@@ -1159,12 +1159,12 @@
 <li>了解神经网络的优缺点</li>
 </ul>
 <hr />
-<p><img alt="image-20200729111216460" src="../assets/image-20200729111216460.png" /></p>
+<p><img alt="image-20200729111216460" src="../../assets/image-20200729111216460.png" /></p>
 <h2 id="1">1 深度学习简介<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>在介绍深度学习之前，我们先看下这幅图：人工智能&gt;机器学习&gt;深度学习</p>
-<p><img alt="image-20200729144825613" src="../assets/image-20200729144825613.png" /></p>
+<p><img alt="image-20200729144825613" src="../../assets/image-20200729144825613.png" /></p>
 <p>深度学习是机器学习的一个子集，也就是说深度学习是实现机器学习的一种方法。与机器学习算法的主要区别如下图所示：</p>
-<p><img alt="image-20200729145632853" src="../assets/image-20200729145632853.png" /></p>
+<p><img alt="image-20200729145632853" src="../../assets/image-20200729145632853.png" /></p>
 <p>传统机器学习算术依赖人工设计特征，并进行特征提取，而深度学习方法不需要人工，而是依赖算法自动提取特征，这也是深度学习被看做黑盒子，可解释性差的原因。</p>
 <p>随着计算机软硬件的飞速发展，现阶段通过**拥有众多层数神经网络(Neural Network)**来模拟人脑来解释数据，包括图像，文本，音频等内容。目前来看常用的神经网络包括：</p>
 <ul>
@@ -1175,12 +1175,12 @@
 </ul>
 <h2 id="2">2 什么是神经网络<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p><strong>人工神经网络（ Artificial Neural Network， 简写为ANN）也简称为神经网络（NN）</strong>，是一种模仿生物神经网络结构和功能的 <strong>计算模型</strong>。人脑可以看做是一个生物神经网络，由众多的神经元连接而成。各个神经元传递复杂的电信号，树突接收到输入信号，然后对信号进行处理，通过轴突输出信号。下图是生物神经元示意图：</p>
-<p><img alt="image-20200729151245685" src="../assets/image-20200729151245685.png" /></p>
+<p><img alt="image-20200729151245685" src="../../assets/image-20200729151245685.png" /></p>
 <p>那怎么构建人工神经网络中的神经元呢？</p>
-<p><img alt="image-20200729153520497" src="../assets/image-20200729153520497.png" /></p>
+<p><img alt="image-20200729153520497" src="../../assets/image-20200729153520497.png" /></p>
 <p>受生物神经元的启发，人工神经元接收来自其他神经元或外部源的输入，每个输入都有一个相关的权值(w)，它是根据该输入对当前神经元的重要性来确定的，对该输入加权并与其他输入求和后，经过一个激活函数f，计算得到该神经元的输出。</p>
 <p>那接下来我们就利用神经元来构建神经网络，相邻层之间的神经元相互连接，并给每一个连接分配一个强度，如下图所示：</p>
-<p><img alt="image-20200729152656655" src="../assets/image-20200729152656655.png" /></p>
+<p><img alt="image-20200729152656655" src="../../assets/image-20200729152656655.png" /></p>
 <p>神经网络中信息只向一个方向移动，即从输入节点向前移动，通过隐藏节点，再向输出节点移动，网络中没有循环或者环。其中的基本构件是：</p>
 <ul>
 <li><strong>输入层</strong>：即输入x的那一层</li>
@@ -1195,15 +1195,15 @@
 </ul>
 <h2 id="3">3 神经元是如何工作的？<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>人工神经元接收到一个或多个输入，对他们进行加权并相加，总和通过一个非线性函数产生输出。</p>
-<p><img alt="image-20200730105108174" src="../assets/image-20200730105108174.png" /></p>
+<p><img alt="image-20200730105108174" src="../../assets/image-20200730105108174.png" /></p>
 <ul>
 <li>所有的输入xi，与相应的权重wi相乘并求和：</li>
 </ul>
-<p><img alt="image-20200729160735019" src="../assets/image-20200729160735019.png" /></p>
+<p><img alt="image-20200729160735019" src="../../assets/image-20200729160735019.png" /></p>
 <ul>
 <li>将求和结果送入到激活函数中，得到最终的输出结果：</li>
 </ul>
-<p><img alt="image-20200729160954682" src="../assets/image-20200729160954682.png" /></p>
+<p><img alt="image-20200729160954682" src="../../assets/image-20200729160954682.png" /></p>
 <h3 id="31">3.1 激活函数<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>在神经元中引入了激活函数，它的本质是向神经网络中引入非线性因素的，通过激活函数，神经网络就可以拟合各种曲线。如果不用激活函数，每一层输出都是上层输入的线性函数，无论神经网络有多少层，输出都是输入的线性组合，引入非线性函数作为激活函数，那输出不再是输入的线性组合，可以逼近任意函数。常用的激活函数有：</p>
 <ul>
@@ -1212,9 +1212,9 @@
 </li>
 </ul>
 <p>数学表达式为：</p>
-<p><img alt="image-20200729162918484" src="../assets/image-20200729162918484.png" /></p>
+<p><img alt="image-20200729162918484" src="../../assets/image-20200729162918484.png" /></p>
 <p>曲线如下图所示：</p>
-<p><img alt="image-20200729162821316" src="../assets/image-20200729162821316.png" /></p>
+<p><img alt="image-20200729162821316" src="../../assets/image-20200729162821316.png" /></p>
 <p>sigmoid 在定义域内处处可导，且两侧导数逐渐趋近于0。如果X的值很大或者很小的时候，那么函数的梯度（函数的斜率）会非常小，在反向传播的过程中，导致了向低层传递的梯度也变得非常小。此时，网络参数很难得到有效训练。这种现象被称为梯度消失。一般来说， sigmoid 网络在 5 层之内就会产生梯度消失现象。而且，该激活函数并不是以0为中心的，所以在实践中这种激活函数使用的很少。sigmoid函数一般只用于二分类的输出层。</p>
 <p>实现方法：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的工具包</span>
@@ -1231,16 +1231,16 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </code></pre></div>
 <p>输出结果为：</p>
-<p><img alt="image-20200730095904782" src="../assets/image-20200730095904782.png" /></p>
+<p><img alt="image-20200730095904782" src="../../assets/image-20200730095904782.png" /></p>
 <ul>
 <li>
 <h4 id="312tanh">3.1.2.tanh(双曲正切曲线)<a class="headerlink" href="#312tanh" title="Permanent link">&para;</a></h4>
 </li>
 </ul>
 <p>数学表达式如下：</p>
-<p><img alt="image-20200729163320949" src="../assets/image-20200729163320949.png" /></p>
+<p><img alt="image-20200729163320949" src="../../assets/image-20200729163320949.png" /></p>
 <p>曲线如下图所示：</p>
-<p><img alt="image-20200729163403186" src="../assets/image-20200729163403186.png" /></p>
+<p><img alt="image-20200729163403186" src="../../assets/image-20200729163403186.png" /></p>
 <p>tanh也是一种非常常见的激活函数。与sigmoid相比，它是以0为中心的，使得其收敛速度要比sigmoid快，减少迭代次数。然而，从图中可以看出，tanh两侧的导数也为0，同样会造成梯度消失。</p>
 <p>若使用时可在隐藏层使用tanh函数，在输出层使用sigmoid函数。</p>
 <p>实现方法为：</p>
@@ -1258,16 +1258,16 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </code></pre></div>
 <p>绘制结果为：</p>
-<p><img alt="image-20200730100042178" src="../assets/image-20200730100042178.png" /></p>
+<p><img alt="image-20200730100042178" src="../../assets/image-20200730100042178.png" /></p>
 <ul>
 <li>
 <h4 id="313relu">3.1.3.RELU<a class="headerlink" href="#313relu" title="Permanent link">&para;</a></h4>
 </li>
 </ul>
 <p>数学表达式为：</p>
-<p><img alt="image-20200729163905308" src="../assets/image-20200729163905308.png" /></p>
+<p><img alt="image-20200729163905308" src="../../assets/image-20200729163905308.png" /></p>
 <p>曲线如下图所示：</p>
-<p><img alt="image-20200729164209522" src="../assets/image-20200729164209522.png" /></p>
+<p><img alt="image-20200729164209522" src="../../assets/image-20200729164209522.png" /></p>
 <p>ReLU是目前最常用的激活函数。 从图中可以看到，当x&lt;0时，ReLU导数为0，而当x&gt;0时，则不存在饱和问题。所以，ReLU 能够在x&gt;0时保持梯度不衰减，从而缓解梯度消失问题。然而，随着训练的推进，部分输入会落入小于0区域，导致对应权重无法更新。这种现象被称为“神经元死亡”。</p>
 <p>与sigmoid相比，RELU的优势是：</p>
 <ul>
@@ -1290,16 +1290,16 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </code></pre></div>
 <p>绘制结果为：</p>
-<p><img alt="image-20200730100208622" src="../assets/image-20200730100208622.png" /></p>
+<p><img alt="image-20200730100208622" src="../../assets/image-20200730100208622.png" /></p>
 <ul>
 <li>
 <h4 id="314leakrelu">3.1.4.LeakReLu<a class="headerlink" href="#314leakrelu" title="Permanent link">&para;</a></h4>
 </li>
 </ul>
 <p>该激活函数是对RELU的改进，数学表达式为：</p>
-<p><img alt="image-20200729164723848" src="../assets/image-20200729164723848.png" /></p>
+<p><img alt="image-20200729164723848" src="../../assets/image-20200729164723848.png" /></p>
 <p>曲线如下所示：</p>
-<p><img alt="image-20200729164751927" src="../assets/image-20200729164751927.png" /></p>
+<p><img alt="image-20200729164751927" src="../../assets/image-20200729164751927.png" /></p>
 <p>实现方法为：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的工具包</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -1321,9 +1321,9 @@
 </ul>
 <p>softmax用于多分类过程中，它是二分类函数sigmoid在多分类上的推广，目的是将多分类的结果以概率的形式展现出来。</p>
 <p>计算方法如下图所示：</p>
-<p><img alt="image-20200729165845632" src="../assets/image-20200729165845632.png" /></p>
+<p><img alt="image-20200729165845632" src="../../assets/image-20200729165845632.png" /></p>
 <p>使用方法：</p>
-<p><img alt="image-20200729170047952" src="../assets/image-20200729170047952.png" /></p>
+<p><img alt="image-20200729170047952" src="../../assets/image-20200729170047952.png" /></p>
 <p><strong>softmax直白来说就是将网络输出的logits通过softmax函数，就映射成为(0,1)的值，而这些值的累和为1（满足概率的性质），那么我们将它理解成概率，选取概率最大（也就是值对应最大的）接点，作为我们的预测目标类别。</strong></p>
 <p>实现，以上图中数字9的分类结果为例给大家进行演示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的工具包</span>
@@ -1344,7 +1344,7 @@
  <span class="mf">0.05330333</span> <span class="mf">0.01865285</span> <span class="mf">0.75445753</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
 </code></pre></div>
 <h4 id="316">3.1.6. 其他激活函数<a class="headerlink" href="#316" title="Permanent link">&para;</a></h4>
-<p><img alt="image-20200729170746541" src="../assets/image-20200729170746541.png" /></p>
+<p><img alt="image-20200729170746541" src="../../assets/image-20200729170746541.png" /></p>
 <h4 id="317">3.1.7.如何选择激活函数<a class="headerlink" href="#317" title="Permanent link">&para;</a></h4>
 <h5 id="_1">隐藏层<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h5>
 <ul>
@@ -1361,7 +1361,7 @@
 </ul>
 <h3 id="32">3.2 参数初始化<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>对于某一个神经元来说，需要初始化的参数有两类：一类是权重W，还有一类是偏置b,偏置b初始化为0即可。而权重W的初始化比较重要，我们着重来介绍常见的初始化方式。</p>
-<p><img alt="image-20200729160628355" src="../assets/image-20200729160628355.png" /></p>
+<p><img alt="image-20200729160628355" src="../../assets/image-20200729160628355.png" /></p>
 <h4 id="321">3.2.1.随机初始化<a class="headerlink" href="#321" title="Permanent link">&para;</a></h4>
 <p>随机初始化从均值为0，标准差是1的高斯分布中取样，使用一些很小的值对参数W进行初始化。</p>
 <h4 id="322">3.2.2.标准初始化<a class="headerlink" href="#322" title="Permanent link">&para;</a></h4>
@@ -1473,7 +1473,7 @@
 </code></pre></div>
 <h2 id="4">4 神经网络的搭建<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>接下来我们来构建如下图所示的神经网络模型：</p>
-<p><img alt="image-20200730140705995" src="../assets/image-20200730140705995.png" /></p>
+<p><img alt="image-20200730140705995" src="../../assets/image-20200730140705995.png" /></p>
 <p>tf.Keras中构建模有两种方式，一种是通过Sequential构建，一种是通过Model类构建。前者是按一定的顺序对层进行堆叠，而后者可以用来构建较复杂的网络模型。首先我们介绍下用来构建网络的全连接层：</p>
 <div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
     <span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="s1">&#39;glorot_uniform&#39;</span><span class="p">,</span>
@@ -1532,7 +1532,7 @@
 <p>通过这种sequential的方式只能构建简单的序列模型，较复杂的模型没有办法实现。</p>
 <p>【扩展📚：参数量计算】</p>
 <p>以第一个隐层为例：该隐层有3个神经元，每个神经元的参数为：4个（w1,w2,w3,b1），所以一共用3x4=12个参数。</p>
-<p><img alt="image-20210129111210263" src="../assets/image-20210129111210263.png" /></p>
+<p><img alt="image-20210129111210263" src="../../assets/image-20210129111210263.png" /></p>
 <h3 id="42-function-api">4.2 利用function API构建<a class="headerlink" href="#42-function-api" title="Permanent link">&para;</a></h3>
 <p>tf.keras 提供了 Functional API，建立更为复杂的模型，使用方法是将层作为可调用的对象并返回张量，并将输入向量和输出向量提供给 <code>tf.keras.Model</code> 的 <code>inputs</code> 和 <code>outputs</code> 参数，实现方法如下：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入工具包</span>
@@ -1574,7 +1574,7 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># 模型展示</span>
 <span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">show_shapes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200730144742181" src="../assets/image-20200730144742181.png" /></p>
+<p><img alt="image-20200730144742181" src="../../assets/image-20200730144742181.png" /></p>
 <h3 id="43-model">4.3 通过model的子类构建<a class="headerlink" href="#43-model" title="Permanent link">&para;</a></h3>
 <p>通过model的子类构建模型，此时需要在__init__中定义神经网络的层，在call方法中定义网络的前向传播过程，实现方法如下：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入工具包</span>
@@ -1712,10 +1712,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

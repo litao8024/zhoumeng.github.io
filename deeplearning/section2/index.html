@@ -855,21 +855,21 @@
 <li>知道回归任务的损失函数</li>
 </ul>
 <hr />
-<p><img alt="image-20200730153842351" src="../assets/image-20200730153842351.png" /></p>
+<p><img alt="image-20200730153842351" src="../../assets/image-20200730153842351.png" /></p>
 <p>在深度学习中, 损失函数是用来衡量模型参数的质量的函数, 衡量的方式是比较网络输出和真实输出的差异，损失函数在不同的文献中名称是不一样的，主要有以下几种命名方式：</p>
-<p><img alt="image-20200730154850183" src="../assets/image-20200730154850183.png" /></p>
+<p><img alt="image-20200730154850183" src="../../assets/image-20200730154850183.png" /></p>
 <h2 id="1">1.分类任务<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>在深度学习的分类任务中使用最多的是交叉熵损失函数，所以在这里我们着重介绍这种损失函数。</p>
 <h3 id="11">1.1 多分类任务<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>在多分类任务通常使用softmax将logits转换为概率的形式，所以多分类的交叉熵损失也叫做softmax损失，它的计算方法是：</p>
-<p><img alt="image-20200730161303768" src="../assets/image-20200730161303768.png" /></p>
+<p><img alt="image-20200730161303768" src="../../assets/image-20200730161303768.png" /></p>
 <p>其中，y是样本x属于某一个类别的真实概率，而f(x)是样本属于某一类别的预测分数，S是softmax函数，L用来衡量p,q之间差异性的损失结果。</p>
 <p>例子：</p>
-<p><img alt="image-20200730160805389" src="../assets/image-20200730160805389.png" /></p>
+<p><img alt="image-20200730160805389" src="../../assets/image-20200730160805389.png" /></p>
 <p>上图中的交叉熵损失为：</p>
-<p><img alt="image-20200730161024749" src="../assets/image-20200730161024749.png" /></p>
+<p><img alt="image-20200730161024749" src="../../assets/image-20200730161024749.png" /></p>
 <p>从概率角度理解，我们的目的是最小化正确类别所对应的预测概率的对数的负值，如下图所示：</p>
-<p><img alt="image-20200730161746110" src="../assets/image-20200730161746110.png" /></p>
+<p><img alt="image-20200730161746110" src="../../assets/image-20200730161746110.png" /></p>
 <p>在tf.keras中使用CategoricalCrossentropy实现，如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的包</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -886,7 +886,7 @@
 </code></pre></div>
 <h3 id="12">1.2 二分类任务<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>在处理二分类任务时，我们不在使用softmax激活函数，而是使用sigmoid激活函数，那损失函数也相应的进行调整，使用二分类的交叉熵损失函数：</p>
-<p><img alt="image-20200730162332710" src="../assets/image-20200730162332710.png" /></p>
+<p><img alt="image-20200730162332710" src="../../assets/image-20200730162332710.png" /></p>
 <p>其中，y是样本x属于某一个类别的真实概率，而y^是样本属于某一类别的预测概率，L用来衡量真实值与预测值之间差异性的损失结果。</p>
 <p>在tf.keras中实现时使用BinaryCrossentropy()，如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的包</span>
@@ -906,9 +906,9 @@
 <p>回归任务中常用的损失函数有以下几种：</p>
 <h3 id="21-mae">2.1 MAE损失<a class="headerlink" href="#21-mae" title="Permanent link">&para;</a></h3>
 <p>Mean absolute loss(MAE)也被称为L1 Loss，是以绝对误差作为距离：</p>
-<p><img alt="image-20200730165058491" src="../assets/image-20200730165058491.png" /></p>
+<p><img alt="image-20200730165058491" src="../../assets/image-20200730165058491.png" /></p>
 <p>曲线如下图所示：</p>
-<p><img alt="image-20200730165142553" src="../assets/image-20200730165142553.png" /></p>
+<p><img alt="image-20200730165142553" src="../../assets/image-20200730165142553.png" /></p>
 <p>特点是：由于L1 loss具有稀疏性，为了惩罚较大的值，因此常常将其作为正则项添加到其他loss中作为约束。L1 loss的最大问题是梯度在零点不平滑，导致会跳过极小值。</p>
 <p>在tf.keras中使用MeanAbsoluteError实现，如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的包</span>
@@ -926,9 +926,9 @@
 </code></pre></div>
 <h3 id="22-mse">2.2 MSE损失<a class="headerlink" href="#22-mse" title="Permanent link">&para;</a></h3>
 <p>Mean Squared Loss/ Quadratic Loss(MSE loss)也被称为L2 loss，或欧氏距离，它以误差的平方和作为距离：</p>
-<p><img alt="image-20200730165213969" src="../assets/image-20200730165213969.png" /></p>
+<p><img alt="image-20200730165213969" src="../../assets/image-20200730165213969.png" /></p>
 <p>曲线如下图所示：</p>
-<p><img alt="image-20200730165404271" src="../assets/image-20200730165404271.png" /></p>
+<p><img alt="image-20200730165404271" src="../../assets/image-20200730165404271.png" /></p>
 <p>特点是：L2 loss也常常作为正则项。当预测值与目标值相差很大时, 梯度容易爆炸。</p>
 <p>在tf.keras中通过MeanSquaredError实现：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的包</span>
@@ -946,9 +946,9 @@
 </code></pre></div>
 <h3 id="23-smooth-l1">2.3 smooth L1 损失<a class="headerlink" href="#23-smooth-l1" title="Permanent link">&para;</a></h3>
 <p>Smooth L1损失函数如下式所示：</p>
-<p><img alt="image-20200730170635889" src="../assets/image-20200730170635889.png" /></p>
+<p><img alt="image-20200730170635889" src="../../assets/image-20200730170635889.png" /></p>
 <p>其中：𝑥=f(x)−y 为真实值和预测值的差值。</p>
-<p><img alt="image-20200730171108887" src="../assets/image-20200730171108887.png" /></p>
+<p><img alt="image-20200730171108887" src="../../assets/image-20200730171108887.png" /></p>
 <p>从上图中可以看出，该函数实际上就是一个分段函数，在[-1,1]之间实际上就是L2损失，这样解决了L1的不光滑问题，在[-1,1]区间外，实际上就是L1损失，这样就解决了离群点梯度爆炸的问题。通常在目标检测中使用该损失函数。</p>
 <p>在tf.keras中使用Huber计算该损失，如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相应的包</span>
@@ -1042,10 +1042,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

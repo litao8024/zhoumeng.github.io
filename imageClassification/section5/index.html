@@ -843,17 +843,17 @@
 <li>能够利用ResNet完成图像分类</li>
 </ul>
 <hr />
-<p><img alt="image-20200810151127127" src="../assets/image-20200810151127127.png" /></p>
+<p><img alt="image-20200810151127127" src="../../assets/image-20200810151127127.png" /></p>
 <p>网络越深，获取的信息就越多，特征也越丰富。但是在实践中，随着网络的加深，优化效果反而越差，测试数据和训练数据的准确率反而降低了。</p>
-<p><img alt="image-20200810153025736" src="../assets/image-20200810153025736.png" /></p>
+<p><img alt="image-20200810153025736" src="../../assets/image-20200810153025736.png" /></p>
 <p>针对这一问题，何恺明等人提出了残差网络（ResNet）在2015年的ImageNet图像识别挑战赛夺魁，并深刻影响了后来的深度神经网络的设计。</p>
 <h2 id="1">1 残差块<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>假设 F(x) 代表某个只包含有两层的映射函数， x 是输入， F(x)是输出。假设他们具有相同的维度。在训练的过程中我们希望能够通过修改网络中的 w和b去拟合一个理想的 H(x)(从输入到输出的一个理想的映射函数)。也就是我们的目标是修改F(x) 中的 w和b逼近 H(x) 。如果我们改变思路，用F(x) 来逼近 H(x)-x ，那么我们最终得到的输出就变为 F(x)+x（这里的加指的是对应位置上的元素相加，也就是element-wise addition），这里将直接从输入连接到输出的结构也称为shortcut，那整个结构就是残差块，ResNet的基础模块。</p>
-<p><img alt="image-20200810153216971" src="../assets/image-20200810153216971.png" /></p>
+<p><img alt="image-20200810153216971" src="../../assets/image-20200810153216971.png" /></p>
 <p>ResNet沿用了VGG全<span><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>卷积层的设计。残差块里首先有2个有相同输出通道数的<span><span class="MathJax_Preview">3\times 3</span><script type="math/tex">3\times 3</script></span>卷积层。每个卷积层后接BN层和ReLU激活函数，然后将输入直接加在最后的ReLU激活函数前，这种结构用于层数较少的神经网络中，比如ResNet34。若输入通道数比较多，就需要引入<span><span class="MathJax_Preview">1\times 1</span><script type="math/tex">1\times 1</script></span>卷积层来调整输入的通道数，这种结构也叫作瓶颈模块，通常用于网络层数较多的结构中。如下图所示：</p>
-<p><img alt="image-20200810154230988" src="../assets/image-20200810154230988.png" /></p>
+<p><img alt="image-20200810154230988" src="../../assets/image-20200810154230988.png" /></p>
 <p>上图左中的残差块的实现如下，可以设定输出通道数，是否使用1*1的卷积及卷积层的步幅。</p>
-<p><img alt="image-20200810160706896" src="../assets/image-20200810160706896.png" /></p>
+<p><img alt="image-20200810160706896" src="../../assets/image-20200810160706896.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 导入相关的工具包</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span><span class="p">,</span> <span class="n">activations</span>
@@ -896,7 +896,7 @@
 <p>1*1卷积用来调整通道数。</p>
 <h2 id="2-resnet">2 ResNet模型<a class="headerlink" href="#2-resnet" title="Permanent link">&para;</a></h2>
 <p>ResNet模型的构成如下图所示：</p>
-<p><img alt="image-20200810160236381" src="../assets/image-20200810160236381.png" /></p>
+<p><img alt="image-20200810160236381" src="../../assets/image-20200810160236381.png" /></p>
 <p>ResNet网络中按照残差块的通道数分为不同的模块。第一个模块前使用了步幅为2的最大池化层，所以无须减小高和宽。之后的每个模块在第一个残差块里将上一个模块的通道数翻倍，并将高和宽减半。</p>
 <p>下面我们来实现这些模块。注意，这里对第一个模块做了特别处理。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ResNet网络中模块的构成</span>

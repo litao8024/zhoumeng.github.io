@@ -844,7 +844,7 @@
 <li>了解tf.keras中模型训练验证的相关方法</li>
 </ul>
 <hr />
-<p><img alt="image-20200728112218409" src="../assets/image-20200728112218409.png" /></p>
+<p><img alt="image-20200728112218409" src="../../assets/image-20200728112218409.png" /></p>
 <p>今天我们通过鸢尾花分类案例，来给大家介绍tf.keras的基本使用流程。tf.keras使用tensorflow中的高级接口，我们调用它即可完成：</p>
 <ol>
 <li>导入和解析数据集</li>
@@ -879,12 +879,12 @@
 <span class="c1"># 展示数据的前五行</span>
 <span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="image-20200727180301620" src="../assets/image-20200727180301620.png" /></p>
+<p><img alt="image-20200727180301620" src="../../assets/image-20200727180301620.png" /></p>
 <p>另外，利用seaborn中pairplot函数探索数据特征间的关系：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 将数据之间的关系进行可视化</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200727180601069" src="../assets/image-20200727180601069.png" /></p>
+<p><img alt="image-20200727180601069" src="../../assets/image-20200727180601069.png" /></p>
 <p>将数据划分为训练集和测试集：从iris dataframe中提取原始数据，将花瓣和萼片数据保存在数组X中，标签保存在相应的数组y中：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 花瓣和花萼的数据</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span>
@@ -916,7 +916,7 @@
 <li>构建分类器时需要进行模型搭建</li>
 <li>数据采集时，sklearn可以接收字符串型的标签，如：“setosa”，但是在tf.keras中需要对标签值进行热编码，如下所示：</li>
 </ul>
-<p><img alt="image-20200727183822507" src="../assets/image-20200727183822507.png" /></p>
+<p><img alt="image-20200727183822507" src="../../assets/image-20200727183822507.png" /></p>
 <p>有很多方法可以实现热编码，比如pandas中的get_dummies(),在这里我们使用tf.keras中的方法进行热编码：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 进行热编码</span>
 <span class="k">def</span> <span class="nf">one_hot_encode_object_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
@@ -934,7 +934,7 @@
 </code></pre></div>
 <h3 id="42">4.2 模型搭建<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>在sklearn中，模型都是现成的。tf.Keras是一个神经网络库,我们需要根据数据和标签值构建神经网络。神经网络可以发现特征与标签之间的复杂关系。神经网络是一个高度结构化的图，其中包含一个或多个隐藏层。每个隐藏层都包含一个或多个神经元。神经网络有多种类别，该程序使用的是密集型神经网络，也称为全连接神经网络：一个层中的神经元将从上一层中的每个神经元获取输入连接。例如，图 2 显示了一个密集型神经网络，其中包含 1 个输入层、2 个隐藏层以及 1 个输出层，如下图所示：</p>
-<p><img alt="image-20200728111649435" src="../assets/image-20200728111649435.png" /></p>
+<p><img alt="image-20200728111649435" src="../../assets/image-20200728111649435.png" /></p>
 <p>上图 中的模型经过训练并馈送未标记的样本时，它会产生 3 个预测结果：相应鸢尾花属于指定品种的可能性。对于该示例，输出预测结果的总和是 1.0。该预测结果分解如下：山鸢尾为 0.02，变色鸢尾为 0.95，维吉尼亚鸢尾为 0.03。这意味着该模型预测某个无标签鸢尾花样本是变色鸢尾的概率为 95％。</p>
 <p>TensorFlow <code>tf.keras</code> API 是创建模型和层的首选方式。通过该 API，您可以轻松地构建模型并进行实验，而将所有部分连接在一起的复杂工作则由 Keras 处理。</p>
 <p><code>tf.keras.Sequential</code> 模型是层的线性堆叠。该模型的构造函数会采用一系列层实例；在本示例中，采用的是 2 个密集层（分别包含 10 个节点）以及 1 个输出层（包含 3 个代表标签预测的节点）。第一个层的 <code>input_shape</code> 参数对应该数据集中的特征数量：</p>
@@ -1089,7 +1089,7 @@ Epoch 10/10
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>

@@ -832,7 +832,7 @@
 <li>能够完成网络的训练和评估</li>
 </ul>
 <hr />
-<p><img alt="image-20200803160224148" src="../assets/image-20200803160224148.png" /></p>
+<p><img alt="image-20200803160224148" src="../../assets/image-20200803160224148.png" /></p>
 <p>使用手写数字的MNIST数据集如上图所示，该数据集包含60,000个用于训练的样本和10,000个用于测试的样本，图像是固定大小(28x28像素)，其值为0到255。</p>
 <p>整个案例的实现流程是：</p>
 <ul>
@@ -884,10 +884,10 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;数字</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 </code></pre></div>
 <p>效果如下所示：</p>
-<p><img alt="image-20200803164406890" src="../assets/image-20200803164406890.png" /></p>
+<p><img alt="image-20200803164406890" src="../../assets/image-20200803164406890.png" /></p>
 <h2 id="2">2.数据处理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>神经网络中的每个训练样本是一个向量，因此需要对输入进行重塑，使每个28x28的图像成为一个的784维向量。另外，将输入数据进行归一化处理，从0-255调整到0-1。</p>
-<p><img alt="image-20200803164551058" src="../assets/image-20200803164551058.png" /></p>
+<p><img alt="image-20200803164551058" src="../../assets/image-20200803164551058.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 调整数据维度：每一个数字转换成一个向量</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
@@ -906,7 +906,7 @@
 <span class="n">测试集</span><span class="err">：</span> <span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
 </code></pre></div>
 <p>另外对于目标值我们也需要进行处理，将其转换为热编码的形式：</p>
-<p><img alt="image-20200803165031160" src="../assets/image-20200803165031160.png" /></p>
+<p><img alt="image-20200803165031160" src="../../assets/image-20200803165031160.png" /></p>
 <p>实现方法如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 将目标值转换为热编码的形式</span>
 <span class="n">Y_train</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">nb_classes</span><span class="p">)</span>
@@ -914,7 +914,7 @@
 </code></pre></div>
 <h2 id="3">3.模型构建<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>在这里我们构建只有3层全连接的网络来进行处理：</p>
-<p><img alt="image-20200803165227791" src="../assets/image-20200803165227791.png" /></p>
+<p><img alt="image-20200803165227791" src="../../assets/image-20200803165227791.png" /></p>
 <p>构建方法如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 利用序列模型来构建模型</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
@@ -995,7 +995,7 @@ Epoch 4/4
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="image-20200806131715237" src="../assets/image-20200806131715237.png" /></p>
+<p><img alt="image-20200806131715237" src="../../assets/image-20200806131715237.png" /></p>
 <p>将训练的准确率绘制为曲线：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 绘制准确率的变化曲线</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1006,7 +1006,7 @@ Epoch 4/4
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="image-20200806131737927" src="../assets/image-20200806131737927.png" /></p>
+<p><img alt="image-20200806131737927" src="../../assets/image-20200806131737927.png" /></p>
 <p>另外可通过tensorboard监控训练过程，这时我们指定回调函数：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 添加tensoboard观察</span>
 <span class="n">tensorboard</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s1">&#39;./graph&#39;</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -1023,8 +1023,8 @@ Epoch 4/4
 <span class="n">tensorboard</span> <span class="o">--</span><span class="n">logdir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span>
 </code></pre></div>
 <p>在浏览器中打开指定网址，可查看损失函数和准确率的变化，图结构等。</p>
-<p><img alt="image-20200806132646844" src="../assets/image-20200806132646844.png" /></p>
-<p><img alt="image-20200806132726958" src="../assets/image-20200806132726958.png" /></p>
+<p><img alt="image-20200806132646844" src="../../assets/image-20200806132646844.png" /></p>
+<p><img alt="image-20200806132726958" src="../../assets/image-20200806132726958.png" /></p>
 <h2 id="6">6.模型测试<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># 模型测试</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1123,10 +1123,10 @@ Epoch 4/4
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

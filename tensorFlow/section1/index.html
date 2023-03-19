@@ -1024,7 +1024,7 @@
 <h2 id="11-tensorflow">1.1 TensorFlow介绍<a class="headerlink" href="#11-tensorflow" title="Permanent link">&para;</a></h2>
 <p>深度学习框架TensorFlow一经发布，就受到了广泛的关注，并在计算机视觉、音频处理、推荐系统和自然语言处理等场景下都被大面积推广使用，现在已发布2.3.0版本，接下来我们深入浅出的介绍Tensorflow的相关应用。</p>
 <p>TensorFlow的依赖视图如下所示：</p>
-<p><img alt="image-20200724164312710" src="../assets/image-20200724164312710.png" /></p>
+<p><img alt="image-20200724164312710" src="../../assets/image-20200724164312710.png" /></p>
 <ul>
 <li>TF托管在github平台，有google groups和contributors共同维护。</li>
 <li>TF提供了丰富的深度学习相关的API，支持Python和C/C++接口。</li>
@@ -1061,7 +1061,7 @@
 <h2 id="13">1.3 张量及其操作<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
 <h3 id="131-tensor">1.3.1 张量Tensor<a class="headerlink" href="#131-tensor" title="Permanent link">&para;</a></h3>
 <p>张量是一个多维数组。 与NumPy ndarray对象类似，tf.Tensor对象也具有数据类型和形状。如下图所示：</p>
-<p><img alt="image-20200724165024626" src="../assets/image-20200724165024626.png" /></p>
+<p><img alt="image-20200724165024626" src="../../assets/image-20200724165024626.png" /></p>
 <p>此外，tf.Tensors可以保留在GPU中。 TensorFlow提供了丰富的操作库（tf.add，tf.matmul，tf.linalg.inv等），它们使用和生成tf.Tensor。在进行张量操作之前先导入相应的工具包：</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1088,7 +1088,7 @@
  <span class="p">[</span><span class="mf">3.</span> <span class="mf">4.</span><span class="p">]</span>
  <span class="p">[</span><span class="mf">5.</span> <span class="mf">6.</span><span class="p">]],</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float16</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200728152807074" src="../assets/image-20200728152807074.png" /></p>
+<p><img alt="image-20200728152807074" src="../../assets/image-20200728152807074.png" /></p>
 <p>我们也可以创建更高维的张量：</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 创建float32类型的张量</span>
 <span class="n">rank_3_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
@@ -1102,7 +1102,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">rank_3_tensor</span><span class="p">)</span>
 </code></pre></div>
 <p>该输出结果我们有更多的方式将其展示出来：</p>
-<p><img alt="image-20200728153219630" src="../assets/image-20200728153219630.png" /></p>
+<p><img alt="image-20200728153219630" src="../../assets/image-20200728153219630.png" /></p>
 <h4 id="2numpy">2.转换成numpy<a class="headerlink" href="#2numpy" title="Permanent link">&para;</a></h4>
 <p>我们可将张量转换为numpy中的ndarray的形式，转换方法有两种，以张量rank_2_tensor为例：</p>
 <ul>
@@ -1180,7 +1180,7 @@ array([[1., 2.],
 </code></pre></div>
 <h2 id="14-tfkeras">1.4 tf.keras介绍<a class="headerlink" href="#14-tfkeras" title="Permanent link">&para;</a></h2>
 <p>tf.keras是TensorFlow 2.0的高阶API接口，为TensorFlow的代码提供了新的风格和设计模式，大大提升了TF代码的简洁性和复用性，官方也推荐使用tf.keras来进行模型设计和开发。</p>
-<p><img alt="image-20200728162342076" src="../assets/image-20200728162342076.png" /></p>
+<p><img alt="image-20200728162342076" src="../../assets/image-20200728162342076.png" /></p>
 <h3 id="141">1.4.1 常用模块<a class="headerlink" href="#141" title="Permanent link">&para;</a></h3>
 <p>tf.keras中常用模块如下表所示：</p>
 <table>
@@ -1243,7 +1243,7 @@ array([[1., 2.],
 </table>
 <h3 id="142">1.4.2 常用方法<a class="headerlink" href="#142" title="Permanent link">&para;</a></h3>
 <p>深度学习实现的主要流程：1.数据获取，2，数据处理，3.模型创建与训练，4 模型测试与评估，5.模型预测</p>
-<p><img alt="image-20200804113054212" src="../assets/image-20200804113054212.png" /></p>
+<p><img alt="image-20200804113054212" src="../../assets/image-20200804113054212.png" /></p>
 <h4 id="1tfkeras">1.导入tf.keras<a class="headerlink" href="#1tfkeras" title="Permanent link">&para;</a></h4>
 <p>使用 <code>tf.keras</code>，首先需要在代码开始时导入<code>tf.keras</code></p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
@@ -1416,10 +1416,10 @@ TensorBoard：使用 TensorBoard 监测模型的状态。</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

@@ -815,7 +815,7 @@
 <li>能够利用tf.keras来完成图像增强</li>
 </ul>
 <hr />
-<p><img alt="image-20200810165426167" src="../assets/image-20200810165426167.png" /></p>
+<p><img alt="image-20200810165426167" src="../../assets/image-20200810165426167.png" /></p>
 <p>大规模数据集是成功应用深度神经网络的前提。例如，我们可以对图像进行不同方式的裁剪，使感兴趣的物体出现在不同位置，从而减轻模型对物体出现位置的依赖性。我们也可以调整亮度、色彩等因素来降低模型对色彩的敏感度。可以说，在当年AlexNet的成功中，图像增强技术功不可没</p>
 <h2 id="1">1.常用的图像增强方法<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>图像增强（image augmentation）指通过剪切、旋转/反射/翻转变换、缩放变换、平移变换、尺度变换、对比度变换、噪声扰动、颜色变换等一种或多种组合数据增强变换的方式来增加数据集的大小。图像增强的意义是通过对训练图像做一系列随机改变，来产生相似但又不同的训练样本，从而扩大训练数据集的规模，而且随机改变训练样本可以降低模型对某些属性的依赖，从而提高模型的泛化能力。</p>
@@ -823,11 +823,11 @@
 <ul>
 <li>几何变换类，主要是对图像进行几何变换操作，包括**翻转，旋转，裁剪，变形，缩放**等。</li>
 </ul>
-<p><img alt="image-20200810171853023" src="../assets/image-20200810171853023.png" /></p>
+<p><img alt="image-20200810171853023" src="../../assets/image-20200810171853023.png" /></p>
 <ul>
 <li>颜色变换类，指通过模糊、颜色变换、擦除、填充等方式对图像进行处理</li>
 </ul>
-<p><img alt="image-20200810172119008" src="../assets/image-20200810172119008.png" /></p>
+<p><img alt="image-20200810172119008" src="../../assets/image-20200810172119008.png" /></p>
 <p>实现图像增强可以通过tf.image来完成，也可以通过tf.keras.imageGenerator来完成。</p>
 <h2 id="2tfimage">2.tf.image进行图像增强<a class="headerlink" href="#2tfimage" title="Permanent link">&para;</a></h2>
 <p>导入所需的工具包并读取要处理的图像：</p>
@@ -845,30 +845,30 @@
 <span class="n">cat1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">random_flip_left_right</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat1</span><span class="err">）</span>
 </code></pre></div>
-<p><img alt="image-20200810180117736" src="../assets/image-20200810180117736.png" /></p>
+<p><img alt="image-20200810180117736" src="../../assets/image-20200810180117736.png" /></p>
 <p>创建<code>tf.image.random_flip_up_down</code>实例来实现图像的上下翻转，上下翻转使用的较少。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 上下翻转</span>
 <span class="n">cat2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">random_flip_up_down</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat2</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200810180317539" src="../assets/image-20200810180317539.png" /></p>
+<p><img alt="image-20200810180317539" src="../../assets/image-20200810180317539.png" /></p>
 <p>随机裁剪出一块面积为原面积<span><span class="MathJax_Preview">10\% \sim 100\%</span><script type="math/tex">10\% \sim 100\%</script></span>的区域，且该区域的宽和高之比随机取自<span><span class="MathJax_Preview">0.5 \sim 2</span><script type="math/tex">0.5 \sim 2</script></span>，然后再将该区域的宽和高分别缩放到200像素。</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 随机裁剪</span>
 <span class="n">cat3</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">random_crop</span><span class="p">(</span><span class="n">cat</span><span class="p">,(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat3</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200810180523815" src="../assets/image-20200810180523815.png" /></p>
+<p><img alt="image-20200810180523815" src="../../assets/image-20200810180523815.png" /></p>
 <h3 id="22">2.2 颜色变换<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>另一类增广方法是颜色变换。我们可以从4个方面改变图像的颜色：亮度、对比度、饱和度和色调。接下来将图像的亮度随机变化为原图亮度的<span><span class="MathJax_Preview">50\%</span><script type="math/tex">50\%</script></span>（即<span><span class="MathJax_Preview">1-0.5</span><script type="math/tex">1-0.5</script></span>）<span><span class="MathJax_Preview">\sim 150\%</span><script type="math/tex">\sim 150\%</script></span>（即<span><span class="MathJax_Preview">1+0.5</span><script type="math/tex">1+0.5</script></span>）。</p>
 <div class="highlight"><pre><span></span><code><span class="n">cat4</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">random_brightness</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat4</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200810180658306" src="../assets/image-20200810180658306.png" /></p>
+<p><img alt="image-20200810180658306" src="../../assets/image-20200810180658306.png" /></p>
 <p>类似地，我们也可以随机变化图像的色调</p>
 <div class="highlight"><pre><span></span><code><span class="n">cat5</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">random_hue</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cat5</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200810180810294" src="../assets/image-20200810180810294.png" /></p>
+<p><img alt="image-20200810180810294" src="../../assets/image-20200810180810294.png" /></p>
 <h2 id="3-imagedatagenerator">3 使用ImageDataGenerator()进行图像增强<a class="headerlink" href="#3-imagedatagenerator" title="Permanent link">&para;</a></h2>
 <p>ImageDataGenerator()是keras.preprocessing.image模块中的图片生成器，可以在batch中对数据进行增强，扩充数据集大小，增强模型的泛化能力。比如旋转，变形等，如下所示：</p>
 <div class="highlight"><pre><span></span><code><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">ImageDataGenerator</span><span class="p">(</span>
@@ -903,7 +903,7 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">break</span>
 </code></pre></div>
-<p><img alt="image-20200810192939233" src="../assets/image-20200810192939233.png" /></p>
+<p><img alt="image-20200810192939233" src="../../assets/image-20200810192939233.png" /></p>
 <hr />
 <p><strong>总结</strong></p>
 <ul>
@@ -978,10 +978,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

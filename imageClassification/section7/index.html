@@ -810,7 +810,7 @@
 <li>为目标模型添加一个输出大小为目标数据集类别个数的输出层，并随机初始化该层的模型参数。</li>
 <li>在目标数据集（如椅子数据集）上训练目标模型。我们将从头训练输出层，而其余层的参数都是基于源模型的参数微调得到的。</li>
 </ol>
-<p><img alt="image-20200810194339095" src="../assets/image-20200810194339095.png" /></p>
+<p><img alt="image-20200810194339095" src="../../assets/image-20200810194339095.png" /></p>
 <p>当目标数据集远小于源数据集时，微调有助于提升模型的泛化能力。</p>
 <h2 id="2">2.热狗识别<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>接下来我们来实践一个具体的例子：热狗识别。将基于一个小数据集对在ImageNet数据集上训练好的ResNet模型进行微调。该小数据集含有数千张热狗或者其他事物的图像。我们将使用微调得到的模型来识别一张图像中是否包含热狗。</p>
@@ -820,7 +820,7 @@
 </code></pre></div>
 <h3 id="21">2.1 获取数据集<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>我们首先将数据集放在路径hotdog/data之下:</p>
-<p><img alt="image-20200811100826721" src="../assets/image-20200811100826721.png" /></p>
+<p><img alt="image-20200811100826721" src="../../assets/image-20200811100826721.png" /></p>
 <p>每个类别文件夹里面是图像文件。</p>
 <p>上一节中我们介绍了ImageDataGenerator进行图像增强，我们可以通过以下方法读取图像文件，该方法以文件夹路径为参数,生成经过图像增强后的结果，并产生batch数据：</p>
 <div class="highlight"><pre><span></span><code><span class="n">flow_from_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span>
@@ -878,11 +878,11 @@
 <span class="c1"># 图像显示</span>
 <span class="n">show_batch</span><span class="p">(</span><span class="n">image_batch</span><span class="p">,</span> <span class="n">label_batch</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200811101033104" src="../assets/image-20200811101033104.png" /></p>
+<p><img alt="image-20200811101033104" src="../../assets/image-20200811101033104.png" /></p>
 <h3 id="22">2.2 模型构建与训练<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>我们使用在ImageNet数据集上预训练的ResNet-50作为源模型。这里指定<code>weights='imagenet'</code>来自动下载并加载预训练的模型参数。在第一次使用时需要联网下载模型参数。</p>
 <p>Keras应用程序（keras.applications）是具有预先训练权值的固定架构，该类封装了很多重量级的网络架构，如下图所示：</p>
-<p><img alt="image-20200811101702946" src="../assets/image-20200811101702946.png" /></p>
+<p><img alt="image-20200811101702946" src="../../assets/image-20200811101702946.png" /></p>
 <p>实现时实例化模型架构：</p>
 <div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">ResNet50</span><span class="p">(</span>
     <span class="n">include_top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">input_tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1005,10 +1005,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       

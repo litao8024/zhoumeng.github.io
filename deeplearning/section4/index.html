@@ -817,7 +817,7 @@
 <li>知道BN层的使用方法</li>
 </ul>
 <hr />
-<p><img alt="image-20200803103317900" src="../assets/image-20200803103317900.png" /></p>
+<p><img alt="image-20200803103317900" src="../../assets/image-20200803103317900.png" /></p>
 <p>在设计机器学习算法时不仅要求在训练集上误差小，而且希望在新样本上的泛化能力强。许多机器学习算法都采用相关的策略来减小测试误差，这些策略被统称为正则化。因为神经网络的强大的表示能力经常遇到过拟合，所以需要使用不同形式的正则化策略。</p>
 <p>正则化通过对算法的修改来减少泛化误差，目前在深度学习中使用较多的策略有参数范数惩罚，提前终止，DropOut等，接下来我们对其进行详细的介绍。</p>
 <h2 id="1-l1l2">1. L1与L2正则化(回顾)<a class="headerlink" href="#1-l1l2" title="Permanent link">&para;</a></h2>
@@ -825,12 +825,12 @@
 <ul>
 <li>L2正则化</li>
 </ul>
-<p><img alt="image-20200803105017732" src="../assets/image-20200803105017732.png" /></p>
+<p><img alt="image-20200803105017732" src="../../assets/image-20200803105017732.png" /></p>
 <p>这里的λ是正则化参数，它是一个需要优化的超参数。L2正则化又称为权重衰减，因为其导致权重趋向于0（但不全是0）</p>
 <ul>
 <li>L1正则化</li>
 </ul>
-<p><img alt="image-20200803105139136" src="../assets/image-20200803105139136.png" /></p>
+<p><img alt="image-20200803105139136" src="../../assets/image-20200803105139136.png" /></p>
 <p>这里，我们惩罚权重矩阵的绝对值。其中，λ 为正则化参数，是超参数，不同于L2，权重值可能被减少到0.因此，L1对于压缩模型很有用。其它情况下，一般选择优先选择L2正则化。</p>
 <p>在tf.keras中实现使用的方法是：</p>
 <ul>
@@ -868,7 +868,7 @@
 </code></pre></div>
 <h2 id="2dropout">2.Dropout正则化<a class="headerlink" href="#2dropout" title="Permanent link">&para;</a></h2>
 <p>dropout是在深度学习领域最常用的正则化技术。Dropout的原理很简单：假设我们的神经网络结构如下所示，在每个迭代过程中，随机选择某些节点，并且删除前向和后向连接。</p>
-<p><img alt="image-20200803112036427" src="../assets/image-20200803112036427.png" /></p>
+<p><img alt="image-20200803112036427" src="../../assets/image-20200803112036427.png" /></p>
 <p>因此，每个迭代过程都会有不同的节点组合，从而导致不同的输出，这可以看成机器学习中的集成方法（ensemble technique）。集成模型一般优于单一模型，因为它们可以捕获更多的随机性。相似地，dropout使得神经网络模型优于正常的模型。</p>
 <p>在tf.keras中实现使用的方法是dropout：</p>
 <div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="p">)</span>
@@ -905,7 +905,7 @@
 </code></pre></div>
 <h2 id="3">3.提前停止<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p>提前停止（early stopping）是将一部分训练集作为验证集（validation set）。 当验证集的性能越来越差时或者性能不再提升，则立即停止对该模型的训练。 这被称为提前停止。</p>
-<p><img alt="image-20200803141815905" src="../assets/image-20200803141815905.png" /></p>
+<p><img alt="image-20200803141815905" src="../../assets/image-20200803141815905.png" /></p>
 <p>在上图中，在虚线处停止模型的训练，此时模型开始在训练数据上过拟合。</p>
 <p>在tf.keras中，我们可以使用callbacks函数实现早期停止:</p>
 <div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span>
@@ -944,11 +944,11 @@
 <h2 id="4">4. 批标准化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>批标准化(BN层,Batch Normalization)是2015年提出的一种方法，在进行深度网络训练时，大多会采取这种算法，与全连接层一样，BN层也是属于网络中的一层。</p>
 <p>BN层是针对单个神经元进行，利用网络训练时一个 mini-batch 的数据来计算该神经元xi 的均值和方差,归一化后并重构，因而称为 Batch Normalization。在每一层输入之前，将数据进行BN，然后再送入后续网络中进行学习：</p>
-<p><img alt="image-20200803145317411" src="../assets/image-20200803145317411.png" /></p>
+<p><img alt="image-20200803145317411" src="../../assets/image-20200803145317411.png" /></p>
 <p>首先我们对某一批次的数据的神经元的输出进行标准化，</p>
-<p><img alt="image-20200803145448868" src="../assets/image-20200803145448868.png" /></p>
+<p><img alt="image-20200803145448868" src="../../assets/image-20200803145448868.png" /></p>
 <p>然后在使用变换重构，引入了可学习参数γ、β，如果各隐藏层的输入均值在靠近0的区域，即处于激活函数的线性区域，不利于训练非线性神经网络，从而得到效果较差的模型。因此，需要用 γ 和 β 对标准化后的结果做进一步处理：</p>
-<p><img alt="image-20200803145636561" src="../assets/image-20200803145636561.png" /></p>
+<p><img alt="image-20200803145636561" src="../../assets/image-20200803145636561.png" /></p>
 <p>这就是BN层最后的结果。整体流程如下图所示：</p>
 <p><img src="../images/BN标准化公式.png" style="zoom:50%;" /></p>
 <p>在tf.keras中实现使用：</p>
@@ -958,7 +958,7 @@
     <span class="n">beta_initializer</span><span class="o">=</span><span class="s1">&#39;zeros&#39;</span><span class="p">,</span> <span class="n">gamma_initializer</span><span class="o">=</span><span class="s1">&#39;ones&#39;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p><img alt="image-20200803150516971" src="../assets/image-20200803150516971.png" /></p>
+<p><img alt="image-20200803150516971" src="../../assets/image-20200803150516971.png" /></p>
 <h3 id="328">3.2.8 总结<a class="headerlink" href="#328" title="Permanent link">&para;</a></h3>
 <ul>
 <li>知道L2正则化与L1正则化的方法</li>
@@ -1044,10 +1044,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../../js/extra.js"></script>
       
