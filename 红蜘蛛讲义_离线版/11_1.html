@@ -1,0 +1,2373 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>11.1 TENER模型 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tener" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11.1 TENER模型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          11.1 TENER模型
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="11_1.html" class="md-nav__link md-nav__link--active">
+        11.1 TENER模型
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tener" class="md-nav__link">
+    TENER模型
+  </a>
+  
+    <nav class="md-nav" aria-label="TENER模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tener_1" class="md-nav__link">
+    TENER模型代码实现
+  </a>
+  
+    <nav class="md-nav" aria-label="TENER模型代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    第1步: 构建子模块的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    第2步: 构建模型类的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    第3步: 训练函数的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    第4步: 模型训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tener" class="md-nav__link">
+    TENER模型
+  </a>
+  
+    <nav class="md-nav" aria-label="TENER模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tener_1" class="md-nav__link">
+    TENER模型代码实现
+  </a>
+  
+    <nav class="md-nav" aria-label="TENER模型代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    第1步: 构建子模块的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    第2步: 构建模型类的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    第3步: 训练函数的代码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    第4步: 模型训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>11.1 TENER模型</h1>
+
+<h2 id="tener">TENER模型<a class="headerlink" href="#tener" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>掌握TENER模型的搭建, 训练和测试代码实现.</li>
+</ul>
+<hr />
+<h3 id="tener_1">TENER模型代码实现<a class="headerlink" href="#tener_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>TENER模型的实现步骤如下:<ul>
+<li>第1步: 构建子模块的代码</li>
+<li>第2步: 构建模型类的代码</li>
+<li>第3步: 训练函数的代码</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="1">第1步: 构建子模块的代码<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1.1: 实现callbacks.py代码</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">Callback</span><span class="p">,</span> <span class="n">Tester</span><span class="p">,</span> <span class="n">DataSet</span>
+
+
+<span class="k">class</span> <span class="nc">EvaluateCallback</span><span class="p">(</span><span class="n">Callback</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    通过使用该Callback可以使得Trainer在evaluate dev之外还可以evaluate其它数据集，比如测试集。每一次验证dev之前都会先验证EvaluateCallback</span>
+<span class="sd">    中的数据。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tester</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param ~fastNLP.DataSet,Dict[~fastNLP.DataSet] data: 传入DataSet对象，会使用Trainer中的metric对数据进行验证。如果需要</span>
+<span class="sd">传入多个</span>
+<span class="sd">            DataSet请通过dict的方式传入。</span>
+<span class="sd">        :param ~fastNLP.Tester,Dict[~fastNLP.DataSet] tester: Tester对象, 通过使用Tester对象，可以使得验证的metric与Trainer中</span>
+<span class="sd">            的metric不一样。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">testers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_test_metric_sofar</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_test_sofar</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_test_epoch</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_test</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_epoch</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">tester</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tester</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tester</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">Tester</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> in tester is not a valid fastNLP.Tester.&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="p">[</span><span class="s1">&#39;tester-&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tester</span><span class="p">,</span> <span class="n">Tester</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="p">[</span><span class="s1">&#39;tester-test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tester</span>
+            <span class="k">for</span> <span class="n">tester</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">tester</span><span class="p">,</span> <span class="s1">&#39;verbose&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Only DataSet object is allowed, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="s1">&#39;data-&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">[</span><span class="s1">&#39;data-test&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;data receives dict[DataSet] or DataSet object.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_train_begin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">dev_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Trainer has no dev data, you cannot pass extra DataSet to do evaluation.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                                <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dev_batch_size&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">),</span>
+                                <span class="n">metrics</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">metrics</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                <span class="n">use_tqdm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">test_use_tqdm</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tester</span>
+
+    <span class="k">def</span> <span class="nf">on_valid_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eval_result</span><span class="p">,</span> <span class="n">metric_key</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">better_result</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">tester</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">testers</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">eval_result</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">indicator</span><span class="p">,</span> <span class="n">indicator_val</span> <span class="o">=</span> <span class="n">_check_eval_results</span><span class="p">(</span><span class="n">eval_result</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">indicator_val</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_test_metric_sofar</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">best_test_metric_sofar</span> <span class="o">=</span> <span class="n">indicator_val</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">best_test_epoch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">best_test_sofar</span> <span class="o">=</span> <span class="n">eval_result</span>
+                    <span class="k">if</span> <span class="n">better_result</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_test</span> <span class="o">=</span> <span class="n">eval_result</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_epoch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EvaluateCallback evaluation on </span><span class="si">{}</span><span class="s2">:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">tester</span><span class="o">.</span><span class="n">_format_eval_results</span><span class="p">(</span><span class="n">eval_result</span><span class="p">))</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Exception happens when evaluate on DataSet named `</span><span class="si">{}</span><span class="s2">`.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="k">def</span> <span class="nf">on_train_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_test_sofar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Best test performance(may not correspond to the best dev performance):</span><span class="si">{}</span><span class="s2"> achieved at Epoch:</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">best_test_sofar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_test_epoch</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_test</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Best test performance(correspond to the best dev performance):</span><span class="si">{}</span><span class="s2"> achieved at Epoch:</span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_test</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_dev_epoch</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_check_eval_results</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="n">metric_key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># metrics: tester返回的结果</span>
+    <span class="c1"># metric_key: 一个用来做筛选的指标，来自Trainer的初始化</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="n">loss</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">metric_dict</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># 取第一个metric</span>
+
+        <span class="k">if</span> <span class="n">metric_key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">indicator_val</span><span class="p">,</span> <span class="n">indicator</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">metric_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">metric_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># metric_key is set</span>
+            <span class="k">if</span> <span class="n">metric_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metric_dict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metric key </span><span class="si">{</span><span class="n">metric_key</span><span class="si">}</span><span class="s2"> not found in </span><span class="si">{</span><span class="n">metric_dict</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">indicator_val</span> <span class="o">=</span> <span class="n">metric_dict</span><span class="p">[</span><span class="n">metric_key</span><span class="p">]</span>
+            <span class="n">indicator</span> <span class="o">=</span> <span class="n">metric_key</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Invalid metrics type. Expect </span><span class="si">{}</span><span class="s2">, got </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">metrics</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">indicator</span><span class="p">,</span> <span class="n">indicator_val</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>1.2: 实现relative_transformer.py代码</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">class</span> <span class="nc">RelativeSinusoidalPositionalEmbedding</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="c1"># This module produces sinusoidal positional embeddings of any length.</span>
+    <span class="c1"># Padding symbols are ignored.</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">init_size</span><span class="o">=</span><span class="mi">1568</span><span class="p">):</span>
+        <span class="c1"># embedding_dim: 每个位置的dimension</span>
+        <span class="c1"># padding_idx: PAD字符所对应的id值</span>
+        <span class="c1"># init_size: 初始输入序列的长度(比如BERT是512)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span> <span class="o">=</span> <span class="n">embedding_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
+
+        <span class="k">assert</span> <span class="n">init_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(</span><span class="n">init_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;weights&#39;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;_float_tensor&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_embedding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_embeddings</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">padding_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Build sinusoidal embeddings.</span>
+        <span class="c1"># This matches the implementation in tensor2tensor, but differs slightly</span>
+        <span class="c1"># from the description in Section 3.5 of &quot;Attention Is All You Need&quot;.</span>
+        <span class="n">half_dim</span> <span class="o">=</span> <span class="n">embedding_dim</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">half_dim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">half_dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="n">emb</span><span class="p">)</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">num_embeddings</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">num_embeddings</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">emb</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">emb</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">emb</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">num_embeddings</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">embedding_dim</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># zero pad</span>
+            <span class="n">emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">emb</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_embeddings</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">padding_idx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">emb</span><span class="p">[</span><span class="n">padding_idx</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">origin_shift</span> <span class="o">=</span> <span class="n">num_embeddings</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">emb</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="c1"># Input is expected to be of size [bsz x seqlen].</span>
+        <span class="n">bsz</span><span class="p">,</span> <span class="n">seq_len</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">max_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">+</span> <span class="n">seq_len</span>
+
+        <span class="k">if</span> <span class="n">max_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin_shift</span><span class="p">:</span>
+            <span class="c1"># recompute/expand embeddings if needed</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_embedding</span><span class="p">(</span><span class="n">max_pos</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">)</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_float_tensor</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">origin_shift</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;weights&#39;</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+
+        <span class="n">positions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">seq_len</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">origin_shift</span>  <span class="c1"># 2*seq_len</span>
+        <span class="n">embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">positions</span><span class="o">.</span><span class="n">long</span><span class="p">())</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">embed</span>
+
+
+<span class="k">class</span> <span class="nc">RelativeMultiHeadAttn</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">r_w_bias</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">r_r_bias</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param int d_model:</span>
+<span class="sd">        :param int n_head:</span>
+<span class="sd">        :param dropout: 对attention map的dropout</span>
+<span class="sd">        :param r_w_bias: n_head x head_dim or None, 如果为dim</span>
+<span class="sd">        :param r_r_bias: n_head x head_dim or None,</span>
+<span class="sd">        :param scale:</span>
+<span class="sd">        :param rel_pos_embed:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qkv_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="n">d_model</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span> <span class="o">=</span> <span class="n">n_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span> <span class="o">=</span> <span class="n">d_model</span> <span class="o">//</span> <span class="n">n_head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos_embed</span> <span class="o">=</span> <span class="n">RelativeSinusoidalPositionalEmbedding</span><span class="p">(</span><span class="n">d_model</span> <span class="o">//</span> <span class="n">n_head</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">scale</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_model</span> <span class="o">//</span> <span class="n">n_head</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">r_r_bias</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">r_w_bias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Biases are not shared</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r_r_bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_head</span><span class="p">,</span> <span class="n">d_model</span> <span class="o">//</span> <span class="n">n_head</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r_w_bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_normal_</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_head</span><span class="p">,</span> <span class="n">d_model</span> <span class="o">//</span> <span class="n">n_head</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r_r_bias</span> <span class="o">=</span> <span class="n">r_r_bias</span>  <span class="c1"># r_r_bias就是v</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r_w_bias</span> <span class="o">=</span> <span class="n">r_w_bias</span>  <span class="c1"># r_w_bias就是u</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param x: batch_size x max_len x d_model</span>
+<span class="sd">        :param mask: batch_size x max_len</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">d_model</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">pos_embed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_embed</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>  <span class="c1"># l x head_dim</span>
+
+        <span class="n">qkv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qkv_linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># batch_size x max_len x d_model 3</span>
+        <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="n">qkv</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_head</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># b x n x l x d</span>
+
+        <span class="n">rw_head_q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_r_bias</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">AC</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bnqd,bnkd-&gt;bnqk&#39;</span><span class="p">,</span> <span class="n">rw_head_q</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>  <span class="c1"># b x n x l x d, n是head</span>
+        <span class="n">D_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;nd,ld-&gt;nl&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r_w_bias</span><span class="p">,</span> <span class="n">pos_embed</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># head x 2max_len, 每个head对位置的bias</span>
+        <span class="n">B_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bnqd,ld-&gt;bnql&#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">pos_embed</span><span class="p">)</span>  <span class="c1"># bsz x head  x max_len x 2max_len，每个query对每个shift的偏移</span>
+        <span class="n">E_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bnqd,ld-&gt;bnql&#39;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">pos_embed</span><span class="p">)</span>  <span class="c1"># bsz x head x max_len x 2max_len, key对relative的bias</span>
+        <span class="n">BD</span> <span class="o">=</span> <span class="n">B_</span> <span class="o">+</span> <span class="n">D_</span>  <span class="c1"># bsz x head x max_len x 2max_len, 要转换为bsz x head x max_len x max_len</span>
+        <span class="n">BDE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shift</span><span class="p">(</span><span class="n">BD</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transpose_shift</span><span class="p">(</span><span class="n">E_</span><span class="p">)</span>
+        <span class="c1"># BDE = self._shift(BD)</span>
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">AC</span> <span class="o">+</span> <span class="n">BDE</span>
+
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">attn</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">attn</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">))</span>
+
+        <span class="n">attn</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">attn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">attn</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">attn</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>  <span class="c1"># b x n x l x d</span>
+
+        <span class="k">return</span> <span class="n">v</span>
+
+    <span class="k">def</span> <span class="nf">_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">BD</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        类似</span>
+<span class="sd">        -3 -2 -1 0 1 2</span>
+<span class="sd">        -3 -2 -1 0 1 2</span>
+<span class="sd">        -3 -2 -1 0 1 2</span>
+
+<span class="sd">        转换为</span>
+<span class="sd">        0   1  2</span>
+<span class="sd">        -1  0  1</span>
+<span class="sd">        -2 -1  0</span>
+
+<span class="sd">        :param BD: batch_size x n_head x max_len x 2max_len</span>
+<span class="sd">        :return: batch_size x n_head x max_len x max_len</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">BD</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">zero_pad</span> <span class="o">=</span> <span class="n">BD</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span><span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">BD</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">BD</span><span class="p">,</span> <span class="n">zero_pad</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>  <span class="c1"># bsz x n_head x (2max_len+1) x max_len</span>
+        <span class="n">BD</span> <span class="o">=</span> <span class="n">BD</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># bsz x n_head x 2max_len x max_len</span>
+        <span class="n">BD</span> <span class="o">=</span> <span class="n">BD</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="n">max_len</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">BD</span>
+
+    <span class="k">def</span> <span class="nf">_transpose_shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        类似</span>
+<span class="sd">          -3   -2   -1   0   1   2</span>
+<span class="sd">         -30  -20  -10  00  10  20</span>
+<span class="sd">        -300 -200 -100 000 100 200</span>
+
+<span class="sd">        转换为</span>
+<span class="sd">          0  -10   -200</span>
+<span class="sd">          1   00   -100</span>
+<span class="sd">          2   10    000</span>
+
+
+<span class="sd">        :param E: batch_size x n_head x max_len x 2max_len</span>
+<span class="sd">        :return: batch_size x n_head x max_len x max_len</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">zero_pad</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">new_zeros</span><span class="p">(</span><span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># bsz x n_head x -1 x (max_len+1)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">E</span><span class="p">,</span> <span class="n">zero_pad</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bsz</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_len</span><span class="p">)</span>
+        <span class="n">indice</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">max_len</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">indice</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># bsz x n_head x max_len x max_len</span>
+        <span class="k">return</span> <span class="n">E</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>1.3: 实现TransformerEmbedding.py代码</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># encoding: utf-8</span>
+<span class="kn">from</span> <span class="nn">fastNLP.embeddings</span> <span class="kn">import</span> <span class="n">TokenEmbedding</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">Vocabulary</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">fastNLP.embeddings.utils</span> <span class="kn">import</span> <span class="n">_construct_char_vocab_from_vocab</span><span class="p">,</span> <span class="n">get_embeddings</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">.transformer</span> <span class="kn">import</span> <span class="n">TransformerEncoder</span>
+
+
+<span class="k">class</span> <span class="nc">TransformerCharEmbed</span><span class="p">(</span><span class="n">TokenEmbedding</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab</span><span class="p">:</span> <span class="n">Vocabulary</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">char_emb_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">word_dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pool_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span>
+                 <span class="n">min_char_freq</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_word_start_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">char_attn_type</span><span class="o">=</span><span class="s1">&#39;adatrans&#39;</span><span class="p">,</span> <span class="n">char_n_head</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">char_dim_ffn</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">char_scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">char_pos_embed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">char_dropout</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">char_after_norm</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param vocab: 词表</span>
+<span class="sd">        :param embed_size: TransformerCharEmbed的输出维度。默认值为50.</span>
+<span class="sd">        :param char_emb_size: character的embedding的维度。默认值为50. 同时也是Transformer的d_model大小</span>
+<span class="sd">        :param float word_dropout: 以多大的概率将一个词替换为unk。这样既可以训练unk也是一定的regularize。</span>
+<span class="sd">        :param dropout: 以多大概率drop character embedding的输出以及最终的word的输出。</span>
+<span class="sd">        :param pool_method: 支持&#39;max&#39;, &#39;avg&#39;。</span>
+<span class="sd">        :param activation: 激活函数，支持&#39;relu&#39;, &#39;sigmoid&#39;, &#39;tanh&#39;, 或者自定义函数.</span>
+<span class="sd">        :param min_char_freq: character的最小出现次数。默认值为2.</span>
+<span class="sd">        :param requires_grad:</span>
+<span class="sd">        :param include_word_start_end: 是否使用特殊的tag标记word的开始与结束</span>
+<span class="sd">        :param char_attn_type: adatrans or naive.</span>
+<span class="sd">        :param char_n_head: 多少个head</span>
+<span class="sd">        :param char_dim_ffn: transformer中ffn中间层的大小</span>
+<span class="sd">        :param char_scale: 是否使用scale</span>
+<span class="sd">        :param char_pos_embed: None, &#39;fix&#39;, &#39;sin&#39;. What kind of position embedding. When char_attn_type=relative, None is</span>
+<span class="sd">            ok</span>
+<span class="sd">        :param char_dropout: Dropout in Transformer encoder</span>
+<span class="sd">        :param char_after_norm: the normalization place.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TransformerCharEmbed</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">word_dropout</span><span class="o">=</span><span class="n">word_dropout</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">char_emb_size</span> <span class="o">%</span> <span class="n">char_n_head</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;d_model should divide n_head.&quot;</span>
+
+        <span class="k">assert</span> <span class="n">pool_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;avg&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_method</span> <span class="o">=</span> <span class="n">pool_method</span>
+        <span class="c1"># activation function</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">activation</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">activation</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;relu&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span>
+            <span class="k">elif</span> <span class="n">activation</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sigmoid</span>
+            <span class="k">elif</span> <span class="n">activation</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tanh&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">tanh</span>
+        <span class="k">elif</span> <span class="n">activation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="n">activation</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">activation</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Undefined activation function: choose from: [relu, tanh, sigmoid, or a callable function]&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Start constructing character vocabulary.&quot;</span><span class="p">)</span>
+        <span class="c1"># 建立char的词表</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">char_vocab</span> <span class="o">=</span> <span class="n">_construct_char_vocab_from_vocab</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">min_freq</span><span class="o">=</span><span class="n">min_char_freq</span><span class="p">,</span>
+                                                           <span class="n">include_word_start_end</span><span class="o">=</span><span class="n">include_word_start_end</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">char_pad_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">char_vocab</span><span class="o">.</span><span class="n">padding_idx</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;In total, there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">char_vocab</span><span class="p">)</span><span class="si">}</span><span class="s2"> distinct characters.&quot;</span><span class="p">)</span>
+        <span class="c1"># 对vocab进行index</span>
+        <span class="n">max_word_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">vocab</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">include_word_start_end</span><span class="p">:</span>
+            <span class="n">max_word_len</span> <span class="o">+=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;words_to_chars_embedding&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),</span> <span class="n">max_word_len</span><span class="p">),</span>
+                                                                    <span class="n">fill_value</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">char_pad_index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;word_lengths&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span><span class="o">.</span><span class="n">long</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">vocab</span><span class="p">:</span>
+            <span class="c1"># if index!=vocab.padding_idx:  # 如果是pad的话，直接就为pad_value了. 修改为不区分pad与否</span>
+            <span class="k">if</span> <span class="n">include_word_start_end</span><span class="p">:</span>
+                <span class="n">word</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;bow&gt;&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;&lt;eow&gt;&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">words_to_chars_embedding</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span> <span class="o">=</span> \
+                <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">char_vocab</span><span class="o">.</span><span class="n">to_index</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">word</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">word_lengths</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">char_embedding</span> <span class="o">=</span> <span class="n">get_embeddings</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">char_vocab</span><span class="p">),</span> <span class="n">char_emb_size</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">char_emb_size</span><span class="p">,</span> <span class="n">char_n_head</span><span class="p">,</span> <span class="n">char_dim_ffn</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">char_dropout</span><span class="p">,</span>
+                                              <span class="n">after_norm</span><span class="o">=</span><span class="n">char_after_norm</span><span class="p">,</span>
+                                              <span class="n">attn_type</span><span class="o">=</span><span class="n">char_attn_type</span><span class="p">,</span> <span class="n">pos_embed</span><span class="o">=</span><span class="n">char_pos_embed</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">char_scale</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">char_emb_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_embed_size</span> <span class="o">=</span> <span class="n">embed_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="n">requires_grad</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        输入words的index后，生成对应的words的表示。</span>
+
+<span class="sd">        :param words: [batch_size, max_len]</span>
+<span class="sd">        :return: [batch_size, max_len, embed_size]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_word</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span> <span class="o">=</span> <span class="n">words</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">words_to_chars_embedding</span><span class="p">[</span><span class="n">words</span><span class="p">]</span>  <span class="c1"># batch_size x max_len x max_word_len</span>
+        <span class="n">word_lengths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_lengths</span><span class="p">[</span><span class="n">words</span><span class="p">]</span>  <span class="c1"># batch_size x max_len</span>
+        <span class="n">max_word_len</span> <span class="o">=</span> <span class="n">word_lengths</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="n">chars</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="n">max_word_len</span><span class="p">]</span>
+        <span class="c1"># 为mask的地方为1</span>
+        <span class="n">chars_masks</span> <span class="o">=</span> <span class="n">chars</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">char_pad_index</span><span class="p">)</span>  <span class="c1"># batch_size x max_len x max_word_len 如果为0, 说明是padding的位置了</span>
+        <span class="n">char_embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">char_embedding</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>  <span class="c1"># batch_size x max_len x max_word_len x embed_size</span>
+        <span class="n">char_embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">char_embeds</span><span class="p">)</span>
+        <span class="n">reshaped_chars</span> <span class="o">=</span> <span class="n">char_embeds</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span> <span class="o">*</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">max_word_len</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">trans_chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">reshaped_chars</span><span class="p">,</span> <span class="n">chars_masks</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_word_len</span><span class="p">))</span>
+        <span class="n">trans_chars</span> <span class="o">=</span> <span class="n">trans_chars</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">max_word_len</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">trans_chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">trans_chars</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_method</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="n">trans_chars</span> <span class="o">=</span> <span class="n">trans_chars</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">chars_masks</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">))</span>
+            <span class="n">chars</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">trans_chars</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># batch_size x max_len x H</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">trans_chars</span> <span class="o">=</span> <span class="n">trans_chars</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">chars_masks</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">chars</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">trans_chars</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">chars_masks</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>1.4: 实现utils.py代码</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># encoding: utf-8</span>
+<span class="c1"># 设置随机数种子</span>
+<span class="k">def</span> <span class="nf">set_rng_seed</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">random</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">numpy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">pytorch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">deterministic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    设置模块的随机数种子。由于pytorch还存在cudnn导致的非deterministic的运行，所以一些情况下可能即使seed一样，结果也不一致</span>
+<span class="sd">        需要在fitlog.commit()或fitlog.set_log_dir()之后运行才会记录该rng_seed到log中</span>
+<span class="sd">    :param int rng_seed: 将这些模块的随机数设置到多少，默认为随机生成一个。</span>
+<span class="sd">    :param bool, random: 是否将python自带的random模块的seed设置为rng_seed.</span>
+<span class="sd">    :param bool, numpy: 是否将numpy的seed设置为rng_seed.</span>
+<span class="sd">    :param bool, pytorch: 是否将pytorch的seed设置为rng_seed(设置torch.manual_seed和torch.cuda.manual_seed_all).</span>
+<span class="sd">    :param bool, deterministic: 是否将pytorch的torch.backends.cudnn.deterministic设置为True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">rng_seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+        <span class="n">rng_seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">%</span> <span class="mi">1000000</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">random</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">numpy</span>
+            <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">if</span> <span class="n">pytorch</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">torch</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">)</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">deterministic</span><span class="p">:</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">rng_seed</span>
+</code></pre></div>
+<hr />
+<h4 id="2">第2步: 构建模型类的代码<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现TENER类的代码: /home/ec2-user/red_spider/ner/tener/models/TENER.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># encoding: utf-8</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">fastNLP.modules</span> <span class="kn">import</span> <span class="n">ConditionalRandomField</span><span class="p">,</span> <span class="n">allowed_transitions</span>
+<span class="kn">from</span> <span class="nn">modules.transformer</span> <span class="kn">import</span> <span class="n">TransformerEncoder</span>
+
+
+<span class="k">class</span> <span class="nc">TENER</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag_vocab</span><span class="p">,</span> <span class="n">embed</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">feedforward_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span>
+                 <span class="n">after_norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">attn_type</span><span class="o">=</span><span class="s1">&#39;adatrans&#39;</span><span class="p">,</span> <span class="n">bi_embed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">fc_dropout</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">pos_embed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">encoding_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dropout_attn</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># tag_vocab: fastNLP Vocabulary</span>
+        <span class="c1"># embed: fastNLP TokenEmbedding</span>
+        <span class="c1"># num_layers: number of self-attention layers</span>
+        <span class="c1"># d_model: input size</span>
+        <span class="c1"># n_head: number of head</span>
+        <span class="c1"># feedforward_dim: the dimension of ffn</span>
+        <span class="c1"># dropout: dropout in self-attention</span>
+        <span class="c1"># after_norm: normalization place</span>
+        <span class="c1"># attn_type: adatrans, naive</span>
+        <span class="c1"># rel_pos_embed: position embedding的类型，支持sin, fix, None. relative时可为None</span>
+        <span class="c1"># bi_embed: Used in Chinese scenerio</span>
+        <span class="c1"># encoding_type: NER任务的编码模式, 此处采用&#39;bmeso&#39;模式</span>
+        <span class="c1"># fc_dropout: dropout rate before the fc layer</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="o">=</span> <span class="n">embed</span>
+        <span class="n">embed_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="o">.</span><span class="n">embed_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bi_embed</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">bi_embed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bi_embed</span> <span class="o">=</span> <span class="n">bi_embed</span>
+            <span class="n">embed_size</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bi_embed</span><span class="o">.</span><span class="n">embed_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">d_model</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span> <span class="o">=</span> <span class="n">TransformerEncoder</span><span class="p">(</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">d_model</span><span class="p">,</span> <span class="n">n_head</span><span class="p">,</span> <span class="n">feedforward_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span>
+                                              <span class="n">after_norm</span><span class="o">=</span><span class="n">after_norm</span><span class="p">,</span> <span class="n">attn_type</span><span class="o">=</span><span class="n">attn_type</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                              <span class="n">dropout_attn</span><span class="o">=</span><span class="n">dropout_attn</span><span class="p">,</span> <span class="n">pos_embed</span><span class="o">=</span><span class="n">pos_embed</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc_dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">fc_dropout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_model</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag_vocab</span><span class="p">))</span>
+
+        <span class="n">trans</span> <span class="o">=</span> <span class="n">allowed_transitions</span><span class="p">(</span><span class="n">tag_vocab</span><span class="p">,</span> <span class="n">encoding_type</span><span class="o">=</span><span class="n">encoding_type</span><span class="p">,</span> <span class="n">include_start_end</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crf</span> <span class="o">=</span> <span class="n">ConditionalRandomField</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tag_vocab</span><span class="p">),</span> <span class="n">include_start_end_trans</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allowed_transitions</span><span class="o">=</span><span class="n">trans</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">bigrams</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">chars</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bi_embed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">bigrams</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bi_embed</span><span class="p">(</span><span class="n">bigrams</span><span class="p">)</span>
+            <span class="n">chars</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">chars</span><span class="p">,</span> <span class="n">bigrams</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_fc</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc_dropout</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="n">chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_fc</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">paths</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">viterbi_decode</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;pred&#39;</span><span class="p">:</span> <span class="n">paths</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">loss</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">bigrams</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">bigrams</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">bigrams</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">chars</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bigrams</span><span class="o">=</span><span class="n">bigrams</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h4 id="3">第3步: 训练函数的代码<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>实现训练代码: /home/ec2-user/red_spider/ner/tener/train_tener_cn.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># encoding: utf-8</span>
+<span class="kn">from</span> <span class="nn">models.TENER</span> <span class="kn">import</span> <span class="n">TENER</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">cache_results</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">Trainer</span><span class="p">,</span> <span class="n">Tester</span>
+<span class="kn">from</span> <span class="nn">fastNLP.core.predictor</span> <span class="kn">import</span> <span class="n">Predictor</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">GradientClipCallback</span><span class="p">,</span> <span class="n">WarmupCallback</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">optim</span>
+<span class="kn">from</span> <span class="nn">fastNLP</span> <span class="kn">import</span> <span class="n">SpanFPreRecMetric</span><span class="p">,</span> <span class="n">BucketSampler</span>
+<span class="kn">from</span> <span class="nn">fastNLP.embeddings</span> <span class="kn">import</span> <span class="n">StaticEmbedding</span>
+<span class="kn">from</span> <span class="nn">modules.pipe</span> <span class="kn">import</span> <span class="n">CNNERPipe</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">modules.callbacks</span> <span class="kn">import</span> <span class="n">EvaluateCallback</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<span class="n">device</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--dataset&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;weibo&#39;</span><span class="p">,</span> <span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="s1">&#39;ontonotes&#39;</span><span class="p">,</span> <span class="s1">&#39;msra&#39;</span><span class="p">])</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--status&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;predict&#39;</span><span class="p">])</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">dataset</span>
+<span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;resume&#39;</span><span class="p">:</span>
+    <span class="n">n_heads</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">head_dims</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0007</span>
+    <span class="n">attn_type</span> <span class="o">=</span> <span class="s1">&#39;adatrans&#39;</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;weibo&#39;</span><span class="p">:</span>
+    <span class="n">n_heads</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">head_dims</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.001</span>
+    <span class="n">attn_type</span> <span class="o">=</span> <span class="s1">&#39;adatrans&#39;</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;ontonotes&#39;</span><span class="p">:</span>
+    <span class="n">n_heads</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">head_dims</span> <span class="o">=</span> <span class="mi">48</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0007</span>
+    <span class="n">attn_type</span> <span class="o">=</span> <span class="s1">&#39;adatrans&#39;</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;msra&#39;</span><span class="p">:</span>
+    <span class="n">n_heads</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">head_dims</span> <span class="o">=</span> <span class="mi">80</span>
+    <span class="n">num_layers</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="mf">0.0007</span>
+    <span class="n">attn_type</span> <span class="o">=</span> <span class="s1">&#39;adatrans&#39;</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">pos_embed</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">warmup_steps</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">after_norm</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s1">&#39;transformer&#39;</span>
+<span class="n">normalize_embed</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">dropout</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">fc_dropout</span> <span class="o">=</span> <span class="mf">0.4</span>
+
+<span class="n">encoding_type</span> <span class="o">=</span> <span class="s1">&#39;bmeso&#39;</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;./cache/</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">_</span><span class="si">{}</span><span class="s1">.pkl&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">model_type</span><span class="p">,</span> <span class="n">encoding_type</span><span class="p">,</span> <span class="n">normalize_embed</span><span class="p">)</span>
+<span class="n">d_model</span> <span class="o">=</span> <span class="n">n_heads</span> <span class="o">*</span> <span class="n">head_dims</span>
+<span class="n">dim_feedforward</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">d_model</span><span class="p">)</span>
+
+
+<span class="nd">@cache_results</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">_refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">():</span>
+    <span class="c1"># 替换路径</span>
+    <span class="k">if</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;ontonotes&#39;</span><span class="p">:</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/OntoNote4NER/train.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/OntoNote4NER/dev.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="s1">&#39;./data/OntoNote4NER/test.char.bmes&#39;</span><span class="p">}</span>
+        <span class="n">min_freq</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;weibo&#39;</span><span class="p">:</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/WeiboNER/train.all.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;dev&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/WeiboNER/dev.all.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/WeiboNER/test.all.bmes&#39;</span><span class="p">}</span>
+        <span class="n">min_freq</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;resume&#39;</span><span class="p">:</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/ResumeNER/train.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;dev&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/ResumeNER/dev.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/ResumeNER/test.char.bmes&#39;</span><span class="p">}</span>
+        <span class="n">min_freq</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">dataset</span> <span class="o">==</span> <span class="s1">&#39;msra&#39;</span><span class="p">:</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/MSRANER/train_dev.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;dev&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/MSRANER/test.char.bmes&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="s1">&#39;./data/MSRANER/test.char.bmes&#39;</span><span class="p">}</span>
+        <span class="n">min_freq</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="n">data_bundle</span> <span class="o">=</span> <span class="n">CNNERPipe</span><span class="p">(</span><span class="n">bigrams</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding_type</span><span class="o">=</span><span class="n">encoding_type</span><span class="p">)</span><span class="o">.</span><span class="n">process_from_file</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+
+    <span class="n">embed</span> <span class="o">=</span> <span class="n">StaticEmbedding</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_vocab</span><span class="p">(</span><span class="s1">&#39;chars&#39;</span><span class="p">),</span>
+                            <span class="n">model_dir_or_name</span><span class="o">=</span><span class="s1">&#39;./data/gigaword_chn.all.a2b.uni.ite50.vec&#39;</span><span class="p">,</span>
+                            <span class="n">min_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">only_norm_found_vector</span><span class="o">=</span><span class="n">normalize_embed</span><span class="p">,</span> <span class="n">word_dropout</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+    <span class="n">bi_embed</span> <span class="o">=</span> <span class="n">StaticEmbedding</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_vocab</span><span class="p">(</span><span class="s1">&#39;bigrams&#39;</span><span class="p">),</span>
+                               <span class="n">model_dir_or_name</span><span class="o">=</span><span class="s1">&#39;./data/gigaword_chn.all.a2b.bi.ite50.vec&#39;</span><span class="p">,</span>
+                               <span class="n">word_dropout</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_freq</span><span class="o">=</span><span class="n">min_freq</span><span class="p">,</span>
+                               <span class="n">only_norm_found_vector</span><span class="o">=</span><span class="n">normalize_embed</span><span class="p">,</span> <span class="n">only_train_min_freq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data_bundle</span><span class="p">,</span> <span class="n">embed</span><span class="p">,</span> <span class="n">bi_embed</span>
+
+
+<span class="n">data_bundle</span><span class="p">,</span> <span class="n">embed</span><span class="p">,</span> <span class="n">bi_embed</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_bundle</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">TENER</span><span class="p">(</span><span class="n">tag_vocab</span><span class="o">=</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_vocab</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">),</span>
+              <span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">,</span>
+              <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+              <span class="n">d_model</span><span class="o">=</span><span class="n">d_model</span><span class="p">,</span>
+              <span class="n">n_head</span><span class="o">=</span><span class="n">n_heads</span><span class="p">,</span>
+              <span class="n">feedforward_dim</span><span class="o">=</span><span class="n">dim_feedforward</span><span class="p">,</span>
+              <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+              <span class="n">after_norm</span><span class="o">=</span><span class="n">after_norm</span><span class="p">,</span>
+              <span class="n">attn_type</span><span class="o">=</span><span class="n">attn_type</span><span class="p">,</span>
+              <span class="n">bi_embed</span><span class="o">=</span><span class="n">bi_embed</span><span class="p">,</span>
+              <span class="n">fc_dropout</span><span class="o">=</span><span class="n">fc_dropout</span><span class="p">,</span>
+              <span class="n">pos_embed</span><span class="o">=</span><span class="n">pos_embed</span><span class="p">,</span>
+              <span class="n">encoding_type</span><span class="o">=</span><span class="n">encoding_type</span><span class="p">,</span>
+              <span class="n">scale</span><span class="o">=</span><span class="n">attn_type</span> <span class="o">==</span> <span class="s1">&#39;transformer&#39;</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">metrics</span><span class="o">=</span><span class="n">SpanFPreRecMetric</span><span class="p">(</span><span class="n">tag_vocab</span><span class="o">=</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_vocab</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">),</span> <span class="n">encoding_type</span><span class="o">=</span><span class="n">encoding_type</span><span class="p">)</span>
+
+<span class="n">callbacks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">clip_callback</span> <span class="o">=</span> <span class="n">GradientClipCallback</span><span class="p">(</span><span class="n">clip_type</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">clip_value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">evaluate_callback</span> <span class="o">=</span> <span class="n">EvaluateCallback</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">warmup_steps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">warmup_callback</span> <span class="o">=</span> <span class="n">WarmupCallback</span><span class="p">(</span><span class="n">warmup_steps</span><span class="p">,</span> <span class="n">schedule</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+    <span class="n">callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">warmup_callback</span><span class="p">)</span>
+<span class="n">callbacks</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">clip_callback</span><span class="p">,</span> <span class="n">evaluate_callback</span><span class="p">])</span>
+
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">),</span>
+                      <span class="n">model</span><span class="p">,</span>
+                      <span class="n">optimizer</span><span class="p">,</span>
+                      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                      <span class="n">sampler</span><span class="o">=</span><span class="n">BucketSampler</span><span class="p">(),</span>
+                      <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                      <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+                      <span class="n">dev_data</span><span class="o">=</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">),</span>
+                      <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span>
+                      <span class="n">dev_batch_size</span><span class="o">=</span><span class="n">batch_size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+                      <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+                      <span class="n">test_use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      <span class="n">use_tqdm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                      <span class="n">print_every</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 训练结束后一定要保存最好的模型, 默认会进行保存.</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="n">model_save_dir</span> <span class="o">=</span> <span class="s2">&quot;./saved_model/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y_%m_</span><span class="si">%d</span><span class="s1">_%H_%M_%S&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">)</span>
+    <span class="n">model_save_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/model_tener.pt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_save_dir</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">model_save_path</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span>
+    <span class="n">time_stamp</span> <span class="o">=</span> <span class="s1">&#39;2021_12_01_05_24_10&#39;</span>
+    <span class="n">model_save_path</span> <span class="o">=</span> <span class="s2">&quot;./saved_model/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">/model_tener.pt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">time_stamp</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_save_path</span><span class="p">))</span>
+
+    <span class="n">tester</span> <span class="o">=</span> <span class="n">Tester</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">),</span>
+                    <span class="n">model</span><span class="p">,</span>
+                    <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span>
+                    <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">tester</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+    <span class="n">predictor</span> <span class="o">=</span> <span class="n">Predictor</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">predictor</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 预测结果</span>
+    <span class="n">test_label_list</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">))[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Prediction cost time:&#39;</span><span class="p">,</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+    <span class="n">pred_tags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">test_label</span> <span class="ow">in</span> <span class="n">test_label_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">test_label</span><span class="p">:</span>
+            <span class="n">pred_tags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="c1"># 原始文字</span>
+    <span class="n">test_raw_char</span> <span class="o">=</span> <span class="n">data_bundle</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)[</span><span class="s1">&#39;raw_chars&#39;</span><span class="p">]</span>
+    <span class="n">predict_path</span> <span class="o">=</span> <span class="s2">&quot;./results/ner_predict.txt&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">predict_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">tags</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">test_raw_char</span><span class="p">,</span> <span class="n">pred_tags</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)):</span>
+                <span class="n">ch</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">tag_text</span> <span class="o">=</span> <span class="n">data_bundle</span><span class="o">.</span><span class="n">get_vocab</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_word</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ch</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">tag_text</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h4 id="4">第4步: 模型训练<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python train_tener_cn.py --dataset resume
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Read cache from ./cache/resume_transformer_bmeso_True.pkl.
+In total 3 datasets:
+    train has 2000 instances.
+    dev has 532 instances.
+    test has 532 instances.
+In total 3 vocabs:
+    chars has 1096 entries.
+    bigrams has 5550 entries.
+    target has 7 entries.
+
+input fields after batch(if batch size is 2):
+    target: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2, 59]) 
+    chars: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2, 59]) 
+    bigrams: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2, 59]) 
+    seq_len: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2]) 
+target fields after batch(if batch size is 2):
+    target: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2, 59]) 
+    seq_len: (1)type:torch.Tensor (2)dtype:torch.int64, (3)shape:torch.Size([2]) 
+
+training epochs started 2023-02-25-12-52-13
+Evaluate data in 0.69 seconds!                                                                                                                                
+Evaluate data in 0.69 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.080617, pre=0.043392, rec=0.567179                                                                                                     
+Evaluation on dev at Epoch 1/200. Step:16/3200:                                                                                                               
+SpanFPreRecMetric: f=0.080617, pre=0.043392, rec=0.567179                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+Evaluation on dev at Epoch 2/200. Step:32/3200:                                                                                                               
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+Evaluation on dev at Epoch 3/200. Step:48/3200:                                                                                                               
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+Evaluation on dev at Epoch 4/200. Step:64/3200:                                                                                                               
+SpanFPreRecMetric: f=0.0, pre=0.0, rec=0.0                                                                                                                    
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.093066, pre=0.944444, rec=0.048944                                                                                                     
+Evaluation on dev at Epoch 5/200. Step:80/3200:                                                                                                               
+SpanFPreRecMetric: f=0.093066, pre=0.944444, rec=0.048944                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.524046, pre=0.461314, rec=0.606526                                                                                                     
+Evaluation on dev at Epoch 6/200. Step:96/3200:                                                                                                               
+SpanFPreRecMetric: f=0.524046, pre=0.461314, rec=0.606526                                                                                                     
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.484195, pre=0.962857, rec=0.323417                                                                                                     
+Evaluation on dev at Epoch 7/200. Step:112/3200:                                                                                                              
+SpanFPreRecMetric: f=0.484195, pre=0.962857, rec=0.323417                                                                                                     
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.700119, pre=0.927215, rec=0.56238                                                                                                      
+Evaluation on dev at Epoch 8/200. Step:128/3200:                                                                                                              
+SpanFPreRecMetric: f=0.700119, pre=0.927215, rec=0.56238                                                                                                      
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.784035, pre=0.911055, rec=0.6881                                                                                                       
+Evaluation on dev at Epoch 9/200. Step:144/3200:                                                                                                              
+SpanFPreRecMetric: f=0.784035, pre=0.911055, rec=0.6881                                                                                                       
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.78663, pre=0.937583, rec=0.677543                                                                                                      
+Evaluation on dev at Epoch 10/200. Step:160/3200:                                                                                                             
+SpanFPreRecMetric: f=0.78663, pre=0.937583, rec=0.677543                                                                                                      
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.809218, pre=0.916262, rec=0.724568                                                                                                     
+Evaluation on dev at Epoch 11/200. Step:176/3200:                                                                                                             
+SpanFPreRecMetric: f=0.809218, pre=0.916262, rec=0.724568                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.817942, pre=0.908558, rec=0.743762                                                                                                     
+Evaluation on dev at Epoch 12/200. Step:192/3200:                                                                                                             
+SpanFPreRecMetric: f=0.817942, pre=0.908558, rec=0.743762                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.819672, pre=0.912839, rec=0.743762                                                                                                     
+Evaluation on dev at Epoch 13/200. Step:208/3200:                                                                                                             
+SpanFPreRecMetric: f=0.819672, pre=0.912839, rec=0.743762                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.837686, pre=0.897914, rec=0.785029                                                                                                     
+Evaluation on dev at Epoch 14/200. Step:224/3200:                                                                                                             
+SpanFPreRecMetric: f=0.837686, pre=0.897914, rec=0.785029                                                                                                     
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.846582, pre=0.896034, rec=0.802303                                                                                                     
+Evaluation on dev at Epoch 15/200. Step:240/3200:                                                                                                             
+SpanFPreRecMetric: f=0.846582, pre=0.896034, rec=0.802303
+
+......
+......
+......
+......
+......
+......
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 192/200. Step:3072/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.978663, pre=0.967198, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 193/200. Step:3088/3200:                                                                                                           
+SpanFPreRecMetric: f=0.978663, pre=0.967198, rec=0.990403                                                                                                     
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.67 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.981455, pre=0.972667, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 194/200. Step:3104/3200:                                                                                                           
+SpanFPreRecMetric: f=0.981455, pre=0.972667, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.981455, pre=0.972667, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 195/200. Step:3120/3200:                                                                                                           
+SpanFPreRecMetric: f=0.981455, pre=0.972667, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 196/200. Step:3136/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 197/200. Step:3152/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 198/200. Step:3168/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Evaluate data in 0.67 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 199/200. Step:3184/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Evaluate data in 0.68 seconds!                                                                                                                                
+Evaluate data in 0.68 seconds!                                                                                                                                
+EvaluateCallback evaluation on data-test:                                                                                                                     
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+Evaluation on dev at Epoch 200/200. Step:3200/3200:                                                                                                           
+SpanFPreRecMetric: f=0.982389, pre=0.974504, rec=0.990403                                                                                                     
+
+Best test performance(may not correspond to the best dev performance):{&#39;SpanFPreRecMetric&#39;: {&#39;f&#39;: 0.987112, &#39;pre&#39;: 0.981956, &#39;rec&#39;: 0.992322}} achieved at Epoch:173.
+Best test performance(correspond to the best dev performance):{&#39;SpanFPreRecMetric&#39;: {&#39;f&#39;: 0.987112, &#39;pre&#39;: 0.981956, &#39;rec&#39;: 0.992322}} achieved at Epoch:173.
+
+In Epoch:173/Step:2768, got best dev performance:
+SpanFPreRecMetric: f=0.987112, pre=0.981956, rec=0.992322
+Reloaded the best model.
+</code></pre></div>
+<hr />
+<hr />
+<h3 id="_2">小节总结<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本小节学习了TENER模型的架构和代码实现.</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="10_3.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 10.3 上线部署与联调测试" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              10.3 上线部署与联调测试
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="12_1.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 12.1 Soft-lexicon模型" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              12.1 Soft-lexicon模型
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

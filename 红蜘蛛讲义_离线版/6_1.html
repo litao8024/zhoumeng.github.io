@@ -1,0 +1,1837 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>6.1 概念图谱的构建 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6.1 概念图谱的构建
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          6.1 概念图谱的构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="6_1.html" class="md-nav__link md-nav__link--active">
+        6.1 概念图谱的构建
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    概念图谱的构建
+  </a>
+  
+    <nav class="md-nav" aria-label="概念图谱的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    概念图谱的内涵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    常见的概念图谱
+  </a>
+  
+    <nav class="md-nav" aria-label="常见的概念图谱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wordnet" class="md-nav__link">
+    WordNet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wikitaxonomy" class="md-nav__link">
+    WikiTaxonomy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probase" class="md-nav__link">
+    Probase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    大词林
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cn-probase" class="md-nav__link">
+    CN-Probase
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    概念图谱的应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    概念图谱的构建
+  </a>
+  
+    <nav class="md-nav" aria-label="概念图谱的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    在线百科的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    模式匹配的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    基于中文图谱的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    概念图谱的构建
+  </a>
+  
+    <nav class="md-nav" aria-label="概念图谱的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    概念图谱的内涵
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    常见的概念图谱
+  </a>
+  
+    <nav class="md-nav" aria-label="常见的概念图谱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wordnet" class="md-nav__link">
+    WordNet
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wikitaxonomy" class="md-nav__link">
+    WikiTaxonomy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probase" class="md-nav__link">
+    Probase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    大词林
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cn-probase" class="md-nav__link">
+    CN-Probase
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    概念图谱的应用
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    概念图谱的构建
+  </a>
+  
+    <nav class="md-nav" aria-label="概念图谱的构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    在线百科的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    模式匹配的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    基于中文图谱的方法
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>6.1 概念图谱的构建</h1>
+
+<h2 id="_1">概念图谱的构建<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_2">学习目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>了解概念图谱的含义.</li>
+<li>了解有哪些概念图谱.</li>
+<li>了解概念图谱有什么价值与应用.</li>
+<li>了解如何自动化构建与完善一个大规模概念图谱.</li>
+</ul>
+<hr />
+<h3 id="_3">概念图谱的内涵<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>概念是认知的基石, 构建概念图谱是让机器具备概念认知能力, 进而形成认知能力的关键一环. 所谓机器的概念认知, 从计算机信息处理的角度来说, 是对某个形态的数据输入产生符号化概念输出的过程.</li>
+</ul>
+<p><center><img alt="" src="img/6_1_1.png" /></center></p>
+<hr />
+<ul>
+<li>符号化概念的发展可能是人类从动物实现智能跃迁而成为智人的革命性一步. 正是概念的出现, 使得抽象思维成为可能. 因此将概念知识以及相应的认知能力赋予机器, 也必将是机器智能发展历程中的重要一步, 是让机器形成认知的关键性基础工作. 建设概念图谱就是为了让机器也能拥有人类的概念知识, 进而形成概念认知能力.</li>
+</ul>
+<hr />
+<ul>
+<li>概念图谱(Concept Graph)是一类专注于实体与概念之间的isA关系的知识图谱, 从认知和语言两个角度, 概念图谱可以分为两个体系:<ul>
+<li>概念层级体系 (Taxonomy)</li>
+<li>词汇概念层级体系 (Lexical Taxonomy)</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>概念层级体系 (Taxonomy): 包含三种元素, 实体, 概念, isA关系, 比如在isA关系"apple isA fruit"中, apple是实体, fruit是概念. isA关系又可以细分为实体与概念之间的instanceOf关系以及概念之间的subclassOf关系.<ul>
+<li>instanceOf关系: 比如"dog isA animal"表达的是实体与概念之间的关系.</li>
+<li>subclassOf关系: 比如"fruit isA food"表达的是概念在之间的关系.(水果是子概念, 食物是父概念) </li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>任何实体或者概念都要通过语言表达, 因此实际应用中通常使用词汇概念层级体系, 其中的节点是没有经过消歧的词. 词汇概念层级体系中的基本关系是词汇之间的上下位关系. 比如"apple isA fruit", apple是fruit的下位词, fruit是apple的上位词. </p>
+</li>
+<li>
+<p>在词汇概念层级体系中, apple只是一个词汇, 在很多情况下并不严格区分其语义, 因此apple同时具有"公司"和"水果"两个上位词.</p>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>思考: 概念层级体系是否是一个有向无环图?</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="_4">常见的概念图谱<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在人工智能发展的早期, 人们就已经意识到概念的重要性, 并开展过一系列概念获取, 概念知识库构建的工作. 时至今日, 工业界已经有大量的概念图谱, 它们在各种应用中发挥着积极的作用, 并且大部分概念图谱是公开, 可用的.</li>
+</ul>
+<hr />
+<h4 id="wordnet">WordNet<a class="headerlink" href="#wordnet" title="Permanent link">&para;</a></h4>
+<ul>
+<li>WordNet是普林斯顿认知科学实验室于1985年开始创建的英文词典, 旨在从心理语言学角度建立英文词汇基本语义关系的实用模型, 其目的在于通过概念来帮助用户获取语义知识.</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>WordNet用单词的常见拼写来表示词形, 用同义词词集来表示词义.</p>
+</li>
+<li>
+<p>WordNet包含两种类型的关系:</p>
+<ul>
+<li>第一种: 词汇关系, 这种关系存在于词形之间.</li>
+<li>第二种: 语义关系, 这种关系存在于词义之间.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>注意: WordNet利用词义而不是词形来组织词汇.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>
+<p>WordNet的语义关系包含: 同义, 反义, 上下位, 整体-部分.</p>
+</li>
+<li>
+<p>WordNet的词汇分为5类: 名词, 动词, 形容词, 副词, 功能词.</p>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: 当我们查询"car"这个单词的时候, "car.n.01"表示car的第一个词义对应项, 而根据边所表达的上下位关系, 可知"car.n.01"的上位词是"motor_vehicle.n.01".</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="wikitaxonomy">WikiTaxonomy<a class="headerlink" href="#wikitaxonomy" title="Permanent link">&para;</a></h4>
+<ul>
+<li>2008年, Ponzetto和Strube提出了WikiTaxonomy概念图谱, 其数据来源于2006年9月25日的维基百科数据快照, 并将抽取出来的isA知识以RDF形式表示. 具体来说, WikiTaxonomy从127325个类和267707个链接中产生了105418条isA关系, 其F1值达到了87.9%.</li>
+</ul>
+<hr />
+<h4 id="probase">Probase<a class="headerlink" href="#probase" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Probase是2012年微软亚洲研究院提出的研究原型, 其目标是从网页数据和搜索记录数据中构造出一个统一的分类知识体系. Probase是从16亿个网页中进行自动抽取构造而成的.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: "X such as Y"这一模式可以从"household pets such as cats"中抽取出"cats isA household pets".</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>Probase早期版本包含了1600万条isA关系, 准确率达到了92%, 并且每条关系皆含有频数, 表示该条关系在总体语料中出现的次数. 例如, (Google, isA, Company, 7816), (Apple, isA, Fruit, 6315). 这些频数对于刻画实体或者概念的典型性具有重要意义.</li>
+</ul>
+<hr />
+<ul>
+<li>Probase经过后续几轮扩容后更名为Microsoft Concept Graph, 现已包含超过500万个概念, 1200多万个实例, 8000多万条isA关系.</li>
+</ul>
+<hr />
+<h4 id="_5">大词林<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>大词林是哈尔滨工业大学社会计算与信息检索研究中心构建的中文概念图谱. 大词林是基于弱监督框架自动构建而成的. 大词林对每个实体分别从搜索引擎的结果, 百科页面和实体名称这三个数据源中获取上下位关系, 然后通过排序模块对实体的上位词进行排序.</li>
+</ul>
+<hr />
+<h4 id="cn-probase">CN-Probase<a class="headerlink" href="#cn-probase" title="Permanent link">&para;</a></h4>
+<ul>
+<li>CN-Probase是复旦大学知识工场实验室研发并维护的大规模中文概念图谱, 其isA关系的准确率在95%以上. 与其他概念图谱相比, CN-Probase具有两个显著优点:<ul>
+<li>第一点: 规模巨大, 基本涵盖常见的中文实体和概念, 包含约1700万个实体, 27万个概念和3300万条isA关系.</li>
+<li>第二点: 严格按照实体进行组织, 有利于精准理解实体的概念.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>关于上述第二点, 可以举例如下: "刘德华"这个名字可能对应很多叫"刘德华"的人, 在CN-Probase里搜索"刘德华", 会将所有匹配的实体按照典型性进行排序, 排在第一的是众所周知的香港流行天王"刘德华".</li>
+</ul>
+<div class="highlight"><pre><span></span><code>刘德华 (中国香港男演员, 歌手, 制片人)
+刘德华 (清华大学教授)
+刘德华 (原民航局空中交通管理局局长)
+刘德华 (山东钢铁集团有限公司财务总监)
+刘德华 (新疆青少年出版社出版的著作)
+刘德华 (湖北籍烈士)
+刘德华 (四川省广安经济技术开发区国家税务局局长)
+刘德华 (江西籍烈士)
+刘德华 (通川区学生自主中心主任)
+</code></pre></div>
+<hr />
+<hr />
+<h3 id="_6">概念图谱的应用<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>概念图谱对于机器认知智能的实现至关重要, 这种重要性体现在一系列实际应用中, 这些应用涉及概念图谱的简单查询以及相对复杂的推理. 不管应用的形式如何, 都可以归结为实例化和概念化这两个最基本的功能.</li>
+</ul>
+<hr />
+<ul>
+<li>实体搜索: 给定一个概念作为查询, 检索该概念的典型实体.<ul>
+<li>例如: 搜索"上海985高校", 返回"复旦大学", "上海交通大学".</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>样本增强: 利用概念下的实例, 增强样本.<ul>
+<li>例如: 对样本"颐和园在哪里?", 替换实体, 生成"圆明园在哪里?", 作为新的样本.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>文本分类: 根据文本中实体的概念, 将文本分为不同类别.<ul>
+<li>例如: 包含"足球", "篮球"的文本应该与包含"宝马", "奔驰"的文本属于不同的类别.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>主题分析: 给定文本, 分析文本属于什么主题.<ul>
+<li>例如: 包含"足球", "篮球"的文本应该属于体育类主题.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>给文档打标签: 给定文本, 给文本打上若干个概念作为标签.<ul>
+<li>例如: 对文本"iPhone进水了怎么办?", 可以打上"手机, 维修"等标签.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>用户画像: 给定用户信息, 为用户生成显式的概念.<ul>
+<li>例如: 根据描述文本"精通Java, Android开发", 可以为用户打上"面向对象编程", "手机APP开发", "Java程序员"等标签.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>基于概念的解释: 根据概念信息, 为事件提供解释.<ul>
+<li>例如: 对于文本"特斯拉Model S的加速性能很好", 可以通过关键概念"特斯拉Model S是电动车", 以及"电动车加速性能通常较好", 来给出合理可信的解释.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>概念归纳: 从实体集合或者词袋归纳概念标签.<ul>
+<li>例如: 给定"清华大学", "北京大学", 可以归纳出"中国高校", "985"等概念.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>语义表示: 利用概念集合表达实体, 词汇的语义.<ul>
+<li>例如: "iPhone X"的语义课表达为其概念集合 {"全面屏手机", "智能手机", "旗舰手机"}.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>实体推荐: 根据一些实体的概念信息为其推荐其他实体.<ul>
+<li>例如: 当用户搜索"iPhone XS"时, 为其推荐"华为 P30"等高端手机.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>规则挖掘: 利用概念从大量数据中挖掘出具有一定泛化能力的规则.<ul>
+<li>例如: 从健身的人吃蔬菜, 吃燕麦等食物, 可以挖掘出健身的人主要吃"高纤维食物".</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>总结: 上述应用的本质都是用概念作为实体, 词汇或者其他对象的语义表示. 不同于当前深度学习方法中常用的基于向量的隐式表示, 基于概念的语义表示是一种显示表示. 概念是符号, 是人类可理解的, 因此基于概念图谱的语义表示具有可控性, 可解释性等优点, 这在很多场景下是非常有意义的!</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="_7">概念图谱的构建<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>知识图谱的规模和质量是构建知识图谱的重要因素, 对于概念图谱也不例外. 人工构建的概念图谱(比如WordNet)质量精良, 已经在很多领域得以应用并得到检验, 但是人工构建的概念图谱规模有限. 概念图谱对于实体和概念的覆盖率直接决定了其能否胜任自然语言中海量实体和概念的理解任务. 另外, 大规模文本中也蕴含着丰富的isA关系. 因此, 从大规模文本中自动抽取isA关系进而构建大规模概念图谱是可能的.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 如何确保自动化构建的大规模概念图谱的准确率? 这是整个自动化构建中的核心问题!</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>isA关系抽取式构建概念图谱的核心. isA关系抽取的方法主要分为三种:<ul>
+<li>基于在线百科的方法</li>
+<li>基于模式匹配的方法</li>
+<li>基于词向量的方法</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>基于词向量的方法将词汇表中的单词或短语映射到向量空间, 基于向量运算发现上下位关系. 通过大量的研究验证, 发现词向量能够基本保持上下位关系, 比如"vector(虾) - vector(对虾)"约等于"vector(鱼) - vector(金鱼)". 这类方法思路上比较简单, 但是由于向量化过程中损失了知识图谱原有的语义信息, 因此直接使用向量推断isA关系的效果比较有限. 一般而言, 需要在基于向量推断的基础上辅以其他证据, 才能进行isA关系的准确推断, 进而完成概念图谱的构建.</li>
+</ul>
+<hr />
+<h4 id="_8">在线百科的方法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于在线百科的方法主要是从百科网站的标签系统中抽取出来概念之间的isA关系. 标签系统用于组织百科网站上的所有实体, 为构建概念图谱提供了理想的数据来源. 只需从标签系统中筛选出高质量的概念, 并建立起概念之间的层级关系, 就能将用户自发贡献的标签系统转换成有结构的概念层级体系.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: 英文概念图谱WikiTaxonomy和YAGO都是基于这一思路构建而成的.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>
+<p>第一步: 概念标签识别</p>
+</li>
+<li>
+<p>根据标签的功能, 维基百科中的标签可分为概念型标签, 主题型标签, 属性型标签以及管理型标签.</p>
+<ul>
+<li>概念型标签: 概念型标签用来描述实体所属的类型, 如"American male film actors". 概念标签是概念图谱中的理想节点.</li>
+<li>主题型标签: 主题型标签用来描述实体所属的主题, 如"Chemistry".</li>
+<li>属性型标签: 属性型标签用于描述实体的相关属性信息, 如"1989 births".</li>
+<li>管理型标签: 管理型标签主要用于管理维基百科词条, 比如"Articles with unsourced statements".</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>方法: 属性型标签和管理型标签一般来说比较少, 可以通过人工或者设定简单规则来剔除. 剩下的标签主要是概念型标签和主题型标签. YAGO使用了浅层语言分析来识别概念型标签, 其基本思路为识别出标签名称中的中心词. 如果这个中心词为复数(比如"American male film actors"中的"actors"), 则认为该标签为概念型标签; 如果中心词为单数(比如"Chemistry"), 则认为这个标签为主题型标签.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>
+<p>第二步: 概念层级体系构建</p>
+</li>
+<li>
+<p>在识别出维基百科中的概念型标签后, YAGO提出了将这些概念型标签与WordNet知识图谱中的概念建立isA关系, 进而构建一个比WordNet更大的概念层级体系. </p>
+</li>
+</ul>
+<hr />
+<h4 id="_9">模式匹配的方法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>维基百科的标签系统规模有限, 这决定了基于维基百科构建的概念图谱规模有限, 难易满足大规模应用的需要. 突破规模瓶颈的一个重要思路是将互联网上的自由文本作为构建概念图谱的数据源. 互联网上的自由文本的规模几乎是无限的, 由此构建的概念图谱可以覆盖常见的实体和概念. 从文本中抽取isA关系最常见的方法是基于模式(Pattern)的抽取方法.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: 对于模式特征词"such as"前后的名词短语作为上下位词, 对于与此模式匹配的"companies such as IBM, Apple", 不难抽取出"IBM isA Company", "Apple isA Company".</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>但是类似上面"such as"模式特征词的做法仍然存在一些问题:<ul>
+<li>噪声词错误: 模式前后的噪声词汇会导致抽取错误. 例如, 对"animals other than dogs such as cats"的抽取会得到错误的isA关系, "cats isA dogs", 主要原因是因为噪声词"other than"的干扰所致.</li>
+<li>分词错误: 分词错误会导致抽取错误. 例如, 对"algorithms including SVM, LR and RF", 分词模型难易确定"LR and RF"到底是一个实体还是两个实体, 从而导致抽取错误.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>由于存在上述的噪声词错误, 分词错误等问题, 基于模式匹配的抽取仍然需要采取额外的手段来提升抽取的精确率和召回率. 充分利用大规模语料以及抽取过程中间结果的统计数据可以帮助解决上述问题.</p>
+</li>
+<li>
+<p>比如对于噪声词错误, 可以设定3个关系t1 = "cats isA dogs", t2 = "cats isA animal", t3 = "dogs isA animal"三者的统计信息加以纠错. 显然从大规模互联网语料中抽取出t2和t3的频次要显著高于t1(频次越高越可信, 反之则越不可信), 结合"同一个词汇的两个下位词不可能满足上下位关系"的规则, 可以识别出t1是错误的.</p>
+</li>
+</ul>
+<hr />
+<h4 id="_10">基于中文图谱的方法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基于模式的方法依赖高质量的抽取模式, 但是中文的高质量句法模式较少, 这是因为中文的语法相对英文而言&gt;更加复杂和灵活. 例如, "such as", "or | and"的模式在英文中有95.7%的准确率, 但在中文场景下只有75.3%的
+准确率. 大部分中文模式比相应的英文模式准确率低.</li>
+</ul>
+<hr />
+<ul>
+<li>这导致基于模式的方法很难构建高质量的中文概念图谱, 而基于在线百科的方法仅从百科的类别系统中获取isA
+关系, 这种方法构建的概念图谱覆盖率往往不高.</li>
+</ul>
+<hr />
+<ul>
+<li>另一类典型的思路是将其他语言的概念图谱翻译成中文. 但是这个思路存在两个挑战:
+        * 第一: 译法存在歧义. 需要在各种可能的译法中选择合适的译法. 比如, 对于"China isA country", China可以翻译成"中国", 或者"瓷器", country可以翻译成"国家", 或者"乡村", 而显然只有"中国isA 国家"是正确的. 因此仍然需要利用一些特征来识别正确的译法. 比如, 利用词对的共现频次, "中国"与"国家"的共现频次要远高于其他不准确的翻译词对.<ul>
+<li>第二: 不同语种倾向于表达不同的知识. 不同语种表达的知识相交部分不多. 比如, 中文百度百科与英文维基百科中的实体相交数量只有40万个左右, 而它们的总实体数都超过了400万个. 不同的语种对应不同的文化, 不同文化的人们对世界的认知是不同的, 自然就有很多知识只在特定语言中存在表达. 比如, 中国讲究饮食文化, 烹饪方式有拌, 腌, 卤, 炒, 熘, 烧, 焖, 蒸, 烤, 煎, 炸, 炖, 煮, 煲, 烩等, 而在英文中只有stew, fry, steam等几种有限的烹饪方式, 无法反映中国烹饪方式的差别与多样性.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>因此, 基于翻译的方法构造中文概念图谱, 在精度和召回率方面均面临巨大挑战!!!</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="5_1.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.1 中文场景下的事件抽取" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              5.1 中文场景下的事件抽取
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="6_2.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.2 百科图谱的构建" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              6.2 百科图谱的构建
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

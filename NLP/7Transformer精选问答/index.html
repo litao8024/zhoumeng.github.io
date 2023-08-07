@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8022/1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="#">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>1. BERT,Transformer的模型架构与详解 - 学习手册</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#11-bert" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="#" title="学习手册" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              学习手册
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                1. BERT,Transformer的模型架构与详解
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" data-md-state="" style="height: 757px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="#" title="学习手册" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    学习手册
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        1. BERT,Transformer的模型架构与详解
+      </label>
+    
+    <a href="#" title="1. BERT,Transformer的模型架构与详解" class="md-nav__link md-nav__link--active">
+      1. BERT,Transformer的模型架构与详解
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11-bert" title="1.1 认识BERT" class="md-nav__link">
+    1.1 认识BERT
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert" title="什么是BERT" class="md-nav__link">
+    什么是BERT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_1" title="BERT的架构" class="md-nav__link">
+    BERT的架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_2" title="BERT的预训练任务" class="md-nav__link">
+    BERT的预训练任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-transformer" title="1.2 Transformer的结构是什么样的? 各个子模块各有什么作用?" class="md-nav__link">
+    1.2 Transformer的结构是什么样的? 各个子模块各有什么作用?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encoder" title="Encoder模块" class="md-nav__link">
+    Encoder模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" title="Decoder模块" class="md-nav__link">
+    Decoder模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-norm" title="Add &amp; Norm模块" class="md-nav__link">
+    Add &amp; Norm模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-encoding" title="位置编码器Positional Encoding" class="md-nav__link">
+    位置编码器Positional Encoding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-transformerdecoder" title="1.3 Transformer结构中的Decoder端具体输入是什么? 在训练阶段和预测阶段一致吗?" class="md-nav__link">
+    1.3 Transformer结构中的Decoder端具体输入是什么? 在训练阶段和预测阶段一致吗?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder_1" title="Decoder端的输入解析" class="md-nav__link">
+    Decoder端的输入解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-transformerself-attention-q-k-v-q-vk-vv" title="1.4 Transformer中一直强调的self-attention是什么? 为什么能发挥如此大的作用? 计算的时候如果不使用三元组(Q, K, V), 而仅仅使用(Q, V)或者(K, V)或者(V)行不行?" class="md-nav__link">
+    1.4 Transformer中一直强调的self-attention是什么? 为什么能发挥如此大的作用? 计算的时候如果不使用三元组(Q, K, V), 而仅仅使用(Q, V)或者(K, V)或者(V)行不行?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention" title="self-attention的机制和原理" class="md-nav__link">
+    self-attention的机制和原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-transformermulti-head-attention-multi-head-attention" title="1.5 Transformer为什么需要进行Multi-head Attention? Multi-head Attention的计算过程是什么?" class="md-nav__link">
+    1.5 Transformer为什么需要进行Multi-head Attention? Multi-head Attention的计算过程是什么?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention" title="采用Multi-head Attention的原因" class="md-nav__link">
+    采用Multi-head Attention的原因
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention_1" title="Multi-head Attention的计算方式" class="md-nav__link">
+    Multi-head Attention的计算方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-transformerrnnlstm" title="1.6 Transformer相比于RNN/LSTM有什么优势? 为什么?" class="md-nav__link">
+    1.6 Transformer相比于RNN/LSTM有什么优势? 为什么?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" title="Transformer的并行计算" class="md-nav__link">
+    Transformer的并行计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer_1" title="Transformer的特征抽取能力" class="md-nav__link">
+    Transformer的特征抽取能力
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-transformerseq2seq" title="1.7 为什么说Transformer可以代替seq2seq?" class="md-nav__link">
+    1.7 为什么说Transformer可以代替seq2seq?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seq2seq" title="seq2seq的两大缺陷" class="md-nav__link">
+    seq2seq的两大缺陷
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer_2" title="Transformer的改进" class="md-nav__link">
+    Transformer的改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-self-attention-scaled" title="1.8 self-attention公式中的归一化有什么作用? 为什么要添加scaled?" class="md-nav__link">
+    1.8 self-attention公式中的归一化有什么作用? 为什么要添加scaled?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention_1" title="self-attention中的归一化概述" class="md-nav__link">
+    self-attention中的归一化概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#softmax" title="softmax的梯度变化" class="md-nav__link">
+    softmax的梯度变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="维度与点积大小的关系" class="md-nav__link">
+    维度与点积大小的关系
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-transformer" title="1.9 Transformer架构的并行化是如何进行的? 具体体现在哪里?" class="md-nav__link">
+    1.9 Transformer架构的并行化是如何进行的? 具体体现在哪里?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformerencoder" title="Transformer架构中Encoder的并行化" class="md-nav__link">
+    Transformer架构中Encoder的并行化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformerdecoder" title="Transformer架构中Decoder的并行化" class="md-nav__link">
+    Transformer架构中Decoder的并行化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-bert" title="1.10 BERT模型的优点和缺点?" class="md-nav__link">
+    1.10 BERT模型的优点和缺点?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_3" title="BERT的优点" class="md-nav__link">
+    BERT的优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_4" title="BERT的缺点" class="md-nav__link">
+    BERT的缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-bertmlm80-10-10" title="1.11 BERT的MLM任务中为什么采用了80%, 10%, 10%的策略?" class="md-nav__link">
+    1.11 BERT的MLM任务中为什么采用了80%, 10%, 10%的策略?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mlm" title="MLM任务中的策略约定分析" class="md-nav__link">
+    MLM任务中的策略约定分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-bert" title="1.12 长文本预测任务如果想用BERT来实现, 要如何构造训练样本?" class="md-nav__link">
+    1.12 长文本预测任务如果想用BERT来实现, 要如何构造训练样本?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_5" title="BERT处理长文本的方法" class="md-nav__link">
+    BERT处理长文本的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="2. ELMo, GPT等经典模型的介绍与对比" class="md-nav__link">
+      2. ELMo, GPT等经典模型的介绍与对比
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 757px;" data-md-state="">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11-bert" title="1.1 认识BERT" class="md-nav__link" data-md-state="">
+    1.1 认识BERT
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert" title="什么是BERT" class="md-nav__link" data-md-state="">
+    什么是BERT
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_1" title="BERT的架构" class="md-nav__link" data-md-state="">
+    BERT的架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_2" title="BERT的预训练任务" class="md-nav__link" data-md-state="">
+    BERT的预训练任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-transformer" title="1.2 Transformer的结构是什么样的? 各个子模块各有什么作用?" class="md-nav__link" data-md-state="">
+    1.2 Transformer的结构是什么样的? 各个子模块各有什么作用?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encoder" title="Encoder模块" class="md-nav__link" data-md-state="">
+    Encoder模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" title="Decoder模块" class="md-nav__link" data-md-state="">
+    Decoder模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-norm" title="Add &amp; Norm模块" class="md-nav__link" data-md-state="">
+    Add &amp; Norm模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-encoding" title="位置编码器Positional Encoding" class="md-nav__link" data-md-state="">
+    位置编码器Positional Encoding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-transformerdecoder" title="1.3 Transformer结构中的Decoder端具体输入是什么? 在训练阶段和预测阶段一致吗?" class="md-nav__link" data-md-state="">
+    1.3 Transformer结构中的Decoder端具体输入是什么? 在训练阶段和预测阶段一致吗?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder_1" title="Decoder端的输入解析" class="md-nav__link" data-md-state="">
+    Decoder端的输入解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-transformerself-attention-q-k-v-q-vk-vv" title="1.4 Transformer中一直强调的self-attention是什么? 为什么能发挥如此大的作用? 计算的时候如果不使用三元组(Q, K, V), 而仅仅使用(Q, V)或者(K, V)或者(V)行不行?" class="md-nav__link" data-md-state="">
+    1.4 Transformer中一直强调的self-attention是什么? 为什么能发挥如此大的作用? 计算的时候如果不使用三元组(Q, K, V), 而仅仅使用(Q, V)或者(K, V)或者(V)行不行?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention" title="self-attention的机制和原理" class="md-nav__link" data-md-state="">
+    self-attention的机制和原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-transformermulti-head-attention-multi-head-attention" title="1.5 Transformer为什么需要进行Multi-head Attention? Multi-head Attention的计算过程是什么?" class="md-nav__link" data-md-state="">
+    1.5 Transformer为什么需要进行Multi-head Attention? Multi-head Attention的计算过程是什么?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention" title="采用Multi-head Attention的原因" class="md-nav__link" data-md-state="">
+    采用Multi-head Attention的原因
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-attention_1" title="Multi-head Attention的计算方式" class="md-nav__link" data-md-state="">
+    Multi-head Attention的计算方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-transformerrnnlstm" title="1.6 Transformer相比于RNN/LSTM有什么优势? 为什么?" class="md-nav__link" data-md-state="">
+    1.6 Transformer相比于RNN/LSTM有什么优势? 为什么?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" title="Transformer的并行计算" class="md-nav__link" data-md-state="">
+    Transformer的并行计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer_1" title="Transformer的特征抽取能力" class="md-nav__link" data-md-state="">
+    Transformer的特征抽取能力
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-transformerseq2seq" title="1.7 为什么说Transformer可以代替seq2seq?" class="md-nav__link" data-md-state="">
+    1.7 为什么说Transformer可以代替seq2seq?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seq2seq" title="seq2seq的两大缺陷" class="md-nav__link" data-md-state="">
+    seq2seq的两大缺陷
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer_2" title="Transformer的改进" class="md-nav__link" data-md-state="">
+    Transformer的改进
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-self-attention-scaled" title="1.8 self-attention公式中的归一化有什么作用? 为什么要添加scaled?" class="md-nav__link" data-md-state="">
+    1.8 self-attention公式中的归一化有什么作用? 为什么要添加scaled?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-attention_1" title="self-attention中的归一化概述" class="md-nav__link" data-md-state="">
+    self-attention中的归一化概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#softmax" title="softmax的梯度变化" class="md-nav__link" data-md-state="">
+    softmax的梯度变化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="维度与点积大小的关系" class="md-nav__link" data-md-state="">
+    维度与点积大小的关系
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-transformer" title="1.9 Transformer架构的并行化是如何进行的? 具体体现在哪里?" class="md-nav__link" data-md-state="">
+    1.9 Transformer架构的并行化是如何进行的? 具体体现在哪里?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformerencoder" title="Transformer架构中Encoder的并行化" class="md-nav__link" data-md-state="">
+    Transformer架构中Encoder的并行化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformerdecoder" title="Transformer架构中Decoder的并行化" class="md-nav__link" data-md-state="">
+    Transformer架构中Decoder的并行化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-bert" title="1.10 BERT模型的优点和缺点?" class="md-nav__link" data-md-state="">
+    1.10 BERT模型的优点和缺点?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_3" title="BERT的优点" class="md-nav__link" data-md-state="">
+    BERT的优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_4" title="BERT的缺点" class="md-nav__link" data-md-state="">
+    BERT的缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-bertmlm80-10-10" title="1.11 BERT的MLM任务中为什么采用了80%, 10%, 10%的策略?" class="md-nav__link" data-md-state="">
+    1.11 BERT的MLM任务中为什么采用了80%, 10%, 10%的策略?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mlm" title="MLM任务中的策略约定分析" class="md-nav__link" data-md-state="">
+    MLM任务中的策略约定分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" title="小节总结" class="md-nav__link" data-md-state="">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-bert" title="1.12 长文本预测任务如果想用BERT来实现, 要如何构造训练样本?" class="md-nav__link" data-md-state="">
+    1.12 长文本预测任务如果想用BERT来实现, 要如何构造训练样本?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" title="学习目标" class="md-nav__link" data-md-state="">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert_5" title="BERT处理长文本的方法" class="md-nav__link" data-md-state="">
+    BERT处理长文本的方法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>1. BERT,Transformer的模型架构与详解</h1>
+                
+                <h2 id="11-bert">1.1 认识BERT</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>了解什么是BERT.</li>
+<li>掌握BERT的架构.</li>
+<li>掌握BERT的预训练任务.</li>
+</ul>
+<hr>
+<h3 id="bert">什么是BERT</h3>
+<ul>
+<li>BERT是2018年10月由Google AI研究院提出的一种预训练模型.<ul>
+<li>BERT的全称是Bidirectional Encoder Representation from Transformers.</li>
+<li>BERT在机器阅读理解顶级水平测试SQuAD1.1中表现出惊人的成绩: 全部两个衡量指标上全面超越人类, 并且在11种不同NLP测试中创出SOTA表现. 包括将GLUE基准推高至80.4% (绝对改进7.6%), MultiNLI准确度达到86.7% (绝对改进5.6%). 成为NLP发展史上的里程碑式的模型成就.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="bert_1">BERT的架构</h3>
+<ul>
+<li>总体架构: 如下图所示, 最左边的就是BERT的架构图, 可以很清楚的看到BERT采用了Transformer Encoder block进行连接, 因为是一个典型的双向编码模型.</li>
+</ul>
+<p></p><center><img src="./index_files/BERT.png" height="auto" width="auto"></center><p></p>
+<hr>
+<ul>
+<li>从上面的架构图中可以看到, 宏观上BERT分三个主要模块.<ul>
+<li>最底层黄色标记的Embedding模块.</li>
+<li>中间层蓝色标记的Transformer模块.</li>
+<li>最上层绿色标记的预微调模块.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Embedding模块: BERT中的该模块是由三种Embedding共同组成而成, 如下图</li>
+</ul>
+<p></p><center><img src="./index_files/BERT2.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>Token Embeddings 是词嵌入张量, 第一个单词是CLS标志, 可以用于之后的分类任务.</p>
+</li>
+<li>
+<p>Segment Embeddings 是句子分段嵌入张量, 是为了服务后续的两个句子为输入的预训练任务.</p>
+</li>
+<li>
+<p>Position Embeddings 是位置编码张量, 此处注意和传统的Transformer不同, 不是三角函数计算的固定位置编码, 而是通过学习得出来的.</p>
+</li>
+<li>
+<p>整个Embedding模块的输出张量就是这3个张量的直接加和结果.</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>双向Transformer模块: BERT中只使用了经典Transformer架构中的Encoder部分, 完全舍弃了Decoder部分. 而两大预训练任务也集中体现在训练Transformer模块中.</li>
+</ul>
+<hr>
+<ul>
+<li>预微调模块: <ul>
+<li>经过中间层Transformer的处理后, BERT的最后一层根据任务的不同需求而做不同的调整即可.</li>
+<li>比如对于sequence-level的分类任务, BERT直接取第一个[CLS] token 的final hidden state, 再加一层全连接层后进行softmax来预测最终的标签.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>对于不同的任务, 微调都集中在预微调模块, 几种重要的NLP微调任务架构图展示如下</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/BERT3.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>从上图中可以发现, 在面对特定任务时, 只需要对预微调层进行微调, 就可以利用Transformer强大的注意力机制来模拟很多下游任务, 并得到SOTA的结果. (句子对关系判断, 单文本主题分类, 问答任务(QA), 单句贴标签(NER))</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>若干可选的超参数建议如下:</li>
+</ul>
+</blockquote>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>Batch size: 16, 32
+Learning rate (Adam): 5e-5, 3e-5, 2e-5
+Epochs: 3, 4
+</code></pre></div>
+
+
+<hr>
+<h3 id="bert_2">BERT的预训练任务</h3>
+<ul>
+<li>BERT包含两个预训练任务:<ul>
+<li>任务一: Masked LM (带mask的语言模型训练)</li>
+<li>任务二: Next Sentence Prediction (下一句话预测任务)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>任务一: Masked LM (带mask的语言模型训练)</p>
+<ul>
+<li>
+<p>关于传统的语言模型训练, 都是采用left-to-right, 或者left-to-right + right-to-left结合的方式, 但这种单向方式或者拼接的方式提取特征的能力有限. 为此BERT提出一个深度双向表达模型(deep bidirectional representation). 即采用MASK任务来训练模型.</p>
+</li>
+<li>
+<p>1: 在原始训练文本中, 随机的抽取15%的token作为参与MASK任务的对象.</p>
+</li>
+<li>
+<p>2: 在这些被选中的token中, 数据生成器并不是把它们全部变成[MASK], 而是有下列3种情况.</p>
+<ul>
+<li>2.1: 在80%的概率下, 用[MASK]标记替换该token, 比如my dog is hairy -&gt; my dog is [MASK]</li>
+<li>2.2: 在10%的概率下, 用一个随机的单词替换token, 比如my dog is hairy -&gt; my dog is apple</li>
+<li>2.3: 在10%的概率下, 保持该token不变, 比如my dog is hairy -&gt; my dog is hairy</li>
+</ul>
+</li>
+<li>
+<p>3: 模型在训练的过程中, 并不知道它将要预测哪些单词? 哪些单词是原始的样子? 哪些单词被遮掩成了[MASK]? 哪些单词被替换成了其他单词? 正是在这样一种高度不确定的情况下, 反倒逼着模型快速学习该token的分布式上下文的语义, 尽最大努力学习原始语言说话的样子. 同时因为原始文本中只有15%的token参与了MASK操作, 并不会破坏原语言的表达能力和语言规则.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>任务二: Next Sentence Prediction (下一句话预测任务)</p>
+<ul>
+<li>
+<p>在NLP中有一类重要的问题比如QA(Quention-Answer), NLI(Natural Language Inference), 需要模型能够很好的理解两个句子之间的关系, 从而需要在模型的训练中引入对应的任务. 在BERT中引入的就是Next Sentence Prediction任务. 采用的方式是输入句子对(A, B), 模型来预测句子B是不是句子A的真实的下一句话.</p>
+</li>
+<li>
+<p>1: 所有参与任务训练的语句都被选中作为句子A.</p>
+<ul>
+<li>1.1: 其中50%的B是原始文本中真实跟随A的下一句话. (标记为IsNext, 代表正样本)</li>
+<li>1.2: 其中50%的B是原始文本中随机抽取的一句话. (标记为NotNext, 代表负样本)</li>
+</ul>
+</li>
+<li>
+<p>2: 在任务二中, BERT模型可以在测试集上取得97%-98%的准确率.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_2">小节总结</h3>
+<ul>
+<li>
+<p>学习了什么是BERT.</p>
+<ul>
+<li>BERT是一个基于Transformer Encoder的预训练语言模型.</li>
+<li>BERT在11种NLP测试任务中创出SOAT表现.</li>
+</ul>
+</li>
+<li>
+<p>学习了BERT的结构.</p>
+<ul>
+<li>最底层的Embedding模块, 包括Token Embeddings, Segment Embeddings, Position Embeddings.</li>
+<li>中间层的Transformer模块, 只使用了经典Transformer架构中的Encoder部分.</li>
+<li>最上层的预微调模块, 具体根据不同的任务类型来做相应的处理.</li>
+</ul>
+</li>
+<li>
+<p>学习了BERT的两大预训练任务.</p>
+<ul>
+<li>MLM任务(Masked Language Model), 在原始文本中随机抽取15%的token参与任务.<ul>
+<li>在80%概率下, 用[MASK]替换该token.</li>
+<li>在10%概率下, 用一个随机的单词替换该token.</li>
+<li>在10%概率下, 保持该token不变.</li>
+</ul>
+</li>
+<li>NSP任务(Next Sentence Prediction), 采用的方式是输入句子对(A, B), 模型预测句子B是不是句子A的真实的下一句话.<ul>
+<li>其中50%的B是原始文本中真实跟随A的下一句话.(标记为IsNext, 代表正样本)</li>
+<li>其中50%的B是原始文本中随机抽取的一句话. (标记为NotNext, 代表负样本)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="12-transformer">1.2 Transformer的结构是什么样的? 各个子模块各有什么作用?</h2>
+<hr>
+<h3 id="_3">学习目标</h3>
+<ul>
+<li>掌握Encoder模块的结构和作用</li>
+<li>掌握Decoder模块的结构和作用</li>
+<li>掌握其他模块的结构和作用</li>
+</ul>
+<hr>
+<h3 id="encoder">Encoder模块</h3>
+<ul>
+<li>Encoder模块的结构和作用:<ul>
+<li>经典的Transformer结构中的Encoder模块包含6个Encoder Block.</li>
+<li>每个Encoder Block包含一个多头自注意力层, 和一个前馈全连接层.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>关于Encoder Block:<ul>
+<li>在Transformer架构中, 6个一模一样的Encoder Block层层堆叠在一起, 共同组成完整的Encoder, 因此剖析一个Block就可以对整个Encoder的内部结构有清晰的认识.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>多头自注意力层(self-attention):</li>
+</ul>
+<blockquote>
+<ul>
+<li>首先来看self-attention的计算规则图:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_2.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>上述attention可以被描述为将query和key-value键值对的一组集合映射到输出, 输出被计算为values的加权和, 其中分配给每个value的权重由query与对应key的相似性函数计算得来. 这种attention的形式被称为Scaled Dot-Product Attention, 对应的数学公式形式如下:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_3.png" height="auto" width="auto"></center> <p></p>
+<hr>
+<blockquote>
+<ul>
+<li>所谓的多头self-attention层, 则是先将Q, K, V经过参数矩阵进行映射, 再做self-attention, 最后将结果拼接起来送入一个全连接层即可.</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_1.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>上述的多头self-attention, 对应的数学公式形式如下:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_4.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>多头self-attention层的作用: 实验结果表明, Multi-head可以在更细致的层面上提取不同head的特征, 总体计算量和单一head相同的情况下, 提取特征的效果更佳.</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>
+<p>前馈全连接层模块</p>
+<ul>
+<li>前馈全连接层模块, 由两个线性变换组成, 中间有一个Relu激活函数, 对应的数学公式形式如下:</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img src="./index_files/picture_5.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>注意: 原版论文中的前馈全连接层, 输入和输出的维度均为d_model = 512, 层内的连接维度d_ff = 2048, 均采用4倍的大小关系.</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>前馈全连接层的作用: 单纯的多头注意力机制并不足以提取到理想的特征, 因此增加全连接层来提升网络的能力.</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="decoder">Decoder模块</h3>
+<ul>
+<li>Decoder模块的结构和作用:<ul>
+<li>经典的Transformer结构中的Decoder模块包含6个Decoder Block.</li>
+<li>每个Decoder Block包含三个子层.<ul>
+<li>一个多头self-attention层</li>
+<li>一个Encoder-Decoder attention层</li>
+<li>一个前馈全连接层</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder Block中的多头self-attention层<ul>
+<li>Decoder中的多头self-attention层与Encoder模块一致, 但需要注意的是Decoder模块的多头self-attention需要做look-ahead-mask, 因为在预测的时候"不能看见未来的信息", 所以要将当前的token和之后的token全部mask.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder Block中的Encoder-Decoder attention层<ul>
+<li>这一层区别于自注意力机制的Q = K = V, 此处矩阵Q来源于Decoder端经过上一个Decoder Block的输出, 而矩阵K, V则来源于Encoder端的输出, 造成了Q != K = V的情况. </li>
+<li>这样设计是为了让Decoder端的token能够给予Encoder端对应的token更多的关注.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder Block中的前馈全连接层<ul>
+<li>此处的前馈全连接层和Encoder模块中的完全一样.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder Block中有2个注意力层的作用: 多头self-attention层是为了拟合Decoder端自身的信息, 而Encoder-Decoder attention层是为了整合Encoder和Decoder的信息.</li>
+</ul>
+<hr>
+<h3 id="add-norm">Add &amp; Norm模块</h3>
+<ul>
+<li>Add &amp; Norm模块接在每一个Encoder Block和Decoder Block中的每一个子层的后面. 具体来说Add表示残差连接, Norm表示LayerNorm.<ul>
+<li>对于每一个Encoder Block, 里面的两个子层后面都有Add &amp; Norm.</li>
+<li>对于每一个Decoder Block, 里面的三个子层后面都有Add &amp; Norm.</li>
+<li>具体的数学表达形式为: LayerNorm(x + Sublayer(x)), 其中Sublayer(x)为子层的输出.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Add残差连接的作用: 和其他神经网络模型中的残差连接作用一致, 都是为了将信息传递的更深, 增强模型的拟合能力. 试验表明残差连接的确增强了模型的表现.</li>
+</ul>
+<hr>
+<ul>
+<li>Norm的作用: 随着网络层数的额增加, 通过多层的计算后参数可能会出现过大, 过小, 方差变大等现象, 这会导致学习过程出现异常, 模型的收敛非常慢. 因此对每一层计算后的数值进行规范化可以提升模型的表现.</li>
+</ul>
+<hr>
+<h3 id="positional-encoding">位置编码器Positional Encoding</h3>
+<ul>
+<li>Transformer中直接采用正弦函数和余弦函数来编码位置信息, 如下图所示:</li>
+</ul>
+<p></p><center><img src="./index_files/picture_7.png" height="auto" width="auto"></center><p></p>
+<hr>
+<ul>
+<li>需要注意: 三角函数应用在此处的一个重要的优点, 因为对于任意的PE(pos+k), 都可以表示为PE(pos)的线性函数, 大大方便计算. 而且周期性函数不受序列长度的限制, 也可以增强模型的泛化能力.</li>
+</ul>
+<p></p><center><img src="./index_files/picture_6.png" height="auto" width="auto"></center><p></p>
+<hr>
+<h3 id="_4">小节总结</h3>
+<ul>
+<li>
+<p>Encoder模块</p>
+<ul>
+<li>经典的Transformer架构中的Encoder模块包含6个Encoder Block.</li>
+<li>每个Encoder Block包含两个子模块, 分别是多头自注意力层, 和前馈全连接层.<ul>
+<li>多头自注意力层采用的是一种Scaled Dot-Product Attention的计算方式, 实验结果表明, Mul
+ti-head可以在更细致的层面上提取不同head的特征, 比单一head提取特征的效果更佳.</li>
+<li>前馈全连接层是由两个全连接层组成, 线性变换中间增添一个Relu激活函数, 具体的维度采用4倍关系, 即多头自注意力的d_model=512, 则层内的变换维度d_ff=2048.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2: Decoder模块</p>
+<ul>
+<li>经典的Transformer架构中的Decoder模块包含6个Decoder Block.</li>
+<li>每个Decoder Block包含3个子模块, 分别是多头自注意力层, Encoder-Decoder Attention层, 和前馈全连接层.<ul>
+<li>多头自注意力层采用和Encoder模块一样的Scaled Dot-Product Attention的计算方式, 最大的
+区别在于需要添加look-ahead-mask, 即遮掩"未来的信息".</li>
+<li>Encoder-Decoder Attention层和上一层多头自注意力层最主要的区别在于Q != K = V, 矩阵Q来源于上一层Decoder Block的输出, 同时K, V来源于Encoder端的输出.</li>
+<li>前馈全连接层和Encoder中完全一样.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>3: Add &amp; Norm模块</p>
+<ul>
+<li>Add &amp; Norm模块接在每一个Encoder Block和Decoder Block中的每一个子层的后面.</li>
+<li>对于每一个Encoder Block, 里面的两个子层后面都有Add &amp; Norm.</li>
+<li>对于每一个Decoder Block, 里面的三个子层后面都有Add &amp; Norm.</li>
+<li>Add表示残差连接, 作用是为了将信息无损耗的传递的更深, 来增强模型的拟合能力.</li>
+<li>Norm表示LayerNorm, 层级别的数值标准化操作, 作用是防止参数过大过小导致的学习过程异常
+, 模型收敛特别慢的问题.</li>
+</ul>
+</li>
+<li>
+<p>4: 位置编码器Positional Encoding</p>
+<ul>
+<li>Transformer中采用三角函数来计算位置编码.</li>
+<li>因为三角函数是周期性函数, 不受序列长度的限制, 而且这种计算方式可以对序列中不同位置的编码的重要程度同等看待.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="13-transformerdecoder">1.3 Transformer结构中的Decoder端具体输入是什么? 在训练阶段和预测阶段一致吗?</h2>
+<hr>
+<h3 id="_5">学习目标</h3>
+<ul>
+<li>掌握Transformer结构中的Decoder端的输入张量特点和含义.</li>
+<li>掌握Decoder在训练阶段的输入是什么.</li>
+<li>掌握Decoder在预测阶段的输入是什么.</li>
+</ul>
+<hr>
+<h3 id="decoder_1">Decoder端的输入解析</h3>
+<ul>
+<li>Decoder端的架构: Transformer原始论文中的Decoder模块是由N=6个相同的Decoder Block堆叠而成, 其中每一个Block是由3个子模块构成, 分别是多头self-attention模块, Encoder-Decoder attention模块, 前馈全连接层模块.</li>
+</ul>
+<hr>
+<ul>
+<li>6个Block的输入不完全相同:<ul>
+<li>最下面的一层Block接收的输入是经历了MASK之后的Decoder端的输入 + Encoder端的输出.</li>
+<li>其他5层Block接收的输入模式一致, 都是前一层Block的输出 + Encoder端的输出.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder在训练阶段的输入解析:<ul>
+<li>从第二层Block到第六层Block的输入模式一致, 无需特殊处理, 都是固定操作的循环处理.</li>
+<li>聚焦在第一层的Block上: 训练阶段每一个time step的输入是上一个time step的输入加上真实标签序列向后移一位. 具体来说, 假设现在的真实标签序列等于"How are you?", 当time step=1时, 输入张量为一个特殊的token, 比如"SOS"; 当time step=2时, 输入张量为"SOS How"; 当time step=3时, 输入张量为"SOS How are", 以此类推...</li>
+<li>注意: 在真实的代码实现中, 训练阶段不会这样动态输入, 而是一次性的把目标序列全部输入给第一层的Block, 然后通过多头self-attention中的MASK机制对序列进行同样的遮掩即可.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Decoder在预测阶段的输入解析:<ul>
+<li>同理于训练阶段, 预测时从第二层Block到第六层Block的输入模式一致, 无需特殊处理, 都是固定操作的循环处理.</li>
+<li>聚焦在第一层的Block上: 因为每一步的输入都会有Encoder的输出张量, 因此这里不做特殊讨论, 只专注于纯粹从Decoder端接收的输入. 预测阶段每一个time step的输入是从time step=0, input_tensor="SOS"开始, 一直到上一个time step的预测输出的累计拼接张量. 具体来说: <ul>
+<li>当time step=1时, 输入的input_tensor="SOS", 预测出来的输出值是output_tensor="What";</li>
+<li>当time step=2时, 输入的input_tensor="SOS What", 预测出来的输出值是output_tensor="is";</li>
+<li>当time step=3时, 输入的input_tensor="SOS What is", 预测出来的输出值是output_tensor="the";</li>
+<li>当time step=4时, 输入的input_tensor="SOS What is the", 预测出来的输出值是output_tensor="matter";</li>
+<li>当time step=5时, 输入的input_tensor="SOS What is the matter", 预测出来的输出值是output_tensor="?";</li>
+<li>当time step=6时, 输入的input_tensor="SOS What is the matter ?", 预测出来的输出值是output_tensor="EOS", 代表句子的结束符, 说明解码结束, 预测结束.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_6">小节总结</h3>
+<ul>
+<li>
+<p>1: 在Transformer结构中的Decoder模块的输入, 区分于不同的Block, 最底层的Block输入有其特殊的地方. 第二层到第六层的输入一致, 都是上一层的输出和Encoder的输出.</p>
+</li>
+<li>
+<p>2: 最底层的Block在训练阶段, 每一个time step的输入是上一个time step的输入加上真实标签序列向后移一位. 具体来看, 就是每一个time step的输入序列会越来越长, 不断的将之前的输入融合进来.</p>
+</li>
+<li>
+<p>3: 最底层的Block在训练阶段, 真实的代码实现中, 采用的是MASK机制来模拟输入序列不断添加的过程.</p>
+</li>
+<li>
+<p>4: 最底层的Block在预测阶段, 每一个time step的输入是从time step=0开始, 一直到上一个time step的预测值的累积拼接张量. 具体来看, 也是随着每一个time step的输入序列会越来越长. 相比于训练阶段最大的不同是这里不断拼接进来的token是每一个time step的预测值, 而不是训练阶段每一个time step取得的groud truth值.</p>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="14-transformerself-attention-q-k-v-q-vk-vv">1.4 Transformer中一直强调的self-attention是什么? 为什么能发挥如此大的作用? 计算的时候如果不使用三元组(Q, K, V), 而仅仅使用(Q, V)或者(K, V)或者(V)行不行?</h2>
+<hr>
+<h3 id="_7">学习目标</h3>
+<ul>
+<li>掌握self-attention的机制和原理.</li>
+<li>掌握为什么要使用三元组(Q, K, V)来计算self-attention.</li>
+</ul>
+<hr>
+<h3 id="self-attention">self-attention的机制和原理</h3>
+<ul>
+<li>
+<p>self-attention是一种通过自身和自身进行关联的attention机制, 从而得到更好的representation来表达自身.</p>
+</li>
+<li>
+<p>self-attention是attention机制的一种特殊情况:</p>
+<ul>
+<li>在self-attention中, Q=K=V, 序列中的每个单词(token)都和该序列中的其他所有单词(token)进行attention规则的计算.</li>
+</ul>
+</li>
+<li>
+<p>attention机制计算的特点在于, 可以直接跨越一句话中不同距离的token, 可以远距离的学习到序列的知识依赖和语序结构.</p>
+</li>
+</ul>
+<p></p><center><img src="./index_files/picture_8.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>从上图中可以看到, self-attention可以远距离的捕捉到语义层面的特征(its的指代对象是Law).</p>
+</li>
+<li>
+<p>应用传统的RNN, LSTM, 在获取长距离语义特征和结构特征的时候, 需要按照序列顺序依次计算, 距离越远的联系信息的损耗越大, 有效提取和捕获的可能性越小.</p>
+</li>
+<li>
+<p>但是应用self-attention时, 计算过程中会直接将句子中任意两个token的联系通过一个计算步骤直接联系起来, </p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>关于self-attention为什么要使用(Q, K, V)三元组而不是其他形式:<ul>
+<li>首先一条就是从分析的角度看, 查询Query是一条独立的序列信息, 通过关键词Key的提示作用, 得到最终语义的真实值Value表达, 数学意义更充分, 完备.</li>
+<li>这里不使用(K, V)或者(V)没有什么必须的理由, 也没有相关的论文来严格阐述比较试验的结果差异, 所以可以作为开放性问题未来去探索, 只要明确在经典self-attention实现中用的是三元组就好.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_8">小节总结</h3>
+<ul>
+<li>
+<p>self-attention机制的重点是使用三元组(Q, K, V)参与规则运算, 这里面Q=K=V.</p>
+</li>
+<li>
+<p>self-attention最大的优势是可以方便有效的提取远距离依赖的特征和结构信息, 不必向RNN那样依次计算产生传递损耗.</p>
+</li>
+<li>
+<p>关于self-attention采用三元组的原因, 经典实现的方式数学意义明确, 理由充分, 至于其他方式的可行性暂时没有论文做充分的对比试验研究.</p>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="15-transformermulti-head-attention-multi-head-attention">1.5 Transformer为什么需要进行Multi-head Attention? Multi-head Attention的计算过程是什么?</h2>
+<hr>
+<h3 id="_9">学习目标</h3>
+<ul>
+<li>掌握Transformer中应用多头注意力的原因.</li>
+<li>掌握Transformer中多头注意力的计算方式.</li>
+</ul>
+<hr>
+<h3 id="multi-head-attention">采用Multi-head Attention的原因</h3>
+<ul>
+<li>
+<p>1: 原始论文中提到进行Multi-head Attention的原因是将模型分为多个头, 可以形成多个子空间, 让模型去关注不同方面的信息, 最后再将各个方面的信息综合起来得到更好的效果.</p>
+</li>
+<li>
+<p>2: 多个头进行attention计算最后再综合起来, 类似于CNN中采用多个卷积核的作用, 不同的卷积核提取不同的特征, 关注不同的部分, 最后再进行融合.</p>
+</li>
+<li>
+<p>3: 直观上讲, 多头注意力有助于神经网络捕捉到更丰富的特征信息.</p>
+</li>
+</ul>
+<hr>
+<h3 id="multi-head-attention_1">Multi-head Attention的计算方式</h3>
+<ul>
+<li>
+<p>1: Multi-head Attention和单一head的Attention唯一的区别就在于, 其对特征张量的最后一个维度进行了分割, 一般是对词嵌入的embedding_dim=512进行切割成head=8, 这样每一个head的嵌入维度就是512/8=64, 后续的Attention计算公式完全一致, 只不过是在64这个维度上进行一系列的矩阵运算而已.</p>
+</li>
+<li>
+<p>2: 在head=8个头上分别进行注意力规则的运算后, 简单采用拼接concat的方式对结果张量进行融合就得到了Multi-head Attention的计算结果.</p>
+</li>
+</ul>
+<hr>
+<h3 id="_10">小节总结</h3>
+<ul>
+<li>
+<p>学习了Transformer架构采用Multi-head Attention的原因.</p>
+<ul>
+<li>将模型划分为多个头, 分别进行Attention计算, 可以形成多个子空间, 让模型去关注不同方面的信息特征, 更好的提升模型的效果.</li>
+<li>多头注意力有助于神经网络捕捉到更丰富的特征信息.</li>
+</ul>
+</li>
+<li>
+<p>学习了Multi-head Attention的计算方式.</p>
+<ul>
+<li>对特征张量的最后一个维度进行了分割, 一般是对词嵌入的维度embedding_dim进行切割, 切割后的计算规则和单一head完全一致.</li>
+<li>在不同的head上应用了注意力计算规则后, 得到的结果张量直接采用拼接concat的方式进行融合, 就得到了Multi-head Attention的结果张量.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="16-transformerrnnlstm">1.6 Transformer相比于RNN/LSTM有什么优势? 为什么?</h2>
+<hr>
+<h3 id="_11">学习目标</h3>
+<ul>
+<li>掌握Transformer相比于RNN/LSTM的优势和背后的原因.</li>
+</ul>
+<hr>
+<h3 id="transformer">Transformer的并行计算</h3>
+<ul>
+<li>对于Transformer比传统序列模型RNN/LSTM具备优势的第一大原因就是强大的并行计算能力.<ul>
+<li>对于RNN来说, 任意时刻t的输入是时刻t的输入x(t)和上一时刻的隐藏层输出h(t-1), 经过运算后得到当前时刻隐藏层的输出h(t), 这个h(t)也即将作为下一时刻t+1的输入的一部分. 这个计算过程是RNN的本质特征, RNN的历史信息是需要通过这个时间步一步一步向后传递的. 而这就意味着RNN序列后面的信息只能等到前面的计算结束后, 将历史信息通过hidden state传递给后面才能开始计算, 形成链式的序列依赖关系, 无法实现并行.</li>
+<li>对于Transformer结构来说, 在self-attention层, 无论序列的长度是多少, 都可以一次性计算所有单词之间的注意力关系, 这个attention的计算是同步的, 可以实现并行.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="transformer_1">Transformer的特征抽取能力</h3>
+<ul>
+<li>对于Transformer比传统序列模型RNN/LSTM具备优势的第二大原因就是强大的特征抽取能力.<ul>
+<li>Transformer因为采用了Multi-head Attention结构和计算机制, 拥有比RNN/LSTM更强大的特征抽取能力, 这里并不仅仅由理论分析得来, 而是大量的试验数据和对比结果, 清楚的展示了Transformer的特征抽取能力远远胜于RNN/LSTM.</li>
+<li>注意: 不是越先进的模型就越无敌, 在很多具体的应用中RNN/LSTM依然大有用武之地, 要具体问题具体分析.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_12">小节总结</h3>
+<ul>
+<li>学习了Transformer相比于RNN/LSTM的优势和原因.<ul>
+<li>1: 第一大优势是并行计算的优势.</li>
+<li>2: 第二大优势是特征提取能力强.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="17-transformerseq2seq">1.7 为什么说Transformer可以代替seq2seq?</h2>
+<hr>
+<h3 id="_13">学习目标</h3>
+<ul>
+<li>掌握Transformer可以替代seq2seq的核心原因.</li>
+</ul>
+<hr>
+<h3 id="seq2seq">seq2seq的两大缺陷</h3>
+<ul>
+<li>
+<p>1: seq2seq架构的第一大缺陷是将Encoder端的所有信息压缩成一个固定长度的语义向量中, 用这个固定的向量来代表编码器端的全部信息. 这样既会造成信息的损耗, 也无法让Decoder端在解码的时候去用注意力聚焦哪些是更重要的信息.</p>
+</li>
+<li>
+<p>2: seq2seq架构的第二大缺陷是无法并行, 本质上和RNN/LSTM无法并行的原因一样.</p>
+</li>
+</ul>
+<hr>
+<h3 id="transformer_2">Transformer的改进</h3>
+<ul>
+<li>Transformer架构同时解决了seq2seq的两大缺陷, 既可以并行计算, 又应用Multi-head Attention机制来解决Encoder固定编码的问题, 让Decoder在解码的每一步可以通过注意力去关注编码器输出中最重要的那些部分.</li>
+</ul>
+<hr>
+<h3 id="_14">小节总结</h3>
+<ul>
+<li>
+<p>学习了seq2seq架构的两大缺陷.</p>
+<ul>
+<li>第一个缺陷是Encoder端的所有信息被压缩成一个固定的输出张量, 当序列长度较长时会造成比较严重的信息损耗.</li>
+<li>第二个缺陷是无法并行计算.</li>
+</ul>
+</li>
+<li>
+<p>学习了Transformer架构对seq2seq两大缺陷的改进.</p>
+<ul>
+<li>Transformer应用Multi-head Attention机制让编码器信息可以更好的展示给解码器.</li>
+<li>Transformer可以实现Encoder端的并行计算. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="18-self-attention-scaled">1.8 self-attention公式中的归一化有什么作用? 为什么要添加scaled?</h2>
+<hr>
+<h3 id="_15">学习目标</h3>
+<ul>
+<li>理解softmax函数的输入是如何影响输出分布的.</li>
+<li>理解softmax函数反向传播进行梯度求导的数学过程.</li>
+<li>理解softmax函数出现梯度消失的原因.</li>
+<li>理解self-attention计算规则中归一化的原因.</li>
+</ul>
+<hr>
+<h3 id="self-attention_1">self-attention中的归一化概述</h3>
+<ul>
+<li>
+<p>训练上的意义: 随着词嵌入维度d_k的增大, q * k 点积后的结果也会增大, 在训练时会将softmax函数推入梯度非常小的区域, 可能出现梯度消失的现象, 造成模型收敛困难.</p>
+</li>
+<li>
+<p>数学上的意义: 假设q和k的统计变量是满足标准正态分布的独立随机变量, 意味着q和k满足均值为0, 方差为1. 那么q和k的点积结果就是均值为0, 方差为d_k, 为了抵消这种方差被放大d_k倍的影响, 在计算中主动将点积缩放1/sqrt(d_k), 这样点积后的结果依然满足均值为0, 方差为1.</p>
+</li>
+</ul>
+<hr>
+<h3 id="softmax">softmax的梯度变化</h3>
+<ul>
+<li>这里我们分3个步骤来解释softmax的梯度问题:<ul>
+<li>第一步: softmax函数的输入分布是如何影响输出的.</li>
+<li>第二步: softmax函数在反向传播的过程中是如何梯度求导的.</li>
+<li>第三步: softmax函数出现梯度消失现象的原因.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: softmax函数的输入分布是如何影响输出的.<ul>
+<li>对于一个输入向量x, softmax函数将其做了一个归一化的映射, 首先通过自然底数e将输入元素之间的差距先"拉大", 然后再归一化为一个新的分布. 在这个过程中假设某个输入x中最大的元素下标是k, 如果输入的数量级变大(就是x中的每个分量绝对值都很大), 那么在数学上会造成y_k的值非常接近1.</li>
+<li>具体用一个例子来演示, 假设输入的向量x = [a, a, 2a], 那么随便给几个不同数量级的值来看看对y3产生的影响</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code>a = 1时,   y3 = 0.5761168847658291
+a = 10时,  y3 = 0.9999092083843412
+a = 100时, y3 = 1.0
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>采用一段实例代码将a在不同取值下, 对应的y3全部画出来, 以曲线的形式展示:</li>
+</ul>
+</blockquote>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_3</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span> <span class="k">for</span> <span class="n">x_i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>得到如下的曲线:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_13.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>从上图可以很清楚的看到输入元素的数量级对softmax最终的分布影响非常之大.</p>
+</li>
+<li>
+<p>结论: 在输入元素的数量级较大时, softmax函数几乎将全部的概率分布都分配给了最大值分量所对应的标签.</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>第二步: softmax函数在反向传播的过程中是如何梯度求导的.</li>
+</ul>
+<blockquote>
+<ul>
+<li>首先定义神经网络的输入和输出:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_9.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>反向传播就是输出端的损失函数对输入端求偏导的过程, 这里要分两种情况, 第一种如下所示:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_10.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>第二种如下所示:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_11.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>经过对两种情况分别的求导计算, 可以得出最终的结论如下:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_12.png" height="auto" width="auto"></center><p></p>
+<hr>
+<ul>
+<li>第三步: softmax函数出现梯度消失现象的原因.</li>
+</ul>
+<blockquote>
+<ul>
+<li>根据第二步中softmax函数的求导结果, 可以将最终的结果以矩阵形式展开如下:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_14.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>根据第一步中的讨论结果, 当输入x的分量值较大时, softmax函数会将大部分概率分配给最大的元素, 假设最大元素是x1, 那么softmax的输出分布将产生一个接近one-hot的结果张量y_ = [1, 0, 0,..., 0], 此时结果矩阵变为:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_15.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>结论: 综上可以得出, 所有的梯度都消失为0(接近于0), 参数几乎无法更新, 模型收敛困难.</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h3 id="_16">维度与点积大小的关系</h3>
+<ul>
+<li>针对为什么维度会影响点积的大小, 原始论文中有这样的一点解释如下:</li>
+</ul>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>To illustrate why the dot products get large, assume that the components of q and k 
+are independent random variables with mean 0 and variance 1. Then their doct product,
+q*k = (q1k1+q2k2+......+q(d_k)k(d_k)), has mean 0 and variance d_k.
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>我们分两步对其进行一个推导, 首先就是假设向量q和k的各个分量是相互独立的随机变量, X = q_i, Y = k_i, X和Y各自有d_k个分量, 也就是向量的维度等于d_k, 有E(X) = E(Y) = 0, 以及D(X) = D(Y) = 1.</p>
+</li>
+<li>
+<p>可以得到E(XY) = E(X)E(Y) = 0 * 0 = 0</p>
+</li>
+<li>
+<p>同理, 对于D(XY)推导如下:</p>
+</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_16.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>根据期望和方差的性质, 对于互相独立的变量满足下式:</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_17.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>根据上面的公式, 可以很轻松的得出q*k的均值为E(qk) = 0, D(qk) = d_k.</p>
+</li>
+<li>
+<p>所以方差越大, 对应的qk的点积就越大, 这样softmax的输出分布就会更偏向最大值所在的分量.</p>
+</li>
+<li>
+<p>一个技巧就是将点积除以sqrt(d_k), 将方差在数学上重新"拉回1", 如下所示:</p>
+</li>
+</ul>
+</blockquote>
+<p></p><center><img src="./index_files/picture_18.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>最终的结论: 通过数学上的技巧将方差控制在1, 也就有效的控制了点积结果的发散, 也就控制了对应的梯度消失的问题!</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="_17">小节总结</h3>
+<ul>
+<li>
+<p>1: 学习了softmax函数的输入是如何影响输出分布的.</p>
+<ul>
+<li>softmax函数本质是对输入的数据分布做一次归一化处理, 但是输入元素的数量级对softmax最终的分布影响非常之大.</li>
+<li>在输入元素的数量级较大时, softmax函数几乎将全部的概率分布都分配给了最大值分量所对应的标签.</li>
+</ul>
+</li>
+<li>
+<p>2: 学习了softmax函数在反向传播的过程中是如何梯度求导的.</p>
+<ul>
+<li>具体的推导过程见讲义正文部分, 注意要分两种情况讨论, 分别处理.</li>
+</ul>
+</li>
+<li>
+<p>3: 学习了softmax函数出现梯度消失现象的原因.</p>
+<ul>
+<li>结合第一步, 第二步的结论, 可以很清楚的看到最终的梯度矩阵接近于零矩阵, 这样在进行参数更新的时候就会产生梯度消失现象.</li>
+</ul>
+</li>
+<li>
+<p>4: 学习了维度和点积大小的关系推导.</p>
+<ul>
+<li>通过期望和方差的推导理解了为什么点积会造成方差变大.</li>
+<li>理解了通过数学技巧除以sqrt(d_k)就可以让方差恢复成1.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="19-transformer">1.9 Transformer架构的并行化是如何进行的? 具体体现在哪里?</h2>
+<hr>
+<h3 id="_18">学习目标</h3>
+<ul>
+<li>掌握Transformer架构的并行化是如何进行的.</li>
+<li>理解为什么采用这样的方式可以实现Transformer的并行化.</li>
+</ul>
+<hr>
+<h3 id="transformerencoder">Transformer架构中Encoder的并行化</h3>
+<ul>
+<li>首先Transformer的并行化主要体现在Encoder模块上.</li>
+</ul>
+<p></p><center><img src="./index_files/picture_19.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>1: 上图最底层绿色的部分, 整个序列所有的token可以并行的进行Embedding操作, 这一层的处理是没有依赖关系的.</p>
+</li>
+<li>
+<p>2: 上图第二层土黄色的部分, 也就是Transformer中最重要的self-attention部分, 这里对于任意一个单词比如x1, 要计算x1对于其他所有token的注意力分布, 得到z1. 这个过程是具有依赖性的, 必须等到序列中所有的单词完成Embedding才可以进行. 因此这一步是不能并行处理的. 但是从另一个角度看, 我们真实计算注意力分布的时候, 采用的都是矩阵运算, 也就是可以一次性的计算出所有token的注意力张量, 从这个角度看也算是实现了并行, 只是矩阵运算的"并行"和词嵌入的"并行"概念上不同而已.</p>
+</li>
+<li>
+<p>3: 上图第三层蓝色的部分, 也就是前馈全连接层, 对于不同的向量z之间也是没有依赖关系的, 所以这一层是可以实现并行化处理的. 也就是所有的向量z输入Feed Forward网络的计算可以同步进行, 互不干扰.</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="transformerdecoder">Transformer架构中Decoder的并行化</h3>
+<ul>
+<li>其次Transformer的并行化也部分的体现在Decoder模块上.</li>
+</ul>
+<p></p><center><img src="./index_files/picture_20.png" height="auto" width="auto"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>
+<p>1: Decoder模块在训练阶段采用了并行化处理. 其中Self-Attention和Encoder-Decoder Attention两个子层的并行化也是在进行矩阵乘法, 和Encoder的理解是一致的. 在进行Embedding和Feed Forward的处理时, 因为各个token之间没有依赖关系, 所以也是可以完全并行化处理的, 这里和Encoder的理解也是一致的.</p>
+</li>
+<li>
+<p>2: Decoder模块在预测阶段基本上不认为采用了并行化处理. 因为第一个time step的输入只是一个"SOS", 后续每一个time step的输入也只是依次添加之前所有的预测token. </p>
+</li>
+<li>
+<p>3: 注意: 最重要的区别是训练阶段目标文本如果有20个token, 在训练过程中是一次性的输入给Decoder端, 可以做到一些子层的并行化处理. 但是在预测阶段, 如果预测的结果语句总共有20个token, 则需要重复处理20次循环的过程, 每次的输入添加进去一个token, 每次的输入序列比上一次多一个token, 所以不认为是并行处理.</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="_19">小节总结</h3>
+<ul>
+<li>
+<p>学习了Transformer架构中Encoder模块的并行化机制.</p>
+<ul>
+<li>Encoder模块在训练阶段和测试阶段都可以实现完全相同的并行化.</li>
+<li>Encoder模块在Embedding层, Feed Forward层, Add &amp; Norm层都是可以并行化的.</li>
+<li>Encoder模块在self-attention层, 因为各个token之间存在依赖关系, 无法独立计算, 不是真正意义上的并行化.</li>
+<li>Encoder模块在self-attention层, 因为采用了矩阵运算的实现方式, 可以一次性的完成所有注意力张量的计算, 也是另一种"并行化"的体现.</li>
+</ul>
+</li>
+<li>
+<p>学习了Transformer架构中Decoder模块的并行化机制.</p>
+<ul>
+<li>Decoder模块在训练阶段可以实现并行化.</li>
+<li>Decoder模块在训练阶段的Embedding层, Feed Forward层, Add &amp; Norm层都是可以并行化的.</li>
+<li>Decoder模块在self-attention层, 以及Encoder-Decoder Attention层, 因为各个token之间存在依赖关系, 无法独立计算, 不是真正意义上的并行化.</li>
+<li>Decoder模块在self-attention层, 以及Encoder-Decoder Attention层, 因为采用了矩阵运算的实现方式, 可以一次性的完成所有注意力张量的计算, 也是另一种"并行化"的体现.</li>
+<li>Decoder模块在预测计算不能并行化处理.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="110-bert">1.10 BERT模型的优点和缺点?</h2>
+<hr>
+<h3 id="_20">学习目标</h3>
+<ul>
+<li>理解BERT模型的优点和原因.</li>
+<li>理解BERT模型的缺点和原因.</li>
+</ul>
+<hr>
+<h3 id="bert_3">BERT的优点</h3>
+<ul>
+<li>
+<p>1: 通过预训练, 加上Fine-tunning, 在11项NLP任务上取得最优结果.</p>
+</li>
+<li>
+<p>2: BERT的根基源于Transformer, 相比传统RNN更加高效, 可以并行化处理同时能捕捉长距离的语义和结构依赖.</p>
+</li>
+<li>
+<p>3: BERT采用了Transformer架构中的Encoder模块, 不仅仅获得了真正意义上的bidirectional context, 而且为后续微调任务留出了足够的调整空间.</p>
+</li>
+</ul>
+<hr>
+<h3 id="bert_4">BERT的缺点</h3>
+<ul>
+<li>
+<p>1: BERT模型过于庞大, 参数太多, 不利于资源紧张的应用场景, 也不利于上线的实时处理.</p>
+</li>
+<li>
+<p>2: BERT目前给出的中文模型中, 是以字为基本token单位的, 很多需要词向量的应用无法直接使用. 同时该模型无法识别很多生僻词, 只能以UNK代替.</p>
+</li>
+<li>
+<p>3: BERT中第一个预训练任务MLM中, [MASK]标记只在训练阶段出现, 而在预测阶段不会出现, 这就造成了一定的信息偏差, 因此训练时不能过多的使用[MASK], 否则会影响模型的表现.</p>
+</li>
+<li>
+<p>4: 按照BERT的MLM任务中的约定, 每个batch数据中只有15%的token参与了训练, 被模型学习和预测, 所以BERT收敛的速度比left-to-right模型要慢很多(left-to-right模型中每一个token都会参与训练).</p>
+</li>
+</ul>
+<hr>
+<h3 id="_21">小节总结</h3>
+<ul>
+<li>
+<p>学习了BERT模型的3个优点:</p>
+<ul>
+<li>在11个NLP任务上取得SOAT成绩.</li>
+<li>利用了Transformer的并行化能力以及长语句捕捉语义依赖和结构依赖.</li>
+<li>BERT实现了双向Transformer并为后续的微调任务留出足够的空间.</li>
+</ul>
+</li>
+<li>
+<p>学习了BERT模型的4个缺点:</p>
+<ul>
+<li>BERT模型太大, 太慢.</li>
+<li>BERT模型中的中文模型是以字为基本token单位的, 无法利用词向量, 无法识别生僻词.</li>
+<li>BERT模型中的MLM任务, [MASK]标记在训练阶段出现, 预测阶段不出现, 这种偏差会对模型有一定影响.</li>
+<li>BERT模型的MLM任务, 每个batch只有15%的token参与了训练, 造成大量文本数据的"无用", 收敛速度慢, 需要的算力和算时都大大提高.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="111-bertmlm80-10-10">1.11 BERT的MLM任务中为什么采用了80%, 10%, 10%的策略?</h2>
+<hr>
+<h3 id="_22">学习目标</h3>
+<ul>
+<li>理解在MLM任务中采用80%, 10%, 10%策略的原因.</li>
+</ul>
+<hr>
+<h3 id="mlm">MLM任务中的策略约定分析</h3>
+<ul>
+<li>
+<p>1: 首先, 如果所有参与训练的token被100%的[MASK], 那么在fine-tunning的时候所有单词都是已知的, 不存在[MASK], 那么模型就只能根据其他token的信息和语序结构来预测当前词, 而无法利用到这个词本身的信息, 因为它们从未出现在训练过程中, 等于模型从未接触到它们的信息, 等于整个语义空间损失了部分信息. 采用80%的概率下应用[MASK], 既可以让模型去学着预测这些单词, 又以20%的概率保留了语义信息展示给模型.</p>
+</li>
+<li>
+<p>2: 保留下来的信息如果全部使用原始token, 那么模型在预训练的时候可能会偷懒, 直接照抄当前token信息. 采用10%概率下random token来随机替换当前token, 会让模型不能去死记硬背当前的token, 而去尽力学习单词周边的语义表达和远距离的信息依赖, 尝试建模完整的语言信息.</p>
+</li>
+<li>
+<p>3: 最后再以10%的概率保留原始的token, 意义就是保留语言本来的面貌, 让信息不至于完全被遮掩, 使得模型可以"看清"真实的语言面貌.</p>
+</li>
+</ul>
+<hr>
+<h3 id="_23">小节总结</h3>
+<ul>
+<li>
+<p>BERT中MLM任务中的[MASK]是以一种显示的方式告诉模型"这个词我不告诉你, 你自己从上下文里猜", 非常类似于同学们在做完形填空. 如果[MASK]意外的部分全部都用原始token, 模型会学习到"如果当前词是[MASK], 就根据其他词的信息推断这个词; 如果当前词是一个正常的单词, 就直接照抄". 这样一来, 到了fine-tunning阶段, 所有单词都是正常单词了, 模型就会照抄所有单词, 不再提取单词之间的依赖关系了.</p>
+</li>
+<li>
+<p>BERT中MLM任务以10%的概率填入random token, 就是让模型时刻处于"紧张情绪"中, 让模型搞不清楚当前看到的token是真实的单词还是被随机替换掉的单词, 这样模型在任意的token位置就只能把当前token的信息和上下文信息结合起来做综合的判断和建模. 这样一来, 到了fine-tunning阶段, 模型也会同时提取这两方面的信息, 因为模型"心理很紧张", 它不知道当前看到的这个token, 所谓的"正常单词"到底有没有"提前被动过手脚".</p>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<h2 id="112-bert">1.12 长文本预测任务如果想用BERT来实现, 要如何构造训练样本?</h2>
+<hr>
+<h3 id="_24">学习目标</h3>
+<ul>
+<li>掌握利用BERT处理长文本的任务如何构造训练样本.</li>
+</ul>
+<hr>
+<h3 id="bert_5">BERT处理长文本的方法</h3>
+<ul>
+<li>
+<p>首选要明确一点, BERT预训练模型所接收的最大sequence长度是512.</p>
+</li>
+<li>
+<p>那么对于长文本(文本长度超过512的句子), 就需要特殊的方式来构造训练样本. 核心就是如何进行截断.</p>
+<ul>
+<li>1: head-only方式: 这是只保留长文本头部信息的截断方式, 具体为保存前510个token (要留两个位置给[CLS]和[SEP]).</li>
+<li>2: tail-only方式: 这是只保留长文本尾部信息的截断方式, 具体为保存最后510个token (要留两个位置给[CLS]和[SEP]).</li>
+<li>3: head+only方式: 选择前128个token和最后382个token (文本总长度在800以内), 或者前256个token和最后254个token (文本总长度大于800).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_25">小节总结</h3>
+<ul>
+<li>学习了长文本处理如果要利用BERT的话, 需要进行截断处理.<ul>
+<li>第一种方式就是只保留前面510个token.</li>
+<li>第二种方式就是只保留后面510个token.</li>
+<li>第三种方式就是前后分别保留一部分token, 总数是510.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="./index2.html" title="2. ELMo, GPT等经典模型的介绍与对比" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                2. ELMo, GPT等经典模型的介绍与对比
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2020, AITutorials.CN This website has been reviewed by the review agency. 京ICP备19006137号
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

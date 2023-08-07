@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://121.199.45.168:10207/1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>第一章:fasttext工具的使用 - 迁移学习</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#11-fasttext" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="/" title="迁移学习" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              迁移学习
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                第一章:fasttext工具的使用
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 637px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="/" title="迁移学习" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    迁移学习
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        第一章:fasttext工具的使用
+      </label>
+    
+    <a href="/" title="第一章:fasttext工具的使用" class="md-nav__link md-nav__link--active">
+      第一章:fasttext工具的使用
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11-fasttext" title="1.1 认识fasttext工具" class="md-nav__link">
+    1.1 认识fasttext工具
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="1.2 进行文本分类" class="md-nav__link">
+    1.2 进行文本分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="什么是文本分类" class="md-nav__link">
+    什么是文本分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="文本分类的种类" class="md-nav__link">
+    文本分类的种类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext" title="使用fasttext工具进行文本分类的过程" class="md-nav__link">
+    使用fasttext工具进行文本分类的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第一步: 获取数据" class="md-nav__link">
+    第一步: 获取数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第二步: 训练集与验证集的划分" class="md-nav__link">
+    第二步: 训练集与验证集的划分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第三步: 训练模型" class="md-nav__link">
+    第三步: 训练模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第四步: 使用模型进行预测并评估" class="md-nav__link">
+    第四步: 使用模型进行预测并评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第五步: 模型调优" class="md-nav__link">
+    第五步: 模型调优
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="第六步: 模型保存与重加载" class="md-nav__link">
+    第六步: 模型保存与重加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="1.3 训练词向量" class="md-nav__link">
+    1.3 训练词向量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext_1" title="使用fasttext工具训练词向量的过程" class="md-nav__link">
+    使用fasttext工具训练词向量的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="第一步: 获取数据" class="md-nav__link">
+    第一步: 获取数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="第二步: 训练词向量" class="md-nav__link">
+    第二步: 训练词向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="第三步: 模型超参数设定" class="md-nav__link">
+    第三步: 模型超参数设定
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="第四步: 模型效果检验" class="md-nav__link">
+    第四步: 模型效果检验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="第五步: 模型的保存与重加载" class="md-nav__link">
+    第五步: 模型的保存与重加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="1.4 词向量迁移" class="md-nav__link">
+    1.4 词向量迁移
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext_2" title="如何使用fasttext进行词向量模型迁移" class="md-nav__link">
+    如何使用fasttext进行词向量模型迁移
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bingz" title="第一步: 下载词向量模型压缩的bin.gz文件" class="md-nav__link">
+    第一步: 下载词向量模型压缩的bin.gz文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bingzbin" title="第二步: 解压bin.gz文件到bin文件" class="md-nav__link">
+    第二步: 解压bin.gz文件到bin文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bin" title="第三步: 加载bin文件获取词向量" class="md-nav__link">
+    第三步: 加载bin文件获取词向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="第四步: 利用邻近词进行效果检验" class="md-nav__link">
+    第四步: 利用邻近词进行效果检验
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="第二章:迁移学习" class="md-nav__link">
+      第二章:迁移学习
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 637px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11-fasttext" title="1.1 认识fasttext工具" class="md-nav__link">
+    1.1 认识fasttext工具
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="1.2 进行文本分类" class="md-nav__link">
+    1.2 进行文本分类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="什么是文本分类" class="md-nav__link">
+    什么是文本分类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="文本分类的种类" class="md-nav__link">
+    文本分类的种类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext" title="使用fasttext工具进行文本分类的过程" class="md-nav__link">
+    使用fasttext工具进行文本分类的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第一步: 获取数据" class="md-nav__link">
+    第一步: 获取数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第二步: 训练集与验证集的划分" class="md-nav__link">
+    第二步: 训练集与验证集的划分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第三步: 训练模型" class="md-nav__link">
+    第三步: 训练模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第四步: 使用模型进行预测并评估" class="md-nav__link">
+    第四步: 使用模型进行预测并评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第五步: 模型调优" class="md-nav__link">
+    第五步: 模型调优
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="第六步: 模型保存与重加载" class="md-nav__link">
+    第六步: 模型保存与重加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="1.3 训练词向量" class="md-nav__link">
+    1.3 训练词向量
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext_1" title="使用fasttext工具训练词向量的过程" class="md-nav__link">
+    使用fasttext工具训练词向量的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" title="第一步: 获取数据" class="md-nav__link">
+    第一步: 获取数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" title="第二步: 训练词向量" class="md-nav__link">
+    第二步: 训练词向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" title="第三步: 模型超参数设定" class="md-nav__link">
+    第三步: 模型超参数设定
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" title="第四步: 模型效果检验" class="md-nav__link">
+    第四步: 模型效果检验
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" title="第五步: 模型的保存与重加载" class="md-nav__link">
+    第五步: 模型的保存与重加载
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="1.4 词向量迁移" class="md-nav__link">
+    1.4 词向量迁移
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fasttext_2" title="如何使用fasttext进行词向量模型迁移" class="md-nav__link">
+    如何使用fasttext进行词向量模型迁移
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bingz" title="第一步: 下载词向量模型压缩的bin.gz文件" class="md-nav__link">
+    第一步: 下载词向量模型压缩的bin.gz文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bingzbin" title="第二步: 解压bin.gz文件到bin文件" class="md-nav__link">
+    第二步: 解压bin.gz文件到bin文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bin" title="第三步: 加载bin文件获取词向量" class="md-nav__link">
+    第三步: 加载bin文件获取词向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" title="第四步: 利用邻近词进行效果检验" class="md-nav__link">
+    第四步: 利用邻近词进行效果检验
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>第一章:fasttext工具的使用</h1>
+                
+                <h2 id="11-fasttext">1.1 认识fasttext工具</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>了解fasttext工具的作用.</li>
+<li>了解fasttext工具的优势及其原因.</li>
+<li>掌握fasttext的安装方法.</li>
+</ul>
+<hr>
+<p></p><center><img style="margin: 0px 0px 0px 0px" src="./index_files/fasttext-logo-color-web.png" width="400px" height="auto"></center><p></p>
+<hr>
+<ul>
+<li>作为NLP工程领域常用的工具包, fasttext有两大作用:<ul>
+<li>进行文本分类</li>
+<li>训练词向量</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>fasttext工具包的优势:<ul>
+<li>正如它的名字, 在保持较高精度的情况下, 快速的进行训练和预测是fasttext的最大优势.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>fasttext优势的原因:<ul>
+<li>fasttext工具包中内含的fasttext模型具有十分简单的网络结构.</li>
+<li>使用fasttext模型训练词向量时使用层次softmax结构, 来提升超多类别下的模型性能.</li>
+<li>由于fasttext模型过于简单无法捕捉词序特征, 因此会进行n-gram特征提取以弥补模型缺陷提升精度.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>fasttext的安装:</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>$ git clone https://github.com/facebookresearch/fastText.git
+$ <span class="nb">cd</span> fastText
+<span class="c1"># 使用pip安装python中的fasttext工具包</span>
+$ sudo pip install .
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>验证安装:</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="n">Python</span> <span class="mf">3.7</span><span class="o">.</span><span class="mi">3</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Mar</span> <span class="mi">27</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">17</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.3</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span> <span class="p">::</span> <span class="n">Anaconda</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span> <span class="n">on</span> <span class="n">linux</span>
+<span class="n">Type</span> <span class="s2">"help"</span><span class="p">,</span> <span class="s2">"copyright"</span><span class="p">,</span> <span class="s2">"credits"</span> <span class="ow">or</span> <span class="s2">"license"</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div>
+
+
+<hr>
+<h2 id="12">1.2 进行文本分类</h2>
+<hr>
+<h3 id="_2">学习目标</h3>
+<ul>
+<li>了解什么是文本分类及其种类.</li>
+<li>掌握fasttext工具进行文本分类的过程.</li>
+</ul>
+<hr>
+<h3 id="_3">什么是文本分类</h3>
+<ul>
+<li>文本分类的是将文档（例如电子邮件，帖子，文本消息，产品评论等）分配给一个或多个类别. 当今文本分类的实现多是使用机器学习方法从训练数据中提取分类规则以进行分类, 因此构建文本分类器需要带标签的数据.</li>
+</ul>
+<hr>
+<h3 id="_4">文本分类的种类</h3>
+<ul>
+<li>二分类: <ul>
+<li>文本被分类两个类别中, 往往这两个类别是对立面, 比如: 判断一句评论是好评还是差评.</li>
+</ul>
+</li>
+<li>单标签多分类: <ul>
+<li>文本被分入到多个类别中, 且每条文本只能属于某一个类别(即被打上某一个标签), 比如: 输入一个人名, 判断它是来自哪个国家的人名. </li>
+</ul>
+</li>
+<li>多标签多分类: <ul>
+<li>文本被分人到多个类别中, 但每条文本可以属于多个类别(即被打上多个标签), 比如: 输入一段描述, 判断可能是和哪些兴趣爱好有关, 一段描述中可能即讨论了美食, 又太讨论了游戏爱好.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="fasttext">使用fasttext工具进行文本分类的过程</h3>
+<ul>
+<li>第一步: 获取数据</li>
+<li>第二步: 训练集与验证集的划分</li>
+<li>第三步: 训练模型</li>
+<li>第四步: 使用模型进行预测并评估</li>
+<li>第五步: 模型调优</li>
+<li>第六步: 模型保存与重加载 </li>
+</ul>
+<hr>
+<h4 id="_5">第一步: 获取数据</h4>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 获取烹饪相关的数据集, 它是由facebook AI实验室提供的演示数据集</span>
+$ wget https://dl.fbaipublicfiles.com/fasttext/data/cooking.stackexchange.tar.gz <span class="o">&amp;&amp;</span> tar xvzf cooking.stackexchange.tar.gz
+<span class="c1"># 查看数据的前10条</span>
+$ head cooking.stackexchange.txt
+</code></pre></div>
+
+
+<hr>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>__label__sauce __label__cheese How much does potato starch affect a cheese sauce recipe?
+__label__food-safety __label__acidity Dangerous pathogens capable of growing in acidic environments
+__label__cast-iron __label__stove How do I cover up the white spots on my cast iron stove?
+__label__restaurant Michelin Three Star Restaurant; but if the chef is not there
+__label__knife-skills __label__dicing Without knife skills, how can I quickly and accurately dice vegetables?
+__label__storage-method __label__equipment __label__bread What's the purpose of a bread box?
+__label__baking __label__food-safety __label__substitutions __label__peanuts how to seperate peanut oil from roasted peanuts at home?
+__label__chocolate American equivalent for British chocolate terms
+__label__baking __label__oven __label__convection Fan bake vs bake
+__label__sauce __label__storage-lifetime __label__acidity __label__mayonnaise Regulation and balancing of readymade packed mayonnaise and other sauces
+</code></pre></div>
+
+
+<blockquote>
+<ul>
+<li>数据说明:<ul>
+<li>cooking.stackexchange.txt中的每一行都包含一个标签列表，后跟相应的文档, 标签列表以类似"__label__sauce __label__cheese"的形式展现, 代表有两个标签sauce和cheese, 所有标签__label__均以前缀开头，这是fastText识别标签或单词的方式. 标签之后的一段话就是文本信息.如: How much does potato starch affect a cheese sauce recipe?</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="_6">第二步: 训练集与验证集的划分</h4>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 查看数据总数</span>
+<span class="err">$</span> <span class="n">wc</span> <span class="n">cooking</span><span class="o">.</span><span class="n">stackexchange</span><span class="o">.</span><span class="n">txt</span> 
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>  15404  169582 1401900 cooking.stackexchange.txt 
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_12"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 12404条数据作为训练数据</span>
+$ head -n <span class="m">12404</span> cooking.stackexchange.txt &gt; cooking.train
+<span class="c1"># 3000条数据作为验证数据</span>
+$ tail -n <span class="m">3000</span> cooking.stackexchange.txt &gt; cooking.valid
+</code></pre></div>
+
+
+<hr>
+<h4 id="_7">第三步: 训练模型</h4>
+<div class="codehilite" id="__code_14"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 代码运行在python解释器中</span>
+<span class="c1"># 导入fasttext</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="c1"># 使用fasttext的train_supervised方法进行文本分类模型的训练</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">)</span>
+
+<span class="c1"># 获得结果</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="c1"># 不重复的词汇总数</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">14543</span>
+<span class="c1"># 标签总数</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+<span class="c1"># Progress: 训练进度, 因为我们这里显示的是最后的训练完成信息, 所以进度是100%</span>
+<span class="c1"># words/sec/thread: 每个线程每秒处理的平均词汇数</span>
+<span class="c1"># lr: 当前的学习率, 因为训练完成所以学习率是0</span>
+<span class="c1"># avg.loss: 训练过程的平均损失 </span>
+<span class="c1"># ETA: 预计剩余训练时间, 因为已训练完成所以是0</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">60162</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span> <span class="mf">10.056812</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_8">第四步: 使用模型进行预测并评估</h4>
+<div class="codehilite" id="__code_16"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用模型预测一段输入文本, 通过我们常识, 可知预测是正确的, 但是对应预测概率并不大</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">"Which baking dish is best to bake a banana bread ?"</span><span class="p">)</span>
+<span class="c1"># 元组中的第一项代表标签, 第二项代表对应的概率</span>
+<span class="p">((</span><span class="s1">'__label__baking'</span><span class="p">,),</span> <span class="n">array</span><span class="p">([</span><span class="mf">0.06550845</span><span class="p">]))</span>
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_18"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="o">#</span> <span class="err">通过我们常识可知预测是错误的</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="ss">"Why not put knives in the dishwasher?"</span><span class="p">)</span>
+<span class="p">((</span><span class="s1">'__label__food-safety'</span><span class="p">,),</span> <span class="nb">array</span><span class="p">([</span><span class="mi">0</span><span class="p">.</span><span class="mi">07541209</span><span class="p">]))</span>
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_20"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="o">#</span> <span class="err">为了评估模型到底表现如何</span><span class="p">,</span> <span class="err">我们在</span><span class="mi">3000</span><span class="err">条的验证集上进行测试</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="p">.</span><span class="n">test</span><span class="p">(</span><span class="ss">"cooking.valid"</span><span class="p">)</span>
+<span class="o">#</span> <span class="err">元组中的每项分别代表</span><span class="p">,</span> <span class="err">验证集样本数量</span><span class="p">,</span> <span class="err">精度以及召回率</span> 
+<span class="o">#</span> <span class="err">我们看到模型精度和召回率表现都很差</span><span class="p">,</span> <span class="err">接下来我们讲学习如何进行优化</span><span class="p">.</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">124</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0541</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_9">第五步: 模型调优</h4>
+<ul>
+<li>原始数据处理:</li>
+</ul>
+<div class="codehilite" id="__code_22"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code># 通过查看数据, 我们发现数据中存在许多标点符号与单词相连以及大小写不统一, 
+# 这些因素对我们最终的分类目标没有益处, 反是增加了模型提取分类规律的难度,
+# 因此我们选择将它们去除或转化
+
+# 处理前的部分数据
+__label__fish Arctic char available in North-America
+__label__pasta __label__salt __label__boiling When cooking pasta in salted water how much of the salt is absorbed?
+__label__coffee Emergency Coffee via Chocolate Covered Coffee Beans?
+__label__cake Non-beet alternatives to standard red food dye
+__label__cheese __label__lentils Could cheese "halt" the tenderness of cooking lentils?
+__label__asian-cuisine __label__chili-peppers __label__kimchi __label__korean-cuisine What kind of peppers are used in Gochugaru ()?
+__label__consistency Pavlova Roll failure
+__label__eggs __label__bread What qualities should I be looking for when making the best French Toast?
+__label__meat __label__flour __label__stews __label__braising Coating meat in flour before browning, bad idea?
+__label__food-safety Raw roast beef on the edge of safe?
+__label__pork __label__food-identification How do I determine the cut of a pork steak prior to purchasing it?
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_24"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 通过服务器终端进行简单的数据预处理</span>
+<span class="c1"># 使标点符号与单词分离并统一使用小写字母</span>
+&gt;&gt; cat cooking.stackexchange.txt <span class="p">|</span> sed -e <span class="s2">"s/\([.\!?,'/()]\)/ \1 /g"</span> <span class="p">|</span> tr <span class="s2">"[:upper:]"</span> <span class="s2">"[:lower:]"</span> &gt; cooking.preprocessed.txt
+&gt;&gt; head -n <span class="m">12404</span> cooking.preprocessed.txt &gt; cooking.train
+&gt;&gt; tail -n <span class="m">3000</span> cooking.preprocessed.txt &gt; cooking.valid
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_26"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code># 处理后的部分数据
+__label__fish arctic char available in north-america
+__label__pasta __label__salt __label__boiling when cooking pasta in salted water how much of the salt is absorbed ?
+__label__coffee emergency coffee via chocolate covered coffee beans ?
+__label__cake non-beet alternatives to standard red food dye
+__label__cheese __label__lentils could cheese "halt" the tenderness of cooking lentils ?
+__label__asian-cuisine __label__chili-peppers __label__kimchi __label__korean-cuisine what kind of peppers are used in gochugaru  (  )  ?
+__label__consistency pavlova roll failure
+__label__eggs __label__bread what qualities should i be looking for when making the best french toast ?
+__label__meat __label__flour __label__stews __label__braising coating meat in flour before browning ,  bad idea ?
+__label__food-safety raw roast beef on the edge of safe ?
+__label__pork __label__food-identification how do i determine the cut of a pork steak prior to purchasing it ?
+</code></pre></div>
+
+
+<ul>
+<li>数据处理后进行训练并测试:</li>
+</ul>
+<div class="codehilite" id="__code_28"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 重新训练</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+
+<span class="c1"># 不重复的词汇总数减少很多, 因为之前会把带大写字母或者与标点符号相连接的单词都认为是新的单词</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+
+<span class="c1"># 我们看到平均损失有所下降</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">65737</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">9.966091</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+
+<span class="c1"># 重新测试</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"cooking.valid"</span><span class="p">)</span>
+<span class="c1"># 我们看到精度和召回率都有所提升</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.161</span><span class="p">,</span> <span class="mf">0.06962663975782038</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>增加训练轮数:</li>
+</ul>
+<div class="codehilite" id="__code_30"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设置train_supervised方法中的参数epoch来增加训练轮数, 默认的轮数是5次</span>
+<span class="c1"># 增加轮数意味着模型能够有更多机会在有限数据中调整分类规律, 当然这也会增加训练时间</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+
+<span class="c1"># 我们看到平均损失继续下降</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">66283</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">7.203885</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"cooking.valid"</span><span class="p">)</span>
+<span class="c1"># 我们看到精度已经提升到了42%, 召回率提升至18%.</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.4206666666666667</span><span class="p">,</span> <span class="mf">0.1819230214790255</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调整学习率:</li>
+</ul>
+<div class="codehilite" id="__code_32"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设置train_supervised方法中的参数lr来调整学习率, 默认的学习率大小是0.1</span>
+<span class="c1"># 增大学习率意味着增大了梯度下降的步长使其在有限的迭代步骤下更接近最优点</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+
+<span class="c1"># 平均损失继续下降</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">66027</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">4.278283</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"cooking.valid"</span><span class="p">)</span>
+<span class="c1"># 我们看到精度已经提升到了47%, 召回率提升至20%.</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.47633333333333333</span><span class="p">,</span> <span class="mf">0.20599682860025947</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>增加n-gram特征:</li>
+</ul>
+<div class="codehilite" id="__code_34"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设置train_supervised方法中的参数wordNgrams来添加n-gram特征, 默认是1, 也就是没有n-gram特征</span>
+<span class="c1"># 我们这里将其设置为2意味着添加2-gram特征, 这些特征帮助模型捕捉前后词汇之间的关联, 更好的提取分类规则用于模型分类, 当然这也会增加模型训时练占用的资源和时间.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+
+<span class="c1"># 平均损失继续下降</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">65084</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">3.189422</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"cooking.valid"</span><span class="p">)</span>
+<span class="c1"># 我们看到精度已经提升到了49%, 召回率提升至21%.</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.49233333333333335</span><span class="p">,</span> <span class="mf">0.2129162462159435</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>修改损失计算方式:</li>
+</ul>
+<div class="codehilite" id="__code_36"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 随着我们不断的添加优化策略, 模型训练速度也越来越慢</span>
+<span class="c1"># 为了能够提升fasttext模型的训练效率, 减小训练时间</span>
+<span class="c1"># 设置train_supervised方法中的参数loss来修改损失计算方式(等效于输出层的结构), 默认是softmax层结构</span>
+<span class="c1"># 我们这里将其设置为'hs', 代表层次softmax结构, 意味着输出层的结构(计算方式)发生了变化, 将以一种更低复杂度的方式来计算损失.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">'hs'</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span> <span class="mi">1341740</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">2.225962</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"cooking.valid"</span><span class="p">)</span>
+<span class="c1"># 我们看到精度和召回率稍有波动, 但训练时间却缩短到仅仅几秒</span>
+<span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mf">0.483</span><span class="p">,</span> <span class="mf">0.20887991927346114</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>自动超参数调优:</li>
+</ul>
+<div class="codehilite" id="__code_38"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 手动调节和寻找超参数是非常困难的, 因为参数之间可能相关, 并且不同数据集需要的超参数也不同, </span>
+<span class="c1"># 因此可以使用fasttext的autotuneValidationFile参数进行自动超参数调优.</span>
+<span class="c1"># autotuneValidationFile参数需要指定验证数据集所在路径, 它将在验证集上使用随机搜索方法寻找可能最优的超参数.</span>
+<span class="c1"># 使用autotuneDuration参数可以控制随机搜索的时间, 默认是300s, 根据不同的需求, 我们可以延长或缩短时间.</span>
+<span class="c1"># 验证集路径'cooking.valid', 随机搜索600秒</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">'cooking.train'</span><span class="p">,</span> <span class="n">autotuneValidationFile</span><span class="o">=</span><span class="s1">'cooking.valid'</span><span class="p">,</span> <span class="n">autotuneDuration</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">Trials</span><span class="p">:</span>   <span class="mi">38</span> <span class="n">Best</span> <span class="n">score</span><span class="p">:</span>  <span class="mf">0.376170</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+<span class="n">Training</span> <span class="n">again</span> <span class="k">with</span> <span class="n">best</span> <span class="n">arguments</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">63791</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">1.888165</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>实际生产中多标签多分类问题的损失计算方式:</li>
+</ul>
+<div class="codehilite" id="__code_40"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 针对多标签多分类问题, 使用'softmax'或者'hs'有时并不是最佳选择, 因为我们最终得到的应该是多个标签, 而softmax却只能最大化一个标签. </span>
+<span class="c1"># 所以我们往往会选择为每个标签使用独立的二分类器作为输出层结构, </span>
+<span class="c1"># 对应的损失计算方式为'ova'表示one vs all.</span>
+<span class="c1"># 这种输出层的改变意味着我们在统一语料下同时训练多个二分类模型,</span>
+<span class="c1"># 对于二分类模型来讲, lr不宜过大, 这里我们设置为0.2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_supervised</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s2">"cooking.train"</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">wordNgrams</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">'ova'</span><span class="p">)</span>
+<span class="n">Read</span> <span class="mi">0</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">8952</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">735</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">65044</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">7.713312</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span> 
+
+<span class="c1"># 我们使用模型进行单条样本的预测, 来看一下它的输出结果.</span>
+<span class="c1"># 参数k代表指定模型输出多少个标签, 默认为1, 这里设置为-1, 意味着尽可能多的输出.</span>
+<span class="c1"># 参数threshold代表显示的标签概率阈值, 设置为0.5, 意味着显示概率大于0.5的标签</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">"Which baking dish is best to bake a banana bread ?"</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># 我看到根据输入文本, 输出了它的三个最有可能的标签</span>
+<span class="p">((</span><span class="sa">u</span><span class="s1">'__label__baking'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'__label__bananas'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'__label__bread'</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.00000</span><span class="p">,</span> <span class="mf">0.939923</span><span class="p">,</span> <span class="mf">0.592677</span><span class="p">]))</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_10">第六步: 模型保存与重加载</h4>
+<div class="codehilite" id="__code_42"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><pre id="__code_43"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_43 pre, #__code_43 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用model的save_model方法保存模型到指定目录</span>
+<span class="c1"># 你可以在指定目录下找到model_cooking.bin文件</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">"./model_cooking.bin"</span><span class="p">)</span>
+
+<span class="c1"># 使用fasttext的load_model进行模型的重加载</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">"./model_cooking.bin"</span><span class="p">)</span>
+
+<span class="c1"># 重加载后的模型使用方法和之前完全相同</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="s2">"Which baking dish is best to bake a banana bread ?"</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="p">((</span><span class="sa">u</span><span class="s1">'__label__baking'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'__label__bananas'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'__label__bread'</span><span class="p">),</span> <span class="n">array</span><span class="p">([</span><span class="mf">1.00000</span><span class="p">,</span> <span class="mf">0.939923</span><span class="p">,</span> <span class="mf">0.592677</span><span class="p">]))</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="_11">小节总结</h3>
+<ul>
+<li>
+<p>学习了什么是文本分类:</p>
+<ul>
+<li>文本分类的是将文档（例如电子邮件，帖子，文本消息，产品评论等）分配给一个或多个类别. 当今文本分类的实现多是使用机器学习方法从训练数据中提取分类规则以进行分类, 因此构建文本分类器需要带标签的数据.</li>
+</ul>
+<hr>
+</li>
+<li>
+<p>文本分类的种类:</p>
+<ul>
+<li>二分类:<ul>
+<li>文本被分类两个类别中, 往往这两个类别是对立面, 比如: 判断一句评论是好评还是差评.</li>
+</ul>
+</li>
+<li>单标签多分类:<ul>
+<li>文本被分入到多个类别中, 且每条文本只能属于某一个类别(即被打上某一个标签), 比如: 输入一个人名, 判断它是来自哪个国家的人名.</li>
+</ul>
+</li>
+<li>多标签多分类:<ul>
+<li>文本被分人到多个类别中, 但每条文本可以属于多个类别(即被打上多个标签), 比如: 输入一段描述, 判断可能是和哪些兴趣爱好有关, 一段描述中可能即讨论了美食, 又太讨论了游戏爱好.</li>
+</ul>
+</li>
+</ul>
+<hr>
+</li>
+<li>
+<p>使用fasttext工具进行文本分类的过程:</p>
+<ul>
+<li>第一步: 获取数据</li>
+<li>第二步: 训练集与验证集的划分</li>
+<li>第三步: 训练模型</li>
+<li>第四步: 使用模型进行预测并评估</li>
+<li>第五步: 模型调优</li>
+<li>第六步: 模型保存与重加载</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="13">1.3 训练词向量</h2>
+<hr>
+<h3 id="_12">学习目标</h3>
+<ul>
+<li>了解词向量的相关知识.</li>
+<li>掌握fasttext工具训练词向量的过程. </li>
+</ul>
+<hr>
+<ul>
+<li>词向量的相关知识:<ul>
+<li>用向量表示文本中的词汇(或字符)是现代机器学习中最流行的做法, 这些向量能够很好的捕捉语言之间的关系, 从而提升基于词向量的各种NLP任务的效果.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="fasttext_1">使用fasttext工具训练词向量的过程</h3>
+<ul>
+<li>第一步: 获取数据</li>
+<li>第二步: 训练词向量</li>
+<li>第三步: 模型超参数设定</li>
+<li>第四步: 模型效果检验</li>
+<li>第五步: 模型的保存与重加载</li>
+</ul>
+<hr>
+<h4 id="_13">第一步: 获取数据</h4>
+<div class="codehilite" id="__code_44"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_44 pre, #__code_44 code"><span class="md-clipboard__message"></span></button><pre id="__code_45"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_45 pre, #__code_45 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 在这里, 我们将研究英语维基百科的部分网页信息, 它的大小在300M左右</span>
+<span class="c1"># 这些语料已经被准备好, 我们可以通过Matt Mahoney的网站下载.</span>
+<span class="c1"># 首先创建一个存储数据的文件夹data</span>
+$ mkdir data
+<span class="c1"># 使用wget下载数据的zip压缩包, 它将存储在data目录中</span>
+$ wget -c http://mattmahoney.net/dc/enwik9.zip -P data
+<span class="c1"># 使用unzip解压, 如果你的服务器中还没有unzip命令, 请使用: yum install unzip -y</span>
+<span class="c1"># 解压后在data目录下会出现enwik9的文件夹</span>
+$ unzip data/enwik9.zip -d data
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看原始数据:</li>
+</ul>
+<div class="codehilite" id="__code_46"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_46 pre, #__code_46 code"><span class="md-clipboard__message"></span></button><pre id="__code_47"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_47 pre, #__code_47 code"><span class="md-clipboard__message"></span></button><code>$ head -10 data/enwik9
+
+<span class="c1"># 原始数据将输出很多包含XML/HTML格式的内容, 这些内容并不是我们需要的</span>
+&lt;mediawiki <span class="nv">xmlns</span><span class="o">=</span><span class="s2">"http://www.mediawiki.org/xml/export-0.3/"</span> xmlns:xsi<span class="o">=</span><span class="s2">"http://www.w3.org/2001/XMLSchema-instance"</span> xsi:schemaLocation<span class="o">=</span><span class="s2">"http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd"</span> <span class="nv">version</span><span class="o">=</span><span class="s2">"0.3"</span> xml:lang<span class="o">=</span><span class="s2">"en"</span>&gt;
+  &lt;siteinfo&gt;
+    &lt;sitename&gt;Wikipedia&lt;/sitename&gt;
+    &lt;base&gt;http://en.wikipedia.org/wiki/Main_Page&lt;/base&gt;
+    &lt;generator&gt;MediaWiki <span class="m">1</span>.6alpha&lt;/generator&gt;
+    &lt;<span class="k">case</span>&gt;first-letter&lt;/case&gt;
+      &lt;namespaces&gt;
+      &lt;namespace <span class="nv">key</span><span class="o">=</span><span class="s2">"-2"</span>&gt;Media&lt;/namespace&gt;
+      &lt;namespace <span class="nv">key</span><span class="o">=</span><span class="s2">"-1"</span>&gt;Special&lt;/namespace&gt;
+      &lt;namespace <span class="nv">key</span><span class="o">=</span><span class="s2">"0"</span> /&gt;
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>原始数据处理:</li>
+</ul>
+<div class="codehilite" id="__code_48"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_48 pre, #__code_48 code"><span class="md-clipboard__message"></span></button><pre id="__code_49"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_49 pre, #__code_49 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用wikifil.pl文件处理脚本来清除XML/HTML格式的内容</span>
+<span class="c1"># 注: wikifil.pl文件已为大家提供</span>
+$ perl wikifil.pl data/enwik9 &gt; data/fil9
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看预处理后的数据:</li>
+</ul>
+<div class="codehilite" id="__code_50"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_50 pre, #__code_50 code"><span class="md-clipboard__message"></span></button><pre id="__code_51"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_51 pre, #__code_51 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 查看前80个字符</span>
+head -c <span class="m">80</span> data/fil9
+
+<span class="c1"># 输出结果为由空格分割的单词</span>
+ anarchism originated as a term of abuse first used against early working class
+</code></pre></div>
+
+
+<hr>
+<h4 id="_14">第二步: 训练词向量</h4>
+<div class="codehilite" id="__code_52"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_52 pre, #__code_52 code"><span class="md-clipboard__message"></span></button><pre id="__code_53"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_53 pre, #__code_53 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 代码运行在python解释器中</span>
+<span class="c1"># 导入fasttext</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">fasttext</span>
+<span class="c1"># 使用fasttext的train_unsupervised(无监督训练方法)进行词向量的训练</span>
+<span class="c1"># 它的参数是数据集的持久化文件路径'data/fil9'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_unsupervised</span><span class="p">(</span><span class="s1">'data/fil9'</span><span class="p">)</span>
+
+
+<span class="c1"># 有效训练词汇量为124M, 共218316个单词</span>
+<span class="n">Read</span> <span class="mi">124</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">218316</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">53996</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">loss</span><span class="p">:</span>  <span class="mf">0.734999</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看单词对应的词向量:</li>
+</ul>
+<div class="codehilite" id="__code_54"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_54 pre, #__code_54 code"><span class="md-clipboard__message"></span></button><pre id="__code_55"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_55 pre, #__code_55 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 通过get_word_vector方法来获得指定词汇的词向量</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_word_vector</span><span class="p">(</span><span class="s2">"the"</span><span class="p">)</span>
+
+<span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.03087516</span><span class="p">,</span>  <span class="mf">0.09221972</span><span class="p">,</span>  <span class="mf">0.17660329</span><span class="p">,</span>  <span class="mf">0.17308897</span><span class="p">,</span>  <span class="mf">0.12863874</span><span class="p">,</span>
+        <span class="mf">0.13912526</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09851588</span><span class="p">,</span>  <span class="mf">0.00739991</span><span class="p">,</span>  <span class="mf">0.37038437</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00845221</span><span class="p">,</span>
+        <span class="o">...</span>
+       <span class="o">-</span><span class="mf">0.21184735</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05048715</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.34571868</span><span class="p">,</span>  <span class="mf">0.23765688</span><span class="p">,</span>  <span class="mf">0.23726143</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_15">第三步: 模型超参数设定</h4>
+<div class="codehilite" id="__code_56"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_56 pre, #__code_56 code"><span class="md-clipboard__message"></span></button><pre id="__code_57"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_57 pre, #__code_57 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 在训练词向量过程中, 我们可以设定很多常用超参数来调节我们的模型效果, 如:</span>
+<span class="c1"># 无监督训练模式: 'skipgram' 或者 'cbow', 默认为'skipgram', 在实践中，skipgram模式在利用子词方面比cbow更好.</span>
+<span class="c1"># 词嵌入维度dim: 默认为100, 但随着语料库的增大, 词嵌入的维度往往也要更大.</span>
+<span class="c1"># 数据循环次数epoch: 默认为5, 但当你的数据集足够大, 可能不需要那么多次.</span>
+<span class="c1"># 学习率lr: 默认为0.05, 根据经验, 建议选择[0.01，1]范围内.</span>
+<span class="c1"># 使用的线程数thread: 默认为12个线程, 一般建议和你的cpu核数相同.</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">train_unsupervised</span><span class="p">(</span><span class="s1">'data/fil9'</span><span class="p">,</span> <span class="s2">"cbow"</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">thread</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">Read</span> <span class="mi">124</span><span class="n">M</span> <span class="n">words</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">words</span><span class="p">:</span>  <span class="mi">218316</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">labels</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Progress</span><span class="p">:</span> <span class="mf">100.0</span><span class="o">%</span> <span class="n">words</span><span class="o">/</span><span class="n">sec</span><span class="o">/</span><span class="n">thread</span><span class="p">:</span>   <span class="mi">49523</span> <span class="n">lr</span><span class="p">:</span>  <span class="mf">0.000000</span> <span class="n">avg</span><span class="o">.</span><span class="n">loss</span><span class="p">:</span>  <span class="mf">1.777205</span> <span class="n">ETA</span><span class="p">:</span>   <span class="mi">0</span><span class="n">h</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_16">第四步: 模型效果检验</h4>
+<div class="codehilite" id="__code_58"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_58 pre, #__code_58 code"><span class="md-clipboard__message"></span></button><pre id="__code_59"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_59 pre, #__code_59 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 检查单词向量质量的一种简单方法就是查看其邻近单词, 通过我们主观来判断这些邻近单词是否与目标单词相关来粗略评定模型效果好坏.</span>
+
+<span class="c1"># 查找"运动"的邻近单词, 我们可以发现"体育网", "运动汽车", "运动服"等. </span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s1">'sports'</span><span class="p">)</span>
+
+<span class="p">[(</span><span class="mf">0.8414610624313354</span><span class="p">,</span> <span class="s1">'sportsnet'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8134572505950928</span><span class="p">,</span> <span class="s1">'sport'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8100415468215942</span><span class="p">,</span> <span class="s1">'sportscars'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8021156787872314</span><span class="p">,</span> <span class="s1">'sportsground'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7889881134033203</span><span class="p">,</span> <span class="s1">'sportswomen'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7863013744354248</span><span class="p">,</span> <span class="s1">'sportsplex'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7786710262298584</span><span class="p">,</span> <span class="s1">'sporty'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7696356177330017</span><span class="p">,</span> <span class="s1">'sportscar'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7619683146476746</span><span class="p">,</span> <span class="s1">'sportswear'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7600985765457153</span><span class="p">,</span> <span class="s1">'sportin'</span><span class="p">)]</span>
+
+
+<span class="c1"># 查找"音乐"的邻近单词, 我们可以发现与音乐有关的词汇.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s1">'music'</span><span class="p">)</span>
+
+<span class="p">[(</span><span class="mf">0.8908010125160217</span><span class="p">,</span> <span class="s1">'emusic'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8464668393135071</span><span class="p">,</span> <span class="s1">'musicmoz'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8444250822067261</span><span class="p">,</span> <span class="s1">'musics'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8113634586334229</span><span class="p">,</span> <span class="s1">'allmusic'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8106718063354492</span><span class="p">,</span> <span class="s1">'musices'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8049437999725342</span><span class="p">,</span> <span class="s1">'musicam'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8004694581031799</span><span class="p">,</span> <span class="s1">'musicom'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7952923774719238</span><span class="p">,</span> <span class="s1">'muchmusic'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7852965593338013</span><span class="p">,</span> <span class="s1">'musicweb'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7767147421836853</span><span class="p">,</span> <span class="s1">'musico'</span><span class="p">)]</span>
+
+<span class="c1"># 查找"小狗"的邻近单词, 我们可以发现与小狗有关的词汇.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s1">'dog'</span><span class="p">)</span>
+
+<span class="p">[(</span><span class="mf">0.8456876873970032</span><span class="p">,</span> <span class="s1">'catdog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7480780482292175</span><span class="p">,</span> <span class="s1">'dogcow'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7289096117019653</span><span class="p">,</span> <span class="s1">'sleddog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7269964218139648</span><span class="p">,</span> <span class="s1">'hotdog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7114801406860352</span><span class="p">,</span> <span class="s1">'sheepdog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6947550773620605</span><span class="p">,</span> <span class="s1">'dogo'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6897546648979187</span><span class="p">,</span> <span class="s1">'bodog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6621081829071045</span><span class="p">,</span> <span class="s1">'maddog'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6605004072189331</span><span class="p">,</span> <span class="s1">'dogs'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6398137211799622</span><span class="p">,</span> <span class="s1">'dogpile'</span><span class="p">)]</span>
+</code></pre></div>
+
+
+<hr>
+<h4 id="_17">第五步: 模型的保存与重加载</h4>
+<div class="codehilite" id="__code_60"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_60 pre, #__code_60 code"><span class="md-clipboard__message"></span></button><pre id="__code_61"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_61 pre, #__code_61 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用save_model保存模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">"fil9.bin"</span><span class="p">)</span>
+
+<span class="c1"># 使用fasttext.load_model加载模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">"fil9.bin"</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_word_vector</span><span class="p">(</span><span class="s2">"the"</span><span class="p">)</span>
+
+<span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.03087516</span><span class="p">,</span>  <span class="mf">0.09221972</span><span class="p">,</span>  <span class="mf">0.17660329</span><span class="p">,</span>  <span class="mf">0.17308897</span><span class="p">,</span>  <span class="mf">0.12863874</span><span class="p">,</span>
+        <span class="mf">0.13912526</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09851588</span><span class="p">,</span>  <span class="mf">0.00739991</span><span class="p">,</span>  <span class="mf">0.37038437</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00845221</span><span class="p">,</span>
+        <span class="o">...</span>
+       <span class="o">-</span><span class="mf">0.21184735</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05048715</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.34571868</span><span class="p">,</span>  <span class="mf">0.23765688</span><span class="p">,</span>  <span class="mf">0.23726143</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="_18">小节总结</h3>
+<ul>
+<li>
+<p>学习了词向量的相关知识:</p>
+<ul>
+<li>用向量表示文本中的词汇(或字符)是现代机器学习中最流行的做法, 这些向量能够很好的捕捉语言之间的关系, 从而提升基于词向量的各种NLP任务的效果.</li>
+</ul>
+<hr>
+</li>
+<li>
+<p>使用fasttext工具训练词向量的过程:</p>
+<ul>
+<li>第一步: 获取数据</li>
+<li>第二步: 训练词向量</li>
+<li>第三步: 模型超参数设定</li>
+<li>第四步: 模型效果检验</li>
+<li>第五步: 模型的保存与重加载</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="14">1.4 词向量迁移</h2>
+<hr>
+<h3 id="_19">学习目标</h3>
+<ul>
+<li>了解什么是词向量迁移.</li>
+<li>了解fasttext工具中有哪些可迁移的词向量模型.</li>
+<li>掌握如何使用fasttext进行词向量模型迁移.</li>
+</ul>
+<hr>
+<ul>
+<li>什么是词向量迁移:<ul>
+<li>使用在大型语料库上已经进行训练完成的词向量模型.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>fasttext工具中可以提供的可迁移的词向量:<ul>
+<li>fasttext提供了157种语言的在CommonCrawl和Wikipedia语料上进行训练的可迁移词向量模型, 它们采用CBOW模式进行训练, 词向量维度为300维. 可通过该地址查看具体语言词向量模型: <a href="https://fasttext.cc/docs/en/crawl-vectors.html">https://fasttext.cc/docs/en/crawl-vectors.html</a></li>
+<li>fasttext提供了294种语言的在Wikipedia语料上进行训练的可迁移词向量模型, 它们采用skipgram模式进行训练, 词向量维度同样是300维. 可通过该地址查看具体语言词向量模型: <a href="https://fasttext.cc/docs/en/pretrained-vectors.html">https://fasttext.cc/docs/en/pretrained-vectors.html</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="fasttext_2">如何使用fasttext进行词向量模型迁移</h3>
+<ul>
+<li>第一步: 下载词向量模型压缩的bin.gz文件</li>
+<li>第二步: 解压bin.gz文件到bin文件</li>
+<li>第三步: 加载bin文件获取词向量</li>
+<li>第四步: 利用邻近词进行效果检验</li>
+</ul>
+<hr>
+<h4 id="bingz">第一步: 下载词向量模型压缩的bin.gz文件</h4>
+<div class="codehilite" id="__code_62"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_62 pre, #__code_62 code"><span class="md-clipboard__message"></span></button><pre id="__code_63"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_63 pre, #__code_63 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 这里我们以迁移在CommonCrawl和Wikipedia语料上进行训练的中文词向量模型为例:</span>
+<span class="c1"># 下载中文词向量模型(bin.gz文件)</span>
+wget https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.zh.300.bin.gz
+</code></pre></div>
+
+
+<hr>
+<h4 id="bingzbin">第二步: 解压bin.gz文件到bin文件</h4>
+<div class="codehilite" id="__code_64"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_64 pre, #__code_64 code"><span class="md-clipboard__message"></span></button><pre id="__code_65"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_65 pre, #__code_65 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用gunzip进行解压, 获取cc.zh.300.bin文件</span>
+gunzip cc.zh.300.bin.gz
+</code></pre></div>
+
+
+<hr>
+<h4 id="bin">第三步: 加载bin文件获取词向量</h4>
+<div class="codehilite" id="__code_66"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_66 pre, #__code_66 code"><span class="md-clipboard__message"></span></button><pre id="__code_67"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_67 pre, #__code_67 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 加载模型</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">fasttext</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">"cc.zh.300.bin"</span><span class="p">)</span>
+
+<span class="c1"># 查看前100个词汇(这里的词汇是广义的, 可以是中文符号或汉字))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">words</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">'，'</span><span class="p">,</span> <span class="s1">'的'</span><span class="p">,</span> <span class="s1">'。'</span><span class="p">,</span> <span class="s1">'&lt;/s&gt;'</span><span class="p">,</span> <span class="s1">'、'</span><span class="p">,</span> <span class="s1">'是'</span><span class="p">,</span> <span class="s1">'一'</span><span class="p">,</span> <span class="s1">'在'</span><span class="p">,</span> <span class="s1">'：'</span><span class="p">,</span> <span class="s1">'了'</span><span class="p">,</span> <span class="s1">'（'</span><span class="p">,</span> <span class="s1">'）'</span><span class="p">,</span> <span class="s2">"'"</span><span class="p">,</span> <span class="s1">'和'</span><span class="p">,</span> <span class="s1">'不'</span><span class="p">,</span> <span class="s1">'有'</span><span class="p">,</span> <span class="s1">'我'</span><span class="p">,</span> <span class="s1">','</span><span class="p">,</span> <span class="s1">')'</span><span class="p">,</span> <span class="s1">'('</span><span class="p">,</span> <span class="s1">'“'</span><span class="p">,</span> <span class="s1">'”'</span><span class="p">,</span> <span class="s1">'也'</span><span class="p">,</span> <span class="s1">'人'</span><span class="p">,</span> <span class="s1">'个'</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="s1">'中'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">,</span> <span class="s1">'就'</span><span class="p">,</span> <span class="s1">'他'</span><span class="p">,</span> <span class="s1">'》'</span><span class="p">,</span> <span class="s1">'《'</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="s1">'你'</span><span class="p">,</span> <span class="s1">'都'</span><span class="p">,</span> <span class="s1">'上'</span><span class="p">,</span> <span class="s1">'大'</span><span class="p">,</span> <span class="s1">'！'</span><span class="p">,</span> <span class="s1">'这'</span><span class="p">,</span> <span class="s1">'为'</span><span class="p">,</span> <span class="s1">'多'</span><span class="p">,</span> <span class="s1">'与'</span><span class="p">,</span> <span class="s1">'章'</span><span class="p">,</span> <span class="s1">'「'</span><span class="p">,</span> <span class="s1">'到'</span><span class="p">,</span> <span class="s1">'」'</span><span class="p">,</span> <span class="s1">'要'</span><span class="p">,</span> <span class="s1">'？'</span><span class="p">,</span> <span class="s1">'被'</span><span class="p">,</span> <span class="s1">'而'</span><span class="p">,</span> <span class="s1">'能'</span><span class="p">,</span> <span class="s1">'等'</span><span class="p">,</span> <span class="s1">'可以'</span><span class="p">,</span> <span class="s1">'年'</span><span class="p">,</span> <span class="s1">'；'</span><span class="p">,</span> <span class="s1">'|'</span><span class="p">,</span> <span class="s1">'以'</span><span class="p">,</span> <span class="s1">'及'</span><span class="p">,</span> <span class="s1">'之'</span><span class="p">,</span> <span class="s1">'公司'</span><span class="p">,</span> <span class="s1">'对'</span><span class="p">,</span> <span class="s1">'中国'</span><span class="p">,</span> <span class="s1">'很'</span><span class="p">,</span> <span class="s1">'会'</span><span class="p">,</span> <span class="s1">'小'</span><span class="p">,</span> <span class="s1">'但'</span><span class="p">,</span> <span class="s1">'我们'</span><span class="p">,</span> <span class="s1">'最'</span><span class="p">,</span> <span class="s1">'更'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'三'</span><span class="p">,</span> <span class="s1">'新'</span><span class="p">,</span> <span class="s1">'自己'</span><span class="p">,</span> <span class="s1">'可'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'或'</span><span class="p">,</span> <span class="s1">'次'</span><span class="p">,</span> <span class="s1">'好'</span><span class="p">,</span> <span class="s1">'将'</span><span class="p">,</span> <span class="s1">'第'</span><span class="p">,</span> <span class="s1">'种'</span><span class="p">,</span> <span class="s1">'她'</span><span class="p">,</span> <span class="s1">'…'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="s1">'地'</span><span class="p">,</span> <span class="s1">'對'</span><span class="p">,</span> <span class="s1">'用'</span><span class="p">,</span> <span class="s1">'工作'</span><span class="p">,</span> <span class="s1">'下'</span><span class="p">,</span> <span class="s1">'后'</span><span class="p">,</span> <span class="s1">'由'</span><span class="p">,</span> <span class="s1">'两'</span><span class="p">,</span> <span class="s1">'使用'</span><span class="p">,</span> <span class="s1">'还'</span><span class="p">,</span> <span class="s1">'又'</span><span class="p">,</span> <span class="s1">'您'</span><span class="p">,</span> <span class="s1">'?'</span><span class="p">,</span> <span class="s1">'其'</span><span class="p">,</span> <span class="s1">'已'</span><span class="p">]</span>
+
+
+<span class="c1"># 使用模型获得'音乐'这个名词的词向量</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_word_vector</span><span class="p">(</span><span class="s2">"音乐"</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">6.81843981e-02</span><span class="p">,</span>  <span class="mf">3.84048335e-02</span><span class="p">,</span>  <span class="mf">4.63239700e-01</span><span class="p">,</span>  <span class="mf">6.11658543e-02</span><span class="p">,</span>
+        <span class="mf">9.38086119e-03</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.63955745e-02</span><span class="p">,</span>  <span class="mf">1.28141120e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.51574507e-02</span><span class="p">,</span>
+        <span class="o">...</span>
+        <span class="mf">3.13430429e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.43611327e-02</span><span class="p">,</span>  <span class="mf">1.68979481e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.95011273e-01</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="n">float32</span><span class="p">)</span>    
+</code></pre></div>
+
+
+<hr>
+<h4 id="_20">第四步: 利用邻近词进行效果检验</h4>
+<div class="codehilite" id="__code_68"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_68 pre, #__code_68 code"><span class="md-clipboard__message"></span></button><pre id="__code_69"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_69 pre, #__code_69 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 以'音乐'为例, 返回的邻近词基本上与音乐都有关系, 如乐曲, 音乐会, 声乐等.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s2">"音乐"</span><span class="p">)</span>
+<span class="p">[(</span><span class="mf">0.6703276634216309</span><span class="p">,</span> <span class="s1">'乐曲'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6569967269897461</span><span class="p">,</span> <span class="s1">'音乐人'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6565821170806885</span><span class="p">,</span> <span class="s1">'声乐'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6557438373565674</span><span class="p">,</span> <span class="s1">'轻音乐'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6536258459091187</span><span class="p">,</span> <span class="s1">'音乐家'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6502416133880615</span><span class="p">,</span> <span class="s1">'配乐'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6501686573028564</span><span class="p">,</span> <span class="s1">'艺术'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6437276005744934</span><span class="p">,</span> <span class="s1">'音乐会'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.639589250087738</span><span class="p">,</span> <span class="s1">'原声'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6368917226791382</span><span class="p">,</span> <span class="s1">'音响'</span><span class="p">)]</span>
+
+
+<span class="c1"># 以'美术'为例, 返回的邻近词基本上与美术都有关系, 如艺术, 绘画, 霍廷霄(满城尽带黄金甲的美术师)等.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s2">"美术"</span><span class="p">)</span>
+<span class="p">[(</span><span class="mf">0.724744975566864</span><span class="p">,</span> <span class="s1">'艺术'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.7165924310684204</span><span class="p">,</span> <span class="s1">'绘画'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6741853356361389</span><span class="p">,</span> <span class="s1">'霍廷霄'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6470299363136292</span><span class="p">,</span> <span class="s1">'纯艺'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6335071921348572</span><span class="p">,</span> <span class="s1">'美术家'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6304370164871216</span><span class="p">,</span> <span class="s1">'美院'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.624431312084198</span><span class="p">,</span> <span class="s1">'艺术类'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6244068741798401</span><span class="p">,</span> <span class="s1">'陈浩忠'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.62302166223526</span><span class="p">,</span> <span class="s1">'美术史'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.621710479259491</span><span class="p">,</span> <span class="s1">'环艺系'</span><span class="p">)]</span>
+
+
+<span class="c1"># 以'周杰伦'为例, 返回的邻近词基本上与明星有关系, 如杰伦, 周董, 陈奕迅等.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">model</span><span class="o">.</span><span class="n">get_nearest_neighbors</span><span class="p">(</span><span class="s2">"周杰伦"</span><span class="p">)</span>
+<span class="p">[(</span><span class="mf">0.6995140910148621</span><span class="p">,</span> <span class="s1">'杰伦'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6967097520828247</span><span class="p">,</span> <span class="s1">'周杰倫'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6859776377677917</span><span class="p">,</span> <span class="s1">'周董'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6381043195724487</span><span class="p">,</span> <span class="s1">'陈奕迅'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6367626190185547</span><span class="p">,</span> <span class="s1">'张靓颖'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6313326358795166</span><span class="p">,</span> <span class="s1">'张韶涵'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6271176338195801</span><span class="p">,</span> <span class="s1">'谢霆锋'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6188404560089111</span><span class="p">,</span> <span class="s1">'周华健'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6184280514717102</span><span class="p">,</span> <span class="s1">'林俊杰'</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.6143589019775391</span><span class="p">,</span> <span class="s1">'王力宏'</span><span class="p">)]</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="_21">小节总结</h3>
+<ul>
+<li>
+<p>学习了什么是词向量迁移:</p>
+<ul>
+<li>使用在大型语料库上已经进行训练完成的词向量模型.</li>
+</ul>
+<hr>
+</li>
+<li>
+<p>学习了fasttext工具中可以提供的可迁移的词向量:</p>
+<ul>
+<li>fasttext提供了157种语言的在CommonCrawl和Wikipedia语料上进行训练的可迁移词向量模型, 它们采用CBOW模式进行训练, 词向量维度为300维. 可通过该地址查看具体语言词向量模型: https://fasttext.cc/docs/en/crawl-vectors.html</li>
+<li>fasttext提供了294种语言的在Wikipedia语料上进行训练的可迁移词向量模型, 它们采用skipgram模式进行训练, 词向量维度同样是300维. 可通过该地址查看具体语言词向量模型: https://fasttext.cc/docs/en/pretrained-vectors.html</li>
+</ul>
+<hr>
+</li>
+<li>
+<p>如何使用fasttext进行词向量模型迁移:</p>
+<ul>
+<li>第一步: 下载词向量模型压缩的bin.gz文件</li>
+<li>第二步: 解压bin.gz文件到bin文件</li>
+<li>第三步: 加载bin文件获取词向量</li>
+<li>第四步: 利用邻近词进行效果检验</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="./index2.html" title="第二章:迁移学习" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                第二章:迁移学习
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

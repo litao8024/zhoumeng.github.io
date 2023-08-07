@@ -1,0 +1,1728 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>7.1 知识图谱建模与存储 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7.1 知识图谱建模与存储
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          7.1 知识图谱建模与存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="7_1.html" class="md-nav__link md-nav__link--active">
+        7.1 知识图谱建模与存储
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱建模与存储
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱建模与存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    知识图谱的数据模型
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的数据模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    三元组模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    图模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    知识图谱的物理存储
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的物理存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    关系表存储
+  </a>
+  
+    <nav class="md-nav" aria-label="关系表存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    三列表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    属性表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    垂直表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    全索引存储
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    图存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    分布式存储
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱建模与存储
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱建模与存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    知识图谱的数据模型
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的数据模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    三元组模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    图模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    知识图谱的物理存储
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的物理存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    关系表存储
+  </a>
+  
+    <nav class="md-nav" aria-label="关系表存储">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    三列表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    属性表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    垂直表存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    全索引存储
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    图存储
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    分布式存储
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>7.1 知识图谱建模与存储</h1>
+
+<h2 id="_1">知识图谱建模与存储<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_2">学习目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>了解知识图谱的相关数据模型.</li>
+<li>理解知识图谱的主流物理存储方法和原理.</li>
+</ul>
+<hr />
+<ul>
+<li>知识图谱数据应用的前提是, 这些数据的有效表示与存储. 逻辑层面的表示(即数据模型)是从人的角度对知识图谱数据进行描述, 物理层面的存储时从计算机的角度对数据进行组织, 两者密切相关.</li>
+</ul>
+<hr />
+<h3 id="_3">知识图谱的数据模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><center><img alt="" src="img/7_3_1.png" /></center></p>
+<hr />
+<ul>
+<li>宏观来看, 知识图谱的数据模型包含两大类:<ul>
+<li>三元组模型</li>
+<li>图模型</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_4">三元组模型<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>这是我们最为熟悉的模型, 比如经典例子, ("柏拉图", "出生地", "雅典"), 将两个实体和他们之间的关系共同组成一个三元组. 因此一个知识图谱数据集可以看做是一个三元组的集合.</li>
+</ul>
+<hr />
+<ul>
+<li>除了上述我们最为熟悉的三元组模式, 在知识图谱的实际应用中, 常常还需要表达一些相对复杂的语义, 包括多元关系, 时空知识, 多模态知识以及对象知识等.<ul>
+<li>例如: 我们向三元组("亚里士多德", "导师", "柏拉图")中添加时空线索信息, 则变成了五元组的形式("亚里士多德", "导师", "柏拉图", "(北纬38°02′, 东经23°44′)", "公元前407年").</li>
+<li>例如: 我们向三元组("柏拉图", "出生地", "雅典")中添加图片资源链接的关系信息, 则变成了四元组的形式("柏拉图", "出生地", "雅典", "http://***.com/foaf/0.1/depiction", "wikiFile:Plato_MC1355.jpg").</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>总结: 三元组模型的优点在于模型简单, 易于扩展, 使得基于这一模型构建大规模数据集成为可能. 但是三元组模型的局限性也很明显, 主要是对于所有知识都只能拆分成二元关系的组合, 难以表达复杂语义. 三元组主要表达的是事实性知识, 对于事理逻辑的表达能力有限, 难以有效支撑逻辑推理. 在实际应用中, 需要联合使用其他知识表示, 包括谓词逻辑, 并给予三元组知识开展有效的推理.</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="_5">图模型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识图谱更加天然的适配于图模型, 在实际应用中, 经常将三元组数据通过预先定义的语义关联转换成一个或多个连通图, 整个知识图谱就可以表示成一张巨大的"图"了.</li>
+</ul>
+<hr />
+<ul>
+<li>主流的表达方式:<ul>
+<li>有向图: 工业界最常用的模式<ul>
+<li>百科图谱DBPedia</li>
+<li>中文百科图谱CN-DBPedia</li>
+<li>药品知识图谱Drugbank</li>
+<li>蛋白质知识图谱UniPort</li>
+<li>地理信息知识图谱LinkedGeoData</li>
+</ul>
+</li>
+<li>属性图: 图数据库工业界广泛采用的模式</li>
+<li>树状图: WordNet</li>
+<li>有向图: 应用面也很广<ul>
+<li>Probase</li>
+<li>YAGO</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<h3 id="_6">知识图谱的物理存储<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>目前工业界的知识图谱数据的存储方式分为两类:<ul>
+<li>基于关系模型的存储</li>
+<li>基于图模型的存储</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>复杂查询的优化问题是知识图谱管理系统的核心问题之一, 可以借鉴传统关系型数据库中的SQL查询的计划生成和查询优化策略. 在实际应用中, 知识图谱数据的查询运算通常呈现出如下特点:<ul>
+<li>选择度高: 知识图谱中常见选择操作的答案仅涉及知识图谱中很少的三元组.</li>
+<li>连接数量多: 知识图谱中常见的运算经常会包含大量的连接操作.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_7">关系表存储<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>考虑到市面上已经存在大量成熟的关系型数据库系统, 而知识图谱数据的三元组很容易映射到关系模型上. 那么基于关系表对知识图谱数据进行组织的方式可以分成四类:<ul>
+<li>基于三列表的存储方式</li>
+<li>基于属性表的存储方式</li>
+<li>基于垂直表的存储方式</li>
+<li>基于全索引的存储方式</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5 id="_8">三列表存储<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>通过维护一个巨大的三元组表来管理RDF知识图谱数据, 这个三元组表包含3列, 分别对应主体, 谓词, 客体(即SPO). 当系统接收到用户输入的查询请求时, 系统将该查询转换为SQL查询. 这些SQL查询通常需要对三元组表执行多次自连接操作(self-join)以得到最终结果.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 使用一个巨大的三元组表, 面临一个巨大的代价, 系统不论执行何种操作, 都需要进行全表扫描!!!</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>工业界的解决方案是建立多个索引, 以增加查询效率. 但因为知识图谱上的运算经常包含大量的连接操作, 而这种自连接操作, 系统需要将三列表进行复制, 然后再两个巨大的三列表上进行连接, 非常耗时.</li>
+</ul>
+<hr />
+<h5 id="_9">属性表存储<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h5>
+<ul>
+<li>为了减少自连接操作的次数, 很多知识图谱管理系统在单个三元组表外, 还构建了额外的属性表来管理数据, 有两大类:<ul>
+<li>分类属性表: 根据实体类型将三元组分类, 相同类的三元组放在同一个表中.</li>
+<li>聚类属性表: 将相似的三元组聚类, 然后将每类三元组集中在一个属性表中进行管理.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>工业界的经典案例当属Jena:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>         三列表 (s  p  o)
+
+
+         单值属性表
+        /
+       /
+      / 
+     /
+ 主键 ---多值属性表
+     \
+      \
+       \
+        \
+         属性类表
+</code></pre></div>
+<hr />
+<blockquote>
+<ul>
+<li>Jena: 首先维护了一个巨大的三元组表, 此外Jena还维护了三种属性表: 单值属性表, 多值属性表, 属性类表. 单值属性表是将实体中所有客体值唯一的谓词聚集起来组织而成的一个表; 多值属性表是为每一个客体值不唯一的谓词构建的只有两列的表, 分别存储主体值和客体值; 属性值表是在单值属性表的基础上增加了存储实体类型列的表.</li>
+</ul>
+</blockquote>
+<hr />
+<h5 id="_10">垂直表存储<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h5>
+<ul>
+<li>针对三列表和属性表连接操作效率低的问题, SW-Store提出了按照谓词分表的方法. 具体来说, 将三元组按照谓词分成不同的表, 每个表保存谓词相同的三元组, SW-Store称这种方法为垂直分割.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>       出生时间
+
+  主体         客体
+苏格拉底      公元前469年
+ 柏拉图       公元前427年
+
+
+# ---------------------------------------
+
+
+       出生地
+
+  主体          客体
+苏格拉底         雅典
+ 柏拉图          雅典
+
+
+# --------------------------------------
+
+
+       学生
+
+  主体          客体
+苏格拉底        柏拉图
+
+
+
+# --------------------------------------
+
+
+       代表作品
+
+  主体          客体
+ 柏拉图         理想国
+</code></pre></div>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 垂直表的一大缺点是无法很好的支持谓词是变量的查询操作! 比如, 查询"柏拉图和苏格拉底的关系", 就需要扫描所有表才能回答, 导致效率低下.</li>
+</ul>
+</blockquote>
+<hr />
+<h5 id="_11">全索引存储<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h5>
+<ul>
+<li>除了采用一般的关系型数据库相关技术, 还有一些系统针对知识图谱数据和运算特点提出了特定的优化技术. 为了加速知识图谱数据在运算过程中的连接运算, 将三元组中SPO的各种排列情况都枚举出来, 然后为它们一一构建索引. 主体, 谓词, 客体的排列情况共计6种, 比如针对于(s, p, o), 额外存储5个对应的三元组(s, o ,p), (p, s, o), (p, o, s), (o, s, p), (o, p, s). 这些索引内容正好对应知识图谱运算中带变量的三元组模式的各种可能. </li>
+</ul>
+<hr />
+<ul>
+<li>按照上述方式建立的索引, 不论是基于主体来查询谓词和客体, 还是基于谓词来查询主体和客体, 抑或是基于客体来查询谓词和主体, 系统都能很快的找到相应的结果.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 因为构建了大量索引, 所以选取满足查询条件的三元组的效率极高! 但是连接操作依然低效, 且索引维护与更新的代价高昂!</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="_12">图存储<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>针对于知识图谱中的图模型表示, 很多系统设计了相应的图存储模式, 主要有两种:<ul>
+<li>邻接表: 每个节点(实体)对应一个列表, 列表中存储与该实体相关的信息.</li>
+<li>邻接矩阵: 在计算机中维护多个(n, n)的矩阵, 其中n为知识图谱中节点的数量. 每个矩阵对应一个谓词, 每一行或每一列都对应知识图谱中的一个节点.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>优化技巧: 在利用邻接表或邻接矩阵进行知识图谱数据管理时, 一个关键问题是如何对指数候选空间的查询操作做出有效的剪枝! 一般都采用基于位图索引的方式, 配合哈希表, 比特压损等技术, 使得查询效率非常高!</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>针对属性图模型, Neo4j公司用Java语言开发了图数据库管理系统-Neo4j, 它是一个符合ACID标准的事务型图数据库, Neo4j已经成为当前最受欢迎的图数据库管理系统之一. 在Neo4j中, 属性图中的节点, 边, 以及属性都以固定长度记录的形式分别存储在不同的文件中. 节点记录维护着指向其相邻边和属性的指针; 边记录维护着指向其相邻接点和属性的指针; 属性记录维护着指向其所对应的具体属性值.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 因为不论节点记录, 边记录, 还是属性记录都是固定长度的, 所以Neo4j在磁盘中读取数据时可以快速计算出偏移量, 使得Neo4j的读取效率很高.</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="_13">分布式存储<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>知识图谱的规模日益增长, 千亿节点规模的知识图谱已经得到应用. 为了应对这些巨大图谱给存储带来的挑战, 越来越多的分布式解决方案也在迅速发展.</li>
+</ul>
+<hr />
+<ul>
+<li>典型的能够支撑SPARQL查询处理的云计算平台包括Hadoop, Spark等:<ul>
+<li>Hadoop: 基于邻接表的存储</li>
+<li>Spark: 基于垂直表的存储</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>Hadoop是最常见的存储知识图谱的云计算平台, 基于Hadoop平台的存储方式首先将知识图谱数据转换为平面文件, 然后存储在Hadoop分布式文件系统HDFS上. 例如, SHARD系统以三元组中的主体为依据划分数据, 与一个主体相关的所有三元组被聚集到一起并存储为HDFS文件中的一行.</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="6_3.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 6.3 知识图谱的众包" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              6.3 知识图谱的众包
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="7_2.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 7.2 neo4j技术解析" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              7.2 neo4j技术解析
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

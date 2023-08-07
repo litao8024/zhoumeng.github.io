@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8008/5/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, zh">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>基于seq2seq的西班牙语到英语的机器翻译任务 - NLP案例集</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+      <link rel="manifest" href="http://121.199.45.168:8008/manifest.webmanifest">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="NLP案例集" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              NLP案例集
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                基于seq2seq的西班牙语到英语的机器翻译任务
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="NLP案例集" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    NLP案例集
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="图片的描述生成任务" class="md-nav__link">
+      图片的描述生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="IMDB影评的情感分析任务" class="md-nav__link">
+      IMDB影评的情感分析任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-nav__link">
+      莎士比亚风格的文本生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-nav__link">
+      应用于bert模型的动态量化技术
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        基于seq2seq的西班牙语到英语的机器翻译任务
+      </label>
+    
+    <a href="" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-nav__link md-nav__link--active">
+      基于seq2seq的西班牙语到英语的机器翻译任务
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gruseq2seq" title="使用基于GRU的seq2seq模型架构实现翻译的过程" class="md-nav__link">
+    使用基于GRU的seq2seq模型架构实现翻译的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步：下载和准备训练数据集" class="md-nav__link">
+    第一步：下载和准备训练数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tfdata" title="第二步：对数据进行预处理并创建一个tf.data数据集" class="md-nav__link">
+    第二步：对数据进行预处理并创建一个tf.data数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第三步：构建模型并选择优化器和损失函数" class="md-nav__link">
+    第三步：构建模型并选择优化器和损失函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第四步: 构建训练函数并进行训练" class="md-nav__link">
+    第四步: 构建训练函数并进行训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第五步：构建评估函数并进行预测分析" class="md-nav__link">
+    第五步：构建评估函数并进行预测分析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-nav__link">
+      ResNet模型在GPU上的并行实践
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gruseq2seq" title="使用基于GRU的seq2seq模型架构实现翻译的过程" class="md-nav__link">
+    使用基于GRU的seq2seq模型架构实现翻译的过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步：下载和准备训练数据集" class="md-nav__link">
+    第一步：下载和准备训练数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tfdata" title="第二步：对数据进行预处理并创建一个tf.data数据集" class="md-nav__link">
+    第二步：对数据进行预处理并创建一个tf.data数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第三步：构建模型并选择优化器和损失函数" class="md-nav__link">
+    第三步：构建模型并选择优化器和损失函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第四步: 构建训练函数并进行训练" class="md-nav__link">
+    第四步: 构建训练函数并进行训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第五步：构建评估函数并进行预测分析" class="md-nav__link">
+    第五步：构建评估函数并进行预测分析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>基于seq2seq的西班牙语到英语的机器翻译任务</h1>
+                
+                <h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>了解机器翻译任务及其相关数据集.</li>
+<li>掌握使用基于GRU的seq2seq模型架构实现翻译的过程.</li>
+<li>掌握Attention机制在解码器端的实现过程.</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/TTF1.png"></center><p></p>
+<hr>
+<h3 id="_2">任务说明<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li>机器翻译任务是NLP领域最为经典且应用最广泛的任务之一，仅google的在线翻译系统每天请求量就已经过亿。当前最好的机器翻译系统正是使用深度学习技术解决各项难题，同时也将经典的seq2seq架构推广到各个领域，再加上近今年来风靡的Attention机制，使得机器翻译能力迅猛提升。下面我们将学习基于seq2seq模型架构和Attention 机制，完成西班牙语到英语的机器翻译案例。</li>
+</ul>
+<hr>
+<h3 id="_3">数据集说明<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>数据集名称: Anki (安基翻译数据集) </li>
+<li>原数据集下载地址:  <a href="http://www.manythings.org/anki/spa-eng.zip">http://www.manythings.org/anki/spa-eng.zip</a> </li>
+<li>数据集下载地址: <a href="http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip">http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip</a></li>
+<li>数据集预览:</li>
+</ul>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code>Go. Ve.
+Go. Vete.
+Go. Vaya.
+Go. Váyase.
+Hi. Hola.
+Run!    ¡Corre!
+Run.    Corred.
+Who?    ¿Quién?
+Fire!   ¡Fuego!
+Fire!   ¡Incendio!
+Fire!   ¡Disparad!
+</code></pre></div>
+
+<ul>
+<li>数据内容说明:<ul>
+<li>数据总条目为: 118964，第一列为英语，第二列为对应翻译的西班牙语.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="gruseq2seq">使用基于GRU的seq2seq模型架构实现翻译的过程<a class="headerlink" href="#gruseq2seq" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步：下载和准备训练数据集</li>
+<li>第二步：对数据进行预处理并创建一个tf.data数据集</li>
+<li>第三步：构建模型并选择优化器和损失函数</li>
+<li>第四步：构建训练函数并进行训练</li>
+<li>第五步：构建评估函数并进行预测分析</li>
+</ul>
+<hr>
+<h4 id="_4">第一步：下载和准备训练数据集<a class="headerlink" href="#_4" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1"># 打印tensorflow版本</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Tensorflow Version:"</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1"># 导入之后绘制Attention效果图的工具包</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="kn">as</span> <span class="nn">ticker</span>
+
+<span class="c1"># 导入sklearn中的相关工具以便进行训练集与验证集划分</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># 导入一些必备的文本清洗工具包</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 使用tf.keras工具中get_file方法下载文件</span>
+<span class="c1"># 'spa-eng.zip'是下载的文件名</span>
+<span class="c1"># origin表示文件下载地址, extract表示是否对文件进行解压缩</span>
+<span class="c1"># 进行解压缩后, 获得压缩包的地址path_to_zip</span>
+<span class="n">path_to_zip</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span>
+    <span class="s1">'spa-eng.zip'</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">'http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip'</span><span class="p">,</span>
+    <span class="n">extract</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># 获得解压缩的标注文件地址 </span>
+<span class="n">path_to_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path_to_zip</span><span class="p">)</span><span class="o">+</span><span class="s2">"/spa-eng/spa.txt"</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code>Tensorflow Version: 2.1.0-rc2
+Downloading data from http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip
+2646016/2638744 [==============================] - 0s 0us/step
+</code></pre></div>
+
+<hr>
+<h4 id="tfdata">第二步：对数据进行预处理并创建一个tf.data数据集<a class="headerlink" href="#tfdata" title="Permanent link">¶</a></h4>
+<ul>
+<li>对文本进行清洗并给每个句子添加一个 开始 和一个 结束 标记: </li>
+</ul>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将 unicode 文件转换为 ascii</span>
+<span class="c1"># 我们可以认为是去掉一些语言中的重音标记：如Ślusàrski---&gt;Slusarski</span>
+<span class="k">def</span> <span class="nf">unicode_to_ascii</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">'NFD'</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">'Mn'</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_sentence</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+    <span class="sd">"""句子处理函数, 输入为原始语料的一句话"""</span>
+    <span class="c1"># 字母小写并去除两侧空白符，调用unicode_to_ascii</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">unicode_to_ascii</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="c1"># 在单词与跟在其后的标点符号之间插入一个空格</span>
+    <span class="c1"># 例如： "he is a boy." =&gt; "he is a boy ."</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([?.!,¿])"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">" \1 "</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[" "]+'</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+    <span class="c1"># 除了 (a-z, A-Z, ".", "?", "!", ",")，将所有字符替换为空格</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[^a-zA-Z?.!,¿]+"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="c1"># 替换后再次去除两侧空白符</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># 给句子加上开始和结束标记</span>
+    <span class="c1"># 以便模型知道何时开始和结束预测</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="s1">'&lt;start&gt; '</span> <span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s1">' &lt;end&gt;'</span>
+    <span class="k">return</span> <span class="n">w</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code><span class="n">en_sentence</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"May I borrow this book?"</span>
+<span class="n">sp_sentence</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"¿Puedo tomar prestado este libro?"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">preprocess_sentence</span><span class="p">(</span><span class="n">en_sentence</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">preprocess_sentence</span><span class="p">(</span><span class="n">sp_sentence</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="o">&lt;</span><span class="n">start</span><span class="o">&gt;</span> <span class="n">may</span> <span class="n">i</span> <span class="n">borrow</span> <span class="n">this</span> <span class="n">book</span> <span class="err">?</span> <span class="o">&lt;</span><span class="n">end</span><span class="o">&gt;</span>
+<span class="sa">b</span><span class="s1">'&lt;start&gt; </span><span class="se">\xc2\xbf</span><span class="s1"> puedo tomar prestado este libro ? &lt;end&gt;'</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>创建对应的翻译文本集</li>
+</ul>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">create_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    description: 创建对应的翻译文本集：共包含两个元组，第一个元组中都是英文，</span>
+<span class="sd">                 第二个元组中都是对应的西班牙文</span>
+<span class="sd">    :param path: 数据集路径</span>
+<span class="sd">    :param num_examples: 取数据集中的文本行数</span>
+<span class="sd">    """</span>
+    <span class="c1"># 读取持久化文件中的全部行</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'UTF-8'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="c1"># 取指定行数的数据并调用preprocess_sentence函数处理</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[[</span><span class="n">preprocess_sentence</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)]</span>  <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[:</span><span class="n">num_examples</span><span class="p">]]</span>
+    <span class="c1"># 将两组文本整合在一个zip对象中</span>
+    <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">pairs</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>path = path_to_file
+num_examples = 5
+en, sp = create_dataset(path, num_examples)
+print(en)
+print(sp)
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code># 第一个元组都是英文句子(因为我们取的是数据集前面的句子，一个单词就是一个句子)
+('&lt;start&gt; go . &lt;end&gt;', '&lt;start&gt; go . &lt;end&gt;', '&lt;start&gt; go . &lt;end&gt;', '&lt;start&gt; go . &lt;end&gt;', '&lt;start&gt; hi . &lt;end&gt;')
+
+# 第二个元组都是对应西班牙文句子
+('&lt;start&gt; ve . &lt;end&gt;', '&lt;start&gt; vete . &lt;end&gt;', '&lt;start&gt; vaya . &lt;end&gt;', '&lt;start&gt; vayase . &lt;end&gt;', '&lt;start&gt; hola . &lt;end&gt;')
+</code></pre></div>
+
+<hr>
+<ul>
+<li>对文本进行数值映射并进行最大长度补齐</li>
+</ul>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">max_length</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="sd">"""获取tensor中的最大长度函数"""</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tensor</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">lang</span><span class="p">):</span>
+    <span class="sd">"""对文本进行数值映射函数"""</span>
+    <span class="c1"># 实例化一个Tokenizer数值映射器</span>
+    <span class="n">lang_tokenizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Tokenizer</span><span class="p">(</span>
+        <span class="n">filters</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+    <span class="c1"># 在输入文本上拟合映射器</span>
+    <span class="n">lang_tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
+    <span class="c1"># 将映射器作用在当前文本上</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">lang_tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">lang</span><span class="p">)</span>
+    <span class="c1"># 使用pad_sequences对文本进行最大长度补齐</span>
+    <span class="n">tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span>
+                                                         <span class="n">padding</span><span class="o">=</span><span class="s1">'post'</span><span class="p">)</span>
+    <span class="c1"># 返回处理后的结果和映射器(因为在之后的预测中还会使用该映射器处理文本)</span>
+    <span class="k">return</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">lang_tokenizer</span>
+
+
+<span class="k">def</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">num_examples</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">"""对两种语言文本进行进行数值映射并进行最大长度补齐"""</span>
+    <span class="c1"># 获得文本清洗之后的结果    </span>
+    <span class="n">targ_lang</span><span class="p">,</span> <span class="n">inp_lang</span> <span class="o">=</span> <span class="n">create_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)</span>
+    <span class="c1"># 分别调用tokenize函数</span>
+    <span class="n">input_tensor</span><span class="p">,</span> <span class="n">inp_lang_tokenizer</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">inp_lang</span><span class="p">)</span>
+    <span class="n">target_tensor</span><span class="p">,</span> <span class="n">targ_lang_tokenizer</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">targ_lang</span><span class="p">)</span>
+    <span class="c1"># 返回对应的结果</span>
+    <span class="k">return</span> <span class="n">input_tensor</span><span class="p">,</span> <span class="n">target_tensor</span><span class="p">,</span> <span class="n">inp_lang_tokenizer</span><span class="p">,</span> <span class="n">targ_lang_tokenizer</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="n">path</span> <span class="o">=</span> <span class="n">path_to_file</span>
+<span class="n">num_examples</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">input_tensor</span><span class="p">,</span> <span class="n">target_tensor</span><span class="p">,</span> <span class="n">inp_lang_tokenizer</span><span class="p">,</span> <span class="n">targ_lang_tokenizer</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)</span> 
+<span class="k">print</span><span class="p">(</span><span class="s2">"input_tensor:"</span><span class="p">,</span> <span class="n">input_tensor</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"target_tensor:"</span><span class="p">,</span> <span class="n">target_tensor</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">inp_lang_tokenizer</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">targ_lang_tokenizer</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>input_tensor: [[1 4 2 3]
+ [1 5 2 3]
+ [1 6 2 3]
+ [1 7 2 3]
+ [1 8 2 3]]
+target_tensor: [[1 4 2 3]
+ [1 4 2 3]
+ [1 4 2 3]
+ [1 4 2 3]
+ [1 5 2 3]]
+&lt;keras_preprocessing.text.Tokenizer object at 0x7f7c305f3b50&gt;
+&lt;keras_preprocessing.text.Tokenizer object at 0x7f7cbe903090&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>限制训练集的大小以保证在可控时间内完成训练<ul>
+<li>为了加快训练速度，将使用30,000个训练子集来训练模型。如果你的硬件资源足够充分，也可以选择使用更多数据来提高模型质量。如果在一个P100 GPU 上运行10万条数据大约花费10分钟左右。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 尝试实验不同大小的数据集</span>
+<span class="c1"># 这里使用30000个样本</span>
+<span class="n">num_examples</span> <span class="o">=</span> <span class="mi">30000</span>
+
+<span class="n">input_tensor</span><span class="p">,</span> <span class="n">target_tensor</span><span class="p">,</span> <span class="n">inp_lang</span><span class="p">,</span> <span class="n">targ_lang</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)</span>
+
+<span class="c1"># 计算目标张量的最大长度 （max_length）</span>
+<span class="n">max_length_targ</span><span class="p">,</span> <span class="n">max_length_inp</span> <span class="o">=</span> <span class="n">max_length</span><span class="p">(</span><span class="n">target_tensor</span><span class="p">),</span> <span class="n">max_length</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+
+<span class="c1"># 采用 8:2 的比例切分训练集和验证集</span>
+<span class="n">input_tensor_train</span><span class="p">,</span> <span class="n">input_tensor_val</span><span class="p">,</span> <span class="n">target_tensor_train</span><span class="p">,</span> <span class="n">target_tensor_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="n">target_tensor</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># 训练集和验证集的样本数量</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_tensor_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_tensor_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_tensor_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_tensor_val</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code>24000 24000 6000 6000
+</code></pre></div>
+
+<hr>
+<ul>
+<li>查看一下数值映射后样本的对应情况:</li>
+</ul>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">lang</span><span class="p">,</span> <span class="n">tensor</span><span class="p">):</span>
+    <span class="c1"># 遍历张量中的每一个数值</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tensor</span><span class="p">:</span>
+        <span class="c1"># 数值映射从1开始，不包括0 </span>
+        <span class="k">if</span> <span class="n">t</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># 使用传入的数值映射器的index_word方法寻找数值对应的单词</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2"> ----&gt; </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">lang</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">t</span><span class="p">]))</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s2">"输入文本的对应情况:"</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="n">inp_lang</span><span class="p">,</span> <span class="n">input_tensor_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">()</span>
+<span class="k">print</span> <span class="p">(</span><span class="s2">"输出文本的对应情况:"</span><span class="p">)</span>
+<span class="n">convert</span><span class="p">(</span><span class="n">targ_lang</span><span class="p">,</span> <span class="n">target_tensor_train</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code>Input Language; index to word mapping
+1 ----&gt; &lt;start&gt;
+2605 ----&gt; mande
+19 ----&gt; mi
+280 ----&gt; reloj
+10 ----&gt; a
+2342 ----&gt; arreglar
+3 ----&gt; .
+2 ----&gt; &lt;end&gt;
+
+Target Language; index to word mapping
+1 ----&gt; &lt;start&gt;
+4 ----&gt; i
+99 ----&gt; had
+21 ----&gt; my
+177 ----&gt; watch
+1002 ----&gt; fixed
+3 ----&gt; .
+2 ----&gt; &lt;end&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>创建一个tf.data数据集对象</li>
+</ul>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 为了方便之后的训练，都需要将数据集转化成tf.data数据集对象，这已经成为了使用tf.keras进行模型训练前的标准步骤!</span>
+
+<span class="c1"># 设置超参数</span>
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_tensor_train</span><span class="p">)</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">steps_per_epoch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_tensor_train</span><span class="p">)</span><span class="o">//</span><span class="n">BATCH_SIZE</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">units</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">vocab_inp_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inp_lang</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">vocab_tar_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">targ_lang</span><span class="o">.</span><span class="n">word_index</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="c1"># 转化成tf.data的dataset形式</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">input_tensor_train</span><span class="p">,</span> <span class="n">target_tensor_train</span><span class="p">))</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>
+<span class="c1"># 进行批次化，drop_remainder=True代表舍弃最后一个批次可能不满足batch_size大小的数据</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">drop_remainder</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># 取出一组样例数据查看一下，现将dataset封装成迭代器，再用next方法取出一个</span>
+<span class="n">example_input_batch</span><span class="p">,</span> <span class="n">example_target_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+
+<span class="c1"># 打印结果</span>
+<span class="k">print</span><span class="p">(</span><span class="n">example_input_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">example_target_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="n">TensorShape</span><span class="p">([</span><span class="mi">64</span><span class="p">,</span> <span class="mi">16</span><span class="p">]),</span> <span class="n">TensorShape</span><span class="p">([</span><span class="mi">64</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+</code></pre></div>
+
+<hr>
+<h4 id="_5">第三步：构建模型并选择优化器和损失函数<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建模型的编码器部分:</li>
+</ul>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">enc_units</span><span class="p">,</span> <span class="n">batch_sz</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        :param vocab_size: 非重复的词汇总数</span>
+<span class="sd">        :param embedding_dim: 词嵌入的维度</span>
+<span class="sd">        :enc_units: 编码器中GRU层的隐含节点数</span>
+<span class="sd">        :batch_sz: 数据批次大小(每次参数更新用到的数据量)</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 将变量传入类中</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_sz</span> <span class="o">=</span> <span class="n">batch_sz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enc_units</span> <span class="o">=</span> <span class="n">enc_units</span>
+        <span class="c1"># 实例化embedding层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="c1"># 实例化gru层</span>
+        <span class="c1"># return_sequences=True代表返回GRU序列模型的每个时间步的输出(每个输出做连接操作)</span>
+        <span class="c1"># return_state=True代表除了返回输出外，还需要返回最后一个隐层状态</span>
+        <span class="c1"># recurrent_initializer='glorot_uniform'即循环状态张量的初始化方式为均匀分布</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gru</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">enc_units</span><span class="p">,</span>
+                                       <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                       <span class="n">return_state</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                       <span class="n">recurrent_initializer</span><span class="o">=</span><span class="s1">'glorot_uniform'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+        <span class="c1"># 对输入进行embedding操作</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># 通过gru层获得最后一个时间步的输出和隐含状态</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">initial_state</span> <span class="o">=</span> <span class="n">hidden</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">initialize_hidden_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># gru层的隐含节点对应的参数张量以零张量初始化</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_sz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enc_units</span><span class="p">))</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code># 实例化encoder
+encoder = Encoder(vocab_inp_size, embedding_dim, units, BATCH_SIZE)
+
+# 样本输入
+sample_hidden = encoder.initialize_hidden_state()
+sample_output, sample_hidden = encoder(example_input_batch, sample_hidden)
+print ('Encoder output shape: (batch size, sequence length, units) {}'.format(sample_output.shape))
+print ('Encoder Hidden state shape: (batch size, units) {}'.format(sample_hidden.shape))
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code>Encoder output shape: (batch size, sequence length, units) (64, 16, 1024)
+Encoder Hidden state shape: (batch size, units) (64, 1024)
+</code></pre></div>
+
+<hr>
+<ul>
+<li>构建注意力机制的类:<ul>
+<li>注意力机制的计算规则遵循以下公式:</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/attention_equation_0.jpg"></center>
+<center><img alt="avatar" src="./index_files/attention_equation_1.jpg"></center><p></p>
+<ul>
+<li>构建注意力机制类的伪代码:</li>
+</ul>
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code># 这里使用Bahdanau 注意力机制
+
+1, score = FC(tanh(FC(EO) + FC(H)))
+2, attention weights = softmax(score, axis = 1).
+# 解释: Softmax 默认被应用于最后一个轴，但是这里我们想将它应用于第一个轴,
+# 因为分数 （score） 的形状是 (批大小，最大长度，隐层大小)，最大长度 （max_length） 是输入的长度。
+# 因为我们想为每个输入长度分配一个权重，所以softmax应该用在这个轴上。
+3, context vector = sum(attention weights * EO, axis = 1)
+# 解释: 选择第一个轴的原因同上.
+4, embedding output = 解码器输入 X 通过一个嵌入层
+5, merged vector = concat(embedding output, context vector)
+
+符号代表:
+FC: 全连接层
+EO: 编码器输出
+H: 隐藏层状态
+X: 解码器输入
+</code></pre></div>
+
+<ul>
+<li>构建注意力机制类:</li>
+</ul>
+<div class="highlight"><pre id="__code_22"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">BahdanauAttention</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BahdanauAttention</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+        <span class="c1"># 隐藏层的形状 == （批大小，隐藏层大小）</span>
+        <span class="c1"># hidden_with_time_axis 的形状 == （批大小，1，隐藏层大小）</span>
+        <span class="c1"># 这样做是为了执行加法以计算分数</span>
+        <span class="n">hidden_with_time_axis</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 分数的形状 == （批大小，最大长度，1）</span>
+        <span class="c1"># 我们在最后一个轴上得到 1， 因为我们把分数应用于 self.V</span>
+        <span class="c1"># 在应用 self.V 之前，张量的形状是（批大小，最大长度，单位）</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">(</span><span class="n">hidden_with_time_axis</span><span class="p">)))</span>
+
+        <span class="c1"># 注意力权重 （attention_weights） 的形状 == （批大小，最大长度，1）</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 上下文向量 （context_vector） 求和之后的形状 == （批大小，隐藏层大小）</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">*</span> <span class="n">values</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">context_vector</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="n">attention_layer</span> <span class="o">=</span> <span class="n">BahdanauAttention</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">attention_result</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">attention_layer</span><span class="p">(</span><span class="n">sample_hidden</span><span class="p">,</span> <span class="n">sample_output</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s2">"Attention result shape: (batch size, units) {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attention_result</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Attention weights shape: (batch_size, sequence_length, 1) {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attention_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_24"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><code>Attention result shape: (batch size, units) (64, 1024)
+Attention weights shape: (batch_size, sequence_length, 1) (64, 16, 1)
+</code></pre></div>
+
+<hr>
+<ul>
+<li>构建RNN解码器:<ul>
+<li>这里RNN是指GRU, 同时在解码器中使用注意力机制.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">dec_units</span><span class="p">,</span> <span class="n">batch_sz</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Decoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 所有的参数传递和实例化方法与编码器相同</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_sz</span> <span class="o">=</span> <span class="n">batch_sz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dec_units</span> <span class="o">=</span> <span class="n">dec_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gru</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dec_units</span><span class="p">,</span>
+                                       <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                       <span class="n">return_state</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                       <span class="n">recurrent_initializer</span><span class="o">=</span><span class="s1">'glorot_uniform'</span><span class="p">)</span>
+        <span class="c1"># 实例化一个Dense层作为输出层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+
+        <span class="c1"># 在解码器阶段我们将使用注意力机制，这里实例化注意力的类</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">BahdanauAttention</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dec_units</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">enc_output</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        :param x: 每个时间步上解码器的输入</span>
+<span class="sd">        :param hidden: 每次解码器的隐层输出</span>
+<span class="sd">        :param enc_output: 编码器的输出</span>
+<span class="sd">        """</span>
+        <span class="c1"># 输入通过embedding层 </span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># 使用注意力规则计算hidden与enc_output的'相互影响程度'</span>
+        <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">enc_output</span><span class="p">)</span>
+        <span class="c1"># 将这种'影响程度'与输入x拼接(这个操作也是注意力计算规则的一部分)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">context_vector</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 将新的x输入到gru层中得到输出</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># 改变输出形状使其适应全连接层的输入形式</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="c1"># 使用全连接层作为输出层</span>
+        <span class="c1"># 输出的形状 == （批大小，vocab）</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">attention_weights</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_26"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><code><span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">vocab_tar_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">BATCH_SIZE</span><span class="p">)</span>
+
+<span class="n">sample_decoder_output</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                                      <span class="n">sample_hidden</span><span class="p">,</span> <span class="n">sample_output</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s1">'Decoder output shape: (batch_size, vocab size) {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_decoder_output</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code>Decoder output shape: (batch_size, vocab size) (64, 4935)
+</code></pre></div>
+
+<hr>
+<ul>
+<li>选取优化方法和损失函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_28"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 选取Adam优化方法</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+<span class="c1"># 损失基本计算方法为稀疏类别交叉熵损失</span>
+<span class="c1"># from_logits=True代表是否将预测结果预期为非 0/1 的值进行保留</span>
+<span class="c1"># 理论来讲二分类最终的结果应该只有0/1，函数将自动将其变为0/1，from_logits=True后，值不会被改变</span>
+<span class="c1"># reduction='none'，接下来我们将自定义损失函数，reduction必须设置为None，</span>
+<span class="c1"># 我们可以将它看作是自定义损失函数的识别属性</span>
+<span class="n">loss_object</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(</span>
+    <span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">'none'</span><span class="p">)</span>
+
+<span class="c1"># 因为每次生成的结果都是局部结果，要和真实结果进行比较需要对真实结果进行遮掩</span>
+<span class="c1"># 等效于对损失计算结果进行掩码</span>
+<span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""自定义损失函数，参数为预测结果pred和真实结果real"""</span>
+    <span class="c1"># 使用tf.math.equal方法对real和0进行对比</span>
+    <span class="c1"># 对结果再进行逻辑非操作生成掩码张量mask</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="c1"># 使用基本计算方法计算损失</span>
+    <span class="n">loss_</span> <span class="o">=</span> <span class="n">loss_object</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+    <span class="c1"># 将mask进行类型转换，使其能够进行后续操作</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">loss_</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="c1"># 将loss_与mask相乘即对loss_进行掩码</span>
+    <span class="n">loss_</span> <span class="o">*=</span> <span class="n">mask</span>
+    <span class="c1"># 计算loss_张量所有元素的均值</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">loss_</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>创建检测点保存对象:</li>
+</ul>
+<div class="highlight"><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 定义检测点（每个阶段训练的模型）保存路径</span>
+<span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="s1">'./training_checkpoints'</span>
+<span class="n">checkpoint_prefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">,</span> <span class="s2">"ckpt"</span><span class="p">)</span>
+<span class="c1"># 使用tf.train.Checkpoint创建检测点保存对象</span>
+<span class="c1"># 我们会在之后的训练中调用它来保存模型</span>
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Checkpoint</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                                 <span class="n">encoder</span><span class="o">=</span><span class="n">encoder</span><span class="p">,</span>
+                                 <span class="n">decoder</span><span class="o">=</span><span class="n">decoder</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<h4 id="_6">第四步: 构建训练函数并进行训练<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建训练函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_30"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><code><span class="nd">@tf.function</span> <span class="c1"># 该装饰器使该函数自动编译张量图, 使其可以直接执行 </span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">,</span> <span class="n">enc_hidden</span><span class="p">):</span>
+    <span class="c1"># 设定初始损失为0</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># 开启一个用于梯度记录的上下文管理器</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="c1"># 调用编码器部分得到编码器输出和编码器隐层输出</span>
+        <span class="n">enc_output</span><span class="p">,</span> <span class="n">enc_hidden</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">enc_hidden</span><span class="p">)</span>
+        <span class="c1"># 将编码器隐层输出设定为解码器的初始隐层状态</span>
+        <span class="n">dec_hidden</span> <span class="o">=</span> <span class="n">enc_hidden</span>
+        <span class="c1"># 以'起始符'作为解码器的第一个输入字符</span>
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">targ_lang</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="s1">'&lt;start&gt;'</span><span class="p">]]</span> <span class="o">*</span> <span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 开始循环解码过程</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">targ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="c1"># 使用解码器获得新的解码器隐层输出(状态)，以及预测结果</span>
+            <span class="n">predictions</span><span class="p">,</span> <span class="n">dec_hidden</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="n">dec_hidden</span><span class="p">,</span> <span class="n">enc_output</span><span class="p">)</span>
+            <span class="c1"># 使用损失函数计算本次训练过程的损失</span>
+            <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">targ</span><span class="p">[:,</span> <span class="n">t</span><span class="p">],</span> <span class="n">predictions</span><span class="p">)</span>
+            <span class="c1"># 使用teacher-forcing矫正可能的错误结果</span>
+            <span class="c1"># 直接将正确结果作为下一次循环的输入</span>
+            <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">targ</span><span class="p">[:,</span> <span class="n">t</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 计算每次batch的平均损失</span>
+        <span class="n">batch_loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">targ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="c1"># 获得整个模型训练的参数变量</span>
+        <span class="n">variables</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">trainable_variables</span> <span class="o">+</span> <span class="n">decoder</span><span class="o">.</span><span class="n">trainable_variables</span>
+        <span class="c1"># 使用梯度记录管理器求解整个网络的梯度，参数是loss和全部参数变量</span>
+        <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+        <span class="c1"># 根据梯度更新参数</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">variables</span><span class="p">))</span>
+        <span class="c1"># 返回每次batch的平均损失</span>
+        <span class="k">return</span> <span class="n">batch_loss</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>
+<p>什么是teacher_forcing?</p>
+<ul>
+<li>它是一种用于序列生成任务的训练技巧, 在seq2seq架构中, 根据循环神经网络理论，解码器每次应该使用上一步的结果作为输入的一部分, 但是训练过程中，一旦上一步的结果是错误的，就会导致这种错误被累积，无法达到训练效果, 因此，我们需要一种机制改变上一步出错的情况，因为训练时我们是已知正确的输出应该是什么，因此可以强制将上一步结果设置成正确的输出, 这种方式就叫做teacher_forcing.</li>
+</ul>
+</li>
+<li>
+<p>teacher_forcing的作用:</p>
+<ul>
+<li>能够在训练的时候矫正模型的预测，避免在序列生成的过程中误差进一步放大.</li>
+<li>teacher_forcing能够极大的加快模型的收敛速度，令模型训练过程更快更平稳.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>进行训练并打印日志:</li>
+</ul>
+<div class="highlight"><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设置训练轮数</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">EPOCHS</span><span class="p">):</span>
+    <span class="c1"># 获得每轮训练的开始时间</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 初始化编码器隐含状态 </span>
+    <span class="n">enc_hidden</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">initialize_hidden_state</span><span class="p">()</span>
+    <span class="c1"># 初始化总损失为0</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># 循环数据集中的每个批次进行训练</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">steps_per_epoch</span><span class="p">)):</span>
+        <span class="c1"># 调用train_step函数获得批次平均损失</span>
+        <span class="n">batch_loss</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">,</span> <span class="n">enc_hidden</span><span class="p">)</span>
+        <span class="c1"># 将批次平均损失相加获得轮数总损失</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">batch_loss</span>
+
+        <span class="c1"># 每100个批次打印一次批次平均损失</span>
+        <span class="k">if</span> <span class="n">batch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">'Epoch {} Batch {} Loss {:.4f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                                         <span class="n">batch</span><span class="p">,</span>
+                                                         <span class="n">batch_loss</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
+    <span class="c1"># 每两轮（epoch），保存一次模型</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">checkpoint</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_prefix</span> <span class="o">=</span> <span class="n">checkpoint_prefix</span><span class="p">)</span>
+
+    <span class="c1"># 打印轮数平均损失</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Epoch {} Loss {:.4f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">total_loss</span> <span class="o">/</span> <span class="n">steps_per_epoch</span><span class="p">))</span>
+    <span class="c1"># 打印模型训练耗时</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Time taken for 1 epoch {} sec</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_32"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><code>Epoch 1 Batch 0 Loss 4.6268
+Epoch 1 Batch 100 Loss 2.1385
+Epoch 1 Batch 200 Loss 1.8945
+Epoch 1 Batch 300 Loss 1.7187
+Epoch 1 Loss 2.0145
+Time taken for 1 epoch 34.930274963378906 sec
+
+Epoch 2 Batch 0 Loss 1.5522
+Epoch 2 Batch 100 Loss 1.3454
+Epoch 2 Batch 200 Loss 1.3791
+Epoch 2 Batch 300 Loss 1.3919
+Epoch 2 Loss 1.3569
+Time taken for 1 epoch 17.682456016540527 sec
+
+Epoch 3 Batch 0 Loss 1.0861
+Epoch 3 Batch 100 Loss 1.0815
+Epoch 3 Batch 200 Loss 0.9158
+Epoch 3 Batch 300 Loss 0.8474
+Epoch 3 Loss 0.9312
+Time taken for 1 epoch 17.20573592185974 sec
+
+Epoch 4 Batch 0 Loss 0.6689
+Epoch 4 Batch 100 Loss 0.5476
+Epoch 4 Batch 200 Loss 0.5617
+Epoch 4 Batch 300 Loss 0.5462
+Epoch 4 Loss 0.6193
+Time taken for 1 epoch 17.651796579360962 sec
+
+Epoch 5 Batch 0 Loss 0.3442
+Epoch 5 Batch 100 Loss 0.3203
+Epoch 5 Batch 200 Loss 0.4267
+Epoch 5 Batch 300 Loss 0.4384
+Epoch 5 Loss 0.4171
+Time taken for 1 epoch 17.20345664024353 sec
+
+Epoch 6 Batch 0 Loss 0.2950
+Epoch 6 Batch 100 Loss 0.3294
+Epoch 6 Batch 200 Loss 0.3228
+Epoch 6 Batch 300 Loss 0.2724
+Epoch 6 Loss 0.2861
+Time taken for 1 epoch 17.587135076522827 sec
+
+Epoch 7 Batch 0 Loss 0.1584
+Epoch 7 Batch 100 Loss 0.1876
+Epoch 7 Batch 200 Loss 0.1844
+Epoch 7 Batch 300 Loss 0.1919
+Epoch 7 Loss 0.2025
+Time taken for 1 epoch 17.285163402557373 sec
+
+Epoch 8 Batch 0 Loss 0.1315
+Epoch 8 Batch 100 Loss 0.1640
+Epoch 8 Batch 200 Loss 0.1424
+Epoch 8 Batch 300 Loss 0.1343
+Epoch 8 Loss 0.1482
+Time taken for 1 epoch 17.918259382247925 sec
+
+Epoch 9 Batch 0 Loss 0.1118
+Epoch 9 Batch 100 Loss 0.1030
+Epoch 9 Batch 200 Loss 0.0644
+Epoch 9 Batch 300 Loss 0.1106
+Epoch 9 Loss 0.1172
+Time taken for 1 epoch 17.48120665550232 sec
+
+Epoch 10 Batch 0 Loss 0.0853
+Epoch 10 Batch 100 Loss 0.0803
+Epoch 10 Batch 200 Loss 0.0681
+Epoch 10 Batch 300 Loss 0.0957
+Epoch 10 Loss 0.0951
+Time taken for 1 epoch 17.945307970046997 sec
+</code></pre></div>
+
+<hr>
+<h4 id="_7">第五步：构建评估函数并进行预测分析<a class="headerlink" href="#_7" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建评估函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    description: 评估函数</span>
+<span class="sd">    :param sentence: 待翻译的句子</span>
+<span class="sd">    """</span>
+    <span class="c1"># 初始化用于绘制注意力效果图的张量</span>
+    <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">max_length_targ</span><span class="p">,</span> <span class="n">max_length_inp</span><span class="p">))</span>
+    <span class="c1"># 下面将对输入文本做与训练语料同样的操作</span>
+    <span class="c1"># 对输入的句子进行文本预处理</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">preprocess_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># 使用输入数值映射器对文本进行数值化映射</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">inp_lang</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)]</span>
+    <span class="c1"># 对文本进行最大长度补齐</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">([</span><span class="n">inputs</span><span class="p">],</span>
+                                                           <span class="n">maxlen</span><span class="o">=</span><span class="n">max_length_inp</span><span class="p">,</span>
+                                                           <span class="n">padding</span><span class="o">=</span><span class="s1">'post'</span><span class="p">)</span>
+    <span class="c1"># 转换成张量</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="c1"># 定义翻译后的结果变量</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="c1"># 初始化编码器的隐层状态</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">units</span><span class="p">))]</span>
+    <span class="c1"># 使用编码器进行编码</span>
+    <span class="n">enc_out</span><span class="p">,</span> <span class="n">enc_hidden</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+    <span class="c1"># 将编码器隐层输出设定为解码器的初始隐层状态</span>
+    <span class="n">dec_hidden</span> <span class="o">=</span> <span class="n">enc_hidden</span>
+    <span class="c1"># 以'起始符'作为解码器的第一个输入字符 </span>
+    <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">targ_lang</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="s1">'&lt;start&gt;'</span><span class="p">]],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># 开始循环解码，过程和训练时十分类似</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length_targ</span><span class="p">):</span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">dec_hidden</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span>
+                                                             <span class="n">dec_hidden</span><span class="p">,</span>
+                                                             <span class="n">enc_out</span><span class="p">)</span>
+
+        <span class="c1"># 存储每次产生的注意力权重以便后面制图</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">attention_weights</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">))</span>
+        <span class="n">attention_plot</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">attention_weights</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1"># 从预测分布中获得概率最大预测id</span>
+        <span class="n">predicted_id</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1"># 使用目标数值映射器将其还原为对应的文本(单词/标识)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">targ_lang</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">predicted_id</span><span class="p">]</span> <span class="o">+</span> <span class="s1">' '</span>
+        <span class="c1"># 如果解码还原后为'终止符'，则返回结果</span>
+        <span class="k">if</span> <span class="n">targ_lang</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">predicted_id</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'&lt;end&gt;'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">attention_plot</span>
+
+        <span class="c1"># 否则，预测id被输送回模型，作为下一次预测输入</span>
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">predicted_id</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># 返回预测结果，原始输入文本，以及整个过程的注意力张量组合(仍然是一个张量)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">attention_plot</span>
+
+
+<span class="k">def</span> <span class="nf">plot_attention</span><span class="p">(</span><span class="n">attention</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">predicted_sentence</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    description: 注意力张量制图函数</span>
+<span class="sd">    :param attention: 整个过程的注意力张量组合</span>
+<span class="sd">    :param sentence: 原始输入文本</span>
+<span class="sd">    :param predicted_sentence: 预测结果</span>
+<span class="sd">    """</span>
+    <span class="c1"># 打开一个10x10的画布</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+    <span class="c1"># 在画布上创建1x1的子画布</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 绘制子画布上绘制矩形，根据给出输入数值不同，颜色也不相同</span>
+    <span class="c1"># cmap='viridis'是一种矩形的色彩填充方案‘绿藻’</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">attention</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'viridis'</span><span class="p">)</span>
+
+    <span class="c1"># 定义字体规范字典，这里我们只要求字体大小即可</span>
+    <span class="n">fontdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'fontsize'</span><span class="p">:</span> <span class="mi">14</span><span class="p">}</span>
+
+    <span class="c1"># 使用x轴设置方法使输入文本在x轴上显示</span>
+    <span class="c1"># rotation=90代表有90度的倾斜角，便于观看</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">''</span><span class="p">]</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+    <span class="c1"># 同样，使预测文本在y轴上显示</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">''</span><span class="p">]</span> <span class="o">+</span> <span class="n">predicted_sentence</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">)</span>
+
+    <span class="c1"># 设置x和y轴的刻度，与绘制时add_subplot的参数对应即可</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># 绘图</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_34"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="sd">"""预测并绘图"""</span>
+    <span class="c1"># 调用评估函数获得结果</span>
+    <span class="n">result</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># 打印输入文本和预测文本</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Input: </span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">sentence</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Predicted translation: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+    <span class="c1"># 根据文本长度对注意力张量进行剪裁(剪裁掉的都是0部分)</span>
+    <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">attention_plot</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)),</span> <span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))]</span>
+    <span class="c1"># 进行注意力效果图绘制</span>
+    <span class="n">plot_attention</span><span class="p">(</span><span class="n">attention_plot</span><span class="p">,</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">),</span> <span class="n">result</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">))</span>
+
+<span class="c1"># 使用检测点对象恢复最近一次保存的模型</span>
+<span class="n">checkpoint</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">))</span>
+
+<span class="c1"># 翻译西班牙语‘这里很冷。’</span>
+<span class="n">translate</span><span class="p">(</span><span class="sa">u</span><span class="s1">'hace mucho frio aqui.'</span><span class="p">)</span>
+
+<span class="c1"># 翻译西班牙语‘这就是我的生活。’</span>
+<span class="n">translate</span><span class="p">(</span><span class="sa">u</span><span class="s1">'esta es mi vida.'</span><span class="p">)</span>
+
+<span class="c1"># 翻译西班牙语‘他们还在家里吗？’</span>
+<span class="n">translate</span><span class="p">(</span><span class="sa">u</span><span class="s1">'¿todavia estan en casa?'</span><span class="p">)</span>
+
+<span class="c1"># 翻译西班牙语‘尝试找出答案。’</span>
+<span class="n">translate</span><span class="p">(</span><span class="sa">u</span><span class="s1">'trata de averiguarlo.'</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code>Input: &lt;start&gt; hace mucho frio aqui . &lt;end&gt;
+Predicted translation: it s very cold here . &lt;end&gt; 
+</code></pre></div>
+
+<p><img alt="" src="./index_files/attn1.png"></p>
+<div class="highlight"><pre id="__code_36"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><code>Input: &lt;start&gt; esta es mi vida . &lt;end&gt;
+Predicted translation: this is my life . &lt;end&gt; 
+</code></pre></div>
+
+<p><img alt="" src="./index_files/attn2.png"></p>
+<div class="highlight"><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code>Input: &lt;start&gt; ¿ todavia estan en casa ? &lt;end&gt;
+Predicted translation: are you still at home ? &lt;end&gt;
+</code></pre></div>
+
+<p><img alt="" src="./index_files/attn3.png"></p>
+<div class="highlight"><pre id="__code_38"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><code>Input: &lt;start&gt; trata de averiguarlo . &lt;end&gt;
+Predicted translation: try to figure it out . &lt;end&gt; 
+</code></pre></div>
+
+<p><img alt="" src="./index_files/attn4.png"></p>
+<hr>
+<ul>
+<li>注意力效果图分析:<ul>
+<li>图中x，y轴分别对应输入和输出文本，他们之间的影响使用明暗不同的矩形小方块表示，方块颜色越明亮(如黄色)，则代表输入对输出影响的作用越大。例如，对于输出英文单词”cold”, 在x轴方向共有三个较明亮的小方块，它们对应的输入单词分别是”mucho”，”frio”，”aqui”，说明生成单词”cold”由以上三个单词来绝对，与此同时，”frio”所对应的小方块最明亮，说明它对生成”cold”所产生的贡献最大。因此，我们可以根据人类语言知识对比效果图来判定模型的”思路”是否和我们一致。</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                应用于bert模型的动态量化技术
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                ResNet模型在GPU上的并行实践
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+              
+            
+          
+          
+            <script src="./index_files/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8888/5/ -->
+<html lang="en" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8888/5/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="./index_files/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>第五章:命名实体审核任务 - DOCTOR</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#51" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="#" title="DOCTOR" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 882px;">
+              DOCTOR
+            </span>
+            <span class="md-header-nav__topic" style="width: 882px;">
+              
+                第五章:命名实体审核任务
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 851px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="#" title="DOCTOR" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    DOCTOR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="第一章:背景介绍与Unit的使用" class="md-nav__link">
+      第一章:背景介绍与Unit的使用
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="第二章:在线医生的总体架构与工具介绍" class="md-nav__link">
+      第二章:在线医生的总体架构与工具介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="第三章:neo4j图数据库" class="md-nav__link">
+      第三章:neo4j图数据库
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="第四章:离线部分" class="md-nav__link">
+      第四章:离线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        第五章:命名实体审核任务
+      </label>
+    
+    <a href="" title="第五章:命名实体审核任务" class="md-nav__link md-nav__link--active">
+      第五章:命名实体审核任务
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#51" title="5.1 任务介绍与模型选用" class="md-nav__link">
+    5.1 任务介绍与模型选用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" title="5.2 训练数据集" class="md-nav__link">
+    5.2 训练数据集
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-bert" title="5.3 BERT中文预训练模型" class="md-nav__link">
+    5.3 BERT中文预训练模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-rnn" title="5.4 构建RNN模型" class="md-nav__link">
+    5.4 构建RNN模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55" title="5.5 进行模型训练" class="md-nav__link">
+    5.5 进行模型训练
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" title="5.6 模型使用" class="md-nav__link">
+    5.6 模型使用
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="第六章:命名实体识别任务" class="md-nav__link">
+      第六章:命名实体识别任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index7.html" title="第七章:在线部分" class="md-nav__link">
+      第七章:在线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index8.html" title="第八章:句子主题相关任务" class="md-nav__link">
+      第八章:句子主题相关任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index9.html" title="第九章:系统联调与测试" class="md-nav__link">
+      第九章:系统联调与测试
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index10.html" title="附录:环境安装部署手册" class="md-nav__link">
+      附录:环境安装部署手册
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 851px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#51" title="5.1 任务介绍与模型选用" class="md-nav__link">
+    5.1 任务介绍与模型选用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" title="5.2 训练数据集" class="md-nav__link">
+    5.2 训练数据集
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-bert" title="5.3 BERT中文预训练模型" class="md-nav__link">
+    5.3 BERT中文预训练模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-rnn" title="5.4 构建RNN模型" class="md-nav__link">
+    5.4 构建RNN模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55" title="5.5 进行模型训练" class="md-nav__link">
+    5.5 进行模型训练
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" title="5.6 模型使用" class="md-nav__link">
+    5.6 模型使用
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>第五章:命名实体审核任务</h1>
+                
+                <h2 id="51">5.1 任务介绍与模型选用<a class="headerlink" href="#51" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>了解命名实体审核任务的相关知识.</li>
+<li>了解选用的模型及其原因.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>NE审核任务: <ul>
+<li>一般在实体进入数据库存储前, 中间都会有一道必不可少的工序, 就是对识别出来的实体进行合法性的检验, 即命名实体(NE)审核任务. 它的检验过程不使用上下文信息, 更关注于字符本身的组合方式来进行判断, 本质上，它是一项短文本二分类问题.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>选用的模型及其原因:<ul>
+<li>针对短文本任务, 无须捕捉长距离的关系, 因此我们使用了传统的RNN模型来解决, 性能和效果可以达到很好的均衡.</li>
+<li>短文本任务往往适合使用字嵌入的方式, 但是如果你的训练集不是很大,涉及的字数有限, 那么可以直接使用预训练模型的字向量进行表示即可. 我们这里使用了bert-chinese预训练模型来获得中文汉字的向量表示.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="52">5.2 训练数据集<a class="headerlink" href="#52" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>了解训练数据集的样式及其相关解释.</li>
+<li>掌握将数据集加载到内存中的过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>训练数据集的样式:</li>
+</ul>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code><span class="mi">1</span>   <span class="err">手内肌萎缩</span>
+<span class="mi">0</span>   <span class="err">缩萎肌内手</span>
+<span class="mi">1</span>   <span class="err">尿黑酸</span>
+<span class="mi">0</span>   <span class="err">酸黑尿</span>
+<span class="mi">1</span>   <span class="err">单眼眼前黑影</span>
+<span class="mi">0</span>   <span class="err">影黑前眼眼单</span>
+<span class="mi">1</span>   <span class="err">忧郁</span>
+<span class="mi">0</span>   <span class="err">郁忧</span>
+<span class="mi">1</span>   <span class="err">红细胞寿命缩短</span>
+<span class="mi">0</span>   <span class="err">短缩命寿胞细红</span>
+<span class="mi">1</span>   <span class="err">皮肤黏蛋白沉积</span>
+<span class="mi">0</span>   <span class="err">积沉白蛋黏肤皮</span>
+<span class="mi">1</span>   <span class="err">眼神异常</span>
+<span class="mi">0</span>   <span class="err">常异神眼</span>
+<span class="mi">1</span>   <span class="err">阴囊坠胀痛</span>
+<span class="mi">0</span>   <span class="err">痛胀坠囊阴</span>
+<span class="mi">1</span>   <span class="err">动脉血氧饱和度降低</span>
+<span class="mi">0</span>   <span class="err">低降度和饱氧血脉动</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>数据集的相关解释:<ul>
+<li>这些训练集中的正样本往往是基于人工审核的标准命名实体.</li>
+<li>数据集中的第一列代表标签, 1为正标签, 代表后面的文字是命名实体. 0为负标签, 代表后面的文字不是命名实体.  </li>
+<li>数据集中的第二列中的命名实体来源于数据库中的症状实体名字, 它是结构化爬虫抓取的数据. 而非命名实体则是它的字符串反转.</li>
+<li>正负样本的比例是1:1. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>将数据集加载到内存:
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="c1"># 读取数据</span>
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="s2">"./train_data.csv"</span>
+<span class="n">train_data</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">train_data_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># 打印正负标签比例</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
+
+<span class="c1"># 转换数据到列表形式</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/train.py</li>
+</ul>
+<hr>
+<ul>
+<li>输出效果:
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 正负标签比例</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">5740</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="mi">5740</span><span class="p">}</span>
+
+<span class="c1"># 取出10条训练数据查看</span>
+<span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'枕部疼痛'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'痛疼部枕'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'陶瑟征阳性'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'性阳征瑟陶'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'恋兽型性变态'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'态变性型兽恋'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'进食困难'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'难困食进'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'会阴瘘管或窦道形成'</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'成形道窦或管瘘阴会'</span><span class="p">]]</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>小节总结:<ul>
+<li>学习了训练数据集的样式及其相关解释.</li>
+<li>学习了将数据集加载到内存中的过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="53-bert">5.3 BERT中文预训练模型<a class="headerlink" href="#53-bert" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>了解BERT中文预训练模型的有关知识和作用.</li>
+<li>掌握使用BERT中文预训练模型对句子编码的过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>BERT中文预训练模型:<ul>
+<li>BERT模型整体架构基于Transformer模型架构, BERT中文预训练模型的编码器具有12层, 输出层中的线性层具有768个节点, 即输出张量最后一维的维度是768. 它使用的多头注意力机制结构中, 头的数量为12, 模型总参数量为110M. 同时, 它在中文简体和繁体上进行训练, 因此适合中文简体和繁体任务.  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>BERT中文预训练模型作用:<ul>
+<li>在实际的文本任务处理中, 有些训练语料很难获得, 他们的总体数量和包含的词汇总数都非常少, 不适合用于训练带有Embedding层的模型, 但这些数据中却又蕴含这一些有价值的规律可以被模型挖掘, 在这种情况下,使用预训练模型对原始文本进行编码是非常不错的选择, 因为预训练模型来自大型语料, 能够使得当前文本具有意义, 虽然这些意义可能并不针对某个特定领域, 但是这种缺陷可以使用微调模型来进行弥补.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用BERT中文预训练模型对句子编码:</li>
+</ul>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+
+
+<span class="c1"># 通过torch.hub(pytorch中专注于迁移学的工具)获得已经训练好的bert-base-chinese模型</span>
+<span class="n">model</span> <span class="o">=</span>  <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'huggingface/pytorch-transformers'</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'bert-base-chinese'</span><span class="p">)</span>
+
+
+<span class="c1"># 获得对应的字符映射器, 它将把中文的每个字映射成一个数字</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'huggingface/pytorch-transformers'</span><span class="p">,</span> <span class="s1">'tokenizer'</span><span class="p">,</span> <span class="s1">'bert-base-chinese'</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_bert_encode_for_single</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    description: 使用bert-chinese编码中文文本</span>
+<span class="sd">    :param text: 要进行编码的文本</span>
+<span class="sd">    :return: 使用bert编码后的文本张量表示</span>
+<span class="sd">    """</span>
+    <span class="c1"># 首先使用字符映射器对每个汉字进行映射</span>
+    <span class="c1"># 这里需要注意, bert的tokenizer映射后会为结果前后添加开始和结束标记即101和102 </span>
+    <span class="c1"># 这对于多段文本的编码是有意义的, 但在我们这里没有意义, 因此使用[1:-1]对头和尾进行切片</span>
+    <span class="n">indexed_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># 之后将列表结构转化为tensor</span>
+    <span class="n">tokens_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">indexed_tokens</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tokens_tensor</span><span class="p">)</span>
+    <span class="c1"># 使模型不自动计算梯度</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="c1"># 调用模型获得隐层输出</span>
+        <span class="n">encoded_layers</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens_tensor</span><span class="p">)</span>
+    <span class="c1"># 输出的隐层是一个三维张量, 最外层一维是1, 我们使用[0]降去它.</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">encoded_layers</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">encoded_layers</span> <span class="o">=</span> <span class="n">encoded_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">encoded_layers</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/bert_chinese_encode.py</li>
+</ul>
+<hr>
+<ul>
+<li>输入参数:
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code><span class="n">text</span> <span class="o">=</span> <span class="s2">"你好, 周杰伦"</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>调用:
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="n">outputs</span> <span class="o">=</span> <span class="n">get_bert_encode_for_single</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>输出效果:
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code><span class="n">tensor</span><span class="p">([[</span> <span class="mf">3.2731e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4832e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.1618e-01</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4088e-01</span><span class="p">,</span>
+         <span class="o">-</span><span class="mf">4.1074e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.5570e-01</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">1.1287e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.6269e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.4861e-01</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.0478e-01</span><span class="p">,</span>
+         <span class="o">-</span><span class="mf">5.3600e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.1953e-01</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">9.3012e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.4381e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1985e+00</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.6624e-01</span><span class="p">,</span>
+         <span class="o">-</span><span class="mf">4.7467e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.6408e-01</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">1.6896e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.3753e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.6060e-01</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.2451e-01</span><span class="p">,</span>
+         <span class="o">-</span><span class="mf">3.4204e-02</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.7930e-01</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">1.3159e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.0048e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.4193e-01</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5756e-02</span><span class="p">,</span>
+         <span class="o">-</span><span class="mf">2.0958e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0649e-01</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">4.0006e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.4410e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.8532e-05</span><span class="p">,</span>  <span class="o">...</span><span class="p">,</span>  <span class="mf">1.9081e-01</span><span class="p">,</span>
+          <span class="mf">1.7006e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.6221e-01</span><span class="p">]])</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">Size</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span> <span class="mi">768</span><span class="p">])</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>小节总结:</p>
+<ul>
+<li>学习了BERT中文预训练模型的有关知识:<ul>
+<li>BERT模型整体架构基于Transformer模型架构, BERT中文预训练模型的编码器具有12层, 输出层中的线性层具有768个节点, 即输出张量最后一维的维度是768. 它使用的多头注意力机制结构中, 头的数量为12, 模型总参数量为110M. 同时, 它在中文简体和繁体上进行训练, 因此适合中文简体和繁体任务.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了BERT中文预训练模型的作用:<ul>
+<li>在实际的文本任务处理中, 有些训练语料很难获得, 他们的总体数量和包含的词汇总数都非常少, 不适合用于训练带有Embedding层的模型, 但这些数据中却又蕴含这一些有价值的规律可以被模型挖掘, 在这种情况下, 使用预训练模型对原始文本进行编码是非常不错的选择, 因为预训练模型来自大型语料, 能够使得当前文本具有意义, 虽然这些意义可能并不针对某个特定领域, 但是这种缺陷可以使用微调模型来进行弥补.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了使用BERT中文预训练模型对句子编码的函数: get_bert_encode_for_single(text)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="54-rnn">5.4 构建RNN模型<a class="headerlink" href="#54-rnn" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>学习RNN模型的内部结构及计算公式.</li>
+<li>掌握RNN模型的实现过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>传统RNN的内部结构图:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/RNN内部结构图.png"></center><p></p>
+<hr>
+<ul>
+<li>结构解释图:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/结构解释图.png"></center><p></p>
+<hr>
+<ul>
+<li>内部结构分析:
+        * 我们把目光集中在中间的方块部分, 它的输入有两部分, 分别是h(t-1)以及x(t), 代表上一时间步的隐层输出, 以及此时间步的输入, 它们进入RNN结构体后, 会"融合"到一起, 这种融合我们根据结构解释可知, 是将二者进行拼接, 形成新的张量[x(t), h(t-1)], 之后这个新的张量将通过一个全连接层(线性层), 该层&gt;使用tanh作为激活函数, 最终得到该时间步的输出h(t), 它将作为下一个时间步的&gt;输入和x(t+1)一起进入结构体. 以此类推.</li>
+</ul>
+<hr>
+<ul>
+<li>内部结构过程演示:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/RNN结构过程图.gif"></center><p></p>
+<hr>
+<ul>
+<li>根据结构分析得出内部计算公式:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/RNN公式图.png"></center><p></p>
+<hr>
+<ul>
+<li>激活函数tanh的作用:
+        * 用于帮助调节流经网络的值, tanh函数将值压缩在-1和1之间.</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/tanh激活函数.gif"></center><p></p>
+<hr>
+<ul>
+<li>构建RNN模型的代码分析:</li>
+</ul>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">RNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">):</span>
+        <span class="sd">"""初始化函数中有三个参数,分别是输入张量最后一维的尺寸大小,</span>
+<span class="sd"> 隐层张量最后一维的尺寸大小, 输出张量最后一维的尺寸大小"""</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 传入隐含层尺寸大小</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        <span class="c1"># 构建从输入到隐含层的线性变化, 这个线性层的输入尺寸是input_size + hidden_size</span>
+        <span class="c1"># 这是因为在循环网络中, 每次输入都有两部分组成，分别是此时刻的输入和上一时刻产生的输出.</span>
+        <span class="c1"># 这个线性层的输出尺寸是hidden_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i2h</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+        <span class="c1"># 构建从输入到输出层的线性变化, 这个线性层的输入尺寸还是input_size + hidden_size</span>
+        <span class="c1"># 这个线性层的输出尺寸是output_size.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i2o</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span> <span class="o">+</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">output_size</span><span class="p">)</span>
+        <span class="c1"># 最后需要对输出做softmax处理, 获得结果.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+        <span class="sd">"""在forward函数中, 参数分别是规定尺寸的输入张量, 以及规定尺寸的初始化隐层张量"""</span>
+        <span class="c1"># 首先使用torch.cat将input与hidden进行张量拼接</span>
+        <span class="n">combined</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 通过输入层到隐层变换获得hidden张量</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">i2h</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+        <span class="c1"># 通过输入到输出层变换获得output张量</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">i2o</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+        <span class="c1"># 对输出进行softmax处理</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="c1"># 返回输出张量和最后的隐层结果</span>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span>
+
+    <span class="k">def</span> <span class="nf">initHidden</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""隐层初始化函数"""</span>
+        <span class="c1"># 将隐层初始化成为一个1xhidden_size的全0张量</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>torch.cat演示:
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">tensor</span><span class="p">([[</span> <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ensor</span><span class="p">([[</span> <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">,</span>  <span class="mf">0.6580</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">,</span>  <span class="mf">0.6580</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0969</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4614</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1034</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5790</span><span class="p">,</span>  <span class="mf">0.1497</span><span class="p">]])</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/RNN_MODEL.py</li>
+</ul>
+<hr>
+<ul>
+<li>实例化参数:
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="n">input_size</span> <span class="o">=</span> <span class="mi">768</span>
+<span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">n_categories</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>输入参数:
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_size</span><span class="p">)</span>
+<span class="n">hidden</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">RNN_MODEL</span> <span class="kn">import</span> <span class="n">RNN</span>
+<span class="n">rnn</span> <span class="o">=</span> <span class="n">RNN</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">n_categories</span><span class="p">)</span>
+<span class="n">outputs</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"outputs:"</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"hidden:"</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>输出效果:</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code><span class="n">outputs</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.7858</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6084</span><span class="p">]],</span> <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">LogSoftmaxBackward</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="n">hidden</span><span class="p">:</span> <span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">4.8444e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.9609e-02</span><span class="p">,</span>  <span class="mf">1.7870e-01</span><span class="p">,</span> 
+                 <span class="o">-</span><span class="mf">1.6553e-01</span><span class="p">,</span>  <span class="o">...</span> <span class="p">,</span> <span class="mf">5.6711e-01</span><span class="p">]],</span> <span class="n">grad_fn</span><span class="o">=&lt;</span><span class="n">AddmmBackward</span><span class="o">&gt;</span><span class="p">))</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>小节总结:<ul>
+<li>学习了RNN模型的内部结构及计算公式.</li>
+<li>学习并实现了RNN模型的类: class RNN(nn.Module).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="55">5.5 进行模型训练<a class="headerlink" href="#55" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>了解进行模型训练的步骤.</li>
+<li>掌握模型训练中每个步骤的实现过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>进行模型训练的步骤:<ul>
+<li>第一步: 构建随机选取数据函数.</li>
+<li>第二步: 构建模型训练函数.</li>
+<li>第三步: 构建模型验证函数.</li>
+<li>第四步: 调用训练和验证函数.</li>
+<li>第五步: 绘制训练和验证的损失和准确率对照曲线.</li>
+<li>第六步: 模型保存. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 构建随机选取数据函数 </li>
+</ul>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入bert中文编码的预训练模型</span>
+<span class="kn">from</span> <span class="nn">bert_chinese_encode</span> <span class="kn">import</span> <span class="n">get_bert_encode_for_single</span>
+<span class="k">def</span> <span class="nf">randomTrainingExample</span><span class="p">(</span><span class="n">train_data</span><span class="p">):</span>
+    <span class="sd">"""随机选取数据函数, train_data是训练集的列表形式数据"""</span>
+    <span class="c1"># 从train_data随机选择一条数据</span>
+    <span class="n">category</span><span class="p">,</span> <span class="n">line</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+    <span class="c1"># 将里面的文字使用bert进行编码, 获取编码后的tensor类型数据</span>
+    <span class="n">line_tensor</span> <span class="o">=</span> <span class="n">get_bert_encode_for_single</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="c1"># 将分类标签封装成tensor</span>
+    <span class="n">category_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">category</span><span class="p">)])</span>
+    <span class="c1"># 返回四个结果</span>
+    <span class="k">return</span> <span class="n">category</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>代码位置:  /data/doctor_offline/review_model/train.py</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>输入参数:
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将数据集加载到内存获得的train_data</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 选择10条数据进行查看</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">category</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span> <span class="o">=</span> <span class="n">randomTrainingExample</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'category ='</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="s1">'/ line ='</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code><span class="n">category</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">触觉失调</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">颤震性理生</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">征压血高娠妊</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">食欲减退</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">血淤道肠胃</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">形畸节关</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">咳呛水饮</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">症痣巨</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">昼盲</span>
+<span class="n">category</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">line</span> <span class="o">=</span> <span class="err">眼神异常</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>第二步: 构建模型训练函数
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 选取损失函数为NLLLoss()</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">()</span>
+<span class="c1"># 学习率为0.005</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.005</span>
+
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span><span class="p">):</span>
+    <span class="sd">"""模型训练函数, category_tensor代表类别张量, line_tensor代表编码后的文本张量"""</span>
+    <span class="c1"># 初始化隐层 </span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">.</span><span class="n">initHidden</span><span class="p">()</span>
+    <span class="c1"># 模型梯度归0</span>
+    <span class="n">rnn</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="c1"># 遍历line_tensor中的每一个字的张量表示</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_tensor</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># 然后将其输入到rnn模型中, 因为模型要求是输入必须是二维张量, 因此需要拓展一个维度, 循环调用rnn直到最后一个字</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">line_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">hidden</span><span class="p">)</span>
+    <span class="c1"># 根据损失函数计算损失, 输入分别是rnn的输出结果和真正的类别标签</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">)</span>
+    <span class="c1"># 将误差进行反向传播</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># 更新模型中所有的参数</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">rnn</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+        <span class="c1"># 将参数的张量表示与参数的梯度乘以学习率的结果相加以此来更新参数</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">add_</span><span class="p">(</span><span class="o">-</span><span class="n">learning_rate</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># 返回结果和损失的值</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/train.py</li>
+</ul>
+<hr>
+<ul>
+<li>第三步: 模型验证函数</li>
+</ul>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span><span class="p">):</span>
+    <span class="sd">"""模型验证函数, category_tensor代表类别张量, line_tensor代表编码后的文本张量"""</span>
+    <span class="c1"># 初始化隐层</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">.</span><span class="n">initHidden</span><span class="p">()</span>
+    <span class="c1"># 验证模型不自动求解梯度</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="c1"># 遍历line_tensor中的每一个字的张量表示    </span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_tensor</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="c1"># 然后将其输入到rnn模型中, 因为模型要求是输入必须是二维张量, 因此需要拓展一个维度, 循环调用rnn直到最后一个字</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">line_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">hidden</span><span class="p">)</span>      
+        <span class="c1"># 获得损失</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">)</span>
+     <span class="c1"># 返回结果和损失的值</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/train.py</li>
+</ul>
+<hr>
+<ul>
+<li>第四步: 调用训练和验证函数</li>
+</ul>
+<blockquote>
+<ul>
+<li>构建时间计算函数: 
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">timeSince</span><span class="p">(</span><span class="n">since</span><span class="p">):</span>
+    <span class="s2">"获得每次打印的训练耗时, since是训练开始时间"</span>
+    <span class="c1"># 获得当前时间</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 获得时间差，就是训练耗时</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">since</span>
+    <span class="c1"># 将秒转化为分钟, 并取整</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="c1"># 计算剩下不够凑成1分钟的秒数</span>
+    <span class="n">s</span> <span class="o">-=</span> <span class="n">m</span> <span class="o">*</span> <span class="mi">60</span>
+    <span class="c1"># 返回指定格式的耗时</span>
+    <span class="k">return</span> <span class="s1">'</span><span class="si">%d</span><span class="s1">m </span><span class="si">%d</span><span class="s1">s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/train.py</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>输入参数:
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 假定模型训练开始时间是10min之前</span>
+<span class="n">since</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="o">*</span><span class="mi">60</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>调用:
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="n">period</span> <span class="o">=</span> <span class="n">timeSince</span><span class="p">(</span><span class="n">since</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:
+<div class="highlight"><pre id="__code_22"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><code><span class="mi">10</span><span class="n">m</span> <span class="mi">0</span><span class="n">s</span>
+</code></pre></div></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>调用训练和验证函数并打印日志</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_23"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设置迭代次数为50000步</span>
+<span class="n">n_iters</span> <span class="o">=</span> <span class="mi">50000</span>
+
+<span class="c1"># 打印间隔为1000步</span>
+<span class="n">plot_every</span> <span class="o">=</span> <span class="mi">1000</span>
+
+
+<span class="c1"># 初始化打印间隔中训练和验证的损失和准确率</span>
+<span class="n">train_current_loss</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">train_current_acc</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">valid_current_loss</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">valid_current_acc</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<span class="c1"># 初始化盛装每次打印间隔的平均损失和准确率</span>
+<span class="n">all_train_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_train_acc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_valid_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_valid_acc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 获取开始时间戳</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+
+<span class="c1"># 循环遍历n_iters次 </span>
+<span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># 调用两次随机函数分别生成一条训练和验证数据</span>
+    <span class="n">category</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span> <span class="o">=</span> <span class="n">randomTrainingExample</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+    <span class="n">category_</span><span class="p">,</span> <span class="n">line_</span><span class="p">,</span> <span class="n">category_tensor_</span><span class="p">,</span> <span class="n">line_tensor_</span> <span class="o">=</span> <span class="n">randomTrainingExample</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+    <span class="c1"># 分别调用训练和验证函数, 获得输出和损失</span>
+    <span class="n">train_output</span><span class="p">,</span> <span class="n">train_loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">category_tensor</span><span class="p">,</span> <span class="n">line_tensor</span><span class="p">)</span>
+    <span class="n">valid_output</span><span class="p">,</span> <span class="n">valid_loss</span> <span class="o">=</span> <span class="n">valid</span><span class="p">(</span><span class="n">category_tensor_</span><span class="p">,</span> <span class="n">line_tensor_</span><span class="p">)</span>
+    <span class="c1"># 进行训练损失, 验证损失，训练准确率和验证准确率分别累加</span>
+    <span class="n">train_current_loss</span> <span class="o">+=</span> <span class="n">train_loss</span>
+    <span class="n">train_current_acc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">train_output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">category_tensor</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">valid_current_loss</span> <span class="o">+=</span> <span class="n">valid_loss</span>
+    <span class="n">valid_current_acc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">valid_output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">category_tensor_</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="c1"># 当迭代次数是指定打印间隔的整数倍时</span>
+    <span class="k">if</span> <span class="nb">iter</span> <span class="o">%</span> <span class="n">plot_every</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># 用刚刚累加的损失和准确率除以间隔步数得到平均值</span>
+        <span class="n">train_average_loss</span> <span class="o">=</span> <span class="n">train_current_loss</span> <span class="o">/</span> <span class="n">plot_every</span>
+        <span class="n">train_average_acc</span> <span class="o">=</span> <span class="n">train_current_acc</span><span class="o">/</span> <span class="n">plot_every</span>
+        <span class="n">valid_average_loss</span> <span class="o">=</span> <span class="n">valid_current_loss</span> <span class="o">/</span> <span class="n">plot_every</span>
+        <span class="n">valid_average_acc</span> <span class="o">=</span> <span class="n">valid_current_acc</span><span class="o">/</span> <span class="n">plot_every</span>
+        <span class="c1"># 打印迭代步, 耗时, 训练损失和准确率, 验证损失和准确率</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Iter:"</span><span class="p">,</span> <span class="nb">iter</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="s2">"TimeSince:"</span><span class="p">,</span> <span class="n">timeSince</span><span class="p">(</span><span class="n">start</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Train Loss:"</span><span class="p">,</span> <span class="n">train_average_loss</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="s2">"Train Acc:"</span><span class="p">,</span> <span class="n">train_average_acc</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Valid Loss:"</span><span class="p">,</span> <span class="n">valid_average_loss</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="s2">"Valid Acc:"</span><span class="p">,</span> <span class="n">valid_average_acc</span><span class="p">)</span>
+        <span class="c1"># 将结果存入对应的列表中，方便后续制图</span>
+        <span class="n">all_train_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_average_loss</span><span class="p">)</span>
+        <span class="n">all_train_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_average_acc</span><span class="p">)</span>
+        <span class="n">all_valid_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">valid_average_loss</span><span class="p">)</span>
+        <span class="n">all_valid_acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">valid_average_acc</span><span class="p">)</span>
+        <span class="c1"># 将该间隔的训练和验证损失及其准确率归0</span>
+        <span class="n">train_current_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">train_current_acc</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">valid_current_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">valid_current_acc</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/train.py</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_24"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><code><span class="n">Iter</span><span class="p">:</span> <span class="mi">1000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">0</span><span class="n">m</span> <span class="mi">56</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.6127021567507527</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.747</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.6702297774022868</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.7</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">2000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">1</span><span class="n">m</span> <span class="mi">52</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5190641692602076</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.789</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5217500487511397</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.784</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">3000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">2</span><span class="n">m</span> <span class="mi">48</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5398398997281778</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.8</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5844468013737023</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.777</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">4000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">3</span><span class="n">m</span> <span class="mi">43</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.4700755337187358</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.822</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5140456306522071</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.802</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">5000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">4</span><span class="n">m</span> <span class="mi">38</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5260879981063878</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.804</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5924804099237979</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.796</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">6000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">5</span><span class="n">m</span> <span class="mi">33</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.4702717279043861</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.825</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.6675750375208704</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.78</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">7000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">6</span><span class="n">m</span> <span class="mi">27</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.4734503294042624</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.833</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.6329268293256277</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.784</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">8000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">7</span><span class="n">m</span> <span class="mi">23</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.4258338176879665</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.847</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5356959595441066</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.82</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">9000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">8</span><span class="n">m</span> <span class="mi">18</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.45773495503464817</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.843</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5413714128659645</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.798</span>
+<span class="n">Iter</span><span class="p">:</span> <span class="mi">10000</span> <span class="o">|</span> <span class="n">TimeSince</span><span class="p">:</span> <span class="mi">9</span><span class="n">m</span> <span class="mi">14</span><span class="n">s</span>
+<span class="n">Train</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.4856756244019302</span> <span class="o">|</span> <span class="n">Train</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.835</span>
+<span class="n">Valid</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5450502399195044</span> <span class="o">|</span> <span class="n">Valid</span> <span class="n">Acc</span><span class="p">:</span> <span class="mf">0.813</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>第五步: 绘制训练和验证的损失和准确率对照曲线</li>
+</ul>
+<div class="highlight"><pre id="__code_25"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_train_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Train Loss"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_valid_losses</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Valid Loss"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"./loss.png"</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_train_acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Train Acc"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_valid_acc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Valid Acc"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"./acc.png"</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>代码位置:  /data/doctor_offline/review_model/train.py</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>训练和验证损失对照曲线:</li>
+</ul>
+</blockquote>
+<p></p><center><img alt="avatar" src="./index_files/rnn_loss.png"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>训练和验证准确率对照曲线:</li>
+</ul>
+</blockquote>
+<p></p><center><img alt="avatar" src="./index_files/rnn_acc.png"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>分析:<ul>
+<li>损失对照曲线一直下降, 说明模型能够从数据中获取规律，正在收敛, 准确率对照曲线中验证准确率一直上升，最终维持在0.98左右.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>第六步: 模型保存
+<div class="highlight"><pre id="__code_26"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 保存路径</span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="s1">'./BERT_RNN.pth'</span>
+<span class="c1"># 保存模型参数</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">rnn</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">MODEL_PATH</span><span class="p">)</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>代码位置:  /data/doctor_offline/review_model/train.py</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>输出效果: <ul>
+<li>在/data/doctor_offline/review_model/路径下生成BERT_RNN.pth文件.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>小节总结:<ul>
+<li>学习了进行模型训练的步骤:<ul>
+<li>第一步: 构建随机选取数据函数.</li>
+<li>第二步: 构建模型训练函数.</li>
+<li>第三步: 构建模型验证函数.</li>
+<li>第四步: 调用训练和验证函数.</li>
+<li>第五步: 绘制训练和验证的损失和准确率对照曲线.</li>
+<li>第六步: 模型保存.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="56">5.6 模型使用<a class="headerlink" href="#56" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>掌握模型预测的实现过程.</li>
+<li>掌握模型批量预测的实现过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型预测的实现过程:</li>
+</ul>
+<div class="highlight"><pre id="__code_27"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+
+<span class="c1"># 导入RNN模型结构</span>
+<span class="kn">from</span> <span class="nn">RNN_MODEL</span> <span class="kn">import</span> <span class="n">RNN</span>
+<span class="c1"># 导入bert预训练模型编码函数</span>
+<span class="kn">from</span> <span class="nn">bert_chinese_encode</span> <span class="kn">import</span> <span class="n">get_bert_encode_for_single</span>
+
+
+<span class="c1"># 预加载的模型参数路径</span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="s1">'./BERT_RNN.pth'</span>
+
+<span class="c1"># 隐层节点数, 输入层尺寸, 类别数都和训练时相同即可</span>
+<span class="n">n_hidden</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">input_size</span> <span class="o">=</span> <span class="mi">768</span>
+<span class="n">n_categories</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># 实例化RNN模型, 并加载保存模型参数</span>
+<span class="n">rnn</span> <span class="o">=</span> <span class="n">RNN</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">n_hidden</span><span class="p">,</span> <span class="n">n_categories</span><span class="p">)</span>
+<span class="n">rnn</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">))</span>
+
+
+
+
+<span class="k">def</span> <span class="nf">_test</span><span class="p">(</span><span class="n">line_tensor</span><span class="p">):</span>
+    <span class="sd">"""模型测试函数, 它将用在模型预测函数中, 用于调用RNN模型并返回结果.它的参数line_tensor代表输入文本的张量表示"""</span>
+    <span class="c1"># 初始化隐层张量</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">.</span><span class="n">initHidden</span><span class="p">()</span>
+    <span class="c1"># 与训练时相同, 遍历输入文本的每一个字符</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line_tensor</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># 将其逐次输送给rnn模型</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">line_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">hidden</span><span class="p">)</span>
+    <span class="c1"># 获得rnn模型最终的输出</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">input_line</span><span class="p">):</span>
+    <span class="sd">"""模型预测函数, 输入参数input_line代表需要预测的文本"""</span>
+    <span class="c1"># 不自动求解梯度</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="c1"># 将input_line使用bert模型进行编码</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">_test</span><span class="p">(</span><span class="n">get_bert_encode_for_single</span><span class="p">(</span><span class="n">input_line</span><span class="p">))</span>
+        <span class="c1"># 从output中取出最大值对应的索引, 比较的维度是1</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">topi</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 返回结果数值</span>
+        <span class="k">return</span> <span class="n">topi</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</code></pre></div>
+
+<hr>
+<p>tensor.topk演示:
+</p><div class="highlight"><pre id="__code_28"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><code><span class="o">&gt;&gt;&gt;</span> <span class="n">tr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tr</span>
+<span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.1808</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.4170</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">tr</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">return_types</span><span class="o">.</span><span class="n">topk</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.1808</span><span class="p">]]),</span> <span class="n">indices</span><span class="o">=</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">]]))</span>
+</code></pre></div><p></p>
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/predict.py</li>
+</ul>
+<hr>
+<ul>
+<li>输入参数:</li>
+</ul>
+<div class="highlight"><pre id="__code_29"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="n">input_line</span> <span class="o">=</span> <span class="s2">"点瘀样尖针性发多"</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre id="__code_30"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><code><span class="n">result</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">input_line</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"result:"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>输出效果:</li>
+</ul>
+<div class="highlight"><pre id="__code_31"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="n">result</span><span class="p">:</span> <span class="mi">0</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>模型批量预测的实现过程:</li>
+</ul>
+<div class="highlight"><pre id="__code_32"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">batch_predict</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+    <span class="sd">"""批量预测函数, 以原始文本(待识别的命名实体组成的文件)输入路径</span>
+<span class="sd">       和预测过滤后(去除掉非命名实体的文件)的输出路径为参数"""</span>
+    <span class="c1"># 待识别的命名实体组成的文件是以疾病名称为csv文件名, </span>
+    <span class="c1"># 文件中的每一行是该疾病对应的症状命名实体</span>
+    <span class="c1"># 读取路径下的每一个csv文件名, 装入csv列表之中</span>
+    <span class="n">csv_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+    <span class="c1"># 遍历每一个csv文件</span>
+    <span class="k">for</span> <span class="n">csv</span> <span class="ow">in</span> <span class="n">csv_list</span><span class="p">:</span>
+        <span class="c1"># 以读的方式打开每一个csv文件</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">csv</span><span class="p">),</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fr</span><span class="p">:</span>
+            <span class="c1"># 再以写的方式打开输出路径的同名csv文件</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">csv</span><span class="p">),</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fw</span><span class="p">:</span>
+                <span class="c1"># 读取csv文件的每一行</span>
+                <span class="n">input_line</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+                <span class="c1"># 使用模型进行预测</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">input_line</span><span class="p">)</span>
+                <span class="c1"># 如果结果为1</span>
+                <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                    <span class="c1"># 说明审核成功, 写入到输出csv中</span>
+                    <span class="n">fw</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">input_line</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>代码位置: /data/doctor_offline/review_model/predict.py</li>
+</ul>
+<hr>
+<ul>
+<li>输入参数:</li>
+</ul>
+<div class="highlight"><pre id="__code_33"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="n">input_path</span> <span class="o">=</span> <span class="s2">"/data/doctor_offline/structured/noreview/"</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="s2">"/data/doctor_offline/structured/reviewed/"</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre id="__code_34"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><code><span class="n">batch_predict</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>输出效果:<ul>
+<li>在输出路径下生成与输入路径等数量的同名csv文件, 内部的症状实体是被审核的可用实体.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>小节总结:<ul>
+<li>学习并实现了模型预测的函数: predict(input_line).</li>
+<li>学习并实现了模型批量预测的函数: batch_predict(input_path, output_path)</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index4.html" title="第四章:离线部分" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                第四章:离线部分
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index6.html" title="第六章:命名实体识别任务" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                第六章:命名实体识别任务
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

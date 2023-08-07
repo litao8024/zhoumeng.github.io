@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8888/3/ -->
+<html lang="en" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8888/3/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="./index_files/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>第三章:neo4j图数据库 - DOCTOR</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#31-neo4j" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="#" title="DOCTOR" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 882px;">
+              DOCTOR
+            </span>
+            <span class="md-header-nav__topic" style="width: 882px;">
+              
+                第三章:neo4j图数据库
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 851px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="#" title="DOCTOR" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    DOCTOR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="第一章:背景介绍与Unit的使用" class="md-nav__link">
+      第一章:背景介绍与Unit的使用
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="第二章:在线医生的总体架构与工具介绍" class="md-nav__link">
+      第二章:在线医生的总体架构与工具介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        第三章:neo4j图数据库
+      </label>
+    
+    <a href="" title="第三章:neo4j图数据库" class="md-nav__link md-nav__link--active">
+      第三章:neo4j图数据库
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#31-neo4j" title="3.1 neo4j简介" class="md-nav__link">
+    3.1 neo4j简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-neo4j" title="3.2 neo4j图数据库的安装" class="md-nav__link">
+    3.2 neo4j图数据库的安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-cypher" title="3.3 Cypher介绍与使用" class="md-nav__link">
+    3.3 Cypher介绍与使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-pythonneo4j" title="3.4 在Python中使用neo4j" class="md-nav__link">
+    3.4 在Python中使用neo4j
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="第四章:离线部分" class="md-nav__link">
+      第四章:离线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="第五章:命名实体审核任务" class="md-nav__link">
+      第五章:命名实体审核任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="第六章:命名实体识别任务" class="md-nav__link">
+      第六章:命名实体识别任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index7.html" title="第七章:在线部分" class="md-nav__link">
+      第七章:在线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index8.html" title="第八章:句子主题相关任务" class="md-nav__link">
+      第八章:句子主题相关任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index9.html" title="第九章:系统联调与测试" class="md-nav__link">
+      第九章:系统联调与测试
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index10.html" title="附录:环境安装部署手册" class="md-nav__link">
+      附录:环境安装部署手册
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 851px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#31-neo4j" title="3.1 neo4j简介" class="md-nav__link">
+    3.1 neo4j简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-neo4j" title="3.2 neo4j图数据库的安装" class="md-nav__link">
+    3.2 neo4j图数据库的安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-cypher" title="3.3 Cypher介绍与使用" class="md-nav__link">
+    3.3 Cypher介绍与使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-pythonneo4j" title="3.4 在Python中使用neo4j" class="md-nav__link">
+    3.4 在Python中使用neo4j
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>第三章:neo4j图数据库</h1>
+                
+                <h2 id="31-neo4j">3.1 neo4j简介<a class="headerlink" href="#31-neo4j" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>了解neo4j图数据库的简介, 版本说明.</li>
+<li>了解节点, 关系，属性，标签的有关概念.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/neo4j.png"></center><p></p>
+<ul>
+<li>neo4j简介:<ul>
+<li>neo4j是由Java实现的开源NoSQL图数据库.自从2003年开始研发, 到2007年发布第一版, 最新版本为3.3.5, neo4j现如今已经被各行各业的数十万家公司和组织采用.</li>
+<li>neo4j实现了专业数据库级别的图数据模型的存储. 与普通的图处理或内存级数据库不同, neo4j提供了完整的数据库特性, 包括ACID事物的支持, 集群支持, 备份与故障转移等. 这使其适合于企业级生产环境下的各种应用.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>neo4j的版本说明:<ul>
+<li>企业版: 需要高额的付费获得授权, 提供高可用, 热备份等性能.</li>
+<li>社区开源版: 免费使用, 但只能单点运行.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>neo4j图形数据库的有关概念:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/标记属性图模型.png"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>节点<ul>
+<li>节点是主要的数据元素, 节点通过关系连接到其他节点, 节点可以具有一个或多个属性
+(即存储为键/值对的属性), 节点有一个或多个标签, 用于描述其在图表中的作用. 示例: Person&gt;节点.</li>
+<li>可以将节点类比为关系型数据库中的表, 对应的标签可以类比为不同的表名, 属性就是表中的列.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>关系<ul>
+<li>关系连接两个节点, 关系是方向性的, 关系可以有一个或多个属性(即存储为键/值对的
+属性).</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>属性<ul>
+<li>属性是命名值, 其中名称(或键)是字符串, 属性可以被索引和约束, 可以从多个属性创
+建复合索引.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>标签<ul>
+<li>标签用于组节点到集, 节点可以具有多个标签, 对标签进行索引以加速在图中查找节点.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="32-neo4j">3.2 neo4j图数据库的安装<a class="headerlink" href="#32-neo4j" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标:<ul>
+<li>掌握neo4j图数据库的安装流程及其可视化后台的登陆..</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>neo4j图数据库的安装流程:<ul>
+<li>第一步: 将neo4j安装信息载入到yum检索列表.</li>
+<li>第二步: 使用yum install命令安装.</li>
+<li>第三步: 修改配置文件内容 /etc/neo4j/neo4j.conf.</li>
+<li>第四步: 启动neo4j数据库.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 将neo4j安装信息载入到yum检索列表
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code><span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span>
+<span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">debian</span><span class="o">.</span><span class="n">neo4j</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">neotechnology</span><span class="o">.</span><span class="n">gpg</span><span class="o">.</span><span class="n">key</span>
+<span class="n">rpm</span> <span class="o">--</span><span class="kn">import</span> <span class="nn">neotechnology.gpg.key</span>
+<span class="n">cat</span> <span class="o">&lt;&lt;</span><span class="n">EOF</span><span class="o">&gt;</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">yum</span><span class="o">.</span><span class="n">repos</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">neo4j</span><span class="o">.</span><span class="n">repo</span>
+<span class="c1"># 写入下面内容</span>
+<span class="p">[</span><span class="n">neo4j</span><span class="p">]</span>
+<span class="n">name</span><span class="o">=</span><span class="n">Neo4j</span> <span class="n">RPM</span> <span class="n">Repository</span>
+<span class="n">baseurl</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">yum</span><span class="o">.</span><span class="n">neo4j</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">stable</span>
+<span class="n">enabled</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">gpgcheck</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>第二步: 使用yum install命令安装
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>yum install neo4j-3.3.5
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>第三步: 修改配置文件默认在/etc/neo4j/neo4j.conf, 为了方便显示下面把一些修改显示在这里
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 数据库的存储库存储位置、日志位置等</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">data</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">data</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">plugins</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">plugins</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">certificates</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">certificates</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">logs</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">neo4j</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">lib</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">lib</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">run</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">neo4j</span>
+
+<span class="c1"># 导入的位置</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">directories</span><span class="o">.</span><span class="n">import</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="kn">import</span>
+
+<span class="c1"># 初始化内存大小</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">heap</span><span class="o">.</span><span class="n">initial_size</span><span class="o">=</span><span class="mi">512</span><span class="n">m</span>
+
+<span class="c1"># Bolt 连接地址</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">bolt</span><span class="o">.</span><span class="n">enabled</span><span class="o">=</span><span class="n">true</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">bolt</span><span class="o">.</span><span class="n">tls_level</span><span class="o">=</span><span class="n">OPTIONAL</span>
+<span class="n">dbms</span><span class="o">.</span><span class="n">connector</span><span class="o">.</span><span class="n">bolt</span><span class="o">.</span><span class="n">listen_address</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7687</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>第四步: 启动neo4j数据库
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 启动命令</span>
+<span class="n">neo4j</span> <span class="n">start</span>
+
+<span class="c1"># 终端显示如下, 代表启动成功</span>
+<span class="n">Active</span> <span class="n">database</span><span class="p">:</span> <span class="n">graph</span><span class="o">.</span><span class="n">db</span>
+<span class="n">Directories</span> <span class="ow">in</span> <span class="n">use</span><span class="p">:</span>
+  <span class="n">home</span><span class="p">:</span>         <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">neo4j</span>
+  <span class="n">config</span><span class="p">:</span>       <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">neo4j</span>
+  <span class="n">logs</span><span class="p">:</span>         <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">neo4j</span>
+  <span class="n">plugins</span><span class="p">:</span>      <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">plugins</span>
+  <span class="n">import</span><span class="p">:</span>       <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="kn">import</span>
+  <span class="nn">data</span><span class="p">:</span>         <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">data</span>
+  <span class="n">certificates</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">neo4j</span><span class="o">/</span><span class="n">certificates</span>
+  <span class="n">run</span><span class="p">:</span>          <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">neo4j</span>
+<span class="n">Starting</span> <span class="n">Neo4j</span><span class="o">.</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>neo4j的可视化管理后台登陆:<ul>
+<li>访问地址: <a href="http://0.0.0.0:7474/">http://0.0.0.0:7474</a>.</li>
+<li>ConnectURL: bolt://0.0.0.0:7687</li>
+<li>Username: neo4j</li>
+<li>Password: neo4j (默认)</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/neo4j可视化.jpg"></center><p></p>
+<hr>
+<ul>
+<li>
+<p>小节总结:</p>
+<ul>
+<li>学习了neo4j图数据库的安装流程:<ul>
+<li>第一步: 将neo4j安装信息载入到yum检索列表.</li>
+<li>第二步: 使用yum install命令安装.</li>
+<li>第三步: 修改配置文件内容 /etc/neo4j/neo4j.conf.</li>
+<li>第四步: 启动neo4j数据库.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了neo4j的可视化管理后台登陆:<ul>
+<li>访问地址: <a href="http://0.0.0.0:7474/">http://0.0.0.0:7474</a>.</li>
+<li>ConnectURL: bolt://0.0.0.0:7687</li>
+<li>Username: neo4j</li>
+<li>Password: neo4j (默认)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="33-cypher">3.3 Cypher介绍与使用<a class="headerlink" href="#33-cypher" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标<ul>
+<li>了解Cypher的基本概念.</li>
+<li>掌握Cypher的基本命令和语法.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Cypher的基本概念:<ul>
+<li>Cypher是neo4j图数据的查询语言, 类似于mysql数据库的sql语句, 但是它允许对图形进行富有表现力和有效的查询和更新.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Cypher的基本命令和语法:<ul>
+<li>create命令</li>
+<li>match命令</li>
+<li>merge命令</li>
+<li>relationship关系命令</li>
+<li>where命令</li>
+<li>delete命令</li>
+<li>sort命令</li>
+<li>字符串函数</li>
+<li>聚合函数</li>
+<li>index索引命令</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>create命令: 创建图数据中的节点.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建命令格式:</span>
+<span class="c1"># 此处create是关键字, 创建节点名称node_name, 节点标签Node_Label, 放在小括号里面()</span>
+<span class="c1"># 后面把所有属于节点标签的属性放在大括号'{}'里面, 依次写出属性名称:属性值, 不同属性用逗号','分隔</span>
+<span class="c1"># 例如下面命令创建一个节点e, 节点标签是Employee, 拥有id, name, salary, deptnp四个属性:</span>
+<span class="n">CREATE</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="mi">222</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span><span class="mi">6000</span><span class="p">,</span> <span class="n">deptno</span><span class="p">:</span><span class="mi">12</span><span class="p">})</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/1.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>match命令: 匹配(查询)已有数据.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code># match命令专门用来匹配查询, 节点名称:节点标签, 依然放在小括号内, 然后使用return语句返回查询结果, 和SQL很相似.
+MATCH (e:Employee) RETURN e.id, e.name, e.salary, e.deptno
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/2.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>merge命令: 若节点存在, 则等效与match命令; 节点不存在, 则等效于create命令.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code><span class="n">MERGE</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="mi">146</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="s1">'Lucer'</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span><span class="mi">3500</span><span class="p">,</span> <span class="n">deptno</span><span class="p">:</span><span class="mi">16</span><span class="p">})</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/3.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>然后再次用merge查询, 发现数据库中的数据并没有增加, 因为已经存在相同的数据了, merge匹配成功.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="n">MERGE</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span><span class="mi">146</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="s1">'Lucer'</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span><span class="mi">3500</span><span class="p">,</span> <span class="n">deptno</span><span class="p">:</span><span class="mi">16</span><span class="p">})</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/4.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>使用create创建关系: 必须创建有方向性的关系, 否则报错.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建一个节点p1到p2的有方向关系, 这个关系r的标签为Buy, 代表p1购买了p2, 方向为p1指向p2</span>
+<span class="n">CREATE</span> <span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Profile1</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">Buy</span><span class="p">]</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Profile2</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/5.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>使用merge创建关系: 可以创建有/无方向性的关系.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建一个节点p1到p2的无方向关系, 这个关系r的标签为miss, 代表p1-miss-p2, 方向为相互的</span>
+<span class="n">MERGE</span> <span class="p">(</span><span class="n">p1</span><span class="p">:</span><span class="n">Profile1</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">:</span><span class="n">miss</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">p2</span><span class="p">:</span><span class="n">Profile2</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/6.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>where命令: 类似于SQL中的添加查询条件.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 查询节点Employee中, id值等于123的那个节点</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">WHERE</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="mi">123</span> <span class="n">RETURN</span> <span class="n">e</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/7.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>delete命令: 删除节点/关系及其关联的属性.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 注意: 删除节点的同时, 也要删除关联的关系边</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">c1</span><span class="p">:</span><span class="n">CreditCard</span><span class="p">)</span><span class="o">-</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">c2</span><span class="p">:</span><span class="n">Customer</span><span class="p">)</span> <span class="n">DELETE</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c2</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/10.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>sort命令: Cypher命令中的排序使用的是order by.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 匹配查询标签Employee, 将所有匹配结果按照id值升序排列后返回结果</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span>
+
+<span class="c1"># 如果要按照降序排序, 只需要将ORDER BY e.salary改写为ORDER BY e.salary DESC</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span> <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span> <span class="n">DESC</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/11.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>字符串函数:<ul>
+<li>toUpper()函数</li>
+<li>toLower()函数</li>
+<li>substring()函数</li>
+<li>replace()函数</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>toUpper()函数: 将一个输入字符串转换为大写字母.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">toUpper</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/12.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>toLower()函数: 讲一个输入字符串转换为小写字母.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code><span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">toLower</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/13.jpeg"></center> <p></p>
+<hr>
+<ul>
+<li>substring()函数: 返回一个子字符串.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 输入字符串为input_str, 返回从索引start_index开始, 到end_index-1结束的子字符串</span>
+<span class="n">substring</span><span class="p">(</span><span class="n">input_str</span><span class="p">,</span> <span class="n">start_index</span><span class="p">,</span> <span class="n">end_index</span><span class="p">)</span>
+
+<span class="c1"># 示例代码, 返回员工名字的前两个字母</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/14.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>replace()函数: 替换掉子字符串.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 输入字符串为input_str, 将输入字符串中符合origin_str的部分, 替换成new_str</span>
+<span class="n">replace</span><span class="p">(</span><span class="n">input_str</span><span class="p">,</span> <span class="n">origin_str</span><span class="p">,</span> <span class="n">new_str</span><span class="p">)</span>
+
+<span class="c1"># 示例代码, 将员工名字替换为添加后缀_HelloWorld</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">replace</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">"_HelloWorld"</span><span class="p">),</span> <span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">deptno</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/15.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>聚合函数<ul>
+<li>count()函数</li>
+<li>max()函数</li>
+<li>min()函数</li>
+<li>sum()函数</li>
+<li>avg()函数</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>count()函数: 返回由match命令匹配成功的条数.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 返回匹配标签Employee成功的记录个数</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">count</span><span class="p">(</span> <span class="o">*</span> <span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/16.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>max()函数: 返回由match命令匹配成功的记录中的最大值.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 返回匹配标签Employee成功的记录中, 最高的工资数字</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/17.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>min()函数: 返回由match命令匹配成功的记录中的最小值.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 返回匹配标签Employee成功的记录中, 最低的工资数字</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="nb">min</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/18.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>sum()函数: 返回由match命令匹配成功的记录中某字段的全部加和值.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 返回匹配标签Employee成功的记录中, 所有员工工资的和</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/19.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>avg()函数: 返回由match命令匹配成功的记录中某字段的平均值.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 返回匹配标签Employee成功的记录中, 所有员工工资的平均值</span>
+<span class="n">MATCH</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="n">Employee</span><span class="p">)</span> <span class="n">RETURN</span> <span class="n">avg</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">salary</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/20.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>索引index<ul>
+<li>Neo4j支持在节点或关系属性上的索引, 以提高查询的性能.</li>
+<li>可以为具有相同标签名称的所有节点的属性创建索引.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建索引: 使用create index on来创建索引.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_22"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建节点Employee上面属性id的索引</span>
+<span class="n">CREATE</span> <span class="n">INDEX</span> <span class="n">ON</span><span class="p">:</span><span class="n">Employee</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/21.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>删除索引: 使用drop index on来删除索引.</li>
+</ul>
+<hr>
+<ul>
+<li>演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_23"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 删除节点Employee上面属性id的索引</span>
+<span class="n">DROP</span> <span class="n">INDEX</span> <span class="n">ON</span><span class="p">:</span><span class="n">Employee</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/22.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>
+<p>小节总结:</p>
+<ul>
+<li>学习了Cypher的基本概念:<ul>
+<li>Cypher是neo4j图数据的查询语言, 类似于mysql数据库的sql语句, 但是它允许对图形进行富有表现力和有效的查询和更新.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Cypher的基本命令和语法:<ul>
+<li>create命令</li>
+<li>match命令</li>
+<li>merge命令</li>
+<li>relationship关系命令</li>
+<li>where命令</li>
+<li>delete命令</li>
+<li>sort命令</li>
+<li>字符串函数</li>
+<li>聚合函数</li>
+<li>index索引命令</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>create命令: 创建图数据中的节点.<ul>
+<li>CREATE (e:Employee{id:222, name:'Bob', salary:6000, deptnp:12})</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>match命令: 匹配(查询)已有数据.<ul>
+<li>MATCH (e:Employee) RETURN e.id, e.name, e.salary, e.deptno</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>merge命令: 若节点存在, 则等效与match命令; 节点不存在, 则等效于create命令.<ul>
+<li>MERGE (e:Employee {id:145, name:'Lucy', salary:7500, deptno:12})</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用create创建关系: 必须创建有方向性的关系, 否则报错.<ul>
+<li>CREATE (p1:Profile1)-[r:Buy]-&gt;(p2:Profile2)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用merge创建关系: 可以创建有/无方向性的关系.<ul>
+<li>MERGE (p1:Profile1)-[r:miss]-(p2:Profile2)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>where命令: 类似于SQL中的添加查询条件.<ul>
+<li>MATCH (e:Employee) WHERE e.id=123 RETURN e</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>delete命令: 删除节点/关系及其关联的属性.<ul>
+<li>MATCH (c1:CreditCard)-[r]-(c2:Customer) DELETE c1, r, c2</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>sort命令: Cypher命令中的排序使用的是order by.<ul>
+<li>MATCH (e:Employee) RETURN e.id, e.name, e.salary, e.deptno ORDER BY e.id</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>字符串函数:<ul>
+<li>toUpper()函数</li>
+<li>toLower()函数</li>
+<li>substring()函数</li>
+<li>replace()函数 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>toUpper()函数: 将一个输入字符串转换为大写字母.<ul>
+<li>MATCH (e:Employee) RETURN e.id, toUpper(e.name), e.salary, e.deptno</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>toLower()函数: 讲一个输入字符串转换为小写字母.<ul>
+<li>MATCH (e:Employee) RETURN e.id, toLower(e.name), e.salary, e.deptno</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>substring()函数: 返回一个子字符串.<ul>
+<li>MATCH (e:Employee) RETURN e.id, substring(e.name,0,2), e.salary, e.deptno</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>replace()函数: 替换掉子字符串.<ul>
+<li>MATCH (e:Employee) RETURN e.id, replace(e.name,e.name,e.name + "_HelloWorld"), e.salary, e.deptno</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>聚合函数<ul>
+<li>count()函数</li>
+<li>max()函数</li>
+<li>min()函数</li>
+<li>sum()函数</li>
+<li>avg()函数</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>count()函数: 返回由match命令匹配成功的条数. <ul>
+<li>MATCH (e:Employee) RETURN count( * )</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>max()函数: 返回由match命令匹配成功的记录中的最大值.<ul>
+<li>MATCH (e:Employee) RETURN max(e.salary)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>min()函数: 返回由match命令匹配成功的记录中的最小值.<ul>
+<li>MATCH (e:Employee) RETURN min(e.salary)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>sum()函数: 返回由match命令匹配成功的记录中某字段的全部加和值.<ul>
+<li>MATCH (e:Employee) RETURN sum(e.salary)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>avg()函数: 返回由match命令匹配成功的记录中某字段的平均值.<ul>
+<li>MATCH (e:Employee) RETURN avg(e.salary)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>索引index<ul>
+<li>Neo4j支持在节点或关系属性上的索引, 以提高查询的性能.</li>
+<li>可以为具有相同标签名称的所有节点的属性创建索引.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>创建索引: 使用create index on来创建索引.<ul>
+<li>CREATE INDEX ON:Employee(id)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>删除索引: 使用drop index on来删除索引.<ul>
+<li>DROP INDEX ON:Employee(id)    </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="34-pythonneo4j">3.4 在Python中使用neo4j<a class="headerlink" href="#34-pythonneo4j" title="Permanent link">¶</a></h2>
+<ul>
+<li>学习目标<ul>
+<li>了解python中neo4j-driver的相关知识.</li>
+<li>掌握neo4j中事务概念和操作方法.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>neo4j-driver简介:<ul>
+<li>neo4j-driver是一个python中的package, 作为python中neo4j的驱动, 帮助我们在python程序中更好的使用图数据库.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>neo4j-driver的安装:</li>
+</ul>
+<div class="highlight"><pre id="__code_24"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><code>pip install neo4j-driver
+</code></pre></div>
+
+<hr>
+<ul>
+<li>neo4j-driver使用演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_25"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code>from neo4j import GraphDatabase
+
+# 关于neo4j数据库的用户名,密码信息已经配置在同目录下的config.py文件中
+from config import NEO4J_CONFIG
+
+driver = GraphDatabase.driver( **NEO4J_CONFIG)
+
+# 直接用python代码形式访问节点Company, 并返回所有节点信息
+with driver.session() as session:
+    cypher = "CREATE(c:Company) SET c.name='黑马程序员' RETURN c.name"
+    record = session.run(cypher)
+    result = list(map(lambda x: x[0], record))
+    print("result:", result)
+</code></pre></div>
+
+<ul>
+<li>输出效果:</li>
+</ul>
+<div class="highlight"><pre id="__code_26"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><code>result: 黑马程序员
+</code></pre></div>
+
+<hr>
+<ul>
+<li>事务的概念:<ul>
+<li>如果一组数据库操作要么全部发生要么一步也不执行，我们称该组处理步骤为一个事务, 它是数据库一致性的保证.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用事务的演示:</li>
+</ul>
+<div class="highlight"><pre id="__code_27"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code>def _some_operations(tx, cat_name, mouse_name):
+    tx.run("MERGE (a:Cat{name: $cat_name})"
+           "MERGE (b:Mouse{name: $mouse_name})"
+           "MERGE (a)-[r:And]-(b)",
+           cat_name=cat_name, mouse_name=mouse_name)
+
+
+with driver.session() as session:
+    session.write_transaction(_some_operations, "Tom", "Jerry")
+</code></pre></div>
+
+<hr>
+<ul>
+<li>输出效果:</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/cat.jpeg"></center><p></p>
+<hr>
+<ul>
+<li>
+<p>小节总结:</p>
+<ul>
+<li>学习了neo4j-driver简介:<ul>
+<li>neo4j-driver是一个python中的package, 作为python中neo4j的驱动, 帮助我们在python程序中更好的使用图数据库.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了neo4j-driver的安装和使用方法.</li>
+</ul>
+<hr>
+<ul>
+<li>学习了事务的概念:<ul>
+<li>如果一组数据库操作要么全部发生要么一步也不执行，我们称该组处理步骤为一个事务, 它是数据库一致性的保证.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了如何使用事务来向图数据库中写入数据.</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index2.html" title="第二章:在线医生的总体架构与工具介绍" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                第二章:在线医生的总体架构与工具介绍
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index4.html" title="第四章:离线部分" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                第四章:离线部分
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

@@ -1,0 +1,1936 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>10.2 搭建红蜘蛛机器人 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10.2 搭建红蜘蛛机器人
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          10.2 搭建红蜘蛛机器人
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="10_2.html" class="md-nav__link md-nav__link--active">
+        10.2 搭建红蜘蛛机器人
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    红蜘蛛搭建全流程
+  </a>
+  
+    <nav class="md-nav" aria-label="红蜘蛛搭建全流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    图谱数据构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    问题分类与答案搜索
+  </a>
+  
+    <nav class="md-nav" aria-label="问题分类与答案搜索">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    问题分类子任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    问题解析子任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    答案搜索子任务
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    红蜘蛛搭建全流程
+  </a>
+  
+    <nav class="md-nav" aria-label="红蜘蛛搭建全流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    图谱数据构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    问题分类与答案搜索
+  </a>
+  
+    <nav class="md-nav" aria-label="问题分类与答案搜索">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    问题分类子任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    问题解析子任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    答案搜索子任务
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>10.2 搭建红蜘蛛机器人</h1>
+
+<h2 id="_1">红蜘蛛搭建全流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_2">学习目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>理解红蜘蛛相关模块的设计思路.</li>
+<li>掌握红蜘蛛机器人的代码实现.</li>
+</ul>
+<hr />
+<h3 id="_3">图谱数据构建<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>红蜘蛛机器人的搭建, 首要任务就是构建知识图谱, 图谱越丰富, 内容越详实, 未来红蜘蛛能对外提供的服务就越优质.</li>
+</ul>
+<hr />
+<ul>
+<li>总体来说, 在此选定neo4j作为项目的图数据库, 配置信息如下: /home/ec2-user/knowledge_graph/red_spider/config.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">NEO4J_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;bolt://0.0.0.0:7687&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auth&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;neo4j&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;encrypted&quot;</span><span class="p">:</span> <span class="kc">False</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>构建知识图谱的代码路径: /home/ec2-user/knowledge_graph/red_spider/build_medicalgraph.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">neo4j</span> <span class="kn">import</span> <span class="n">GraphDatabase</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">NEO4J_CONFIG</span>
+
+
+<span class="c1"># 知识图谱主类</span>
+<span class="k">class</span> <span class="nc">MedicalGraph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cur_dir</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span> <span class="s1">&#39;data/temp.json&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 读取文件</span>
+    <span class="k">def</span> <span class="nf">read_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 共4类节点</span>
+        <span class="n">drugs</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c1"># 药品</span>
+        <span class="n">foods</span> <span class="o">=</span> <span class="p">[]</span>          <span class="c1"># 食物</span>
+        <span class="n">diseases</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># 疾病</span>
+        <span class="n">symptoms</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># 症状</span>
+
+        <span class="c1"># 构建节点实体关系</span>
+        <span class="n">rels_recommandeat</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 疾病-推荐吃食物关系</span>
+        <span class="n">rels_recommanddrug</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 疾病-推荐药品关系</span>
+        <span class="n">rels_symptom</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># 疾病-症状关系</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">):</span>
+            <span class="n">disease_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;count = &#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+
+            <span class="c1"># 当前V1.0版本仅支持疾病症状, 药品, 食品的相关咨询</span>
+            <span class="n">data_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">disease</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">diseases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">disease</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s1">&#39;symptom&#39;</span> <span class="ow">in</span> <span class="n">data_json</span><span class="p">:</span>
+                <span class="n">symptoms</span> <span class="o">+=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;symptom&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">symptom</span> <span class="ow">in</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;symptom&#39;</span><span class="p">]:</span>
+                    <span class="n">rels_symptom</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">disease</span><span class="p">,</span> <span class="n">symptom</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s1">&#39;recommand_drug&#39;</span> <span class="ow">in</span> <span class="n">data_json</span><span class="p">:</span>
+                <span class="n">recommand_drug</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;recommand_drug&#39;</span><span class="p">]</span>
+                <span class="n">drugs</span> <span class="o">+=</span> <span class="n">recommand_drug</span>
+                <span class="k">for</span> <span class="n">drug</span> <span class="ow">in</span> <span class="n">recommand_drug</span><span class="p">:</span>
+                    <span class="n">rels_recommanddrug</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">disease</span><span class="p">,</span> <span class="n">drug</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s1">&#39;recommand_eat&#39;</span> <span class="ow">in</span> <span class="n">data_json</span><span class="p">:</span>
+                <span class="n">recommand_eat</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;recommand_eat&#39;</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">_recommand</span> <span class="ow">in</span> <span class="n">recommand_eat</span><span class="p">:</span>
+                    <span class="n">rels_recommandeat</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">disease</span><span class="p">,</span> <span class="n">_recommand</span><span class="p">])</span>
+                <span class="n">foods</span> <span class="o">+=</span> <span class="n">recommand_eat</span>
+
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">drugs</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">foods</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">symptoms</span><span class="p">),</span> <span class="nb">set</span><span class="p">(</span><span class="n">diseases</span><span class="p">),</span> <span class="n">rels_recommandeat</span><span class="p">,</span> <span class="n">rels_recommanddrug</span><span class="p">,</span> <span class="n">rels_symptom</span>
+
+
+    <span class="c1"># 创建知识图谱疾病相关的节点, 疾病, 症状, 药品, 食品</span>
+    <span class="k">def</span> <span class="nf">create_graphnodes_and_graphrels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Drugs</span><span class="p">,</span> <span class="n">Foods</span><span class="p">,</span> <span class="n">Symptoms</span><span class="p">,</span> <span class="n">Diseases</span><span class="p">,</span> <span class="n">rels_recommandeat</span><span class="p">,</span> <span class="n">rels_recommanddrug</span><span class="p">,</span> <span class="n">rels_symptom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_nodes</span><span class="p">()</span>
+
+        <span class="c1"># 打印相关数据的条数</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Drugs:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Drugs</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Foods:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Foods</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Symptoms:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Symptoms</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Diseases:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Diseases</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rels_recommandeat:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rels_recommandeat</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rels_recommanddrug:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rels_recommanddrug</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rels_symptom:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rels_symptom</span><span class="p">))</span>
+
+        <span class="c1"># 实例化图数据库驱动器对象</span>
+        <span class="n">driver</span> <span class="o">=</span> <span class="n">GraphDatabase</span><span class="o">.</span><span class="n">driver</span><span class="p">(</span> <span class="o">**</span><span class="n">NEO4J_CONFIG</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">driver</span><span class="o">.</span><span class="n">session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="c1"># 创建中心疾病的知识图谱节点</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始创建中心疾病节点......&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">Diseases</span><span class="p">:</span>
+                <span class="n">cypher</span> <span class="o">=</span> <span class="s2">&quot;MERGE (a:Disease{name:</span><span class="si">%r</span><span class="s2">}) RETURN a&quot;</span> <span class="o">%</span> <span class="n">d</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cypher</span><span class="p">)</span>
+
+            <span class="c1"># 创建&quot;药品&quot;, &quot;食品&quot;, &quot;症状&quot;的知识图谱节点, V1.0版本只提供这3种问诊信息</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始创建药品节点Drug......&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Drugs</span><span class="p">:</span>
+                <span class="n">cypher</span> <span class="o">=</span> <span class="s2">&quot;MERGE (a:Drug{name:</span><span class="si">%r</span><span class="s2">}) RETURN a&quot;</span> <span class="o">%</span> <span class="n">n</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cypher</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始创建食品节点Food......&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Foods</span><span class="p">:</span>
+                <span class="n">cypher</span> <span class="o">=</span> <span class="s2">&quot;MERGE (a:Food{name:</span><span class="si">%r</span><span class="s2">}) RETURN a&quot;</span> <span class="o">%</span> <span class="n">n</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cypher</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;开始创建症状节点Symptom......&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Symptoms</span><span class="p">:</span>
+                <span class="n">cypher</span> <span class="o">=</span> <span class="s2">&quot;MERGE (a:Symptom{name:</span><span class="si">%r</span><span class="s2">}) RETURN a&quot;</span> <span class="o">%</span> <span class="n">n</span>
+                <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cypher</span><span class="p">)</span>
+
+        <span class="c1"># 创建实体关系边, V1.0版本仅支持3种关系的查询</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_relationship</span><span class="p">(</span><span class="s1">&#39;Disease&#39;</span><span class="p">,</span> <span class="s1">&#39;Food&#39;</span><span class="p">,</span> <span class="n">rels_recommandeat</span><span class="p">,</span> <span class="s1">&#39;recommand_eat&#39;</span><span class="p">,</span> <span class="s1">&#39;推荐食谱&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_relationship</span><span class="p">(</span><span class="s1">&#39;Disease&#39;</span><span class="p">,</span> <span class="s1">&#39;Drug&#39;</span><span class="p">,</span> <span class="n">rels_recommanddrug</span><span class="p">,</span> <span class="s1">&#39;recommand_drug&#39;</span><span class="p">,</span> <span class="s1">&#39;推荐药品&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_relationship</span><span class="p">(</span><span class="s1">&#39;Disease&#39;</span><span class="p">,</span> <span class="s1">&#39;Symptom&#39;</span><span class="p">,</span> <span class="n">rels_symptom</span><span class="p">,</span> <span class="s1">&#39;has_symptom&#39;</span><span class="p">,</span> <span class="s1">&#39;症状&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># 创建实体关联边</span>
+    <span class="k">def</span> <span class="nf">create_relationship</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">rel_type</span><span class="p">,</span> <span class="n">rel_name</span><span class="p">):</span>
+        <span class="c1"># 关系的去重处理</span>
+        <span class="n">set_edges</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">set_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;###&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">edge</span><span class="p">))</span>
+        <span class="n">num_edges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">set_edges</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num_edges = &#39;</span><span class="p">,</span> <span class="n">num_edges</span><span class="p">)</span>
+
+        <span class="c1"># 实例化图数据库驱动器对象                 </span>
+        <span class="n">driver</span> <span class="o">=</span> <span class="n">GraphDatabase</span><span class="o">.</span><span class="n">driver</span><span class="p">(</span> <span class="o">**</span><span class="n">NEO4J_CONFIG</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">driver</span><span class="o">.</span><span class="n">session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">set_edges</span><span class="p">):</span>
+                <span class="n">edge</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;###&#39;</span><span class="p">)</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="c1"># 锁定节点和关系, 进行三元组的创建</span>
+                <span class="n">cypher</span> <span class="o">=</span> <span class="s2">&quot;match(p:</span><span class="si">%s</span><span class="s2">), (q:</span><span class="si">%s</span><span class="s2">) where p.name=&#39;</span><span class="si">%s</span><span class="s2">&#39;and q.name=&#39;</span><span class="si">%s</span><span class="s2">&#39; create (p)-[rel:</span><span class="si">%s</span><span class="s2">{name:&#39;</span><span class="si">%s</span><span class="s2">&#39;}]-&gt;(q)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">end_node</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">rel_type</span><span class="p">,</span> <span class="n">rel_name</span><span class="p">)</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cypher</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">mg</span> <span class="o">=</span> <span class="n">MedicalGraph</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;创建知识图谱中的节点和关系......&#39;</span><span class="p">)</span>
+    <span class="n">mg</span><span class="o">.</span><span class="n">create_graphnodes_and_graphrels</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python build_medicalgraph.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>创建知识图谱中的节点和关系......
+count =  10
+count =  20
+count =  30
+count =  40
+count =  50
+count =  60
+count =  70
+count =  80
+count =  90
+count =  100
+Drugs: 320
+Foods: 283
+Symptoms: 314
+Diseases: 100
+rels_recommandeat: 553
+rels_recommanddrug: 675
+rels_symptom: 748
+开始创建中心疾病节点......
+开始创建药品节点Drug......
+开始创建食品节点Food......
+开始创建症状节点Symptom......
+num_edges =  553
+num_edges =  675
+num_edges =  748
+</code></pre></div>
+<hr />
+<ul>
+<li>展示neo4j图数据库的数据:</li>
+</ul>
+<p><center><img alt="" src="img/10_2_1.png" /></center></p>
+<hr />
+<p><center><img alt="" src="img/10_2_2.png" /></center></p>
+<hr />
+<p><center><img alt="" src="img/10_2_3.png" /></center></p>
+<hr />
+<hr />
+<h3 id="_4">问题分类与答案搜索<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>构建好知识图谱后, 我们要搭建一个简单的基于规则派的红蜘蛛对话机器人, 需要完成3个子功能:<ul>
+<li>问题分类子任务</li>
+<li>问题解析子任务</li>
+<li>答案搜索子任务</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_5">问题分类子任务<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对于用户的任意问句, 将其分类到红蜘蛛可以支持回答的若干子类中, 有利于后续查询和回答模板的编写.</li>
+</ul>
+<hr />
+<ul>
+<li>代码路径: /home/ec2-user/knowledge_graph/red_spider/question_classifier.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">ahocorasick</span>
+
+
+<span class="k">class</span> <span class="nc">QuestionClassifier</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cur_dir</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1">#　特征词路径</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disease_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span> <span class="s1">&#39;dict/disease.txt&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drug_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span> <span class="s1">&#39;dict/drug.txt&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">food_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span> <span class="s1">&#39;dict/food.txt&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symptom_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cur_dir</span><span class="p">,</span> <span class="s1">&#39;dict/symptom.txt&#39;</span><span class="p">)</span>
+        <span class="c1"># 加载特征词</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disease_words</span><span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">disease_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drug_words</span><span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drug_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">food_words</span><span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">food_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symptom_words</span><span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symptom_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">region_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">disease_words</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">drug_words</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">food_words</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">symptom_words</span><span class="p">)</span>
+        <span class="c1"># 构造领域actree, 可以加速关键词匹配查找</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">region_tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_actree</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">region_words</span><span class="p">))</span>
+        <span class="c1"># 构建词典</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wdtype_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_wdtype_dict</span><span class="p">()</span>
+
+        <span class="c1"># 问句疑问词, V1.0版本仅支持症状, 食品, 药品的查询.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symptom_request</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;症状&#39;</span><span class="p">,</span> <span class="s1">&#39;表征&#39;</span><span class="p">,</span> <span class="s1">&#39;现象&#39;</span><span class="p">,</span> <span class="s1">&#39;症候&#39;</span><span class="p">,</span> <span class="s1">&#39;表现&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">food_request</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;饮食&#39;</span><span class="p">,</span> <span class="s1">&#39;饮用&#39;</span><span class="p">,</span> <span class="s1">&#39;吃&#39;</span><span class="p">,</span> <span class="s1">&#39;食&#39;</span><span class="p">,</span> <span class="s1">&#39;伙食&#39;</span><span class="p">,</span> <span class="s1">&#39;膳食&#39;</span><span class="p">,</span> <span class="s1">&#39;喝&#39;</span><span class="p">,</span> <span class="s1">&#39;菜&#39;</span> <span class="p">,</span><span class="s1">&#39;忌口&#39;</span><span class="p">,</span> <span class="s1">&#39;补品&#39;</span><span class="p">,</span> <span class="s1">&#39;保健品&#39;</span><span class="p">,</span> <span class="s1">&#39;食谱&#39;</span><span class="p">,</span> <span class="s1">&#39;菜谱&#39;</span><span class="p">,</span> <span class="s1">&#39;食用&#39;</span><span class="p">,</span> <span class="s1">&#39;食物&#39;</span><span class="p">,</span><span class="s1">&#39;补品&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drug_request</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;药&#39;</span><span class="p">,</span> <span class="s1">&#39;药品&#39;</span><span class="p">,</span> <span class="s1">&#39;用药&#39;</span><span class="p">,</span> <span class="s1">&#39;胶囊&#39;</span><span class="p">,</span> <span class="s1">&#39;口服液&#39;</span><span class="p">,</span> <span class="s1">&#39;炎片&#39;</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;model init finished ......&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 分类主函数</span>
+    <span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">medical_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_medical</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">medical_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">medical_dict</span>
+        <span class="c1"># 收集问句当中所涉及到的实体类型</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">medical_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">types</span> <span class="o">+=</span> <span class="n">type_</span>
+        <span class="n">question_type</span> <span class="o">=</span> <span class="s1">&#39;others&#39;</span>
+
+        <span class="n">question_types</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 症状</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symptom_request</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;disease&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">):</span>
+            <span class="n">question_type</span> <span class="o">=</span> <span class="s1">&#39;disease_symptom&#39;</span>
+            <span class="n">question_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">question_type</span><span class="p">)</span>
+
+        <span class="c1"># 推荐食品</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">food_request</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;disease&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">):</span>
+            <span class="n">question_type</span> <span class="o">=</span> <span class="s1">&#39;disease_food&#39;</span>
+            <span class="n">question_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">question_type</span><span class="p">)</span>
+
+        <span class="c1"># 推荐药品</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drug_request</span><span class="p">,</span> <span class="n">question</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;disease&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">):</span>
+            <span class="n">question_type</span> <span class="o">=</span> <span class="s1">&#39;disease_drug&#39;</span>
+            <span class="n">question_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">question_type</span><span class="p">)</span>
+
+        <span class="c1"># 若没有查到相关的外部查询信息，那么则将该疾病的描述信息返回</span>
+        <span class="k">if</span> <span class="n">question_types</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> <span class="s1">&#39;symptom&#39;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+            <span class="n">question_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;disease_symptom&#39;</span><span class="p">]</span>
+
+        <span class="c1"># 将多个分类结果进行合并处理，组装成一个字典</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;question_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_types</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="c1"># 构造关键词对应的节点类型</span>
+    <span class="k">def</span> <span class="nf">build_wdtype_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">word_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">region_words</span><span class="p">:</span>
+            <span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># 检查是否有疾病关键词</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">disease_words</span><span class="p">:</span>
+                <span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">)</span>
+
+            <span class="c1"># 检查是否有药品关键词</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">drug_words</span><span class="p">:</span>
+                <span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;drug&#39;</span><span class="p">)</span>
+
+            <span class="c1"># 检查是否有食品关键词</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">food_words</span><span class="p">:</span>
+                <span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;food&#39;</span><span class="p">)</span>
+
+            <span class="c1"># 检查是否有症状关键词</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">symptom_words</span><span class="p">:</span>
+                <span class="n">word_dict</span><span class="p">[</span><span class="n">word</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;symptom&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">word_dict</span>
+
+    <span class="c1"># 构造actree加速过滤</span>
+    <span class="k">def</span> <span class="nf">build_actree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wordlist</span><span class="p">):</span>
+        <span class="n">actree</span> <span class="o">=</span> <span class="n">ahocorasick</span><span class="o">.</span><span class="n">Automaton</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wordlist</span><span class="p">):</span>
+            <span class="n">actree</span><span class="o">.</span><span class="n">add_word</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">word</span><span class="p">))</span>
+        <span class="n">actree</span><span class="o">.</span><span class="n">make_automaton</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">actree</span>
+
+    <span class="c1"># 问句检查</span>
+    <span class="k">def</span> <span class="nf">check_medical</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">):</span>
+        <span class="n">region_words</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 利用AcTree加速查询关键词</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">region_tree</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="n">question</span><span class="p">):</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">region_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+        <span class="n">stop_words</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 子词进入停用词表</span>
+        <span class="k">for</span> <span class="n">word1</span> <span class="ow">in</span> <span class="n">region_words</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">word2</span> <span class="ow">in</span> <span class="n">region_words</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">word1</span> <span class="ow">in</span> <span class="n">word2</span> <span class="ow">and</span> <span class="n">word1</span> <span class="o">!=</span> <span class="n">word2</span><span class="p">:</span>
+                    <span class="n">stop_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
+
+        <span class="n">final_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">region_words</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+        <span class="n">final_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">wdtype_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">final_words</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">final_dict</span>
+
+    <span class="c1"># 基于特征词进行问句检测, 并进行问句类型的规则分类</span>
+    <span class="k">def</span> <span class="nf">check_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">sent</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">qc</span> <span class="o">=</span> <span class="n">QuestionClassifier</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">question</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;input an question:&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">qc</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python question_classifier.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>input an question:身体发热恶心应该吃什么?
+{&#39;args&#39;: {&#39;恶心&#39;: [&#39;symptom&#39;]}, &#39;question_types&#39;: [&#39;disease_symptom&#39;]}
+input an question:Q
+{}
+</code></pre></div>
+<hr />
+<h4 id="_6">问题解析子任务<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对于用户的任意问句, 经过上一步骤进行分类后, 已经得到了问题的分类标签, 接下来要对症状, 食品, 药品进行neo4j查询的cypher语句组装和解析.</li>
+</ul>
+<hr />
+<ul>
+<li>代码路径: /home/ec2-user/knowledge_graph/red_spider/question_parser.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">QuestionPaser</span><span class="p">:</span>
+    <span class="c1"># 构建实体节点</span>
+    <span class="k">def</span> <span class="nf">build_entitydict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="n">entity_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">types</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">entity_dict</span><span class="p">:</span>
+                    <span class="n">entity_dict</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">arg</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">entity_dict</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">entity_dict</span>
+
+    <span class="c1"># 解析主函数</span>
+    <span class="k">def</span> <span class="nf">parser_main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res_classify</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">res_classify</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span>
+        <span class="n">entity_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_entitydict</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">question_types</span> <span class="o">=</span> <span class="n">res_classify</span><span class="p">[</span><span class="s1">&#39;question_types&#39;</span><span class="p">]</span>
+        <span class="n">sqls</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">question_type</span> <span class="ow">in</span> <span class="n">question_types</span><span class="p">:</span>
+            <span class="n">sql_</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">sql_</span><span class="p">[</span><span class="s1">&#39;question_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_type</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># 按照不同的分类结果, 组装不同的cypher查询语句</span>
+            <span class="k">if</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_symptom&#39;</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_transfer</span><span class="p">(</span><span class="n">question_type</span><span class="p">,</span> <span class="n">entity_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_food&#39;</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_transfer</span><span class="p">(</span><span class="n">question_type</span><span class="p">,</span> <span class="n">entity_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_drug&#39;</span><span class="p">:</span>
+                <span class="n">sql</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sql_transfer</span><span class="p">(</span><span class="n">question_type</span><span class="p">,</span> <span class="n">entity_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disease&#39;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">sql</span><span class="p">:</span>
+                <span class="n">sql_</span><span class="p">[</span><span class="s1">&#39;sql&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sql</span>
+                <span class="n">sqls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sql_</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sqls</span>
+
+    <span class="c1"># 针对不同的问题，分开进行处理</span>
+    <span class="k">def</span> <span class="nf">sql_transfer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_type</span><span class="p">,</span> <span class="n">entities</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+
+        <span class="c1"># 查询语句</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 查询疾病有哪些症状</span>
+        <span class="k">if</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_symptom&#39;</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MATCH (m:Disease)-[r:has_symptom]-&gt;(n:Symptom) where m.name = &#39;</span><span class="si">{0}</span><span class="s2">&#39; return m.name, r.name, n.name&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
+        <span class="c1"># 查询疾病建议吃的东西</span>
+        <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_food&#39;</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MATCH (m:Disease)-[r:recommand_eat]-&gt;(n:Food) where m.name = &#39;</span><span class="si">{0}</span><span class="s2">&#39; return m.name, r.name, n.name&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
+        <span class="c1"># 查询疾病常用药品</span>
+        <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_drug&#39;</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MATCH (m:Disease)-[r:recommand_drug]-&gt;(n:Drug) where m.name = &#39;</span><span class="si">{0}</span><span class="s2">&#39; return m.name, r.name, n.name&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">sql</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">qp</span> <span class="o">=</span> <span class="n">QuestionPaser</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qp</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python question_parser.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&lt;__main__.QuestionPaser object at 0x7f656f8407d0&gt;
+</code></pre></div>
+<hr />
+<h4 id="_7">答案搜索子任务<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>对于任意用户的问句, 经过前面两个步骤的处理, 已经有了具体的查询计划, 当前子任务只需要完成具体的查询, 并组装回复模板即可.</li>
+</ul>
+<hr />
+<ul>
+<li>代码路径: /home/ec2-user/knowledge_graph/red_spider/answer_search.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">neo4j</span> <span class="kn">import</span> <span class="n">GraphDatabase</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">NEO4J_CONFIG</span>
+
+
+<span class="c1"># 答案搜索的主类</span>
+<span class="k">class</span> <span class="nc">AnswerSearcher</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_limit</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="n">GraphDatabase</span><span class="o">.</span><span class="n">driver</span><span class="p">(</span> <span class="o">**</span><span class="n">NEO4J_CONFIG</span><span class="p">)</span>
+
+    <span class="c1"># 执行cypher查询，并返回相应结果</span>
+    <span class="k">def</span> <span class="nf">search_main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sqls</span><span class="p">):</span>
+        <span class="n">final_answers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 开启会话</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">sql_</span> <span class="ow">in</span> <span class="n">sqls</span><span class="p">:</span>
+                <span class="n">question_type</span> <span class="o">=</span> <span class="n">sql_</span><span class="p">[</span><span class="s1">&#39;question_type&#39;</span><span class="p">]</span>
+                <span class="n">queries</span> <span class="o">=</span> <span class="n">sql_</span><span class="p">[</span><span class="s1">&#39;sql&#39;</span><span class="p">]</span>
+                <span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+
+                <span class="c1"># 遍历所有的查询cypher, 依次执行, 并将结果逐个添加进列表中</span>
+                <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+                    <span class="n">ress</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+                    <span class="n">answers</span> <span class="o">+=</span> <span class="n">ress</span>
+
+                <span class="c1"># 调用精准回复模板</span>
+                <span class="n">final_answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">answer_prettify</span><span class="p">(</span><span class="n">question_type</span><span class="p">,</span> <span class="n">answers</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">final_answer</span><span class="p">:</span>
+                    <span class="n">final_answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">final_answer</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">final_answers</span>
+
+    <span class="c1"># 根据对应的qustion_type, 调用相应的回复模板</span>
+    <span class="k">def</span> <span class="nf">answer_prettify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question_type</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
+        <span class="n">final_answer</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">answers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_symptom&#39;</span><span class="p">:</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;n.name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">]</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">answers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;m.name&#39;</span><span class="p">]</span>
+            <span class="n">final_answer</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">的症状包括:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">desc</span><span class="p">))[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_limit</span><span class="p">]))</span>
+
+        <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_food&#39;</span><span class="p">:</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;n.name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">]</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">answers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;m.name&#39;</span><span class="p">]</span>
+            <span class="n">final_answer</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">推荐食谱包括:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">desc</span><span class="p">))[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_limit</span><span class="p">]))</span>
+
+        <span class="k">elif</span> <span class="n">question_type</span> <span class="o">==</span> <span class="s1">&#39;disease_drug&#39;</span><span class="p">:</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;n.name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">]</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">answers</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;m.name&#39;</span><span class="p">]</span>
+            <span class="n">final_answer</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">推荐的药品包括:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">desc</span><span class="p">))[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_limit</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">final_answer</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">AnswerSearcher</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python answer_search.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&lt;__main__.AnswerSearcher object at 0x7fdc589a3a50&gt;
+</code></pre></div>
+<hr />
+<hr />
+<h3 id="_8">小节总结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本小节完成了知识图谱的构建, 以及红蜘蛛机器人上线前的3个子任务代码.</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="10_1.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 10.1 总体设计方案" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              10.1 总体设计方案
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="10_3.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 10.3 上线部署与联调测试" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              10.3 上线部署与联调测试
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

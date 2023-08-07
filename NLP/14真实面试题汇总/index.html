@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8567/1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>学生常见项目问题 - Transformer</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#1aibert-chinese" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="Transformer" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="active">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              Transformer
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                学生常见项目问题
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 844px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="Transformer" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    Transformer
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        学生常见项目问题
+      </label>
+    
+    <a href="" title="学生常见项目问题" class="md-nav__link md-nav__link--active">
+      学生常见项目问题
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1aibert-chinese" title="1.AI医生项目中，命名实体审核任务和句子主题相关任务中为什么选用bert-chinese模型，相比于其它模型它的优势是什么？" class="md-nav__link">
+    1.AI医生项目中，命名实体审核任务和句子主题相关任务中为什么选用bert-chinese模型，相比于其它模型它的优势是什么？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2bert" title="2.在句子主题相关任务中，我们使用微调bert模型，为什么只选用两层全连接层？好处是什么？" class="md-nav__link">
+    2.在句子主题相关任务中，我们使用微调bert模型，为什么只选用两层全连接层？好处是什么？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3gpu" title="3.命名实体审核任务任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？" class="md-nav__link">
+    3.命名实体审核任务任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4nllloss" title="4.命名实体审核任务任务中，你们为什么最终采用NLLLoss损失函数，是出于哪方面考虑？相比于其它损失函数在这个项目中优势在哪里？" class="md-nav__link">
+    4.命名实体审核任务任务中，你们为什么最终采用NLLLoss损失函数，是出于哪方面考虑？相比于其它损失函数在这个项目中优势在哪里？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5gpu" title="5.句子主题相关任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？" class="md-nav__link">
+    5.句子主题相关任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#698" title="6.用讲义上的数据量，测试效果在审核模型和相关性模型都达到了98%以上。那用实际的 数据量，这两个最终的损失值和准确率该有多少？" class="md-nav__link">
+    6.用讲义上的数据量，测试效果在审核模型和相关性模型都达到了98%以上。那用实际的 数据量，这两个最终的损失值和准确率该有多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-f1" title="7. 还有命名实体审核这部分，数据量和最后的精确率，召回率，F1该说多少？" class="md-nav__link">
+    7. 还有命名实体审核这部分，数据量和最后的精确率，召回率，F1该说多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-f1" title="8. 命名实体识别这部分，数据量和最后的精确率，召回率，F1该说多少？" class="md-nav__link">
+    8. 命名实体识别这部分，数据量和最后的精确率，召回率，F1该说多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-huggingfacetransformertransformerner" title="9. 自己也做了优化，没有用微调方式，直接使用huggingface的transformer包，只是在它的代码基础上将数据格式修改成了transformer可用的形式，进行了分类，语义相关，NER的训练，那这些如果改成实际的数据量，效果怎么说？" class="md-nav__link">
+    9. 自己也做了优化，没有用微调方式，直接使用huggingface的transformer包，只是在它的代码基础上将数据格式修改成了transformer可用的形式，进行了分类，语义相关，NER的训练，那这些如果改成实际的数据量，效果怎么说？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" title="10. 自己优化的方式，面试可能会问哪些问题，会不会给自己挖坑了？" class="md-nav__link">
+    10. 自己优化的方式，面试可能会问哪些问题，会不会给自己挖坑了？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" title="11. 统计了下现在讲义上的训练数据量：" class="md-nav__link">
+    11. 统计了下现在讲义上的训练数据量：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="12. 说自己负责三个模型搭建，这个可行吗？会不会假？" class="md-nav__link">
+    12. 说自己负责三个模型搭建，这个可行吗？会不会假？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="13. 实体命名这块，维特比会让推公式，手写代码吗？" class="md-nav__link">
+    13. 实体命名这块，维特比会让推公式，手写代码吗？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="14. 机器学习部分，今天提到的几个算法，有公式推导的，需要掌握吗？如果面试官问，他一般问到什么程度？" class="md-nav__link">
+    14. 机器学习部分，今天提到的几个算法，有公式推导的，需要掌握吗？如果面试官问，他一般问到什么程度？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="15. 是不是等下个项目讲完再投简历，最后我的简历里写这两个项目就好。" class="md-nav__link">
+    15. 是不是等下个项目讲完再投简历，最后我的简历里写这两个项目就好。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" title="16. 我七月份去北京找工作晚吗？" class="md-nav__link">
+    16. 我七月份去北京找工作晚吗？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" title="17. 对于智能文本分类项目, 为什么不直接使用单个多分类模型，而要使用这么多的二分类模型?" class="md-nav__link">
+    17. 对于智能文本分类项目, 为什么不直接使用单个多分类模型，而要使用这么多的二分类模型?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="学生真实面试问题" class="md-nav__link">
+      学生真实面试问题
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 844px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1aibert-chinese" title="1.AI医生项目中，命名实体审核任务和句子主题相关任务中为什么选用bert-chinese模型，相比于其它模型它的优势是什么？" class="md-nav__link" data-md-state="">
+    1.AI医生项目中，命名实体审核任务和句子主题相关任务中为什么选用bert-chinese模型，相比于其它模型它的优势是什么？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2bert" title="2.在句子主题相关任务中，我们使用微调bert模型，为什么只选用两层全连接层？好处是什么？" class="md-nav__link" data-md-state="">
+    2.在句子主题相关任务中，我们使用微调bert模型，为什么只选用两层全连接层？好处是什么？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3gpu" title="3.命名实体审核任务任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？" class="md-nav__link" data-md-state="">
+    3.命名实体审核任务任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4nllloss" title="4.命名实体审核任务任务中，你们为什么最终采用NLLLoss损失函数，是出于哪方面考虑？相比于其它损失函数在这个项目中优势在哪里？" class="md-nav__link" data-md-state="">
+    4.命名实体审核任务任务中，你们为什么最终采用NLLLoss损失函数，是出于哪方面考虑？相比于其它损失函数在这个项目中优势在哪里？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5gpu" title="5.句子主题相关任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？" class="md-nav__link" data-md-state="">
+    5.句子主题相关任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#698" title="6.用讲义上的数据量，测试效果在审核模型和相关性模型都达到了98%以上。那用实际的 数据量，这两个最终的损失值和准确率该有多少？" class="md-nav__link" data-md-state="">
+    6.用讲义上的数据量，测试效果在审核模型和相关性模型都达到了98%以上。那用实际的 数据量，这两个最终的损失值和准确率该有多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-f1" title="7. 还有命名实体审核这部分，数据量和最后的精确率，召回率，F1该说多少？" class="md-nav__link" data-md-state="">
+    7. 还有命名实体审核这部分，数据量和最后的精确率，召回率，F1该说多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-f1" title="8. 命名实体识别这部分，数据量和最后的精确率，召回率，F1该说多少？" class="md-nav__link" data-md-state="">
+    8. 命名实体识别这部分，数据量和最后的精确率，召回率，F1该说多少？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-huggingfacetransformertransformerner" title="9. 自己也做了优化，没有用微调方式，直接使用huggingface的transformer包，只是在它的代码基础上将数据格式修改成了transformer可用的形式，进行了分类，语义相关，NER的训练，那这些如果改成实际的数据量，效果怎么说？" class="md-nav__link" data-md-state="">
+    9. 自己也做了优化，没有用微调方式，直接使用huggingface的transformer包，只是在它的代码基础上将数据格式修改成了transformer可用的形式，进行了分类，语义相关，NER的训练，那这些如果改成实际的数据量，效果怎么说？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" title="10. 自己优化的方式，面试可能会问哪些问题，会不会给自己挖坑了？" class="md-nav__link" data-md-state="">
+    10. 自己优化的方式，面试可能会问哪些问题，会不会给自己挖坑了？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" title="11. 统计了下现在讲义上的训练数据量：" class="md-nav__link" data-md-state="">
+    11. 统计了下现在讲义上的训练数据量：
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" title="12. 说自己负责三个模型搭建，这个可行吗？会不会假？" class="md-nav__link" data-md-state="">
+    12. 说自己负责三个模型搭建，这个可行吗？会不会假？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" title="13. 实体命名这块，维特比会让推公式，手写代码吗？" class="md-nav__link" data-md-state="">
+    13. 实体命名这块，维特比会让推公式，手写代码吗？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" title="14. 机器学习部分，今天提到的几个算法，有公式推导的，需要掌握吗？如果面试官问，他一般问到什么程度？" class="md-nav__link" data-md-state="">
+    14. 机器学习部分，今天提到的几个算法，有公式推导的，需要掌握吗？如果面试官问，他一般问到什么程度？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" title="15. 是不是等下个项目讲完再投简历，最后我的简历里写这两个项目就好。" class="md-nav__link" data-md-state="">
+    15. 是不是等下个项目讲完再投简历，最后我的简历里写这两个项目就好。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" title="16. 我七月份去北京找工作晚吗？" class="md-nav__link" data-md-state="">
+    16. 我七月份去北京找工作晚吗？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" title="17. 对于智能文本分类项目, 为什么不直接使用单个多分类模型，而要使用这么多的二分类模型?" class="md-nav__link">
+    17. 对于智能文本分类项目, 为什么不直接使用单个多分类模型，而要使用这么多的二分类模型?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>学生常见项目问题</h1>
+                
+                <hr>
+<p></p><center><img alt="avatar" src="./index_files/xueyuan.png"></center><p></p>
+<hr>
+<h4 id="1aibert-chinese">1.AI医生项目中，命名实体审核任务和句子主题相关任务中为什么选用bert-chinese模型，相比于其它模型它的优势是什么？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>一方面，与传统的LSTM，GRU等模型相比，选用bert-chinese进行微调的重要原因在于：bert-chinese本身是在大语料集上预训练得来的，项目初期，我们命名实体审核和主题相关任务的样本数量和质量相比较低（比如，很多词汇在整个语料中只出现过几次，这样的情况将导致使用该语料训练的LSTM／GRU无法准确表达词义，训练效果欠佳）。我们需要借助预训练学习到的知识为这些词汇丰富语义，来弥补当前数据集早期的缺陷，经过在当前语料下的对比试验，bert-chinese上也表现更好。另一方面，与其他bert的改进模型相比，如XLNET，ALBERT或roBERTa等，在中文的支持方面，没有比bert-chinese更权威的预训练模型，对于工业生产，我们选择了可靠性更强的bert-chinese。</p>
+</div>
+<hr>
+<h4 id="2bert">2.在句子主题相关任务中，我们使用微调bert模型，为什么只选用两层全连接层？好处是什么？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>在微调bert过程中，选择怎样的微调网络一直是比较开放的话题，使用全连接层是google官方推荐的一种方式，那全连接具体该选择几层，每层设置多少个节点呢？一般根据经验，我们会将任务的训练数据集样本条数与微调条网络的参数做对照，希望二者更接近；当然只能算是选择方案的初始化逻辑，而当前选择两层全连接，每层节点数分别是8，2，是我们在当前数据集上做了大量对比实验得到的结论。这些超参数(层数，节点数)的选择会随着数据集的变化而变化。</p>
+</div>
+<hr>
+<h4 id="3gpu">3.命名实体审核任务任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>在我们的命名实体审核任务中，文本的平均长度为6（样本平均长度很重要，会影响训练机器的内存占用和整体训练时间），训练集正负样本数量总和为15万条数据，这样的数据规模是完全可以在16C，32G内存的CPU上对bert进行微调，以我们当前设定的超参数（记住：模型训练时间和很多超参数的设定有很大关系，比如，batch_size, epoch, 微调网络结构等等）微调时间约为23个小时左右。如果换做单机GTX1080Ti 11G，训练时间可以缩减10倍（在硬件评测表现中，GTX1080Ti是4C CPU的25倍，是16C CPU的10倍左右），大概2小时即可。如果在能够做数据分布式训练，比如6进程分布，那么，半小时内即可训练完成。但是一般公司内GPU都是抢占式资源，CPU训练不了时才可以抢占GPU。在这里我们的评估指标都是使用ACC，验证集数据量在30000条左右，审核任务对指标要求较高，一般至少需达到90%（短文本分类任务必须是90%以上），我们通过不断优化，完全可以达到90%左右。</p>
+</div>
+<hr>
+<h4 id="4nllloss">4.命名实体审核任务任务中，你们为什么最终采用NLLLoss损失函数，是出于哪方面考虑？相比于其它损失函数在这个项目中优势在哪里？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>我们所有的分类任务，理论上来讲都是使用交叉熵损失，二分类任务就是二分类交叉熵损失。这里提到的NLLLoss叫做负对数似然损失，本质上，它并不是一种新的损失函数，而且你会发现它只是存在于pytorch框架中，这是torch框架早期实现时开发者为了更灵活使用交叉熵损失而定义的函数，与CrossEntropyLoss相比只是少计算了softmax，不会对模型的训练和结果产生任何影响，因此你也可以把它认为是交叉熵损失。修改损失函数确实是模型优化的一个点，但损失函数的改变往往需要涉及到对应优化器的改变（损失函数需要优化器求解），它属于更学术的优化方向，一般我们不会涉及。</p>
+</div>
+<hr>
+<h4 id="5gpu">5.句子主题相关任务中，实际训练数据量多少，训练多长时间，用了几块GPU,什么型号的，最终公司对模型的评估指标是什么，达到多少合格，你们达到了多少？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>在我们的句子主题相关任务中，文本的平均长度高达为15，一般情况下，数据集的平均文本长度越大，如果想要训练出效果的话，需要的训练样本数量也就越多。因此我们训练集正负样本数量总和为30万条数据。这样的数据规模也是完全可以在16C，32G内存的CPU上对bert进行微调，以我们当前设定的超参数（记住：模型训练时间和很多超参数的设定有很大关系，比如，batch_size, epoch, 微调网络结构等等）微调时间约为56个小时左右。如果换做单机GTX1080Ti 11G，训练时间可以缩减10倍（在硬件评测表现中，GTX1080Ti是4C CPU的25倍，是16C CPU的10倍左右），大概6小时即可。如果在能够做数据分布式训练，比如6进程分布，那么，一个小时内即可训练完成。在这里我们的评估指标都是使用ACC，验证集数据量在60000条左右，主题相关对指标要求不高，一般至少需达到80%，我们通过不断优化，完全可以达到85%左右。</p>
+</div>
+<hr>
+<h4 id="698">6.用讲义上的数据量，测试效果在审核模型和相关性模型都达到了98%以上。那用实际的 数据量，这两个最终的损失值和准确率该有多少？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>咱们当前讲义上的数据量，准确率以及损失其实也是可用的（是做项目的一个早期阶段）。只不过从当前讲义上的数据量来讲，并不能发挥bert模型的优势，咱们现有的数据集中的内容相对是简化的，也就是说，数据中的规律过于简单，我们的模型很容易就可以捕获到规律，甚至拿一个逻辑回归也可以取得不错的效果，数据基本上是线性可分的，不需要任何调优。这属于项目应用模型的早期阶段（这也是实际场景中的组成部分）。等到了项目发展的中期，数据量变得越来越大，数据文本包含的信息也越来越多，为了捕捉更复杂的规律，这时迁移bert模型进行微调的方法比传统的方式训练的模型优势开始彰显。此时数据量可能达到几十万条到几百万条，验证集中数据形式也更丰富，但是对于审核任务（短文本分类）来讲，仍然需要达到90%以上的准确率，对应的损失约在[0.03, 0.3]之间（损失的计算方式可能有差异，但相差不会太大）。对于句子主题相关模型(长文本分类任务)，这时长文本的复杂性开始影响模型准确率，一般能到达85%就是比较比错的模型了，对应的损失在[0.2, 0.4]之间都有可能。等到项目的后期，数据量达到百万甚至千万条，就需要从模型结构本身就进行改进，微调网络需要更加复杂的结构和更多的参数来拟合数据。但这个阶段一般公司很难达到，虽然很多公司自称拥有千万或上亿的数据，其实都是指没有加工过的原始数据，真正能拿来训练的并不能到达这个级别。一般来讲，短文本任务分类在千万数据量级别仍然有不错的效果。而长文本准确率衰减非常快，会出现非常多的问题，不仅仅是过拟合和欠拟合的问题，还会有”鞍点”等的问题。等你把当前的问题都复习好了，再深入的讨论。</p>
+</div>
+<hr>
+<h4 id="7-f1">7. 还有命名实体审核这部分，数据量和最后的精确率，召回率，F1该说多少？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>对于命名实体审核模型来讲，你可以直接说中期阶段：比如数据量30万左右，正如上面所有段文本分类ACC仍然要达到90%以上，如果非要考虑精度，召回和F1，审核任务其实更希望精度更高(只要预测为正那就希望它一定为正)，因此精度可以上到93%，召回87%，这样F1作为二者的调和平均数为0.933.</p>
+</div>
+<hr>
+<h4 id="8-f1">8. 命名实体识别这部分，数据量和最后的精确率，召回率，F1该说多少？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>对于NER任务，垂直领域NER的标注数据一般都是依靠纯人工标准，所以数据量不会太多，5万左右的标注数据是在一个中型公司比较合适数据量。因为NER任务本身是比文本分类任务更困难的（多次角色标签分类正确才能保证一个实体是正确的），因此对于NER的评估指标，在10000条（5万的2%）验证集上得效果一般不会上到90%，如：P：约87%，R：约82%，F1：约0.844。注意：NER的评估指标受最后的模式匹配影响，是可以人工调节“松紧”的。</p>
+</div>
+<hr>
+<h4 id="9-huggingfacetransformertransformerner">9. 自己也做了优化，没有用微调方式，直接使用huggingface的transformer包，只是在它的代码基础上将数据格式修改成了transformer可用的形式，进行了分类，语义相关，NER的训练，那这些如果改成实际的数据量，效果怎么说？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>在咱们刚刚说的中等数据量级上，十万到百万之间，非迁移学习的方式不仅耗时，而且效果一般都会略低5%左右。（这个会很多因素影响，但是面试时这样去说对比实验结果是没有问题的）</p>
+</div>
+<hr>
+<h4 id="10">10. 自己优化的方式，面试可能会问哪些问题，会不会给自己挖坑了？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>你现在说的优化方式应该就是模型间的对比实验，只要你把对比结果说的不太离谱就没有问题。在面试过程中，bert最常问到的优化都是对推断阶段的优化，可以使用“动态量化方式”进行优化来缩短推断时间。具体过程和方法参见NLP案例库：http://52.83.69.131:8008/4/</p>
+</div>
+<hr>
+<h4 id="11">11. 统计了下现在讲义上的训练数据量：</h4>
+<p>实体审核：共11480条数据（含正负样本），训练集9148条。
+句子相关：共27732条数据，训练集22185条
+实体命名：共40467条数据，训练集21787条</p>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>这可以作为项目早期的数据量级，这个时候很多模型都可以取得不错的效果。</p>
+</div>
+<hr>
+<h4 id="12">12. 说自己负责三个模型搭建，这个可行吗？会不会假？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>不建议直接说自己负责三个模型，公司中算法团队可能每人负责一个模型，你主要负责一个，但是你们之间会经常沟通交流，多少对其他模型的训练也会有一些了解，这样去说比较好。</p>
+</div>
+<hr>
+<h4 id="13">13. 实体命名这块，维特比会让推公式，手写代码吗？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>不会，一般只会问到维特比的算法原理，也就是动态规划，最多让你讲一下动态规划的意思。</p>
+</div>
+<hr>
+<h4 id="14">14. 机器学习部分，今天提到的几个算法，有公式推导的，需要掌握吗？如果面试官问，他一般问到什么程度？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>机器学习算法不会推导公式，但可能手写交叉熵损失函数（这一定要会），以及损失函数怎么得来的，这个只要说就可以。正常的公司，机器学习部分都是使用LR，SVM和GBDT其中的某个，问题也就是围绕损失函数，bagging决策树和boosting决策树区别，SVM的核函数展开。如果在面试过程中，真的问到了你不会的问题，你可以说这块已经很久没有用到，有些忘了，最近都是在使用深度模型，把话题拽回来。</p>
+</div>
+<hr>
+<h4 id="15">15. 是不是等下个项目讲完再投简历，最后我的简历里写这两个项目就好。</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>其实把一个项目写好，完全也可以投简历（单点去投，不要大面积）。一个项目也可以写两个阶段，初期的NLP大部分都是使用规则和文本数据的处理。后期才会开始让你接手模型训练。</p>
+</div>
+<hr>
+<h4 id="16">16. 我七月份去北京找工作晚吗？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>准备好了就来，什么时候都不晚，但我建议大家还是早日工作！人生苦短，及时行乐！</p>
+</div>
+<hr>
+<h4 id="17">17. 对于智能文本分类项目, 为什么不直接使用单个多分类模型，而要使用这么多的二分类模型?</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>1，首先我们需要解决的问题类型是：多标签多分类问题，也就是语料不仅存在多个类别，而且也允许每条样本存在多个类别。而我们常用的典型多分类模型只能解决类似于“手写字识别”的多分类问题。
+2，假如我们改变当个多分类的模型输出层，让它能够产生多标签多分类的效果，在我们当前的语料分布上并不适合，因为只是使用一个模型意味着所有的语料都需要放在一起进行训练，这对于不同源（原始数据不是同一个源，每个类别的数量的无法控制）的数据实验效果非常差，而且样本如何很好的均衡也是一个难题。
+3，随着业务的快速迭代，标签的数量也在发生变化，单独的多分类模型需要重新设计输出层，也就需要重新训练模型，对其他标签的识别效果可能造成影响。而多个二分类能够灵活的增加和减少类别，不会对其他类别产生影响。</p>
+</div>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="./index2.html" title="学生真实面试问题" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                学生真实面试问题
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

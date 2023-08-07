@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://121.199.45.168:8818/1_2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8818/1_2/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>1.2 项目中的数据集初探 - 文本摘要项目</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="./1_1.html" title="文本摘要项目" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              文本摘要项目
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                1.2 项目中的数据集初探
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 788px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="./1_1.html" title="文本摘要项目" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    文本摘要项目
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked="">
+    
+    <label class="md-nav__link" for="nav-1">
+      第一章:文本摘要项目简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: block; overflow: visible;">
+      <label class="md-nav__title" for="nav-1">
+        第一章:文本摘要项目简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_1.html" title="1.1 项目背景介绍" class="md-nav__link">
+      1.1 项目背景介绍
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        1.2 项目中的数据集初探
+      </label>
+    
+    <a href="" title="1.2 项目中的数据集初探" class="md-nav__link md-nav__link--active">
+      1.2 项目中的数据集初探
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文本摘要项目数据集" class="md-nav__link">
+    文本摘要项目数据集
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="清晰了解本项目的数据." class="md-nav__link">
+    清晰了解本项目的数据.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="清晰了解项目中的数据待处理任务" class="md-nav__link">
+    清晰了解项目中的数据待处理任务
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="数据集中的空值" class="md-nav__link">
+    数据集中的空值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="数据集中的脏数据" class="md-nav__link">
+    数据集中的脏数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="数据集中的特殊字符" class="md-nav__link">
+    数据集中的特殊字符
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      第二章:TextRank模型
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-2">
+        第二章:TextRank模型
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-nav__link">
+      2.1 TextRank算法理论基础
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_2.html" title="2.2 TextRank实现baseline-0模型" class="md-nav__link">
+      2.2 TextRank实现baseline-0模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      第三章:seq2seq经典架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-3">
+        第三章:seq2seq经典架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_1.html" title="3.1 seq2seq实现baseline-1模型" class="md-nav__link">
+      3.1 seq2seq实现baseline-1模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_2.html" title="3.2 baseline-1模型的优化" class="md-nav__link">
+      3.2 baseline-1模型的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      第四章:PGN先进架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-4">
+        第四章:PGN先进架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_1.html" title="4.1 PGN架构解析" class="md-nav__link">
+      4.1 PGN架构解析
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_2.html" title="4.2 PGN模型的数据处理" class="md-nav__link">
+      4.2 PGN模型的数据处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_3.html" title="4.3 PGN实现baseline-2模型" class="md-nav__link">
+      4.3 PGN实现baseline-2模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      第五章:生成式模型的评估方法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-5">
+        第五章:生成式模型的评估方法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_1.html" title="5.1 文本摘要评估方法" class="md-nav__link">
+      5.1 文本摘要评估方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_2.html" title="5.2 ROUGE评估算法实现" class="md-nav__link">
+      5.2 ROUGE评估算法实现
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      第六章:模型的迭代优化
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-6">
+        第六章:模型的迭代优化
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_1.html" title="6.1 PGN + coverage的优化模型" class="md-nav__link">
+      6.1 PGN + coverage的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_2.html" title="6.2 PGN + beam-search的优化模型" class="md-nav__link">
+      6.2 PGN + beam-search的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_3.html" title="6.3 数据增强的优化" class="md-nav__link">
+      6.3 数据增强的优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_4.html" title="6.4 训练策略的优化" class="md-nav__link">
+      6.4 训练策略的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      第七章:模型的部署与总结
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-7">
+        第七章:模型的部署与总结
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_1.html" title="7.1 硬件优化与模型部署" class="md-nav__link">
+      7.1 硬件优化与模型部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_2.html" title="7.2 项目总结" class="md-nav__link">
+      7.2 项目总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 788px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文本摘要项目数据集" class="md-nav__link">
+    文本摘要项目数据集
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="清晰了解本项目的数据." class="md-nav__link">
+    清晰了解本项目的数据.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="清晰了解项目中的数据待处理任务" class="md-nav__link">
+    清晰了解项目中的数据待处理任务
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="数据集中的空值" class="md-nav__link">
+    数据集中的空值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="数据集中的脏数据" class="md-nav__link">
+    数据集中的脏数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="数据集中的特殊字符" class="md-nav__link">
+    数据集中的特殊字符
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>1.2 项目中的数据集初探</h1>
+                
+                <h2 id="_1">文本摘要项目数据集</h2>
+<hr>
+<h3 id="_2">学习目标</h3>
+<ul>
+<li>清晰了解本项目的数据.</li>
+<li>清晰了解项目中的数据待处理任务.</li>
+</ul>
+<hr>
+<h3 id="_3">清晰了解本项目的数据.</h3>
+<ul>
+<li>本项目中用到的数据集来源于百度开放的汽车大师APP对话记录, 分两个数据文件提供, 分别是train.csv和test.csv.</li>
+</ul>
+<hr>
+<ul>
+<li>训练数据集展示如下, 文件中共有数据82943行.</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>QID,Brand,Model,Question,Dialogue,Report
+Q1,奔驰,奔驰GL级,方向机重，助力泵，方向机都换了还是一样,技师说：[语音]|车主说：新的都换了|车主说：助力泵，方向
+机|技师说：[语音]|车主说：换了方向机带的有|车主说：[图片]|技师说：[语音]|车主说：有助力就是重，这车要匹配吧|技
+师说：不需要|技师说：你这是更换的部件有问题|车主说：跑快了还好点，就倒车重的很。|技师说：是非常重吗|车主说：是
+的，累人|技师说：[语音]|车主说：我觉得也是，可是车主是以前没这么重，选吧助理泵换了不行，又把放向机换了，现在还
+这样就不知道咋和车主解释。|技师说：[语音]|技师说：[语音],随时联系
+Q2,奔驰,奔驰M级,奔驰ML500排气凸轮轴调节错误,技师说：你这个有没有电脑检测故障代码。|车主说：有|技师说：发一下|&gt;车主说：发动机之前亮故障灯、显示是失火、有点缺缸、现在又没有故障、发动机多少有点抖动、检查先前的故障是报这个故
+障|车主说：稍等|车主说：显示图片太大传不了|技师说：[语音]|车主说：这个对发动机的抖动、失火、缺缸有直接联系吗？
+|技师说：[语音]|车主说：还有就是报（左右排气凸轮轴作动电磁铁）对正极短路、对地短路、对导线断路|技师说：[语音]|车主说：这几个电磁阀和问您的第一个故障有直接关系吧|技师说：[语音]|车主说：这个有办法检测它好坏吗？|技师说：[语
+音]|车主说：谢谢|技师说：不客气,随时联系
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>数据文件路径: /home/ec2-user/text_summary/seq2seq/data/train.csv</li>
+</ul>
+<hr>
+<ul>
+<li>测试数据集展示如下, 文件中共有数据20000行.</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code>QID,Brand,Model,Question,Dialogue
+Q1,大众(进口),高尔夫(进口),我的帕萨特烧机油怎么办怎么办？,技师说：你好，请问你的车跑了多少公里了，如果在保修期
+内，可以到当地的4店里面进行检查维修。如果已经超出了保修期建议你到当地的大型维修店进行检查，烧机油一般是发动机&gt;活塞环间隙过大和气门油封老化引起的。如果每7500公里烧一升机油的话，可以在后备箱备一些机油，以便机油报警时有机油
+及时补充，如果超过两升或者两升以上，建议你进行发动机检查维修。|技师说：你好|车主说：嗯
+Q2,一汽-大众奥迪,奥迪A6,修一下多少钱是换还是修,技师说：你好师傅！抛光处理一下就好了！50元左右就好了，希望能够&gt;帮到你！祝你生活愉快！
+Q3,上汽大众,帕萨特,帕萨特领域    喇叭坏了  店里说方向盘里线坏了 换一根两三百不等 感觉太贵 ,技师说：你好，气囊&gt;油丝坏了吗，这个价格不贵。可以更换。
+Q4,南京菲亚特,派力奥,发动机漏气会有什么征兆？,技师说：你好！一：发动机没力，并伴有“啪啪”的漏气声音。二：发动机
+没力，并伴有排气管冒黑烟。三：水温高，水箱盖出冒气泡出来。
+Q5,东风本田,思铂睿,请问 那天右后胎扎了订，补了胎后跑高速80多开始有点抖，110时速以上抖动明显，以为是未做动平衡&gt;导致，做了一样抖，请问是不是前面两条胎的问题导致？,技师说：你好师傅！可能前轮平衡快脱落或者不平衡造成的！建议&gt;前轮做一下动平衡就好了！希望能够帮到你！祝你用车愉快！|车主说：谢谢大师！|技师说：不客气！祝您用车愉快！
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>数据文件路径: /home/ec2-user/text_summary/seq2seq/data/test.csv</li>
+</ul>
+<hr>
+<ul>
+<li>结论: 本项目中真正能用于监督学习的数据只有train.csv中的数据, 因为test.csv没有人工摘要的标签Report列. 所以后续的训练集, 测试集都要通过train.csv进行划分. 而这里面的test.csv的功能其实是利用训练好的模型进行预测, 然后将预测结果文件提交至竞赛平台, 由百度平台的后端程序自动进行效果评估. 也就是说test.csv中对应的真实标签并没有公开给广大用户, 属于"闭卷考试题".</li>
+</ul>
+<hr>
+<hr>
+<h3 id="_4">清晰了解项目中的数据待处理任务</h3>
+<ul>
+<li>一般来说, 在任何项目中, 面对原始数据都要进行接下来的几点工作:<ul>
+<li>删除空值.</li>
+<li>删除"脏"数据.</li>
+<li>删除特定字符的集合.</li>
+<li>分词.</li>
+<li>完成字符到id的映射.</li>
+<li>完成padding, cutting的工作.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="_5">数据集中的空值</h4>
+<ul>
+<li>本项目中首先要评估的就是数据集中的空值情况.</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">train_path</span> <span class="o">=</span> <span class="s1">'train.csv'</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="s1">'test.csv'</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'**********************'</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 82943 entries, 0 to 82942
+Data columns (total 6 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   QID       82943 non-null  object
+ 1   Brand     81642 non-null  object
+ 2   Model     81642 non-null  object
+ 3   Question  82943 non-null  object
+ 4   Dialogue  82941 non-null  object
+ 5   Report    82873 non-null  object
+dtypes: object(6)
+**********************
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 20000 entries, 0 to 19999
+Data columns (total 5 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   QID       20000 non-null  object
+ 1   Brand     19987 non-null  object
+ 2   Model     19987 non-null  object
+ 3   Question  20000 non-null  object
+ 4   Dialogue  20000 non-null  object
+dtypes: object(5)
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>结论: 经过初步统计, 可以很清晰的看到同一个数据文件中, 不同的数据列非空样本数量并不相同. 所以删除空值的是必须的环节, 否则后续处理文件会报错, 后续构建训练样本也会因为缺少特征而报错.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="_6">数据集中的脏数据</h4>
+<ul>
+<li>对于生产环境中的现实数据, 总会有各种各样的情况, 我们喜欢"干净"的数据, 不喜欢"脏"的数据. 一般来说, 关于脏数据没有严格的统一定义, 都是各个公司根据不同的业务线, 业务场景自行定义.</li>
+</ul>
+<hr>
+<ul>
+<li>比如我们在测试集样本test.csv中截取两行样本, 展示如下:</li>
+</ul>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code>Q34,一汽-大众奥迪,奥迪A4L,刚刚亮起，是什么故障灯？,技师说：这是发动机故障灯|技师说：该故障灯点亮，表示发动机系
+统检测到故障，需要用解码器读取故障记录。根据故障提示排查问题。|车主说：[图片]|车主说：抬速不出常，平时正常是800转，今晚突然底转速，当推到p挡后转速升到千二三转，然后又降下来|车主说：这是什么问题
+Q35,上汽大众,朗逸,朗逸17款新车。300公里。行驶中发现转数高，停车熄火。档位在D挡回不去。刹车踩不下去，打不燃火,&gt;技师说：你好，发动机故障灯亮了没有，检查一下刹车真空助力|车主说：[图片]|车主说：请问怎么检查|车主说：可以电话&gt;交流吗？|技师说：没办法，我们有规定不让留联系方式，车子启动，起动机工作不|技师说：我问你回答，尽最大努力帮你解
+决问题！|车主说：点火完全没有反应。档位回不去。刹车踩不了。方向盘锁死|技师说：仪表盘上防盗灯有没有亮，|车主说&gt;：我刚刚给你发了一张图片。亮的就是那些|技师说：检查一下发动机舱和驾驶员车门旁边仪表台测面有没有保险丝烧了|车主
+说：没有看到。麻烦问一下。这种情况我的车还没有上户。应该怎么找4s店处理|技师说：新车，4s店要给质保的，要把问题&gt;帮你彻底解决，并且告诉你造成这种故障的原因，|车主说：可以找他理赔吗？|车主说：自动挡能不能找车拉回去呢？|技师&gt;说：自，在变速器杆旁边有个机械回位的插孔，可以把档位回到空挡上，用车拉，要不然自动挡不能直接拉|技师说：放心把&gt;，他们肯定要帮你把问题解决的，如果解决不了，你可以申请理赔|车主说：机械回位在哪？|技师说：在换挡杆周边，塑料盖
+子下面，|车主说：[图片]|车主说：哪里？|技师说：把皮套拿掉|车主说：[图片]|车主说：哪一个？|车主说：复位了，火打
+燃了|技师说：那就好|技师说：可以去4s店找他们，|车主说：谢谢|技师说：不用谢
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>可以发现, 汽车大师中的对话内容由两方面要考虑:<ul>
+<li>第一: 很多"技师说", "车主说", 类似这样字符串其实对于文本语义没有任何帮助, 属于"停用词"的类型.</li>
+<li>第二: 文本中有"[图片]"字样, 这是在APP端可见的图片, 但是在本项目中不可见. 因此这样的字符子串也属于"脏数据".</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>结论: 经过上述分析, 可知在未来的数据预处理中包含"脏"数据的部分都应该删除掉.</li>
+</ul>
+<hr>
+<h4 id="_7">数据集中的特殊字符</h4>
+<ul>
+<li>关于特殊字符一般来说, 除了常用的停用词表, 主要靠程序员的观察, 总结. 再次展示test.csv中的若干样本文本:</li>
+</ul>
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>Q1,大众(进口),高尔夫(进口),我的帕萨特烧机油怎么办怎么办？,技师说：你好，请问你的车跑了多少公里了，如果在保修期
+内，可以到当地的4店里面进行检查维修。如果已经超出了保修期建议你到当地的大型维修店进行检查，烧机油一般是发动机&gt;活塞环间隙过大和气门油封老化引起的。如果每7500公里烧一升机油的话，可以在后备箱备一些机油，以便机油报警时有机油
+及时补充，如果超过两升或者两升以上，建议你进行发动机检查维修。|技师说：你好|车主说：嗯
+Q38,一汽-大众奥迪,奥迪A6,05年的圆屁股a6，1.8T自动挡，能卖多少钱，一手车，车况好【车型：奥迪A6】,技师说：你好，
+你可以在当地二手车市场让他们估价，我想大概还能值30000-40000左右吧。谢谢
+Q39,北京现代,瑞纳,新买的车，想贴膜，请问什么牌子的膜好用？在一般的店里贴膜大概多少钱？当然不要太贵的，就是经济
+实惠的～,技师说：你好，最好是熟人修理厂，因为贴膜利润是比较大得，暴利产品，四门后档便宜，前挡风玻璃要贵一点得&gt;。祝你们幸福的，|车主说：请问四门后挡贴个一般的大概多少钱|技师说：熟人得话四门加后档四五百，一个前挡也是四百块
+钱左右。如果是比较熟或者亲戚更便宜，因为膜得利润是百分几百
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>结论: 有的字符是"(进口)", 这个字样对摘要意义不大(当然了, 你也可以认为意义很大!). 还有"【车型：奥迪A6】"这样的中文输入法下的中括号, 也属于特殊字符, 意义不大. 还有"就是经济
+实惠的～,", 这种带波浪线的特殊字符, 都是未来数据预处理中需要删除的无效字符.</li>
+</ul>
+<hr>
+<ul>
+<li>后续的关于分词, 完成word_to_id的映射, 以及完成padding, cutting的工作, 就属于更纯粹的数据处理领域了. 等到后面章节中具体用到的时候我们具体分析, 处理.</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./1_1.html" title="1.1 项目背景介绍" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                1.1 项目背景介绍
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                2.1 TextRank算法理论基础
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2020, AITutorials.CN This website has been reviewed by the review agency. 京ICP备19006137号
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

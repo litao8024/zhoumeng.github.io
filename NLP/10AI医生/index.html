@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8888/1/ -->
+<html lang="en" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8888/1/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="./index_files/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>第一章:背景介绍与Unit的使用 - DOCTOR</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&amp;display=fallback">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#11" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="#" title="DOCTOR" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="active">
+          
+            <span class="md-header-nav__topic" style="width: 882px;">
+              DOCTOR
+            </span>
+            <span class="md-header-nav__topic" style="width: 882px;">
+              
+                第一章:背景介绍与Unit的使用
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 881px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="#" title="DOCTOR" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    DOCTOR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        第一章:背景介绍与Unit的使用
+      </label>
+    
+    <a href="" title="第一章:背景介绍与Unit的使用" class="md-nav__link md-nav__link--active">
+      第一章:背景介绍与Unit的使用
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11" title="1.1 背景介绍" class="md-nav__link">
+    1.1 背景介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-unitapi" title="1.2 Unit对话API的使用" class="md-nav__link">
+    1.2 Unit对话API的使用
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="第二章:在线医生的总体架构与工具介绍" class="md-nav__link">
+      第二章:在线医生的总体架构与工具介绍
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="第三章:neo4j图数据库" class="md-nav__link">
+      第三章:neo4j图数据库
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="第四章:离线部分" class="md-nav__link">
+      第四章:离线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="第五章:命名实体审核任务" class="md-nav__link">
+      第五章:命名实体审核任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="第六章:命名实体识别任务" class="md-nav__link">
+      第六章:命名实体识别任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index7.html" title="第七章:在线部分" class="md-nav__link">
+      第七章:在线部分
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index8.html" title="第八章:句子主题相关任务" class="md-nav__link">
+      第八章:句子主题相关任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index9.html" title="第九章:系统联调与测试" class="md-nav__link">
+      第九章:系统联调与测试
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index10.html" title="附录:环境安装部署手册" class="md-nav__link">
+      附录:环境安装部署手册
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 881px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#11" title="1.1 背景介绍" class="md-nav__link" data-md-state="">
+    1.1 背景介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-unitapi" title="1.2 Unit对话API的使用" class="md-nav__link">
+    1.2 Unit对话API的使用
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>第一章:背景介绍与Unit的使用</h1>
+                
+                <h2 id="11">1.1 背景介绍<a class="headerlink" href="#11" title="Permanent link">¶</a></h2>
+<hr>
+<ul>
+<li>学习目标:<ul>
+<li>了解智能对话系统的相关背景知识.</li>
+<li>掌握使用Unit对话API.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>什么是智能对话系统？<ul>
+<li>随着人工智能技术的发展, 聊天机器人, 语音助手等应用在生活中随处可见, 比如百度的小度, 阿里的小蜜, 微软的小冰等等. 其目的在于通过人工智能技术让机器像人类一样能够进行智能回复, 解决现实中的各种问题.</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img src="./index_files/image8.gif" height="200px" width="200px"></center><p></p>
+<hr>
+<ul>
+<li>从处理问题的角度来区分, 智能对话系统可分为:<ul>
+<li>任务导向型: 完成具有明确指向性的任务, 比如预定酒店咨询,  在线问诊等等.</li>
+<li>非任务导向型: 没有明确目的, 比如算算术, 播放音乐, 回答问题.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>我们的在线医生项目就是任务导向型的智能对话系统.</li>
+</ul>
+<hr>
+<h2 id="12-unitapi">1.2 Unit对话API的使用<a class="headerlink" href="#12-unitapi" title="Permanent link">¶</a></h2>
+<hr>
+<ul>
+<li>学习目标:<ul>
+<li>了解Unit平台的相关知识.</li>
+<li>掌握调用Unit API的实现过程.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Unit平台的相关知识:<ul>
+<li>Unit平台是百度大脑开放的智能对话定制与服务平台, 也是当前最大的中文领域对话开放平台之一. Unit对注册用户提供免费的对话接口服务, 比如中文闲聊API, 百科问答API, 诗句生成API等, 通过这些API我们可以感受一下智能对话的魅力, 同时它也可以作为任务导向型对话系统无法匹配用户输入时的最终选择.</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img src="./index_files/picture1_0512.png" height="auto" width="auto"></center><p></p>
+<hr>
+<ul>
+<li>Unit闲聊API演示:
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code>用户输入 &gt;&gt;&gt; "你好"
+Unit回复 &gt;&gt;&gt; "你好,想聊什么呢~"
+用户输入 &gt;&gt;&gt; "我想有一个女朋友!"
+Unit回复 &gt;&gt;&gt; "我也是想要一个女朋友~"
+用户输入 &gt;&gt;&gt; "晚吃啥呢想想"
+Unit回复 &gt;&gt;&gt; "想吃火锅"
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>调用Unit API的实现过程:<ul>
+<li>第一步: 注册登录百度账户, 进入Unit控制台创建自己的机器人.</li>
+<li>第二步: 进行相关配置, 获得请求API接口需要的API Key与Secret Key.</li>
+<li>第三步: 在服务器上编写API调用脚本并进行测试.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 注册登录百度账户, 进入Unit控制台创建自己的机器人.</li>
+</ul>
+<p></p><center><img src="./index_files/picture2_0512.png" height="auto" width="auto"></center><p></p>
+<hr>
+<ul>
+<li>第二步: 进行相关配置, 获得请求API接口需要的API Key与Secret Key.</li>
+</ul>
+<blockquote>
+<ul>
+<li>点击获取API Key进入百度云应用管理页面.
+<center><img src="./index_files/picture3_0512.png" height="auto" width="auto"></center></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>点击创建应用, 进入应用信息表单填写页面.
+<center><img src="./index_files/picture4_0512.png" height="auto" width="auto"></center></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>填写完毕后, 点击立即创建, 成功后会提示创建完毕.
+<center><img src="./index_files/picture5_0512.png" height="auto" width="auto"></center></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>点击返回应用列表.
+<center><img src="./index_files/picture6_0512.png" height="auto" width="auto"></center></li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>可以看到创建的API Key和Secret Key, 至此创建流程结束.
+<center><img src="./index_files/picture7_0512.png" height="auto" width="auto"></center></li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>第三步: 在服务器上编写API调用脚本并进行测试</li>
+</ul>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># client_id 为官网获取的AK， client_secret 为官网获取的SK</span>
+<span class="n">client_id</span> <span class="o">=</span> <span class="s2">"1xhPonkmHqwolDt3GCICLX39"</span>
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s2">"SRYsfjMGNuW8G265paMXLEjDTjO6O4RC"</span>
+
+
+<span class="k">def</span> <span class="nf">unit_chat</span><span class="p">(</span><span class="n">chat_input</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="s2">"88888"</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    description:调用百度UNIT接口，回复聊天内容</span>
+<span class="sd">    Parameters</span>
+<span class="sd">      ----------</span>
+<span class="sd">      chat_input : str</span>
+<span class="sd">          用户发送天内容</span>
+<span class="sd">      user_id : str</span>
+<span class="sd">          发起聊天用户ID，可任意定义</span>
+<span class="sd">    Return</span>
+<span class="sd">      ----------</span>
+<span class="sd">      返回unit回复内容</span>
+<span class="sd">    """</span>
+    <span class="c1"># 设置默认回复内容,  一旦接口出现异常, 回复该内容</span>
+    <span class="n">chat_reply</span> <span class="o">=</span> <span class="s2">"不好意思，俺们正在学习中，随后回复你。"</span>
+    <span class="c1"># 根据 client_id 与 client_secret 获取access_token</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">"https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&amp;client_id=</span><span class="si">%s</span><span class="s2">&amp;client_secret=</span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span>
+    <span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">access_token</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s2">"access_token"</span><span class="p">]</span>
+    <span class="c1"># 根据 access_token 获取聊天机器人接口数据</span>
+    <span class="n">unit_chatbot_url</span> <span class="o">=</span> <span class="s2">"https://aip.baidubce.com/rpc/2.0/unit/service/chat?access_token="</span> <span class="o">+</span> <span class="n">access_token</span>
+    <span class="c1"># 拼装聊天接口对应请求发送数据，主要是填充 query 值</span>
+    <span class="n">post_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"log_id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()),</span>
+                <span class="s2">"request"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"query"</span><span class="p">:</span> <span class="n">chat_input</span><span class="p">,</span>
+                    <span class="s2">"user_id"</span><span class="p">:</span> <span class="n">user_id</span>
+                <span class="p">},</span>
+                <span class="s2">"session_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+                <span class="s2">"service_id"</span><span class="p">:</span> <span class="s2">"S23245"</span><span class="p">,</span>
+                <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"2.0"</span>
+            <span class="p">}</span>
+    <span class="c1"># 将封装好的数据作为请求内容, 发送给Unit聊天机器人接口, 并得到返回结果</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">unit_chatbot_url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">post_data</span><span class="p">)</span>
+
+
+    <span class="c1"># 获取聊天接口返回数据</span>
+    <span class="n">unit_chat_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="c1"># print(unit_chat_obj)</span>
+    <span class="c1"># 打印返回的结果</span>
+    <span class="c1"># 判断聊天接口返回数据是否出错 error_code == 0 则表示请求正确</span>
+    <span class="k">if</span> <span class="n">unit_chat_obj</span><span class="p">[</span><span class="s2">"error_code"</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">chat_reply</span>
+    <span class="c1"># 解析聊天接口返回数据，找到返回文本内容 result -&gt; response_list -&gt; schema -&gt; intent_confidence(&gt;0) -&gt; action_list -&gt; say</span>
+    <span class="n">unit_chat_obj_result</span> <span class="o">=</span> <span class="n">unit_chat_obj</span><span class="p">[</span><span class="s2">"result"</span><span class="p">]</span>
+    <span class="n">unit_chat_response_list</span> <span class="o">=</span> <span class="n">unit_chat_obj_result</span><span class="p">[</span><span class="s2">"response_list"</span><span class="p">]</span>
+    <span class="c1"># 随机选取一个"意图置信度"[+response_list[].schema.intent_confidence]不为0的技能作为回答</span>
+    <span class="n">unit_chat_response_obj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+       <span class="p">[</span><span class="n">unit_chat_response</span> <span class="k">for</span> <span class="n">unit_chat_response</span> <span class="ow">in</span> <span class="n">unit_chat_response_list</span> <span class="k">if</span>
+        <span class="n">unit_chat_response</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">][</span><span class="s2">"intent_confidence"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">])</span>
+    <span class="n">unit_chat_response_action_list</span> <span class="o">=</span> <span class="n">unit_chat_response_obj</span><span class="p">[</span><span class="s2">"action_list"</span><span class="p">]</span>
+    <span class="n">unit_chat_response_action_obj</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">unit_chat_response_action_list</span><span class="p">)</span>
+    <span class="n">unit_chat_response_say</span> <span class="o">=</span> <span class="n">unit_chat_response_action_obj</span><span class="p">[</span><span class="s2">"say"</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">unit_chat_response_say</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">chat_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"请输入:"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">chat_input</span><span class="p">)</span>
+        <span class="n">chat_reply</span> <span class="o">=</span> <span class="n">unit_chat</span><span class="p">(</span><span class="n">chat_input</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"用户输入 &gt;&gt;&gt;"</span><span class="p">,</span> <span class="n">chat_input</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Unit回复 &gt;&gt;&gt;"</span><span class="p">,</span> <span class="n">chat_reply</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">chat_input</span> <span class="o">==</span> <span class="s1">'Q'</span> <span class="ow">or</span> <span class="n">chat_input</span> <span class="o">==</span> <span class="s1">'q'</span><span class="p">:</span>
+            <span class="k">break</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>代码位置: /data/doctor_online/main_serve/unit.py</li>
+</ul>
+<hr>
+<ul>
+<li>调用:
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code>python unit.py
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>输出效果:
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="Copy to clipboard" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="err">请输入</span><span class="p">:</span><span class="err">你好啊</span>
+<span class="err">你好啊</span>
+<span class="err">用户输入</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">你好啊</span>
+<span class="n">Unit回复</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">你也好啊</span><span class="o">~</span>
+<span class="err">请输入</span><span class="p">:</span><span class="err">今天天气棒棒哒</span>
+<span class="err">今天天气棒棒哒</span>
+<span class="err">用户输入</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">今天天气棒棒哒</span>
+<span class="n">Unit回复</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">必须的</span>
+<span class="err">请输入</span><span class="p">:</span><span class="err">晚饭吃点什么?</span>
+<span class="err">晚饭吃点什么?</span>
+<span class="err">用户输入</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">晚饭吃点什么?</span>
+<span class="n">Unit回复</span> <span class="o">&gt;&gt;&gt;</span> <span class="err">晚饭没吃，减肥</span>
+<span class="err">请输入</span><span class="p">:</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>本章总结:</p>
+<ul>
+<li>学习了智能对话系统的相关背景知识:<ul>
+<li>什么是智能对话系统</li>
+<li>从处理问题的目的来区分, 智能对话系统的分类</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>我们的在线医生项目就是任务导向型的智能对话系统.</li>
+</ul>
+<hr>
+<ul>
+<li>学习了Unit平台的相关知识:<ul>
+<li>Unit平台是百度大脑开放的智能对话定制与服务平台, 也是当前最大的中文领域对话开放平台之一. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>学习了调用Unit API的实现过程:<ul>
+<li>第一步: 注册登录百度账户, 进入Unit控制台创建自己的机器人.</li>
+<li>第二步: 进行相关配置, 获得请求API接口需要的API Key与Secret Key.</li>
+<li>第三步: 在服务器上编写API调用脚本并进行测试.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="./index2.html" title="第二章:在线医生的总体架构与工具介绍" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                第二章:在线医生的总体架构与工具介绍
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

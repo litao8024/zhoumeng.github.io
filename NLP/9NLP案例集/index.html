@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8008/1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, zh">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>图片的描述生成任务 - NLP案例集</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+      <link rel="manifest" href="http://121.199.45.168:8008/manifest.webmanifest">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="NLP案例集" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              NLP案例集
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                图片的描述生成任务
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="NLP案例集" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    NLP案例集
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        图片的描述生成任务
+      </label>
+    
+    <a href="" title="图片的描述生成任务" class="md-nav__link md-nav__link--active">
+      图片的描述生成任务
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="使用迁移学习实现图片的描述生成过程" class="md-nav__link">
+    使用迁移学习实现图片的描述生成过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms-coco" title="第一步: 导入必备的工具包并下载MS-COCO数据集" class="md-nav__link">
+    第一步: 导入必备的工具包并下载MS-COCO数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 限制训练集的大小以保证在可控时间内完成训练" class="md-nav__link">
+    第二步: 限制训练集的大小以保证在可控时间内完成训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inceptionv3" title="第三步: 使用InceptionV3预训练模型处理图片训练集数据" class="md-nav__link">
+    第三步: 使用InceptionV3预训练模型处理图片训练集数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第四步: 对图片描述的文本进行处理" class="md-nav__link">
+    第四步: 对图片描述的文本进行处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tfdata" title="第五步: 划分训练与验证数据集并使用tf.data封装" class="md-nav__link">
+    第五步: 划分训练与验证数据集并使用tf.data封装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第六步: 构建微调模型并选取优化方法和损失函数" class="md-nav__link">
+    第六步: 构建微调模型并选取优化方法和损失函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第七步: 构建训练函数并进行训练" class="md-nav__link">
+    第七步: 构建训练函数并进行训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第八步: 构建评估函数并进行评估" class="md-nav__link">
+    第八步: 构建评估函数并进行评估
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="IMDB影评的情感分析任务" class="md-nav__link">
+      IMDB影评的情感分析任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-nav__link">
+      莎士比亚风格的文本生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-nav__link">
+      应用于bert模型的动态量化技术
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-nav__link">
+      基于seq2seq的西班牙语到英语的机器翻译任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-nav__link">
+      ResNet模型在GPU上的并行实践
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="使用迁移学习实现图片的描述生成过程" class="md-nav__link">
+    使用迁移学习实现图片的描述生成过程
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ms-coco" title="第一步: 导入必备的工具包并下载MS-COCO数据集" class="md-nav__link">
+    第一步: 导入必备的工具包并下载MS-COCO数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 限制训练集的大小以保证在可控时间内完成训练" class="md-nav__link">
+    第二步: 限制训练集的大小以保证在可控时间内完成训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inceptionv3" title="第三步: 使用InceptionV3预训练模型处理图片训练集数据" class="md-nav__link">
+    第三步: 使用InceptionV3预训练模型处理图片训练集数据
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第四步: 对图片描述的文本进行处理" class="md-nav__link">
+    第四步: 对图片描述的文本进行处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tfdata" title="第五步: 划分训练与验证数据集并使用tf.data封装" class="md-nav__link">
+    第五步: 划分训练与验证数据集并使用tf.data封装
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第六步: 构建微调模型并选取优化方法和损失函数" class="md-nav__link">
+    第六步: 构建微调模型并选取优化方法和损失函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第七步: 构建训练函数并进行训练" class="md-nav__link">
+    第七步: 构建训练函数并进行训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第八步: 构建评估函数并进行评估" class="md-nav__link">
+    第八步: 构建评估函数并进行评估
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>图片的描述生成任务</h1>
+                
+                <h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>了解关于图片的描述生成任务和MSCOCO数据集.</li>
+<li>掌握使用迁移学习实现图片的描述生成过程.</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/Caption.png"></center><p></p>
+<hr>
+<h3 id="_2">任务说明<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li>以一张图片为输入, 使用模型帮助我们生成针对图片内容的描述, 描述将会以文本的形式展现, 即输出为一段与图片有关的文字。这样的任务将适用于很多实际场景中, 比如直播间的聊天机器人需要针对主播某一时刻的截图进行评论, 来合理的进行与主播互动, 增加直播室热度, 提升用户留存率.</li>
+</ul>
+<hr>
+<h3 id="_3">数据集说明<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>数据集名称: MS-COCO</li>
+<li>数据下载地址: <a href="http://cocodataset.org/#download">http://cocodataset.org/#download</a></li>
+<li>数据文件分为两部分:<ul>
+<li>标注文件: annotations/captions_train2014.json</li>
+<li>图片文件: train2014/xxxx.jpg</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>标注文件captions_train2014.json预览:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code><span class="p">{</span><span class="nt">"info"</span><span class="p">:</span> <span class="p">{</span><span class="nt">"description"</span><span class="p">:</span> <span class="s2">"COCO 2014 Dataset"</span><span class="p">,</span><span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://cocodataset.org"</span><span class="p">,</span><span class="nt">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span><span class="nt">"year"</span><span class="p">:</span> <span class="mi">2014</span><span class="p">,</span><span class="nt">"contributor"</span><span class="p">:</span> <span class="s2">"COCO Consortium"</span><span class="p">,</span><span class="nt">"date_created"</span><span class="p">:</span> <span class="s2">"2017/09/01"</span><span class="p">},</span>
+<span class="nt">"images"</span><span class="p">:</span> <span class="p">[{</span><span class="nt">"license"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span><span class="nt">"file_name"</span><span class="p">:</span> <span class="s2">"COCO_train2014_000000057870.jpg"</span><span class="p">,</span><span class="nt">"coco_url"</span><span class="p">:</span> <span class="s2">"http://images.cocodataset.org/train2014/COCO_train2014_000000057870.jpg"</span><span class="p">,</span><span class="nt">"height"</span><span class="p">:</span> <span class="mi">480</span><span class="p">,</span><span class="nt">"width"</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span><span class="nt">"date_captured"</span><span class="p">:</span> <span class="s2">"2013-11-14 16:28:13"</span><span class="p">,</span><span class="nt">"flickr_url"</span><span class="p">:</span> <span class="s2">"http://farm4.staticflickr.com/3153/2970773875_164f0c0b83_z.jpg"</span><span class="p">,</span><span class="nt">"id"</span><span class="p">:</span> <span class="mi">57870</span><span class="p">},</span> <span class="err">...</span><span class="p">]</span>
+<span class="s2">"annotations"</span><span class="p">:</span> <span class="p">[{</span><span class="nt">"image_id"</span><span class="p">:</span> <span class="mi">318556</span><span class="p">,</span><span class="nt">"id"</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span><span class="nt">"caption"</span><span class="p">:</span> <span class="s2">"A very clean and well decor</span>
+<span class="s2">ated empty bathroom"</span><span class="p">},{</span><span class="nt">"image_id"</span><span class="p">:</span> <span class="mi">116100</span><span class="p">,</span><span class="nt">"id"</span><span class="p">:</span> <span class="mi">67</span><span class="p">,</span><span class="nt">"caption"</span><span class="p">:</span> <span class="s2">"A panoramic view of a kit</span>
+<span class="s2">chen and all of its appliances."</span><span class="p">},</span> <span class="err">...</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>标注文件分析:<ul>
+<li>标注文件captions_train2014.json中存在三个键, 分别是:”info”, “images”, “annotations”, 代表”数据集信息”, “图片详情”, “图片标注描述详情”, 其中”annotations”是我们用到的, “annotations”的值是一个列表, 包含所有的图片对应的描述信息, 每个图片的描述信息是一个字典形式, 包含”image_id”, “id”, “caption”三个键, 代表对应的图片id, 描述信息的唯一标识(同一张图片可能存在多个描述信息), 描述信息的具体内容. </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<ul>
+<li>图片文件train2014/xxxx.jpg预览:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>COCO_train2014_000000218579.jpg      COCO_train2014_000000509321.jpg
+COCO_train2014_000000218580.jpg      COCO_train2014_000000509339.jpg
+COCO_train2014_000000218589.jpg      COCO_train2014_000000509350.jpg
+COCO_train2014_000000218599.jpg      COCO_train2014_000000509358.jpg
+COCO_train2014_000000218601.jpg      COCO_train2014_000000509365.jpg
+...
+</code></pre></div>
+
+<ul>
+<li>图片文件分析:<ul>
+<li>所有的文件格式为jpg, 图片名称由数据集名称COCO_train2014以及图片id:000000218579组成, 对应标注文件的中描述信息”image_id”。图片总数为85000张, 每张图片至少在标注文件中存在5条描述信息.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_4">使用迁移学习实现图片的描述生成过程<a class="headerlink" href="#_4" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步: 导入必备的工具包并下载MS-COCO数据集.</li>
+<li>第二步: 限制训练集的大小以保证在可控时间内完成训练.</li>
+<li>第三步: 使用InceptionV3预训练模型处理图片训练集数据.</li>
+<li>第四步: 对图片描述的文本进行处理.</li>
+<li>第五步: 划分训练与验证数据集并使用tf.data封装.</li>
+<li>第六步: 构建微调模型并选取优化方法和损失函数.</li>
+<li>第七步: 构建训练函数并进行训练.</li>
+<li>第八步: 构建评估函数并进行评估.</li>
+</ul>
+<hr>
+<h4 id="ms-coco">第一步: 导入必备的工具包并下载MS-COCO数据集<a class="headerlink" href="#ms-coco" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1"># 打印tensorflow版本</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Tensorflow Version:"</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1"># 导入matplotlib进行损失曲线的绘制</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># 导入sklearn中的相关工具以便进行训练集与验证集划分</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+
+<span class="c1"># 导入一些必备的处理工具包</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+
+<span class="c1"># 下载图片的标注文件</span>
+<span class="c1"># 定义标注文件的存储文件目录</span>
+<span class="n">annotation_folder</span> <span class="o">=</span> <span class="s1">'/annotations/'</span>
+
+<span class="c1"># 如果不存在该文件目录</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="o">+</span> <span class="n">annotation_folder</span><span class="p">):</span>
+    <span class="c1"># 使用tf.keras工具中get_file方法下载图片的标注文件 </span>
+    <span class="c1"># 'captions.zip'是下载的文件名, cache_subdir表示文件缓存路径</span>
+    <span class="c1"># origin表示文件下载地址, extract表示是否对文件进行解压缩</span>
+    <span class="c1"># 进行解压缩后, 获得压缩包的地址annotation_zip</span>
+    <span class="n">annotation_zip</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">'captions.zip'</span><span class="p">,</span>
+                                          <span class="n">cache_subdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'.'</span><span class="p">),</span>
+                                          <span class="n">origin</span> <span class="o">=</span> <span class="s1">'http://images.cocodataset.org/annotations/annotations_trainval2014.zip'</span><span class="p">,</span>
+                                          <span class="n">extract</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># 获得解压缩的标注文件地址 </span>
+    <span class="n">annotation_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">annotation_zip</span><span class="p">)</span><span class="o">+</span><span class="s1">'/annotations/captions_train2014.json'</span>
+    <span class="c1"># 文件解压后, 删除压缩包</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">annotation_zip</span><span class="p">)</span>
+
+<span class="c1"># 下载图片文件</span>
+<span class="c1"># 定义图片文件的存储文件目录</span>
+<span class="n">image_folder</span> <span class="o">=</span> <span class="s1">'/train2014/'</span>
+
+<span class="c1"># 如果不存在该文件目录</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="o">+</span> <span class="n">image_folder</span><span class="p">):</span>
+    <span class="c1"># 过程和下载标注文件相同</span>
+    <span class="n">image_zip</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">'train2014.zip'</span><span class="p">,</span>
+                                      <span class="n">cache_subdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'.'</span><span class="p">),</span>
+                                      <span class="n">origin</span> <span class="o">=</span> <span class="s1">'http://images.cocodataset.org/zips/train2014.zip'</span><span class="p">,</span>
+                                      <span class="n">extract</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+    <span class="c1"># 定义图片文件路径</span>
+    <span class="n">PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">image_zip</span><span class="p">)</span> <span class="o">+</span> <span class="n">image_folder</span>
+    <span class="c1"># 删除压缩包</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">image_zip</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code>Tensorflow Version: 2.1.0-rc2
+Downloading data from http://images.cocodataset.org/annotations/annotations_trainval2014.zip
+252878848/252872794 [==============================] - 16s 0us/step
+Downloading data from http://images.cocodataset.org/zips/train2014.zip
+ 6301122560/13510573713 [============&gt;.................] - ETA: 7:05
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>下载后的文件详情请参考<a href="http://47.92.175.143:8008/1/#21">2.1 使用迁移学习进行图片的描述生成任务</a>下的相关数据集.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="_5">第二步: 限制训练集的大小以保证在可控时间内完成训练<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
+<ul>
+<li>限制训练集大小的目标:<ul>
+<li>为了加快训练速度，将使用30,000个训练子集来训练模型。如果你的硬件资源足够充分，也可以选择使用更多数据来提高模型质量。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将标注的json文件加载到内存</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">annotation_file</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">annotations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># 定义存储图片和对应描述的列表</span>
+<span class="n">all_captions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_mg_name_vector</span><span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 循环遍历标注的json文件中的键'annotations'</span>
+<span class="k">for</span> <span class="n">annot</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">[</span><span class="s1">'annotations'</span><span class="p">]:</span>
+    <span class="c1"># 将每一个caption(描述)加上开始和结束标记</span>
+    <span class="n">caption</span> <span class="o">=</span> <span class="s1">'&lt;start&gt; '</span> <span class="o">+</span> <span class="n">annot</span><span class="p">[</span><span class="s1">'caption'</span><span class="p">]</span> <span class="o">+</span> <span class="s1">' &lt;end&gt;'</span>
+    <span class="c1"># 再取对应的image_id</span>
+    <span class="n">image_id</span> <span class="o">=</span> <span class="n">annot</span><span class="p">[</span><span class="s1">'image_id'</span><span class="p">]</span>
+    <span class="c1"># 对应图片文件的图片全路径</span>
+    <span class="n">full_coco_image_path</span> <span class="o">=</span> <span class="n">PATH</span> <span class="o">+</span> <span class="s1">'COCO_train2014_'</span> <span class="o">+</span> <span class="s1">'</span><span class="si">%012d</span><span class="s1">.jpg'</span> <span class="o">%</span> <span class="p">(</span><span class="n">image_id</span><span class="p">)</span>
+    <span class="c1"># 将图片全路径装进列表中</span>
+    <span class="n">all_img_name_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">full_coco_image_path</span><span class="p">)</span>
+    <span class="c1"># 将对应的描述装进列表中</span>
+    <span class="n">all_captions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">caption</span><span class="p">)</span>
+
+<span class="c1"># 使用shuffle方法打乱数据集中的数据顺序</span>
+<span class="n">train_captions</span><span class="p">,</span> <span class="n">img_name_vector</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">all_captions</span><span class="p">,</span>
+                                          <span class="n">all_img_name_vector</span><span class="p">,</span>
+                                          <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 选取30000条作为使用数据</span>
+<span class="n">num_examples</span> <span class="o">=</span> <span class="mi">30000</span>
+<span class="n">train_captions</span> <span class="o">=</span> <span class="n">train_captions</span><span class="p">[:</span><span class="n">num_examples</span><span class="p">]</span>
+<span class="n">img_name_vector</span> <span class="o">=</span> <span class="n">img_name_vector</span><span class="p">[:</span><span class="n">num_examples</span><span class="p">]</span>
+
+<span class="c1"># 打印使用数据数量和数据原本的数量</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_captions</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_captions</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code># 共有数据414113条, 只选取30000条使用
+（30000，414113）
+</code></pre></div>
+
+<hr>
+<h4 id="inceptionv3">第三步: 使用InceptionV3预训练模型处理图片训练集数据<a class="headerlink" href="#inceptionv3" title="Permanent link">¶</a></h4>
+<ul>
+<li>使用InceptionV3中的预处理方法对图像进行处理，将像素缩放至[-1, 1], 以便之后迁移InceptionV3模型</li>
+</ul>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建一个函数load_image来处理原生图片 </span>
+
+<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+    <span class="sd">"""以原生图片路径image_path为参数, 返回处理后的图片和图片路径"""</span>
+    <span class="c1"># 读取原生图片路径 </span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="c1"># 对图片进行图片格式的解码, 颜色通道为3</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># 统一图片尺寸为299x299</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">299</span><span class="p">,</span> <span class="mi">299</span><span class="p">))</span>
+    <span class="c1"># 调用keras.applications.inception_v3中的preprocess_input方法对统一尺寸后的图片进行处理</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">inception_v3</span><span class="o">.</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="c1"># 返回处理后的图片和对应的图片地址</span>
+    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">image_path</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>image_path = "./train2014/COCO_train2014_000000520749.jpg"
+img, image_path = load_image(image_path)
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code># 图片地址:
+./train2014/COCO_train2014_000000520749.jpg
+
+# 图片效果:
+</code></pre></div>
+
+<p></p><center><img alt="avatar" src="./index_files/test_img.jpg"></center><p></p>
+<hr>
+<ul>
+<li>初始化InceptionV3模型并加载预训练的Imagenet权重:</li>
+</ul>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用tf.keras.applications.InceptionV3并加载imagenet权重, 不包括模型的输出头</span>
+<span class="n">image_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">InceptionV3</span><span class="p">(</span><span class="n">include_top</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                                <span class="n">weights</span><span class="o">=</span><span class="s1">'imagenet'</span><span class="p">)</span>
+<span class="c1"># 将预训练模型的输入作为特征提取模型的输入</span>
+<span class="n">new_input</span> <span class="o">=</span> <span class="n">image_model</span><span class="o">.</span><span class="n">input</span>
+
+<span class="c1"># 将预训练模型的最后一层的输出部分作为特征提取模型的输出</span>
+<span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">image_model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
+
+<span class="c1"># 根据输入和输出构建特征提取模型</span>
+<span class="n">image_features_extract_model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">new_input</span><span class="p">,</span> <span class="n">hidden_layer</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="k">print</span><span class="p">(</span><span class="n">image_features_extract_model</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code># keras模型对象
+&lt;tensorflow.python.keras.engine.training.Model object at 0x7f2a4074fa10&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>使用模型对特征进行提取</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将之前选取的30000条数据进行去重并排序作为特征提取对象</span>
+<span class="n">encode_train</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">img_name_vector</span><span class="p">))</span>
+
+<span class="c1"># 将encode_train列表创建基于tensor的tf数据集, 方便之后对数据集对象进行操作 </span>
+<span class="n">image_dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="n">encode_train</span><span class="p">)</span>
+
+<span class="c1"># 根据硬件资源本身的情况，对数据集进行并行数据处理(使用load_image进行处理), 并将16个数据合并成1个批次</span>
+<span class="n">image_dataset</span> <span class="o">=</span> <span class="n">image_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+  <span class="n">load_image</span><span class="p">,</span> <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># 遍历image_dataset</span>
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">image_dataset</span><span class="p">:</span>
+    <span class="c1"># 使用之前构建的特征提取模型对每一批图片进行特征提取, 得到批次特征</span>
+    <span class="n">batch_features</span> <span class="o">=</span> <span class="n">image_features_extract_model</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="c1"># 将四维(图片本身3维+批次数1维)的批次特征转化成三维</span>
+    <span class="n">batch_features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch_features</span><span class="p">,</span>
+                              <span class="p">(</span><span class="n">batch_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+
+    <span class="c1"># 防止硬件内存无法满足要求，将batch图片特征存储在对应的路径下</span>
+    <span class="k">for</span> <span class="n">bf</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">batch_features</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="c1"># 得到特征的路径</span>
+        <span class="n">path_of_feature</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
+        <span class="c1"># 使用numpy进行存储</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path_of_feature</span><span class="p">,</span> <span class="n">bf</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:<ul>
+<li>在./train2014/路径下出现以下.npy结尾的文件
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code>COCO_train2014_000000218579.jpg.npy      COCO_train2014_000000509321.jpg.npy
+COCO_train2014_000000218580.jpg.npy      COCO_train2014_000000509339.jpg.npy
+COCO_train2014_000000218589.jpg.npy      COCO_train2014_000000509350.jpg.npy
+COCO_train2014_000000218599.jpg.npy      COCO_train2014_000000509358.jpg.npy
+COCO_train2014_000000218601.jpg.npy      COCO_train2014_000000509365.jpg.npy
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="_6">第四步: 对图片描述的文本进行处理<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
+<ul>
+<li>选取最常出现的前5000个词汇进行数值映射:</li>
+</ul>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 最常出现的词汇个数</span>
+<span class="n">top_k</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="c1"># 使用tf.keras.preprocessing.text.Tokenizer方法实例化数值映射器, 其中超出部分的词汇使用&lt;unk&gt;表示</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
+                                                  <span class="n">oov_token</span><span class="o">=</span><span class="s2">"&lt;unk&gt;"</span><span class="p">,</span>
+                                                  <span class="n">filters</span><span class="o">=</span><span class="s1">'!"#$%&amp;()*+.,-/:;=?@[\]^_`{|}~ '</span><span class="p">)</span>
+
+<span class="c1"># 使用数值映射器拟合train_captions(用于训练的描述文本)</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">train_captions</span><span class="p">)</span>
+
+<span class="c1"># 数值映射器是从1开始不断映射的, 因此可以将0作为英文词汇的空白分割符</span>
+<span class="c1"># 这里使用&lt;pad&gt;表示英文词汇的空白分割符</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="s1">'&lt;pad&gt;'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'&lt;pad&gt;'</span>
+
+<span class="c1"># 最后作用于描述文本得到对应的数值映射结果</span>
+<span class="n">train_seqs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">(</span><span class="n">train_captions</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"train_seqs:"</span><span class="p">,</span> <span class="n">train_seqs</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果：</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">471</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">472</span><span class="p">,</span> <span class="mi">320</span><span class="p">,</span> <span class="mi">473</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">474</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">321</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">475</span><span class="p">,</span> <span class="mi">322</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">476</span><span class="p">,</span> <span class="mi">477</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">478</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">237</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span> <span class="mi">479</span><span class="p">,</span> <span class="mi">238</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="err">...</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">323</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">187</span><span class="p">,</span> <span class="mi">481</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">482</span><span class="p">,</span> <span class="mi">483</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">188</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+ <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">131</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">484</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>为了保证输入满足要求, 需要对数值映射结果进行最大长度补齐:</li>
+</ul>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用tf.keras.preprocessing.sequence.pad_sequences进行补齐, 参数'post'代表使用0在序列前面补齐</span>
+<span class="n">cap_vector</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">train_seqs</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'post'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"cap_vector:"</span><span class="p">,</span> <span class="n">cap_vector</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code>cap_vector: [[  3   2 184 ...   0   0   0]
+ [  3   2  13 ...   0   0   0]
+ [  3  18 474 ...   0   0   0]
+ ...
+ [  3 284 220 ...   0   0   0]
+ [  3   2   1 ...   0   0   0]
+ [  3  48  19 ...   0   0   0]]
+</code></pre></div>
+
+<hr>
+<ul>
+<li>获取图片描述文本的最大长度, 将在之后的步骤中使用:</li>
+</ul>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">calc_max_length</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+    <span class="sd">"""计算最大长度的函数"""</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tensor</span><span class="p">)</span>
+
+<span class="c1"># 获取训练集数据映射后的最大长度</span>
+<span class="n">max_length</span> <span class="o">=</span> <span class="n">calc_max_length</span><span class="p">(</span><span class="n">train_seqs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"max_length:"</span><span class="p">,</span> <span class="n">max_length</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>输出效果:</li>
+</ul>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code># 根据使用的样本数量，最大长度可能发生变化
+max_length: 28
+</code></pre></div>
+
+<hr>
+<h4 id="tfdata">第五步: 划分训练与验证数据集并使用tf.data封装<a class="headerlink" href="#tfdata" title="Permanent link">¶</a></h4>
+<ul>
+<li>划分训练与验证数据集:</li>
+</ul>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用train_test_split方法对数据集进行划分，训练集占80%，验证集占20%</span>
+<span class="n">img_name_train</span><span class="p">,</span> <span class="n">img_name_val</span><span class="p">,</span> <span class="n">cap_train</span><span class="p">,</span> <span class="n">cap_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">img_name_vector</span><span class="p">,</span>
+                                                                    <span class="n">cap_vector</span><span class="p">,</span>
+                                                                    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 打印对应的数量</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">img_name_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cap_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_name_val</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cap_val</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code>(24000, 24000, 6000, 6000)
+</code></pre></div>
+
+<hr>
+<ul>
+<li>创建一个tf.data数据集准备用于训练:</li>
+</ul>
+<div class="highlight"><pre id="__code_22"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设定训练过程的超参数</span>
+
+<span class="c1"># 参数更新的批次数量</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># 数据打乱时的缓存区大小，缓存区越大结果混乱程度越高</span>
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># 对描述文本进行嵌入的维度大小</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="c1"># 联合嵌入特征的维度大小(文本嵌入的维度+图片编码后的维度)</span>
+<span class="n">units</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1"># 不重复的词汇总数</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="n">top_k</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># 完成一轮数据训练的步数</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_name_train</span><span class="p">)</span> <span class="o">//</span> <span class="n">BATCH_SIZE</span>
+
+<span class="c1"># 以下两个参数的值由InceptionV3模型的输出形状决定</span>
+<span class="c1"># InceptionV3模型的输出形状为(8, 8, 2048)即(64, 2048) </span>
+<span class="c1"># 对应attention_features_shape和features_shape </span>
+<span class="n">attention_features_shape</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">features_shape</span> <span class="o">=</span> <span class="mi">2048</span>
+
+<span class="c1"># 使用tf.data.Dataset.from_tensor_slices方法构建tf.data数据集, 便于之后使用</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">img_name_train</span><span class="p">,</span> <span class="n">cap_train</span><span class="p">))</span>
+
+<span class="c1"># 加载之前存储的numpy图片文件</span>
+<span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">img_name</span><span class="p">,</span> <span class="n">cap</span><span class="p">):</span>
+    <span class="c1"># 使用np.load加载npy文件到内存</span>
+    <span class="n">img_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">img_name</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span><span class="o">+</span><span class="s1">'.npy'</span><span class="p">)</span>
+    <span class="c1"># 返回对应的图片张量和对应的描述</span>
+    <span class="k">return</span> <span class="n">img_tensor</span><span class="p">,</span> <span class="n">cap</span>
+
+
+<span class="c1"># 使用dataset的map方法并行调用map_func函数, 将数据集加载到内存中</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">item1</span><span class="p">,</span> <span class="n">item2</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">numpy_function</span><span class="p">(</span>
+          <span class="n">map_func</span><span class="p">,</span> <span class="p">[</span><span class="n">item1</span><span class="p">,</span> <span class="n">item2</span><span class="p">],</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">]),</span>
+          <span class="n">num_parallel_calls</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+
+<span class="c1"># 将数据集成批次的进行打乱</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+
+<span class="c1"># 根据当前硬件的资源情况，会在模型训练同时预取数据到内存中, 加快训练速度</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code># 预取数据集对象
+&lt;PrefetchDataset shapes: (&lt;unknown&gt;, &lt;unknown&gt;), types: (tf.float32, tf.int32)&gt;
+</code></pre></div>
+
+<hr>
+<h4 id="_7">第六步: 构建微调模型并选取优化方法和损失函数<a class="headerlink" href="#_7" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建注意力机制的类:<ul>
+<li>注意力机制的计算规则遵循以下公式:</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/attention_equation_0.jpg"></center>
+<center><img alt="avatar" src="./index_files/attention_equation_1.jpg"></center> <p></p>
+<ul>
+<li>构建注意力机制类的伪代码:</li>
+</ul>
+<div class="highlight"><pre id="__code_24"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 这里使用Bahdanau 注意力机制</span>
+
+<span class="mi">1</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">FC</span><span class="p">(</span><span class="n">tanh</span><span class="p">(</span><span class="n">FC</span><span class="p">(</span><span class="n">EO</span><span class="p">)</span> <span class="o">+</span> <span class="n">FC</span><span class="p">(</span><span class="n">H</span><span class="p">)))</span>
+<span class="mi">2</span><span class="p">,</span> <span class="n">attention</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span>
+<span class="c1"># 解释: Softmax 默认被应用于最后一个轴，但是这里我们想将它应用于第一个轴, </span>
+<span class="c1"># 因为分数 （score） 的形状是 (批大小，最大长度，隐层大小)，最大长度 （max_length） 是输入的长度。</span>
+<span class="c1"># 因为我们想为每个输入长度分配一个权重，所以softmax应该用在这个轴上。</span>
+<span class="mi">3</span><span class="p">,</span> <span class="n">context</span> <span class="n">vector</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">attention</span> <span class="n">weights</span> <span class="o">*</span> <span class="n">EO</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="c1"># 解释: 选择第一个轴的原因同上.</span>
+<span class="mi">4</span><span class="p">,</span> <span class="n">embedding</span> <span class="n">output</span> <span class="o">=</span> <span class="err">解码器输入</span> <span class="n">X</span> <span class="err">通过一个嵌入层</span>
+<span class="mi">5</span><span class="p">,</span> <span class="n">merged</span> <span class="n">vector</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">embedding</span> <span class="n">output</span><span class="p">,</span> <span class="n">context</span> <span class="n">vector</span><span class="p">)</span>
+
+<span class="err">符号代表</span><span class="p">:</span>
+<span class="n">FC</span><span class="p">:</span> <span class="err">全连接层</span>
+<span class="n">EO</span><span class="p">:</span> <span class="err">编码器输出</span>
+<span class="n">H</span><span class="p">:</span> <span class="err">隐藏层状态</span>
+<span class="n">X</span><span class="p">:</span> <span class="err">解码器输入</span>
+</code></pre></div>
+
+<ul>
+<li>构建注意力机制类:</li>
+</ul>
+<div class="highlight"><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">BahdanauAttention</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">units</span><span class="p">):</span>
+        <span class="sd">"""初始化三个必要的全连接层"""</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BahdanauAttention</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+        <span class="sd">"""</span>
+<span class="sd">        description: 具体计算函数</span>
+<span class="sd">        :param features: 编码器的输出</span>
+<span class="sd">        :param hidden: 解码器的隐层输出</span>
+<span class="sd">        return: 通过注意力机制处理后的结果context_vector和注意力权重attention_weights</span>
+<span class="sd">        """</span>
+        <span class="c1"># 为hidden扩展一个维度(batch_size, hidden_size) --&gt; (batch_size, 1, hidden_size)</span>
+        <span class="n">hidden_with_time_axis</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 根据公式计算注意力得分, 输出score的形状为: (batch_size, 64, hidden_size)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">(</span><span class="n">features</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">(</span><span class="n">hidden_with_time_axis</span><span class="p">))</span>
+
+        <span class="c1"># 根据公式计算注意力权重, 输出attention_weights形状为: (batch_size, 64, 1)</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 最后根据公式获得注意力机制处理后的结果context_vector</span>
+        <span class="c1"># context_vector的形状为: (batch_size, hidden_size)</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">*</span> <span class="n">features</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">context_vector</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>构建CNN编码器:<ul>
+<li>称作CNN编码器主要是因为之前使用InceptionV3进行图片处理, 编码器内部只有一个全连接层构成.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_26"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">CNN_Encoder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CNN_Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 实例化一个全连接层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># 使用全连接层</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="c1"># 激活函数使用relu函数</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code><span class="n">encoder</span> <span class="o">=</span> <span class="n">CNN_Encoder</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"encoder:"</span><span class="p">,</span> <span class="n">encoder</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_28"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><code>encoder: &lt;__main__.CNN_Encoder object at 0x13efb7da0&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>构建RNN解码器:<ul>
+<li>这里RNN是指GRU, 同时在解码器中使用注意力机制.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">RNN_Decoder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">(</span><span class="n">RNN_Decoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+      <span class="c1"># 传入联合嵌入特征的维度</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">units</span>
+      <span class="c1"># 实例化一个embedding层</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+      <span class="c1"># 实例化一个gru层</span>
+      <span class="c1"># return_sequences=True代表返回GRU序列模型的每个时间步的输出(每个输出做连接操作)</span>
+      <span class="c1"># return_state=True代表除了返回输出外，还需要返回最后一个隐层状态</span>
+      <span class="c1"># recurrent_initializer='glorot_uniform'即循环状态矩阵的初始化方式为均匀分布</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">gru</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">,</span>
+                                   <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                   <span class="n">return_state</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                   <span class="n">recurrent_initializer</span><span class="o">=</span><span class="s1">'glorot_uniform'</span><span class="p">)</span>
+      <span class="c1"># 实例化两个全连接层</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+      <span class="c1"># 实例化注意力机制</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">BahdanauAttention</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+      <span class="c1"># 首先使用注意力计算规则获得features和hidden的注意力结果</span>
+      <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+
+      <span class="c1"># 输入通过embedding 层, 得到的输出形状: (batch_size, 1, embedding_dim)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+      <span class="c1"># 连接x和注意力结果, 获得新的输出x，形状为: (batch_size, 1, embedding_dim + hidden_size)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">context_vector</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+      <span class="c1"># 将x输入到gru层</span>
+      <span class="n">output</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gru</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+      <span class="c1"># 将x输入到全连接层, 输出形状: (batch_size, max_length, hidden_size)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+      <span class="c1"># 改变x形状以便输入到第二个全连接层, 输出形状为: (batch_size * max_length, hidden_size)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+      <span class="c1"># 将x输入到第二个全连接层, 输出形状为: (batch_size * max_length, vocab)</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+      <span class="c1"># 返回解码结果, gru隐层状态, 和注意力权重</span>
+      <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">attention_weights</span>
+
+  <span class="k">def</span> <span class="nf">reset_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+      <span class="c1"># 初始化gru隐层状态的权重张量为全0张量</span>
+      <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">))</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_30"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><code><span class="n">decoder</span> <span class="o">=</span> <span class="n">RNN_Decoder</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"decoder:"</span><span class="p">,</span> <span class="n">decoder</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code>decoder: &lt;__main__.RNN_Decoder object at 0x150e5de10&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>选取优化方法和损失函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_32"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 选取Adam优化方法</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+<span class="c1"># 损失基本计算方法为稀疏类别交叉熵损失</span>
+<span class="c1"># from_logits=True代表是否将预测结果预期为非 0/1 的值进行保留</span>
+<span class="c1"># 理论来讲二分类最终的结果应该只有0/1，函数将自动将其变为0/1，from_logits=True后，值不会被改变</span>
+<span class="c1"># reduction='none'，接下来我们将自定义损失函数，reduction必须设置为None，</span>
+<span class="c1"># 我们可以将它看作是自定义损失函数的识别属性</span>
+<span class="n">loss_object</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(</span>
+    <span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">'none'</span><span class="p">)</span>
+
+<span class="c1"># 因为每次生成的结果都是局部结果，要和真实结果进行比较需要对真实结果进行遮掩</span>
+<span class="c1"># 等效于对损失计算结果进行掩码</span>
+<span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="sd">"""自定义损失函数，参数为预测结果pred和真实结果real"""</span>
+    <span class="c1"># 使用tf.math.equal方法对real和0进行对比</span>
+    <span class="c1"># 对结果再进行逻辑非操作生成掩码张量mask</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="c1"># 使用基本计算方法计算损失</span>
+    <span class="n">loss_</span> <span class="o">=</span> <span class="n">loss_object</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+    <span class="c1"># 将mask进行类型转换，使其能够进行后续操作</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">loss_</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="c1"># 将loss_与mask相乘即对loss_进行掩码</span>
+    <span class="n">loss_</span> <span class="o">*=</span> <span class="n">mask</span>
+    <span class="c1"># 计算loss_张量所有元素的均值</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">loss_</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<h4 id="_8">第七步: 构建训练函数并进行训练<a class="headerlink" href="#_8" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建训练函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 因为之后要绘制损失曲线, 定义一个用于存放每轮平均损失的列表</span>
+<span class="n">loss_plot</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nd">@tf.function</span> <span class="c1"># 该装饰器使该函数自动编译张量图, 使其可以直接执行 </span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="c1"># 设定初始损失为0</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># 初始化解码器的隐含状态张量</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">reset_state</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># 定义解码器的第一个文本描述输入(即起始符&lt;start&gt;对应的张量)    </span>
+    <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="s1">'&lt;start&gt;'</span><span class="p">]]</span> <span class="o">*</span> <span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 开启一个用于梯度记录的上下文管理器</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="c1"># 使用编码器处理输入的图片张量</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">)</span>
+        <span class="c1"># 开始使用解码器循环解码, 解码长度为target.shape[1]即文本描述张量的最大长度</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="c1"># 使用解码器获得第一个预测值和隐含张量</span>
+            <span class="n">predictions</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+            <span class="c1"># 计算该解码过程的损失</span>
+            <span class="n">loss</span> <span class="o">+=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">target</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">predictions</span><span class="p">)</span>
+            <span class="c1"># 接下来这里使用了teacher_forcing来定义下一次解码的输入</span>
+            <span class="c1"># 关于teacher_forcing请查看下方定义和作用</span>
+            <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">target</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 全部循环解码完成后, 计算句子粒度的平均损失</span>
+    <span class="n">average_loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">loss</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1"># 获得整个模型训练的参数变量</span>
+    <span class="n">trainable_variables</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">trainable_variables</span> <span class="o">+</span> <span class="n">decoder</span><span class="o">.</span><span class="n">trainable_variables</span>
+    <span class="c1"># 使用梯度管理器对象对参数变量求解梯度</span>
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="c1"># 根据梯度更新参数</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">trainable_variables</span><span class="p">))</span>
+    <span class="c1"># 返回句子粒度的平均损失</span>
+    <span class="k">return</span> <span class="n">average_loss</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>
+<p>什么是teacher_forcing?</p>
+<ul>
+<li>它是一种用于序列生成任务的训练技巧, 在seq2seq架构中, 根据循环神经网络理论，解码器每次应该使用上一步的结果作为输入的一部分, 但是训练过程中，一旦上一步的结果是错误的，就会导致这种错误被累积，无法达到训练效果, 因此，我们需要一种机制改变上一步出错的情况，因为训练时我们是已知正确的输出应该是什么，因此可以强制将上一步结果设置成正确的输出, 这种方式就叫做teacher_forcing.</li>
+</ul>
+</li>
+<li>
+<p>teacher_forcing的作用:</p>
+<ul>
+<li>能够在训练的时候矫正模型的预测，避免在序列生成的过程中误差进一步放大.</li>
+<li>teacher_forcing能够极大的加快模型的收敛速度，令模型训练过程更快更平稳.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>进行训练并打印日志:</li>
+</ul>
+<div class="highlight"><pre id="__code_34"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设定训练轮数</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># 循环轮数训练</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">EPOCHS</span><span class="p">):</span>
+    <span class="c1"># 获得每轮训练的开始时间</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 初始化轮数总损失为0</span>
+    <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># 循环数据集中的每个批次进行训练</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">img_tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+        <span class="c1"># 调用train_step函数获得批次总损失和批次平均损失</span>
+        <span class="n">t_loss</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="c1"># 将批次平均损失相加获得轮数总损失</span>
+        <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">t_loss</span>
+
+    <span class="c1"># 绘制轮数平均损失</span>
+    <span class="n">loss_plot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_loss</span> <span class="o">/</span> <span class="n">num_steps</span><span class="p">)</span>
+    <span class="c1"># 打印轮数, 对应的平均损失</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Epoch {} Loss {:.6f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                         <span class="n">total_loss</span><span class="o">/</span><span class="n">num_steps</span><span class="p">))</span>
+    <span class="c1"># 打印每轮的耗时</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Time taken for 1 epoch {} sec</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code>Epoch 1 Loss 1.053660
+Time taken for 1 epoch 102.81588959693909 sec
+Epoch 2 Loss 0.803199
+Time taken for 1 epoch 46.122520208358765 sec
+Epoch 3 Loss 0.729249
+Time taken for 1 epoch 45.95720458030701 sec
+Epoch 4 Loss 0.682262
+Time taken for 1 epoch 46.03855228424072 sec
+Epoch 5 Loss 0.645122
+Time taken for 1 epoch 46.359169721603394 sec
+Epoch 6 Loss 0.616254
+Time taken for 1 epoch 45.84763479232788 sec
+Epoch 7 Loss 0.582275
+Time taken for 1 epoch 46.07718873023987 sec
+Epoch 8 Loss 0.550876
+Time taken for 1 epoch 46.32008242607117 sec
+Epoch 9 Loss 0.520402
+Time taken for 1 epoch 46.090750217437744 sec
+Epoch 10 Loss 0.489396
+Time taken for 1 epoch 46.069819688797 sec
+Epoch 11 Loss 0.460302
+Time taken for 1 epoch 46.13562488555908 sec
+Epoch 12 Loss 0.431713
+Time taken for 1 epoch 45.62839698791504 sec
+Epoch 13 Loss 0.402241
+Time taken for 1 epoch 45.647090673446655 sec
+Epoch 14 Loss 0.377377
+Time taken for 1 epoch 45.79609179496765 sec
+Epoch 15 Loss 0.350675
+Time taken for 1 epoch 45.3898491859436 sec
+Epoch 16 Loss 0.324569
+Time taken for 1 epoch 45.74031972885132 sec
+Epoch 17 Loss 0.305316
+Time taken for 1 epoch 44.66712689399719 sec
+Epoch 18 Loss 0.283276
+Time taken for 1 epoch 45.17093324661255 sec
+Epoch 19 Loss 0.263147
+Time taken for 1 epoch 45.49183177947998 sec
+Epoch 20 Loss 0.246605
+Time taken for 1 epoch 44.986790895462036 sec
+</code></pre></div>
+
+<hr>
+<ul>
+<li>绘制损失曲线:</li>
+</ul>
+<div class="highlight"><pre id="__code_36"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 绘制损失曲线</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_plot</span><span class="p">)</span>
+
+<span class="c1"># 定义x轴，y轴，和图标名称</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Epochs'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Loss Plot'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<p></p><center><img alt="avatar" src="./index_files/output_1Wm83G-ZBPcC_0.png"></center><p></p>
+<hr>
+<h4 id="_9">第八步: 构建评估函数并进行评估<a class="headerlink" href="#_9" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建评估函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">"""评估函数, 以一张图片为输入"""</span>
+    <span class="c1"># 初始化用于制图的注意力张量, 为全0张量</span>
+    <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">max_length</span><span class="p">,</span> <span class="n">attention_features_shape</span><span class="p">))</span>
+    <span class="c1"># 初始化隐层张量</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">reset_state</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 使用load_image进行图片初始处理, 并扩展一个维度</span>
+    <span class="n">temp_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">load_image</span><span class="p">(</span><span class="n">image</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># 对图片进行特征提取, 并使得形状满足编码器要求 </span>
+    <span class="n">img_tensor_val</span> <span class="o">=</span> <span class="n">image_features_extract_model</span><span class="p">(</span><span class="n">temp_input</span><span class="p">)</span>
+    <span class="n">img_tensor_val</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">img_tensor_val</span><span class="p">,</span> <span class="p">(</span><span class="n">img_tensor_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">img_tensor_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+    <span class="c1"># 使用编码器对图片进行编码</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">img_tensor_val</span><span class="p">)</span>
+    <span class="c1"># 初始化解码器的输入张量</span>
+    <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_index</span><span class="p">[</span><span class="s1">'&lt;start&gt;'</span><span class="p">]],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 初始化图片描述的文本结果列表</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 根据解码器结果生成最终的文本结果 </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_length</span><span class="p">):</span>
+        <span class="c1"># 使用解码器获得每次的输出张量   </span>
+        <span class="n">predictions</span><span class="p">,</span> <span class="n">hidden</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">dec_input</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+        <span class="c1"># 根据每次获得的注意力权重填充用于制图的注意力张量</span>
+        <span class="n">attention_plot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">attention_weights</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1"># 从解码器得到的预测概率分布predictions中s随机按概率大小选择索引作为predicted_id</span>
+        <span class="n">predicted_id</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">categorical</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="c1"># 根据数值映射器和predicted_id获得对应单词(文本)并装入结果列表中</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">predicted_id</span><span class="p">])</span>
+        <span class="c1"># 判断预测字符是否的终止符&lt;end&gt;</span>
+        <span class="k">if</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">predicted_id</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'&lt;end&gt;'</span><span class="p">:</span>
+            <span class="c1"># 返回结果列表和用于制图的注意力张量</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span>
+        <span class="c1"># 如果不是终止符, 则将本次的结果扩展维度作为下次解码器的输出</span>
+        <span class="n">dec_input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">predicted_id</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 根据预测结果的真实长度对attention_plot进行切片, 去除多余的为0的部分</span>
+    <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">attention_plot</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="p">:]</span>
+    <span class="c1"># 返回结果列表和切片后的注意力张量</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span>
+
+<span class="k">def</span> <span class="nf">plot_attention</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span><span class="p">):</span>
+    <span class="sd">"""注意力可视化函数"""</span>
+    <span class="c1"># 获得numpy格式的图片表示 </span>
+    <span class="n">temp_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+
+    <span class="c1"># 创建一个10x10的画板</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="c1"># 获得图片描述文本结果长度</span>
+    <span class="n">len_result</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="c1"># 循环结果列表长度</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_result</span><span class="p">):</span>
+        <span class="c1"># 将每个结果对应的注意力张量变成8x8的张量</span>
+        <span class="n">temp_att</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">attention_plot</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="c1"># 创建大小为结果列表长度一半的子图画布</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">len_result</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">len_result</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 设置子图画布的title</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+        <span class="c1"># 在子图画布上显示原图片</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">temp_image</span><span class="p">)</span>
+        <span class="c1"># 在子图画布上显示注意力的灰度块 </span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">temp_att</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">get_extent</span><span class="p">())</span>
+
+    <span class="c1"># 调整子图位置, 填充整个画布</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="c1"># 图像显示</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre id="__code_38"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 在验证集上进行调用</span>
+<span class="c1"># 随机在[0, len(img_name_val)]区间产生一个随机数</span>
+<span class="n">rid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_name_val</span><span class="p">))</span>
+<span class="c1"># 根据随机数获得对应的图片</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">img_name_val</span><span class="p">[</span><span class="n">rid</span><span class="p">]</span>
+<span class="c1"># 获得图片对应描述文本</span>
+<span class="n">real_caption</span> <span class="o">=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">index_word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cap_val</span><span class="p">[</span><span class="n">rid</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="c1"># 调用评估函数获得结果和制图的注意力张量</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="c1"># 打印真实描述和预测描述进行对比</span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">'Real Caption:'</span><span class="p">,</span> <span class="n">real_caption</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">'Prediction Caption:'</span><span class="p">,</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code># 可以多次运行获得结果(代码将随机选择不同的图片生成描述)
+Real Caption: &lt;start&gt; a snowboarder sits in the snow at the base of a tall mountain &lt;end&gt;
+Prediction Caption: a person is with a small white hat sitting at the air while skis in the snow with skis is skiing &lt;unk&gt; slope &lt;end&gt;
+</code></pre></div>
+
+<hr>
+<ul>
+<li>使用一张图片进行模型预测: </li>
+</ul>
+<div class="highlight"><pre id="__code_40"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 任意选择一张图片</span>
+<span class="n">image_url</span> <span class="o">=</span> <span class="s1">'https://tensorflow.org/images/surf.jpg'</span>
+<span class="c1"># 取图片的扩展名.jpg</span>
+<span class="n">image_extension</span> <span class="o">=</span> <span class="n">image_url</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+<span class="c1"># 将图片下载到本地</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">'image'</span><span class="o">+</span><span class="n">image_extension</span><span class="p">,</span>
+                                     <span class="n">origin</span><span class="o">=</span><span class="n">image_url</span><span class="p">)</span>
+<span class="c1"># 调用评估函数获得结果和制图的注意力张量</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+<span class="c1"># 打印预测结果</span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">'Prediction Caption:'</span><span class="p">,</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+<span class="c1"># 绘制注意力子图</span>
+<span class="n">plot_attention</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">attention_plot</span><span class="p">)</span>
+<span class="c1"># 查看原图片</span>
+<span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code>Downloading data from https://tensorflow.org/images/surf.jpg
+65536/64400 [==============================] - 0s 3us/step
+Prediction Caption: a person is sitting down to surfboard in no to their surf &lt;end&gt;
+</code></pre></div>
+
+<p></p><center><img alt="avatar" src="./index_files/output_9Psd1quzaAWg_1.png"></center><p></p>
+<hr>
+<ul>
+<li>注意力分析:<ul>
+<li>灰度子图中越明亮的部分说明在生成描述单词时被利用的信息越多(越被注意), 如生成单词”person”时, 明亮的方块基本在人脸附近, 而生成”surfboard”时, 明亮的方块集中在冲浪板附近.注意力机制与人类在识别事物方面具有高度一致性.</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="avatar" src="./index_files/output_9Psd1quzaAWg_2.png"></center><p></p>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="http://121.199.45.168:8008/2/" title="IMDB影评的情感分析任务" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                IMDB影评的情感分析任务
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+              
+            
+          
+          
+            <script src="./index_files/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://121.199.45.168:8818/2_2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8818/2_2/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>2.2 TextRank实现baseline-0模型 - 文本摘要项目</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#textrank" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="./1_1.html" title="文本摘要项目" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="active">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              文本摘要项目
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                2.2 TextRank实现baseline-0模型
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 756px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="./1_1.html" title="文本摘要项目" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    文本摘要项目
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      第一章:文本摘要项目简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-1">
+        第一章:文本摘要项目简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_1.html" title="1.1 项目背景介绍" class="md-nav__link">
+      1.1 项目背景介绍
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_2.html" title="1.2 项目中的数据集初探" class="md-nav__link">
+      1.2 项目中的数据集初探
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked="">
+    
+    <label class="md-nav__link" for="nav-2">
+      第二章:TextRank模型
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: block; overflow: visible;">
+      <label class="md-nav__title" for="nav-2">
+        第二章:TextRank模型
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-nav__link">
+      2.1 TextRank算法理论基础
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2.2 TextRank实现baseline-0模型
+      </label>
+    
+    <a href="" title="2.2 TextRank实现baseline-0模型" class="md-nav__link md-nav__link--active">
+      2.2 TextRank实现baseline-0模型
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#textrank" title="基于TextRank实现模型" class="md-nav__link">
+    基于TextRank实现模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="文本摘要数据集" class="md-nav__link">
+    文本摘要数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="数据预处理" class="md-nav__link">
+    数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 提取特定的文本." class="md-nav__link">
+    第一步: 提取特定的文本.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 删除" 脏"数据."="" class="md-nav__link">
+    第二步: 删除"脏"数据.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 删除特定的字符集合." class="md-nav__link">
+    第三步: 删除特定的字符集合.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第四步: 删除特殊位置的特定字符." class="md-nav__link">
+    第四步: 删除特殊位置的特定字符.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textrank_1" title="TextRank模型代码实现" class="md-nav__link">
+    TextRank模型代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="小节总结:" class="md-nav__link">
+    小节总结:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      第三章:seq2seq经典架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-3">
+        第三章:seq2seq经典架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_1.html" title="3.1 seq2seq实现baseline-1模型" class="md-nav__link">
+      3.1 seq2seq实现baseline-1模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_2.html" title="3.2 baseline-1模型的优化" class="md-nav__link">
+      3.2 baseline-1模型的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      第四章:PGN先进架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-4">
+        第四章:PGN先进架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_1.html" title="4.1 PGN架构解析" class="md-nav__link">
+      4.1 PGN架构解析
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_2.html" title="4.2 PGN模型的数据处理" class="md-nav__link">
+      4.2 PGN模型的数据处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_3.html" title="4.3 PGN实现baseline-2模型" class="md-nav__link">
+      4.3 PGN实现baseline-2模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      第五章:生成式模型的评估方法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-5">
+        第五章:生成式模型的评估方法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_1.html" title="5.1 文本摘要评估方法" class="md-nav__link">
+      5.1 文本摘要评估方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_2.html" title="5.2 ROUGE评估算法实现" class="md-nav__link">
+      5.2 ROUGE评估算法实现
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      第六章:模型的迭代优化
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-6">
+        第六章:模型的迭代优化
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_1.html" title="6.1 PGN + coverage的优化模型" class="md-nav__link">
+      6.1 PGN + coverage的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_2.html" title="6.2 PGN + beam-search的优化模型" class="md-nav__link">
+      6.2 PGN + beam-search的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_3.html" title="6.3 数据增强的优化" class="md-nav__link">
+      6.3 数据增强的优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_4.html" title="6.4 训练策略的优化" class="md-nav__link">
+      6.4 训练策略的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      第七章:模型的部署与总结
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-7">
+        第七章:模型的部署与总结
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_1.html" title="7.1 硬件优化与模型部署" class="md-nav__link">
+      7.1 硬件优化与模型部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_2.html" title="7.2 项目总结" class="md-nav__link">
+      7.2 项目总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 756px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#textrank" title="基于TextRank实现模型" class="md-nav__link" data-md-state="blur">
+    基于TextRank实现模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link" data-md-state="blur">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="文本摘要数据集" class="md-nav__link" data-md-state="blur">
+    文本摘要数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="数据预处理" class="md-nav__link" data-md-state="blur">
+    数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 提取特定的文本." class="md-nav__link" data-md-state="blur">
+    第一步: 提取特定的文本.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 删除" 脏"数据."="" class="md-nav__link" data-md-state="blur">
+    第二步: 删除"脏"数据.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 删除特定的字符集合." class="md-nav__link" data-md-state="">
+    第三步: 删除特定的字符集合.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第四步: 删除特殊位置的特定字符." class="md-nav__link" data-md-state="">
+    第四步: 删除特殊位置的特定字符.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#textrank_1" title="TextRank模型代码实现" class="md-nav__link" data-md-state="">
+    TextRank模型代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="小节总结:" class="md-nav__link">
+    小节总结:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>2.2 TextRank实现baseline-0模型</h1>
+                
+                <h2 id="textrank">基于TextRank实现模型</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>选定中文文本摘要数据集.</li>
+<li>掌握对于数据的预处理过程.</li>
+<li>掌握TextRank模型的代码实现.</li>
+</ul>
+<hr>
+<h3 id="_2">文本摘要数据集</h3>
+<ul>
+<li>此处选择验证集数据dev.csv, 作为TextRank算法构建模型的原始数据.</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>QID,Brand,Model,Question,Dialogue,Report
+Q70001,别克,英朗,15款英朗因为油底壳撞烂，导致机油泄露曲轴抱死，要大修，但是没换曲轴只是加工校正了。现在跑高速&gt;上100码发动机故障灯闪烁，降到100码一下过10秒左右故障灯灭，用电脑检测14缸缺火，换了火花塞和点火线圈还是一样。,&gt;技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：&gt;测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线&gt;圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技
+师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有&gt;什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气,检修喷油嘴  缸压 及电脑板是否正常
+
+Q70002,标致,标致3008,你好，今天清洗发动机后发现锁车后过一段时间喇叭会一直响，然后到晚上时候锁车，双闪灯不会亮&gt;，过一会儿才亮，是什么情况？,技师说：你好，相关的线路进水导致的防盗系统线路故障，这种故障只能等相关的线路水分&gt;晾干或者是去修理厂排查线路|车主说：会不会影响什么?|技师说：别的方面影响不大|车主说：等我明天早上再看看有没有问
+题，明早上应该干了|车主说：是不是干了就不怕了？|车主说：不干继续开怕不怕？|技师说：干了就没有任何问题,清洗发动
+机造成的相关线路进水，防盗系统连电造成的，这种情况只能等水彻底干了，以后才行。
+Q70003,现代,北京现代ix35,请问多少钱,技师说：你好！可以说的具体点吗？|车主说：北京现代ix35，2018新款2.0L自动版&gt;的多少钱|技师说：两驱还是四驱?|技师说：两驱12万左右  四驱14万左右|车主说：你认为那个好点|技师说：个人认为两驱&gt;的动力就可以了  满足需要|技师说：要根据你自己的需求  我的建议仅供参考|车主说：好的谢谢|技师说：不用客气|技师说
+：可以点击头像关注我  有什么不明白的随时询问  一定真诚用心为你解决,13万左右  不同地区价格有些差异  仅供参考
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>数据文件路径: /home/ec2-user/text_summary/textrank/dev.csv, 共有12943条样本数据.</li>
+</ul>
+<hr>
+<hr>
+<h3 id="_3">数据预处理</h3>
+<ul>
+<li>我们在第一章的1.2小节曾经讨论过原始数据存在的各种问题, 这些问题都需要在数据预处理的这个环节一一解决. 接下来按照如下步骤进行处理:<ul>
+<li>第一步: 提取特定的文本.</li>
+<li>第二步: 删除"脏"数据.</li>
+<li>第三步: 删除特定的字符集合.</li>
+<li>第四步: 删除特殊位置的特定字符.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="_4">第一步: 提取特定的文本.</h4>
+<ul>
+<li>面对原始语料, 并不是说我们必须要全部纳入模型中, 可以根据业务需求, 或者程序员的项目经验, 或许出于尝试的态度, 只选取一部分出来作为我们后续模型的输入数据.</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>这里我们按照'|'对语句进行分隔, 只选取'技师'说的话作为后续应用TextRank算法的语料数据.</p>
+</li>
+<li>
+<p>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</p>
+</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># 1. 将sentence按照'|'分句，并只提取技师的话</span>
+    <span class="n">sub_jishi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 按照'|'字符将车主和用户的对话分离</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'|'</span><span class="p">)</span>
+
+    <span class="c1"># 遍历每个子句</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)):</span>
+        <span class="c1"># 如果不是以句号结尾, 增加一个句号</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'。'</span><span class="p">):</span>
+            <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">'。'</span>
+        <span class="c1"># 只使用技师说的句子</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'技师'</span><span class="p">):</span>
+            <span class="n">sub_jishi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 拼接成字符串并返回</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_jishi</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sentence</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="c1"># 读取数据, 并指定编码格式为'utf-8'</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'dev.csv'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Dialogue'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理前的第一条句子：'</span><span class="p">,</span> <span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'********************************'</span><span class="p">)</span>
+
+    <span class="c1"># 数据预处理</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">clean_sentence</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理后的第一条句子: '</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>预处理前的第一条句子： 技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气
+********************************
+预处理后的第一条句子:  技师说：你好！以前也出现过该故障吗？。技师说：缸压多少有没有测量一下?。技师说：测量一下缸压 看一四缸缸压是否偏低。技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除。技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题。技师说：这个影响不大的。技师说：缸压八个以上正常。技师说：所以说让你测量缸压  只要缸压正常则没有问题。技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决。技师说：不用客气。
+</code></pre></div>
+
+
+<hr>
+<h4 id="_5">第二步: 删除"脏"数据.</h4>
+<ul>
+<li>
+<p>关于什么是"脏"数据是个千人千面的问题, 我们在第一章中也讨论过. 这一步也仅仅处理一个baseline的级别.</p>
+</li>
+<li>
+<p>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</p>
+</li>
+</ul>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入正则表达式工具包, 用来删除特定模式的数据</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># 1. 将sentence按照'|'分句，并只提取技师的话</span>
+    <span class="n">sub_jishi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 按照'|'字符将车主和用户的对话分离</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'|'</span><span class="p">)</span>
+
+    <span class="c1"># 遍历每个子句</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)):</span>
+        <span class="c1"># 如果不是以句号结尾, 增加一个句号</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'。'</span><span class="p">):</span>
+            <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">'。'</span>
+        <span class="c1"># 只使用技师说的句子</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'技师'</span><span class="p">):</span>
+            <span class="n">sub_jishi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 拼接成字符串并返回</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_jishi</span><span class="p">)</span>
+
+    <span class="c1"># 第二步中添加的两个处理, 利用正则表达式re工具</span>
+    <span class="c1"># 2. 删除1. 2. 3. 这些标题</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"\D(\d\.)\D"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 3. 删除一些无关紧要的词以及语气助词</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"车主说|技师说|语音|图片|呢|吧|哈|啊|啦"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">sentence</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="c1"># 读取数据, 并指定编码格式为'utf-8'</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'dev.csv'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Dialogue'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理前的第一条句子：'</span><span class="p">,</span> <span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'********************************'</span><span class="p">)</span>
+
+    <span class="c1"># 数据预处理</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">clean_sentence</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理后的第一条句子: '</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_12"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code>预处理前的第一条句子： 技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气
+********************************
+预处理后的第一条句子:  ：你好！以前也出现过该故障吗？。：缸压多少有没有测量一下?。：测量一下缸压 看一四缸缸压是否偏低。：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除。：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题。：这个影响不大的。：缸压八个以上正常。：所以说让你测量缸压  只要缸压正常则没有问题。：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决。：不用客气。
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h4 id="_6">第三步: 删除特定的字符集合.</h4>
+<ul>
+<li>对于文本中哪些字符是需要删除的特定字符, 这又是一个见仁见智的问题. 取决于程序员的经验, 个人喜好, 还有业务部门的具体需求. <ul>
+<li>1: 我们发现原始数据文件中有若干的"进口", "海外"字样, 可认为是需要删除的特定字符.</li>
+<li>2: 为了后续处理文本容易, 除了汉字还有数字, 英文字母, 特定的几个标点符号, 其他都删除.</li>
+<li>3: 将标点符号的半角格式, 转变成全角格式.</li>
+<li>4: 将问号, 感叹号, 转变成句号.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</li>
+</ul>
+<div class="codehilite" id="__code_14"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入正则表达式工具包, 用来删除特定模式的数据</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># 第一步要处理的代码</span>
+    <span class="c1"># 1. 将sentence按照'|'分句，并只提取技师的话</span>
+    <span class="n">sub_jishi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 按照'|'字符将车主和用户的对话分离</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'|'</span><span class="p">)</span>
+
+    <span class="c1"># 遍历每个子句</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)):</span>
+        <span class="c1"># 如果不是以句号结尾, 增加一个句号</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'。'</span><span class="p">):</span>
+            <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">'。'</span>
+        <span class="c1"># 只使用技师说的句子</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'技师'</span><span class="p">):</span>
+            <span class="n">sub_jishi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 拼接成字符串并返回</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_jishi</span><span class="p">)</span>
+
+    <span class="c1"># 第二步中添加的两个处理, 利用正则表达式re工具</span>
+    <span class="c1"># 2. 删除1. 2. 3. 这些标题</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"\D(\d\.)\D"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 3. 删除一些无关紧要的词以及语气助词</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"车主说|技师说|语音|图片|呢|吧|哈|啊|啦"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 第三步中添加的4个处理</span>
+    <span class="c1"># 4. 删除带括号的 进口 海外</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[(（]进口[)）]|\(海外\)"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 5. 删除除了汉字数字字母和，！？。.- 以外的字符</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"[^，！？。\.\-</span><span class="se">\u4e00</span><span class="s2">-</span><span class="se">\u9fa5</span><span class="s2">_a-zA-Z0-9]"</span><span class="p">)</span>
+
+    <span class="c1"># 6. 半角变为全角</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">"，"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"!"</span><span class="p">,</span> <span class="s2">"！"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"?"</span><span class="p">,</span> <span class="s2">"？"</span><span class="p">)</span>
+
+    <span class="c1"># 7. 问号叹号变为句号</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"？"</span><span class="p">,</span> <span class="s2">"。"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"！"</span><span class="p">,</span> <span class="s2">"。"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sentence</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_16"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="c1"># 读取数据, 并指定编码格式为'utf-8'</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'dev.csv'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Dialogue'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理前的第一条句子：'</span><span class="p">,</span> <span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'********************************'</span><span class="p">)</span>
+
+    <span class="c1"># 数据预处理</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">clean_sentence</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理后的第一条句子: '</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_18"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code>预处理前的第一条句子： 技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气
+********************************
+预处理后的第一条句子:  你好。以前也出现过该故障吗。。缸压多少有没有测量一下。。测量一下缸压看一四缸缸压是否偏低。点火线圈火花塞喷油嘴不用干活直接和二三缸对倒一下跑一段在测量一下故障码进行排除。调一下喷油嘴测一下缸压都正常则为发动机电脑板问题。这个影响不大的。缸压八个以上正常。所以说让你测量缸压只要缸压正常则没有问题。可以点击头像关注我有什么问题随时询问一定真诚用心为你解决。不用客气。
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h4 id="_7">第四步: 删除特殊位置的特定字符.</h4>
+<ul>
+<li>
+<p>原始文本中有些特定位置会有特定的字符, 比如每行文本的起始处的行号, 比如结尾处的特殊结尾符, 或者其他位置的那些和文本语义无关的特定字符, 都需要删除掉.</p>
+</li>
+<li>
+<p>这里面完全取决于程序员的细心, 耐心, 多看多分析你要处理的文本数据.</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</li>
+</ul>
+<div class="codehilite" id="__code_20"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入正则表达式工具包, 用来删除特定模式的数据</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># 第一步要处理的代码</span>
+    <span class="c1"># 1. 将sentence按照'|'分句，并只提取技师的话</span>
+    <span class="n">sub_jishi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 按照'|'字符将车主和用户的对话分离</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'|'</span><span class="p">)</span>
+
+    <span class="c1"># 遍历每个子句</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)):</span>
+        <span class="c1"># 如果不是以句号结尾, 增加一个句号</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'。'</span><span class="p">):</span>
+            <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="s1">'。'</span>
+        <span class="c1"># 只使用技师说的句子</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'技师'</span><span class="p">):</span>
+            <span class="n">sub_jishi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 拼接成字符串并返回</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_jishi</span><span class="p">)</span>
+
+    <span class="c1"># 第二步中添加的两个处理, 利用正则表达式re工具</span>
+    <span class="c1"># 2. 删除1. 2. 3. 这些标题</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"\D(\d\.)\D"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 3. 删除一些无关紧要的词以及语气助词</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"车主说|技师说|语音|图片|呢|吧|哈|啊|啦"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 第三步中添加的4个处理</span>
+    <span class="c1"># 4. 删除带括号的 进口 海外</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[(（]进口[)）]|\(海外\)"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 5. 删除除了汉字数字字母和，！？。.- 以外的字符</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"[^，！？。\.\-</span><span class="se">\u4e00</span><span class="s2">-</span><span class="se">\u9fa5</span><span class="s2">_a-zA-Z0-9]"</span><span class="p">)</span>
+
+    <span class="c1"># 6. 半角变为全角</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">"，"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"!"</span><span class="p">,</span> <span class="s2">"！"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"?"</span><span class="p">,</span> <span class="s2">"？"</span><span class="p">)</span>
+
+    <span class="c1"># 7. 问号叹号变为句号</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"？"</span><span class="p">,</span> <span class="s2">"。"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"！"</span><span class="p">,</span> <span class="s2">"。"</span><span class="p">)</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+    <span class="c1"># 第四步添加的删除特定位置的特定字符</span>
+    <span class="c1"># 8. 删除句子开头的逗号</span>
+    <span class="k">if</span> <span class="n">sentence</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'，'</span><span class="p">):</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">sentence</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_22"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="c1"># 读取数据, 并指定编码格式为'utf-8'</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'dev.csv'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Dialogue'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理前的第一条句子：'</span><span class="p">,</span> <span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'********************************'</span><span class="p">)</span>
+
+    <span class="c1"># 数据预处理</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">clean_sentence</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'预处理后的第一条句子: '</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_24"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code>预处理前的第一条句子： 技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气
+********************************
+预处理后的第一条句子:  你好。以前也出现过该故障吗。。缸压多少有没有测量一下。。测量一下缸压看一四缸缸压是否偏低。点火线圈火花塞喷油嘴不用干活直接和二三缸对倒一下跑一段在测量一下故障码进行排除。调一下喷油嘴测一下缸压都正常则为发动机电脑板问题。这个影响不大的。缸压八个以上正常。所以说让你测量缸压只要缸压正常则没有问题。可以点击头像关注我有什么问题随时询问一定真诚用心为你解决。不用客气。
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>结论: 经过上述几轮的迭代处理, 我们发现处理后的文本已经"干净"了很多. 剩下的文本都是对我们后续模型统计有正向价值的文本.</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h3 id="textrank_1">TextRank模型代码实现</h3>
+<ul>
+<li>我们在第一章中已经为大家演示了如何调用textrank4zh来直接提取关键词, 关键短语, 关键语句. 这里我们约定通过提取关键语句, 作为文本摘要的语义替代品.</li>
+</ul>
+<hr>
+<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</li>
+</ul>
+<div class="codehilite" id="__code_26"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 初始化结果存放的列表</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># 初始化textrank4zh类对象</span>
+<span class="n">tr4s</span> <span class="o">=</span> <span class="n">TextRank4Sentence</span><span class="p">()</span>
+
+<span class="c1"># 循环遍历整个测试集, texts是经历前面数据预处理后的结果列表</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="c1"># 直接调用分析函数</span>
+    <span class="n">tr4s</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">'all_filters'</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s1">''</span>
+
+    <span class="c1"># 直接调用函数获取关键语句</span>
+    <span class="c1"># num=3: 获取重要性最高的3个句子.</span>
+    <span class="c1"># sentence_min_len=2: 句子的长度最小等于2.</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tr4s</span><span class="o">.</span><span class="n">get_key_sentences</span><span class="p">(</span><span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sentence_min_len</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">sentence</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s1">'。'</span>
+
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># 间隔100次打印结果</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'result length: '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">))</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_28"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 上述代码在model.py文件中, 切换到对应目录下直接执行程序即可.</span>
+<span class="nb">cd</span> /home/ec2-user/text_summary/textrank/
+python model.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_30"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code>Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.737 seconds.
+Prefix dict has been built successfully.
+100 可以先开地毯看一下有没有生锈腐蚀的情况，没有的话就最好。你好，可以做一下打磨，喷漆处理，或者是，点漆处理。这种情况谁也不知道，会不会生锈，只有打开，才可以看到。
+200 你好，影响肯定是有的，但不会有太大影响，P档是利用一个钩型的结构勾住齿轮的，这种情况肯定会对该机构造成损伤，至于损伤程度有多大，只能是拆解检查。不是更换油液。属于机械结构，对变速器危害不大。
+300 需要更换机油，机滤，空滤，空调滤芯，汽油滤芯，火花塞，防冻液，变速箱油还需要清洗节气门。没有老化裂痕，可以不用。喷油嘴，三元催化，等项目。
+400 这个情况的一般原因是左前门喇叭线路断路或者喇叭损坏造成的。修复相关线路，更换损坏的喇叭。需要拆开车门内衬板来检查。
+500 这个不能，我也是偷着从4S店拿出来，时间长了会出事儿。定州市，不用正时容易对不准，这不麻烦。实在不行只能去4S店借了，我这边能借到，不过也得拖朋友。
+600 如果室外温度低，发动机温度也低，冷车提速会慢一些，同时建议你清洗节气门，喷油嘴。渗漏的废气。清洗干净即可。
+700 喷漆的话，市场价一个面是300到400左右。在外面修理厂找个专业做钣金喷漆的，让她给你修复一下，完全没问题的。只是保险杠修复和喷漆时这么多，你后备箱怎么了也需要做喷漆吗。
+800 车子公里多少，有缺机油，或是漏机油，以及出现过烧机油问题没有。
+900 你好很高兴为您回答，这两款车肯定选择高尔夫，因为大众高尔夫整车性能都杠杠的。
+
+......
+......
+......
+
+12400 你好，这个不影响驾驶的，经常检查一下就可以了，渗漏严重的话更换密封垫就可以了。祝您用车愉快。
+12500 如果，都没事，去修理厂排查一下。一个一个拔保险，看电流表数值变小时，说明就是这个保险后面的线路跑电。几天不开就没电了。
+12600 你好，正常的，冷车启动，机油流动性不好，在油底壳里面。机油没有润滑，气门的声音，机油润滑了就消失了，是正常的，很多车。冷车都会有这个声音。
+12700 这是变速箱的问题，一般在4S店维修三次还不好就可以申请更换变速箱总成部件。第三次维修不好才能申请更换总成。可以的。
+12800 低转速共振大，检查发动机机脚胶垫。看看节气门的信号，和正常车辆的信号做对比。检查发动机引擎脚。
+12900 还是配件问题。你好，这个是后尾盖弹簧质量的问题。这个不好说，反正后来的配件弄不好都不怎么合适。
+result length:  12943
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>
+<p>将结果保存到文件中:</p>
+</li>
+<li>
+<p>代码文件路径: /home/ec2-user/text_summary/textrank/model.py</p>
+</li>
+</ul>
+<div class="codehilite" id="__code_32"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 保存结果</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Prediction'</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span>
+
+<span class="c1"># 提取ID, Report, 和预测结果这3列</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'QID'</span><span class="p">,</span> <span class="s1">'Report'</span><span class="p">,</span> <span class="s1">'Prediction'</span><span class="p">]]</span>
+
+<span class="c1"># 保存结果，这里自动生成一个结果名</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'textrank_result_.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+
+<span class="c1"># 将空行置换为随时联系, 文件保存格式指定为utf-8</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'textrank_result_.csv'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">'随时联系。'</span><span class="p">)</span>
+
+<span class="c1"># 将处理后的文件保存起来</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'textrank_result_final_.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_34"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 上述代码在model.py文件中, 切换到对应目录下直接执行程序即可.</span>
+<span class="nb">cd</span> /home/ec2-user/text_summary/textrank/
+python model.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果, 直接查看一下textrank_result_final_.csv文件即可:</li>
+</ul>
+<div class="codehilite" id="__code_36"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code>QID,Report,Prediction
+Q70001,检修喷油嘴  缸压 及电脑板是否正常 ,点火线圈火花塞喷油嘴不用干活直接和二三缸对倒一下跑一段在测量一下故障
+码进行排除。所以说让你测量缸压只要缸压正常则没有问题。缸压多少有没有测量一下。
+Q70002,清洗发动机造成的相关线路进水，防盗系统连电造成的，这种情况只能等水彻底干了，以后才行。,你好，相关的线路
+进水导致的防盗系统线路故障，这种故障只能等相关的线路水分晾干或者是去修理厂排查线路。别的方面影响不大。干了就没
+有任何问题。
+Q70003,13万左右  不同地区价格有些差异  仅供参考,两驱还是四驱。两驱12万左右四驱14万左右。个人认为两驱的动力就可
+以了满足需要。
+Q70004,你好，图中显示的位置两个车门，如果是在四s店钣金喷漆的话，价格在1500左右，建议你走保险。,你好，图中显示&gt;两车门，底边都需要钣金喷漆修复，在在4s维修，车门加底边钣金喷漆处理，价格1500左右，外面修理厂800左右就差不多。&gt;走保险的话可以去4s维修。建议走保险。
+Q70005,建议在倒车灯上面找线  比较好找,在倒车灯上面找。我是真心的希望帮助到你的师傅希望你。可以从档位开关上面找
+挂倒挡用表或试灯测一下。
+Q70006,你好，倒车灯更换，需要把后车门的装饰板拆卸，最好去修理厂找专业的维修人员帮你更换。,你好，宝骏730的倒车&gt;灯更换，需要把后备箱的，后门装饰板拆下来才能更换。最好是用专用工具，建议你还是去修理厂更换。教程我没有详细，你
+可以去百度查一下。
+Q70007,您好，这种情况应该是发电机发电量不稳定或者是电瓶老化亏电造成的，具体还需要去修理厂检查一下才能确定,电瓶
+是否老化亏电，确定都没问题，需要检查仪表盘搭铁线路是否虚接。如果电瓶亏电的话，可以用充电机充电试试，不行的话只
+能更换。你好，这种情况首先检查一下发电机发电量是否正常。
+Q70008,6——8万公里需要大保养  更换变速箱油 刹车油  转向助力油 汽油滤芯  火花塞 ，清洗节气门  进气道 喷油嘴 三元
+催化 燃烧室积碳,68万公里需要检修大保养更换变速箱油汽油滤芯火花塞防冻液，清洗节气门进气道三元催化喷油嘴燃烧室积
+碳。不建议你自己购买若购买的话则工时费会很高不合算。不用客气。
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h3 id="_8">小节总结:</h3>
+<ul>
+<li>
+<p>数据集的解析:</p>
+<ul>
+<li>明确采用的数据集是哪个.</li>
+<li>明确数据集的大小, 特点.</li>
+</ul>
+</li>
+<li>
+<p>数据预处理:</p>
+<ul>
+<li>提取特定文本: 我们在此只采用了技师说的话, 也可以尝试其他文本话语.</li>
+<li>删除'脏'数据: 什么是'脏'数据见仁见智, 普遍来讲无效的数字标题, 一些语气助词都是这一类.</li>
+<li>删除特定的字符集合: 这也是一个见仁见智的问题, 除了删除一些'主观'特定字符, 还做了全角转半角, 标点符号全部换成句号.</li>
+<li>删除特定位置的特定字符: 这个也是程序员处理的自由, 凭经验, 业务要求等即可.</li>
+</ul>
+</li>
+<li>
+<p>模型实现:</p>
+<ul>
+<li>在工程实践中, 普遍直接采用textrank4zh工具包来辅助实现.</li>
+<li>将处理后的结果保存, 以便未来使用.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                2.1 TextRank算法理论基础
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./3_1.html" title="3.1 seq2seq实现baseline-1模型" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                3.1 seq2seq实现baseline-1模型
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2020, AITutorials.CN This website has been reviewed by the review agency. 京ICP备19006137号
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

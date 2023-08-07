@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8234/1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>数据结构与算法笔试题 - Transformer</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="Transformer" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="active">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              Transformer
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                数据结构与算法笔试题
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 843px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="Transformer" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    Transformer
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        数据结构与算法笔试题
+      </label>
+    
+    <a href="" title="数据结构与算法笔试题" class="md-nav__link md-nav__link--active">
+      数据结构与算法笔试题
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="笔试部分说明" class="md-nav__link">
+    笔试部分说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="常见的典型笔试题" class="md-nav__link">
+    常见的典型笔试题
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="问题1：实现快速排序" class="md-nav__link">
+    问题1：实现快速排序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="问题2：整数反转" class="md-nav__link">
+    问题2：整数反转
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="问题3：最长公共前缀" class="md-nav__link">
+    问题3：最长公共前缀
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="问题4：回文整数" class="md-nav__link">
+    问题4：回文整数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" title="问题5：翻转二叉树" class="md-nav__link">
+    问题5：翻转二叉树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" title="问题6：反转链表" class="md-nav__link">
+    问题6：反转链表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" title="问题7：求队列最大值" class="md-nav__link">
+    问题7：求队列最大值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" title="问题8：三数之和" class="md-nav__link">
+    问题8：三数之和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" title="问题9：有效括号" class="md-nav__link">
+    问题9：有效括号
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" title="问题10：全排列" class="md-nav__link">
+    问题10：全排列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" title="问题11：罗马数字转整数" class="md-nav__link">
+    问题11：罗马数字转整数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="问题12：最长公共子序列" class="md-nav__link">
+    问题12：最长公共子序列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" title="问题13：合并两个有序链表" class="md-nav__link">
+    问题13：合并两个有序链表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="问题14：最长公共子串" class="md-nav__link">
+    问题14：最长公共子串
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" title="问题15：删除排序数组中的重复项" class="md-nav__link">
+    问题15：删除排序数组中的重复项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" title="问题16: 移除元素" class="md-nav__link">
+    问题16: 移除元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17" title="问题17：删除排序链表中的重复元素" class="md-nav__link">
+    问题17：删除排序链表中的重复元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" title="问题18：字符串匹配" class="md-nav__link">
+    问题18：字符串匹配
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19" title="问题19：最后一个字符串长度" class="md-nav__link">
+    问题19：最后一个字符串长度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20" title="问题20：搜索插入的位置" class="md-nav__link">
+    问题20：搜索插入的位置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21" title="问题21：最大子序和" class="md-nav__link">
+    问题21：最大子序和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" title="问题22：二进制求和" class="md-nav__link">
+    问题22：二进制求和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" title="问题23：链表有环" class="md-nav__link">
+    问题23：链表有环
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" title="问题24：多数元素" class="md-nav__link">
+    问题24：多数元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" title="问题25：相同的树" class="md-nav__link">
+    问题25：相同的树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" title="问题26：旋转(平移)数组" class="md-nav__link">
+    问题26：旋转(平移)数组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" title="问题27：打家劫舍" class="md-nav__link">
+    问题27：打家劫舍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" title="问题28：翻转字符串里的单词" class="md-nav__link">
+    问题28：翻转字符串里的单词
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" title="问题29：二分查找" class="md-nav__link">
+    问题29：二分查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" title="问题30：求两个有序数组的最大值" class="md-nav__link">
+    问题30：求两个有序数组的最大值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" title="问题31：字符串蕴含" class="md-nav__link">
+    问题31：字符串蕴含
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="ModelArchitectures" class="md-nav__link">
+      ModelArchitectures
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="整体优化思路" class="md-nav__link">
+      整体优化思路
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 843px;" data-md-state="lock">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="笔试部分说明" class="md-nav__link" data-md-state="blur">
+    笔试部分说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="常见的典型笔试题" class="md-nav__link" data-md-state="blur">
+    常见的典型笔试题
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" title="问题1：实现快速排序" class="md-nav__link" data-md-state="blur">
+    问题1：实现快速排序
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" title="问题2：整数反转" class="md-nav__link" data-md-state="blur">
+    问题2：整数反转
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" title="问题3：最长公共前缀" class="md-nav__link" data-md-state="blur">
+    问题3：最长公共前缀
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" title="问题4：回文整数" class="md-nav__link" data-md-state="">
+    问题4：回文整数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" title="问题5：翻转二叉树" class="md-nav__link" data-md-state="">
+    问题5：翻转二叉树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" title="问题6：反转链表" class="md-nav__link" data-md-state="">
+    问题6：反转链表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" title="问题7：求队列最大值" class="md-nav__link" data-md-state="">
+    问题7：求队列最大值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" title="问题8：三数之和" class="md-nav__link" data-md-state="">
+    问题8：三数之和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" title="问题9：有效括号" class="md-nav__link" data-md-state="">
+    问题9：有效括号
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10" title="问题10：全排列" class="md-nav__link" data-md-state="">
+    问题10：全排列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11" title="问题11：罗马数字转整数" class="md-nav__link" data-md-state="">
+    问题11：罗马数字转整数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" title="问题12：最长公共子序列" class="md-nav__link" data-md-state="">
+    问题12：最长公共子序列
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" title="问题13：合并两个有序链表" class="md-nav__link" data-md-state="">
+    问题13：合并两个有序链表
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" title="问题14：最长公共子串" class="md-nav__link" data-md-state="">
+    问题14：最长公共子串
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" title="问题15：删除排序数组中的重复项" class="md-nav__link" data-md-state="">
+    问题15：删除排序数组中的重复项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" title="问题16: 移除元素" class="md-nav__link" data-md-state="">
+    问题16: 移除元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17" title="问题17：删除排序链表中的重复元素" class="md-nav__link" data-md-state="">
+    问题17：删除排序链表中的重复元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" title="问题18：字符串匹配" class="md-nav__link" data-md-state="">
+    问题18：字符串匹配
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19" title="问题19：最后一个字符串长度" class="md-nav__link" data-md-state="">
+    问题19：最后一个字符串长度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20" title="问题20：搜索插入的位置" class="md-nav__link" data-md-state="">
+    问题20：搜索插入的位置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21" title="问题21：最大子序和" class="md-nav__link" data-md-state="">
+    问题21：最大子序和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" title="问题22：二进制求和" class="md-nav__link" data-md-state="">
+    问题22：二进制求和
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" title="问题23：链表有环" class="md-nav__link" data-md-state="">
+    问题23：链表有环
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" title="问题24：多数元素" class="md-nav__link" data-md-state="">
+    问题24：多数元素
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" title="问题25：相同的树" class="md-nav__link" data-md-state="">
+    问题25：相同的树
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" title="问题26：旋转(平移)数组" class="md-nav__link" data-md-state="">
+    问题26：旋转(平移)数组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" title="问题27：打家劫舍" class="md-nav__link" data-md-state="">
+    问题27：打家劫舍
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" title="问题28：翻转字符串里的单词" class="md-nav__link" data-md-state="">
+    问题28：翻转字符串里的单词
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" title="问题29：二分查找" class="md-nav__link" data-md-state="">
+    问题29：二分查找
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30" title="问题30：求两个有序数组的最大值" class="md-nav__link" data-md-state="">
+    问题30：求两个有序数组的最大值
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31" title="问题31：字符串蕴含" class="md-nav__link">
+    问题31：字符串蕴含
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>数据结构与算法笔试题</h1>
+                
+                <h2 id="_1">笔试部分说明</h2>
+<p>在当前的市场上（这是公元2020年），大部分公司在招聘算法工程师或NLP/CV/AI工程师时，都会出相应的笔试问题，而这些笔试问题中，大部分考察的也都是数据结构和算法的基本问题。这也是因为在国际大厂笔试中都以该考核点为标准。因此，在参加面试前，复习数据结构与算法，在诸如Leetcode等刷题网站上做大量类型的题目，是十分有必要的过程。以下将给出一些常见的典型笔试题和答案。</p>
+<hr>
+<p><img alt="" src="https://dpzbhybb2pdcj.cloudfront.net/lane/Figures/04fig01_alt.jpg"></p>
+<hr>
+<h2 id="_2">常见的典型笔试题</h2>
+<h3 id="1">问题1：实现快速排序</h3>
+<ul>
+<li>考察点: 基本排序算法原理和实现，请自行复习快排逻辑和时间复杂度。</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 一行代码实现快速排序，</span>
+<span class="n">quicksort</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">x</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> \
+        <span class="k">else</span> <span class="n">quicksort</span><span class="p">(</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="p">)</span> <span class="o">+</span> \
+        <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">quicksort</span><span class="p">(</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="2">问题2：整数反转</h3>
+<p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code>输入: 123
+输出: 321
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code>输入: -123
+输出: -321
+</code></pre></div>
+
+
+<p>示例 3:</p>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code>输入: 120
+输出: 21
+</code></pre></div>
+
+
+<ul>
+<li>注意:<ul>
+<li>假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为&nbsp;[−231,&nbsp; 231&nbsp;− 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>快速实现方法：int(str(x).strip("0")[::-1])</li>
+<li>字符串末尾去“0”：.strip("0")</li>
+<li>字符串反转：[::-1]</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>实现：</li>
+</ul>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 特殊情况0</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+        <span class="c1"># 边界判断，既要判断输入还要判断输出</span>
+        <span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">if</span> <span class="mi">2</span><span class="o">**</span><span class="mi">31</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">31</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="k">def</span> <span class="nf">_reverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">_reverse</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="o">-</span><span class="nb">int</span><span class="p">(</span><span class="n">_reverse</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">_f</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">k</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="3">问题3：最长公共前缀</h3>
+<p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串&nbsp;""。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>输入: ["flower","flow","flight"]
+输出: "fl"
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_12"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code>输入: ["dog","racecar","car"]
+输出: ""
+</code></pre></div>
+
+
+<ul>
+<li>
+<p>解释: 输入不存在公共前缀。</p>
+</li>
+<li>
+<p>说明: 所有输入只包含小写字母&nbsp;a-z&nbsp;。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>zip(<em>[List])使用：eg：list(zip(</em>["ab", "cd"])) ---&gt; [("a", "c"), ("b", "d")]</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_14"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">longestCommonPrefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="c1"># 默认为空字符串，也是题目的要求</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="s1">''</span>
+        <span class="c1"># 循环遍历zip(*[List])中的tuple</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">strs</span><span class="p">):</span>
+            <span class="c1"># 每个tuple装的都是列表中每个单词的对应位置字符</span>
+            <span class="c1"># 如果这个tuple中所有元素相同，则说明是每次单词的公共字符</span>
+            <span class="c1"># 所有元素相同即集合化后长度为1</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># 之后将该字符放到结果之中</span>
+                <span class="n">ans</span> <span class="o">+=</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 如果出现不同，则停止循环</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="4">问题4：回文整数</h3>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_16"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code>输入: 121
+输出: true
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_18"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code>输入: -121
+输出: false
+</code></pre></div>
+
+
+<ul>
+<li>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</li>
+</ul>
+<p>示例 3:</p>
+<div class="codehilite" id="__code_20"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code>输入: 10
+输出: false
+</code></pre></div>
+
+
+<ul>
+<li>
+<p>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
+</li>
+<li>
+<p>进阶:</p>
+<ul>
+<li>你能不将整数转为字符串来解决这个问题吗？</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>x%10 获得最后一位数字</li>
+<li>x//10 获得除最后一位的其他数字</li>
+<li>int(math.log(x, 10)) + 1 获得整数长度</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_22"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 当x为负数或者以0结尾的正数时都不是回文整数</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c1"># x为0是回文整数</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 获得正整数长度</span>
+            <span class="kn">import</span> <span class="nn">math</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="c1"># 设置初始的反转数 </span>
+            <span class="n">reverse_x</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># 使用循环反转该整数的一半（12321 --&gt; 12, 123321 --&gt; 123）</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">remainder</span> <span class="o">=</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">10</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">//</span> <span class="mi">10</span>
+                <span class="n">reverse_x</span> <span class="o">=</span> <span class="n">reverse_x</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">remainder</span>
+            <span class="c1"># 此时x只剩下前面的一半（123）对应长度的偶数的数字，reverse_x == x</span>
+            <span class="c1"># 对于长度的奇数的数字，reverse_x == x//10</span>
+            <span class="k">if</span> <span class="n">reverse_x</span> <span class="o">==</span> <span class="n">x</span> <span class="ow">or</span> <span class="n">reverse_x</span> <span class="o">==</span> <span class="n">x</span><span class="o">//</span><span class="mi">10</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="5">问题5：翻转二叉树</h3>
+<p>翻转一棵二叉树。</p>
+<p>示例：</p>
+<p>输入：</p>
+<div class="codehilite" id="__code_24"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code>     <span class="mi">4</span>
+   <span class="o">/</span>   <span class="err">\</span>
+  <span class="mi">2</span>     <span class="mi">7</span>
+ <span class="o">/</span> <span class="err">\</span>   <span class="o">/</span> <span class="err">\</span>
+<span class="mi">1</span>   <span class="mi">3</span> <span class="mi">6</span>   <span class="mi">9</span>
+</code></pre></div>
+
+
+<p>输出：</p>
+<div class="codehilite" id="__code_26"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code>     <span class="mi">4</span>
+   <span class="o">/</span>   <span class="err">\</span>
+  <span class="mi">7</span>     <span class="mi">2</span>
+ <span class="o">/</span> <span class="err">\</span>   <span class="o">/</span> <span class="err">\</span>
+<span class="mi">9</span>   <span class="mi">6</span> <span class="mi">3</span>   <span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<div class="codehilite" id="__code_28"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode:</span>
+<span class="c1">#     def __init__(self, x, left=None, right=None):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.left = left</span>
+<span class="c1">#         self.right = right</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">invertTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
+         <span class="sd">"""输入与输出都是TreeNode类型或None"""</span>
+         <span class="c1"># 进行递归操作，终止条件为遇到叶子节点（即不是根节点）</span>
+         <span class="c1"># 否则将进行翻转，翻转的意思就是：根节点的值不变，左右子节点值互换</span>
+         <span class="c1"># 在左右子树的位置调用invertTree函数，并左右子的树的根节点设定为右左子树</span>
+         <span class="k">return</span> <span class="bp">None</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span> <span class="k">else</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> 
+         <span class="bp">self</span><span class="o">.</span><span class="n">invertTree</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">invertTree</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">))</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="6">问题6：反转链表</h3>
+<p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
+<p>示例:</p>
+<div class="codehilite" id="__code_30"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+</code></pre></div>
+
+
+<ul>
+<li>限制：   <ul>
+<li>0 &lt;= 节点个数 &lt;= 5000</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>构建ListNode数据结构，[1, 2, 3] --&gt; ListNode(1, ListNode(2, ListNode(3)))    &nbsp;</li>
+<li>定义头尾节点（head，last）</li>
+<li>节点next（指针）连续赋值操作</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_32"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+     <span class="sd">"""链表数据结构"""</span>
+     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reverseList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ListNode</span><span class="p">:</span>
+        <span class="c1"># 定义尾部节点，默认为None</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c1"># 当传入的头部节点不为None时，即没有反转完成时</span>
+        <span class="k">while</span> <span class="n">head</span><span class="p">:</span>
+            <span class="c1"># 连续赋值，等效于：将等号右边的变量全部暂存为中间变量, 再赋值给右侧，顺序从左至右</span>
+            <span class="c1"># eg: l = last, h = head, hn = head.next, head.next = l, last = h, head = hn</span>
+            <span class="c1"># 按照反转链表的定义，反转后新链表的最后一个节点是当前的head节点，所以对于新链表head.next=None（last的默认值）</span>
+            <span class="c1"># 而last是一直变动的，处理完新链表的尾部后，从head开始，所以有last=head</span>
+            <span class="c1"># last的遍历过程在改变着链表，我们是使用head来限制其应该何时结束，因此head也应该逐次变化，直到head.next指向None</span>
+            <span class="c1"># 因此head变化为：head = head.next</span>
+            <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">head</span> <span class="o">=</span> <span class="n">last</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">last</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="7">问题7：求队列最大值</h3>
+<p>请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。</p>
+<p>若队列为空，pop_front 和 max_value&nbsp;需要返回 -1</p>
+<p>示例 1：</p>
+<p>输入: </p>
+<div class="codehilite" id="__code_34"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code>["MaxQueue","push_back","push_back","max_value","pop_front","max_value"]
+
+[[],[1],[2],[],[],[]]
+</code></pre></div>
+
+
+<p>输出:&nbsp;</p>
+<div class="codehilite" id="__code_36"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code>[null,null,null,2,1,2]
+</code></pre></div>
+
+
+<p>示例 2：</p>
+<div class="codehilite" id="__code_38"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code>输入: 
+
+["MaxQueue","pop_front","max_value"]
+
+[[],[],[]]
+</code></pre></div>
+
+
+<div class="codehilite" id="__code_40"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code>输出:&nbsp;
+[null,-1,-1]
+</code></pre></div>
+
+
+<ul>
+<li>限制：<ul>
+<li>1 &lt;= push_back,pop_front,max_value的总操作数&nbsp;&lt;= 10000</li>
+<li>1 &lt;= value &lt;= 10^5</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>熟练使用python中的双向队列queue.deque()</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_42"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><pre id="__code_43"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_43 pre, #__code_43 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入队列工具包</span>
+<span class="kn">import</span> <span class="nn">queue</span>
+
+<span class="k">class</span> <span class="nc">MaxQueue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 初始化双向队列</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deque</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">max_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 双向队列求最大值使用max(self.deque)，类似于list</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">push_back</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># 入队列，使用append，类似于list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pop_front</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 出队列（从左侧出），即popleft方法</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">deque</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="8">问题8：三数之和</h3>
+<p>给你一个包含 n 个整数的数组&nbsp;nums，判断&nbsp;nums&nbsp;中是否存在三个元素 a，b，c ，使得&nbsp;a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p>示例：</p>
+<p>给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
+<div class="codehilite" id="__code_44"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_44 pre, #__code_44 code"><span class="md-clipboard__message"></span></button><pre id="__code_45"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_45 pre, #__code_45 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 满足要求的三元组集合为：</span>
+<span class="p">[</span>
+  <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+  <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">]</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>特况判定</li>
+<li>有序查找</li>
+<li>双指针遍历</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_46"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_46 pre, #__code_46 code"><span class="md-clipboard__message"></span></button><pre id="__code_47"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_47 pre, #__code_47 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">threeSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="sd">"""三数之和，暴力列举的话，时间复杂度为O(n^3)，该解法为O(n^2)"""</span>
+        <span class="c1"># 因为是计算三数之和，因此输入数组的长度必须大于等于3，否则返回[]</span>
+        <span class="c1"># 因此首先进行长度判断</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+        <span class="c1"># 特况判定后，对输入数组进行快排，直接使用sort()</span>
+        <span class="c1"># 为之后的有序查找奠定基础</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 因为最后我们需要得到索引，因此按照索引遍历数组</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="c1"># 因为需要找到三数之和为0，又因为数组有序，我们设计的双指针都在i的右侧，即大于nums[i]</span>
+            <span class="c1"># 所以一旦nums[i]&gt;0则之后不需要再进行判断，直接返回结果即可</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">res</span>
+            <span class="c1"># 因为题目要求，不需要重复答案，因此如果nums[i]与之前相同则跳过</span>
+            <span class="c1"># 这里注意不能从第一个开始跳过的，因为[0, 0, 0]都跳过变成[]</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">continue</span>
+            <span class="c1"># 好，这些特殊情况处理之后，我们定义双指针</span>
+            <span class="c1"># left从当前索引的下一个索引开始</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+            <span class="c1"># right从最后一个索引开始</span>
+            <span class="n">R</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+            <span class="c1"># 双指针结束条件为L&lt;R</span>
+            <span class="k">while</span> <span class="n">L</span> <span class="o">&lt;</span> <span class="n">R</span><span class="p">:</span>
+                <span class="c1"># 如果双指针对应的值加上当前遍历值和为0，则满足条件</span>
+                <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># 将结果装入res中</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">R</span><span class="p">]])</span>
+                    <span class="c1"># 一旦出现匹配结果，仍然要保证结果不重复，</span>
+                    <span class="c1"># 也就是左右指针的下一个值如果和上一个相同需要一直移动</span>
+                    <span class="c1"># 而且要控制移动后L&lt;R</span>
+                    <span class="c1"># L指针向右，R指针向左</span>
+                    <span class="k">while</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">R</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">L</span><span class="p">]</span><span class="o">==</span><span class="n">nums</span><span class="p">[</span><span class="n">L</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">while</span><span class="p">(</span><span class="n">L</span><span class="o">&lt;</span><span class="n">R</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">R</span><span class="p">]</span><span class="o">==</span><span class="n">nums</span><span class="p">[</span><span class="n">R</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                        <span class="n">R</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="c1"># 当然如果并没有重复，那么指针就按照正常情况进行移动</span>
+                    <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">R</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="c1"># 如果我们发现三数之和大于0，因为数组有序，只需移动R指针即可</span>
+                <span class="k">elif</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">nums</span><span class="p">[</span><span class="n">L</span><span class="p">]</span><span class="o">+</span><span class="n">nums</span><span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">R</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="c1"># 否则移动左指针</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">L</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="9">问题9：有效括号</h3>
+<p>给定一个只包括 '('，')'，'{'，'}'，'['，']'&nbsp;的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+注意空字符串可被认为是有效字符串。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_48"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_48 pre, #__code_48 code"><span class="md-clipboard__message"></span></button><pre id="__code_49"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_49 pre, #__code_49 code"><span class="md-clipboard__message"></span></button><code>输入: "()"
+输出: true
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_50"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_50 pre, #__code_50 code"><span class="md-clipboard__message"></span></button><pre id="__code_51"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_51 pre, #__code_51 code"><span class="md-clipboard__message"></span></button><code>输入: "()[]{}"
+输出: true
+</code></pre></div>
+
+
+<p>示例&nbsp;3:</p>
+<div class="codehilite" id="__code_52"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_52 pre, #__code_52 code"><span class="md-clipboard__message"></span></button><pre id="__code_53"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_53 pre, #__code_53 code"><span class="md-clipboard__message"></span></button><code>输入: "(]"
+输出: false
+</code></pre></div>
+
+
+<p>示例&nbsp;4:</p>
+<div class="codehilite" id="__code_54"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_54 pre, #__code_54 code"><span class="md-clipboard__message"></span></button><pre id="__code_55"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_55 pre, #__code_55 code"><span class="md-clipboard__message"></span></button><code>输入: "([)]"
+输出: false
+</code></pre></div>
+
+
+<p>示例&nbsp;5:</p>
+<div class="codehilite" id="__code_56"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_56 pre, #__code_56 code"><span class="md-clipboard__message"></span></button><pre id="__code_57"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_57 pre, #__code_57 code"><span class="md-clipboard__message"></span></button><code>输入: "{[]}"
+输出: true
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>成对"字符"的存储使用dict，而匹配检测可以使用"栈"</li>
+<li>List的qppend和pop操作可以表示"栈"的操作，但注意pop时不允许为空List</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_58"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_58 pre, #__code_58 code"><span class="md-clipboard__message"></span></button><pre id="__code_59"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_59 pre, #__code_59 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isValid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 使用dict存储成对的待检测的字符，其中多出了字符"?"</span>
+        <span class="c1"># 是因为List表示栈时不允许为空，所以初始字符设置为?,映射也是?</span>
+        <span class="c1"># 其实只要不是待检测的字符即可</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'{'</span><span class="p">:</span> <span class="s1">'}'</span><span class="p">,</span>  <span class="s1">'['</span><span class="p">:</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'('</span><span class="p">:</span> <span class="s1">')'</span><span class="p">,</span> <span class="s1">'?'</span><span class="p">:</span> <span class="s1">'?'</span><span class="p">}</span>
+        <span class="c1"># 对栈（列表表示）进行初始化</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'?'</span><span class="p">]</span>
+        <span class="c1"># 逐个将待检测字符拿出来比对</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="c1"># 如果是左括号，则进行入栈操作</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span> <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="c1"># 如果不是左括号（一定是右括号，只不过不一定和前一个匹配），</span>
+            <span class="c1"># 所以就要把上一个放在栈里的左括号拿出来，注意，是拿出来匹配</span>
+            <span class="c1"># 如果正好是这个拿出来的左括号对应的右括号，</span>
+            <span class="c1"># 那么这个原来在栈里的左括号被抵消，循环继续</span>
+            <span class="c1"># 如果这个拿出来的左括号和现在遍历的右括号不是一对，那就直接返回False即可</span>
+            <span class="k">elif</span> <span class="n">dic</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">:</span> <span class="k">return</span> <span class="bp">False</span> 
+        <span class="c1"># 最终，有效的括号字符串，会将所有入栈的左括号都抵消掉，只留下"?"</span>
+        <span class="c1"># 因此最后，len(stack) == 1即可返回True，否则，比如输入的都是左括号，会返回False</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="10">问题10：全排列</h3>
+<p>给定一个 没有重复 数字的序列，返回其所有可能的全排列。</p>
+<p>示例:</p>
+<div class="codehilite" id="__code_60"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_60 pre, #__code_60 code"><span class="md-clipboard__message"></span></button><pre id="__code_61"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_61 pre, #__code_61 code"><span class="md-clipboard__message"></span></button><code>输入: [1,2,3]
+输出:
+[
+  [1,2,3],
+  [1,3,2],
+  [2,1,3],
+  [2,3,1],
+  [3,1,2],
+  [3,2,1]
+]
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>工业级全排列会使用itertools.permutations(nums)，但这不是算法考核的目的，我们需要剖析API的实现方式。</li>
+<li>全排列重点考核的算法思想是回溯搜索，你需要按照二叉树的深度优先遍历方式去理解</li>
+<li>注意区分：回溯搜索，动态规划，递推都是算法思想，而递归（函数调用自身）是实现方式。</li>
+<li>全排列的回溯仍然是使用递归，而递归就需要明确的终止条件</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_62"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_62 pre, #__code_62 code"><span class="md-clipboard__message"></span></button><pre id="__code_63"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_63 pre, #__code_63 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="c1"># 因为最终目的是获得一个装有列表的列表</span>
+        <span class="c1"># 因此我们初始化一个空列表</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 接着我们需要编写一个内置函数，这个函数接下来会被调用</span>
+        <span class="c1"># 回溯法的递归方式是在内置函数的外部和内部分别调用它，来保证回溯</span>
+        <span class="c1"># 你需要把它想象成二叉树的深度优先遍历，外部的调用类似每个"深度"的遍历</span>
+        <span class="c1"># 而内部调用就是真正深度的遍历，当然深度的遍历是必须带有结束条件的</span>
+        <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">tmp</span><span class="p">):</span>
+            <span class="sd">"""这个内置函数以输入的待排列list为第一个参数</span>
+<span class="sd">               第二个参数则是在搜索过程中不断累加的可能结果</span>
+<span class="sd">               它的初始化是一个空列表</span>
+<span class="sd">            """</span>
+            <span class="c1"># 首先需要明确深度遍历的结束条件</span>
+            <span class="c1"># 就是nums已经为空</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+                <span class="c1"># 这时说明已经到了足够的深度，tmp已经完成这条路径的采集</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+                <span class="k">return</span> 
+            <span class="c1"># 如果nums还不是空的，我们会遍历nums</span>
+            <span class="c1"># 第一次的nums遍历就是被外部调用，类似每个"深度"的遍历</span>
+            <span class="c1"># 这并不会是nums的数量减小，而是逐个的遍历而已</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                <span class="c1"># 接下来，我们在逐个遍历时，又一次调用这个函数</span>
+                <span class="c1"># 只不过这一次该函数的输入变成了除去"i"位置的其他数值</span>
+                <span class="c1"># 因此我们发现，内置的调用会让nums的元素越来越少，直到满足终止条件</span>
+                <span class="c1"># 并且，原来的tmp开始使用正在遍历的元素进行累加（列表的合并）</span>
+                <span class="c1"># 也就是说，直到"深度"遍历完，tmp会收集到所有的nums中的数值</span>
+                <span class="c1"># 因此，tmp成为nums中的一种排列的可能被存到res结果列表中</span>
+                <span class="n">backtrack</span><span class="p">(</span><span class="n">nums</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:],</span> <span class="n">tmp</span> <span class="o">+</span> <span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="c1"># 外部调用</span>
+        <span class="n">backtrack</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="11">问题11：罗马数字转整数</h3>
+<p>罗马数字包含以下七种字符:&nbsp;I，&nbsp;V，&nbsp;X，&nbsp;L，C，D&nbsp;和&nbsp;M。</p>
+<div class="codehilite" id="__code_64"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_64 pre, #__code_64 code"><span class="md-clipboard__message"></span></button><pre id="__code_65"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_65 pre, #__code_65 code"><span class="md-clipboard__message"></span></button><code>字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+</code></pre></div>
+
+
+<p>例如， 罗马数字 2 写做&nbsp;II&nbsp;，即为两个并列的 1。12 写做&nbsp;XII&nbsp;，即为&nbsp;X&nbsp;+&nbsp;II&nbsp;。 27 写做&nbsp;&nbsp;XXVII, 即为&nbsp;XX&nbsp;+&nbsp;V&nbsp;+&nbsp;II&nbsp;。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做&nbsp;IIII，而是&nbsp;IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为&nbsp;IX。这个特殊的规则只适用于以下六种情况：</p>
+<p>I&nbsp;可以放在&nbsp;V&nbsp;(5) 和&nbsp;X&nbsp;(10) 的左边，来表示 4 和 9。
+X&nbsp;可以放在&nbsp;L&nbsp;(50) 和&nbsp;C&nbsp;(100) 的左边，来表示 40 和&nbsp;90。&nbsp;
+C&nbsp;可以放在&nbsp;D&nbsp;(500) 和&nbsp;M&nbsp;(1000) 的左边，来表示&nbsp;400 和&nbsp;900。
+给定一个罗马数字，将其转换成整数。输入确保在 1&nbsp;到 3999 的范围内。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_66"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_66 pre, #__code_66 code"><span class="md-clipboard__message"></span></button><pre id="__code_67"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_67 pre, #__code_67 code"><span class="md-clipboard__message"></span></button><code>输入:&nbsp;"III"
+输出: 3
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_68"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_68 pre, #__code_68 code"><span class="md-clipboard__message"></span></button><pre id="__code_69"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_69 pre, #__code_69 code"><span class="md-clipboard__message"></span></button><code>输入:&nbsp;"IV"
+输出: 4
+</code></pre></div>
+
+
+<p>示例&nbsp;3:</p>
+<div class="codehilite" id="__code_70"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_70 pre, #__code_70 code"><span class="md-clipboard__message"></span></button><pre id="__code_71"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_71 pre, #__code_71 code"><span class="md-clipboard__message"></span></button><code>输入:&nbsp;"IX"
+输出: 9
+</code></pre></div>
+
+
+<p>示例&nbsp;4:</p>
+<div class="codehilite" id="__code_72"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_72 pre, #__code_72 code"><span class="md-clipboard__message"></span></button><pre id="__code_73"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_73 pre, #__code_73 code"><span class="md-clipboard__message"></span></button><code>输入:&nbsp;"LVIII"
+输出: 58
+解释: L = 50, V= 5, III = 3.
+</code></pre></div>
+
+
+<p>示例&nbsp;5:</p>
+<div class="codehilite" id="__code_74"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_74 pre, #__code_74 code"><span class="md-clipboard__message"></span></button><pre id="__code_75"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_75 pre, #__code_75 code"><span class="md-clipboard__message"></span></button><code>输入:&nbsp;"MCMXCIV"
+输出: 1994
+解释: M = 1000, CM = 900, XC = 90, IV = 4.
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>明确罗马数字转换规则: "XIV" = "X" + "IV" = 10 + 4 = 14，"XCI" = "XC" + "I" = 91，即优先选择二位来映射，不存在两位即选择一位</li>
+<li>使用字典构建所有有限映射</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_76"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_76 pre, #__code_76 code"><span class="md-clipboard__message"></span></button><pre id="__code_77"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_77 pre, #__code_77 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">romanToInt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 使用字典存储所有映射可能</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'I'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'IV'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s1">'V'</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="s1">'IX'</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="s1">'X'</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'XL'</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span> <span class="s1">'L'</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s1">'XC'</span><span class="p">:</span><span class="mi">90</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="s1">'CD'</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span> <span class="s1">'CM'</span><span class="p">:</span><span class="mi">900</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">:</span><span class="mi">1000</span><span class="p">}</span>
+        <span class="c1"># 遍历的所有结果列表, eg: "XIV" = "X" + "IV" = 10 + 4，即su = [10, 4]，最后求和</span>
+        <span class="n">su</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># s遍历开始的指针</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="c1"># 优先考虑间隔两位的字符</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+            <span class="c1"># 判断字符是否在d中</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="c1"># 如果在，取出对应的数字</span>
+                <span class="n">su</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+                <span class="c1"># 指针跳跃一个</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 否则说明只有一个字符映射，并且一定在d中</span>
+                <span class="c1"># 直接取出即可</span>
+                <span class="n">su</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 最后对结果求和</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">su</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="12">问题12：最长公共子序列</h3>
+<p>给定两个字符串&nbsp;text1 和&nbsp;text2，返回这两个字符串的最长公共子序列的长度。</p>
+<p>一个字符串的&nbsp;子序列&nbsp;是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
+例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
+<p>若这两个字符串没有公共子序列，则返回 0。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_78"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_78 pre, #__code_78 code"><span class="md-clipboard__message"></span></button><pre id="__code_79"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_79 pre, #__code_79 code"><span class="md-clipboard__message"></span></button><code>输入：text1 = "abcde", text2 = "ace" 
+输出：3  
+解释：最长公共子序列是 "ace"，它的长度为 3。
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_80"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_80 pre, #__code_80 code"><span class="md-clipboard__message"></span></button><pre id="__code_81"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_81 pre, #__code_81 code"><span class="md-clipboard__message"></span></button><code>输入：text1 = "abc", text2 = "abc"
+输出：3
+解释：最长公共子序列是 "abc"，它的长度为 3。
+</code></pre></div>
+
+
+<p>示例 3:</p>
+<div class="codehilite" id="__code_82"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_82 pre, #__code_82 code"><span class="md-clipboard__message"></span></button><pre id="__code_83"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_83 pre, #__code_83 code"><span class="md-clipboard__message"></span></button><code>输入：text1 = "abc", text2 = "def"
+输出：0
+解释：两个字符串没有公共子序列，返回 0。
+</code></pre></div>
+
+
+<ul>
+<li>提示:<ul>
+<li>1 &lt;= text1.length &lt;= 1000</li>
+<li>1 &lt;= text2.length &lt;= 1000</li>
+<li>输入的字符串只含有小写英文字符。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>成对字符串的对比==&gt;用双指针==&gt;用初始化为0的矩阵表示存储</li>
+<li>动态规划方法：找出原问题的子问题==&gt;判断当前问题的子问题，因此i，j遍历从1开始，因此需要0作为其子问题</li>
+<li>注意：遍历的是子序列长度的存储单元，而比对的是字符串是否相同 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_84"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_84 pre, #__code_84 code"><span class="md-clipboard__message"></span></button><pre id="__code_85"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_85 pre, #__code_85 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">longestCommonSubsequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 因为需要遍历字符串并构建存储矩阵，所以需要求两个字符串的长度</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+        <span class="c1"># 初始化为0的存储矩阵，dp[i][j]用于存储该‘单元’之前的子串中公共子序列的长度</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="c1"># 初始化最终结果，长度为整型，默认为0</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 因为需要判断子问题，所以i，j以1而不是0开始，结束也是对应的m+1和n+1</span>
+        <span class="c1"># （实质遍历的是存储单元，与字符串遍历相差为1）</span>
+        <span class="c1"># 对于字符串，m+1，n+1指针是越界的，但是对于存储，是不越界的。</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="c1"># 通过子问题判断，来决定当前的d[i][j]的值</span>
+                <span class="c1"># d[i][j]存储的就是之间累加的子序列长度</span>
+                <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="c1"># 如果两个字符串的当前字符相等，那么dp[i][j]的值就是之前d[i-1][j-1]存储的长度+1</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="c1"># 新得到的最长序列要和上一次得到的最长序列结果ans取最大成为新的ans</span>
+                    <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># 如果当前字符不等，那么存储单元的值应该取其附近存储单元的最大值</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ans</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="13">问题13：合并两个有序链表</h3>
+<p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。&nbsp;</p>
+<p>示例：</p>
+<div class="codehilite" id="__code_86"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_86 pre, #__code_86 code"><span class="md-clipboard__message"></span></button><pre id="__code_87"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_87 pre, #__code_87 code"><span class="md-clipboard__message"></span></button><code>输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>使用递归实现递推思想的典型算法。</li>
+<li>理解对ListNode.next进行节点赋值是在逐一遍历链表节点</li>
+<li>要返回值较小的链表ListNode</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_88"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_88 pre, #__code_88 code"><span class="md-clipboard__message"></span></button><pre id="__code_89"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_89 pre, #__code_89 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 定义链表节点的数据结构</span>
+<span class="c1"># class ListNode:</span>
+<span class="c1">#     def __init__(self, val, next=None):</span>
+<span class="c1">#         self.val = val</span>
+<span class="c1">#         self.next = next</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l1</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">,</span> <span class="n">l2</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ListNode</span><span class="p">:</span>
+        <span class="sd">"""输入是两个待排序链表的头节点"""</span>
+        <span class="c1"># 终止条件，当传入的待排序链表l1或l2为空时，说明递归可以结束</span>
+        <span class="c1"># 返回排序好的l1或l2即可，l1为空返回l2，l2为空返回l1.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">l1</span><span class="p">:</span> <span class="k">return</span> <span class="n">l2</span>  
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">l2</span><span class="p">:</span> <span class="k">return</span> <span class="n">l1</span>
+        <span class="c1"># 待排序链表头节点值的比较</span>
+        <span class="k">if</span> <span class="n">l1</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">l2</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>  
+            <span class="c1"># 在l1值较小的条件下，我们通过合并函数的执行会得到新的l1.next，用于下一次比较</span>
+            <span class="c1"># 而完成合并的l1则可以直接返回</span>
+            <span class="n">l1</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">l1</span><span class="o">.</span><span class="n">next</span><span class="p">,</span><span class="n">l2</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">l1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 同理，如果l2的值较小，我们就要改变l2的下一个节点（l1不变），并要得到新的用于比较的l2.next(当前l2的下一个节点)</span>
+            <span class="n">l2</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span><span class="n">l2</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">l2</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="14">问题14：最长公共子串</h3>
+<p>与最长公共子序列类似，只不过要求公共子序列是连续的，即子串。</p>
+<p>示例：</p>
+<div class="codehilite" id="__code_90"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_90 pre, #__code_90 code"><span class="md-clipboard__message"></span></button><pre id="__code_91"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_91 pre, #__code_91 code"><span class="md-clipboard__message"></span></button><code>输入：text1 = "abcde", text2 = "abe" 
+输出：2 
+解释：最长公共子串是 "ab"，它的长度为 2。
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>双输入字符串的动态规划问题：使用矩阵存储</li>
+<li>与公共子序列相比不需要考虑字符不相同的情况，不相同直接从0计数</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_92"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_92 pre, #__code_92 code"><span class="md-clipboard__message"></span></button><pre id="__code_93"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_93 pre, #__code_93 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">longestCommonString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 因为需要遍历字符串并构建存储矩阵，所以需要求两个字符串的长度</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+        <span class="c1"># 初始化为0的存储矩阵，dp[i][j]用于存储该‘单元’之前的子串长度</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="c1"># 初始化最终结果，长度为整型，默认为0</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 因为需要判断子问题，所以i，j以1而不是0开始，结束也是对应的m+1和n+1</span>
+        <span class="c1"># （实质遍历的是存储单元，与字符串遍历相差为1）</span>
+        <span class="c1"># 对于字符串，m+1，n+1指针是越界的，但是对于存储，是不越界的。</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="c1"># 通过子问题判断，来决定当前的d[i][j]的值</span>
+                <span class="c1"># d[i][j]存储的就是之间累加的子串长度</span>
+                <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="c1"># 如果两个字符串的当前字符相等，那么dp[i][j]的值就是之前d[i-1][j-1]存储的长度+1</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="c1"># 新得到的最长序列要和上一次得到的最长序列结果ans取最大成为新的ans</span>
+                    <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ans</span>
+
+
+
+<span class="c1"># 与子序列相比，子串只是不去考虑双重循环中，条件语句中的else，</span>
+<span class="c1"># 因为默认矩阵为0，即如果A[i - 1] != B[j - 1]即出现不连续，那么从0开始重新计数</span>
+<span class="c1"># 而子序列却需要从附近的存储单元来延续这个数值</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="15">问题15：删除排序数组中的重复项</h3>
+<p>给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_94"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_94 pre, #__code_94 code"><span class="md-clipboard__message"></span></button><pre id="__code_95"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_95 pre, #__code_95 code"><span class="md-clipboard__message"></span></button><code>给定数组 nums = [1,1,2], 
+
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
+
+你不需要考虑数组中超出新长度后面的元素。
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_96"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_96 pre, #__code_96 code"><span class="md-clipboard__message"></span></button><pre id="__code_97"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_97 pre, #__code_97 code"><span class="md-clipboard__message"></span></button><code>给定 nums = [0,0,1,1,1,2,2,3,3,4],
+
+函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code></pre></div>
+
+
+<p>说明:</p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>不可以开辟新的空间，则使用双指针进行覆盖。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_98"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_98 pre, #__code_98 code"><span class="md-clipboard__message"></span></button><pre id="__code_99"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_99 pre, #__code_99 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">removeDuplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">"""这个函数返回的是结果列表的长度（最后指针+1）而不是数组，这本质上是等效的"""</span>
+        <span class="c1"># 首先是边界条件，空列表，返回0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="c1"># 初始化第一个指针i，在0的位置</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 第二个指针从1开始遍历</span>
+        <span class="c1"># 注意，我们不需要遍历第一个指针，因为它与第二个指针具备一定的关系</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="c1"># 当两个指针所指数值不等时</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="c1"># 因为数组是有序的，因此i的位置的数值是保留的，i指针到下一个位置</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># 因为如果i，j对应的值相同，j指针是一直往下走的（你会发现这个if没有对应的else语句）</span>
+                <span class="c1"># 所以j其实已经走完了所有重复的值，因为i通过i+1保留了这个值，而j现在正在和i不同的值上</span>
+                <span class="c1"># 因此将num[j]覆盖num[i]</span>
+                <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="c1"># 返回结果列表的长度</span>
+        <span class="k">return</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="16">问题16: 移除元素</h3>
+<p>给你一个数组 nums&nbsp;和一个值 val，你需要 原地 移除所有数值等于&nbsp;val&nbsp;的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_100"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_100 pre, #__code_100 code"><span class="md-clipboard__message"></span></button><pre id="__code_101"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_101 pre, #__code_101 code"><span class="md-clipboard__message"></span></button><code>给定 nums = [3,2,2,3], val = 3,
+
+函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_102"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_102 pre, #__code_102 code"><span class="md-clipboard__message"></span></button><pre id="__code_103"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_103 pre, #__code_103 code"><span class="md-clipboard__message"></span></button><code>给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+
+函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+
+注意这五个元素可为任意顺序。
+
+你不需要考虑数组中超出新长度后面的元素。
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>对列表的移除/覆盖操作可能破坏列表索引取值的位置，则考虑使用倒序遍历。</li>
+<li>倒序遍历能够有效避免元素变化导致列表索引取值（是默认的正序取值）出错。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_104"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_104 pre, #__code_104 code"><span class="md-clipboard__message"></span></button><pre id="__code_105"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_105 pre, #__code_105 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">removeElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">"""输入数组，返回结果数组的长度（整数）"""</span>
+        <span class="c1"># 使用倒序遍历，有效避免（正序的索引取值问题）</span>
+        <span class="c1"># 从倒数第一个开始，直到索引为-1，即索引为0也要计算 </span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># 判断相等</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">):</span>
+                <span class="c1"># 使用pop直接移除</span>
+                <span class="n">nums</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># 最终返回列表长度 </span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="17">问题17：删除排序链表中的重复元素</h3>
+<p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_106"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_106 pre, #__code_106 code"><span class="md-clipboard__message"></span></button><pre id="__code_107"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_107 pre, #__code_107 code"><span class="md-clipboard__message"></span></button><code>输入: 1-&gt;1-&gt;2
+输出: 1-&gt;2
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_108"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_108 pre, #__code_108 code"><span class="md-clipboard__message"></span></button><pre id="__code_109"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_109 pre, #__code_109 code"><span class="md-clipboard__message"></span></button><code>输入: 1-&gt;1-&gt;2-&gt;3-&gt;3
+输出: 1-&gt;2-&gt;3
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>从head开始，node.next代表node节点的下一个节点</li>
+<li>通过node.next = node.next.next语句删除node的下一个节点</li>
+<li>通过node = node.next来遍历所有节点 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_110"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_110 pre, #__code_110 code"><span class="md-clipboard__message"></span></button><pre id="__code_111"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_111 pre, #__code_111 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># Definition for singly-linked list.</span>
+<span class="c1"># class ListNode:</span>
+<span class="c1">#     def __init__(self, x, next=None):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = next</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ListNode</span><span class="p">:</span>
+        <span class="c1"># 输入是链表的头节点</span>
+        <span class="c1"># 并将头节点赋值给node，代表移动的节点</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="c1"># 随后node开始遍历，就像列表的一样</span>
+        <span class="c1"># 当node和node.next都要存在时，才执行循环内容 </span>
+        <span class="k">while</span> <span class="n">node</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="c1"># 因为本身链表是有序的，所以判断邻近值是否相等即可</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+                <span class="c1"># 如果重复，则让node的下一个节点和下一个的下一个节点等效</span>
+                <span class="c1"># 这意味着node的下一个节点被覆盖掉了</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 否则，就是没有重复，node一直往下走 </span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="n">head</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="18">问题18：字符串匹配</h3>
+<p>给定一个&nbsp;haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回&nbsp; -1。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_112"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_112 pre, #__code_112 code"><span class="md-clipboard__message"></span></button><pre id="__code_113"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_113 pre, #__code_113 code"><span class="md-clipboard__message"></span></button><code>输入: haystack = "hello", needle = "ll"
+输出: 2
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_114"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_114 pre, #__code_114 code"><span class="md-clipboard__message"></span></button><pre id="__code_115"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_115 pre, #__code_115 code"><span class="md-clipboard__message"></span></button><code>输入: haystack = "aaaaa", needle = "bba"
+输出: -1
+</code></pre></div>
+
+
+<p>说明:</p>
+<p>当&nbsp;needle&nbsp;是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。</p>
+<p>对于本题而言，当&nbsp;needle&nbsp;是空字符串时我们应当返回 0 。这与C语言的&nbsp;strstr()&nbsp;以及 Java的&nbsp;indexOf()&nbsp;定义相符。</p>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>传统的pattern匹配算法有很多，KMP，Sunday等等，但是都不够pythonic</li>
+<li>python中使用in和index解决pattern匹配问题</li>
+<li>简单优雅是python的准则</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_116"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_116 pre, #__code_116 code"><span class="md-clipboard__message"></span></button><pre id="__code_117"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_117 pre, #__code_117 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">strStr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">haystack</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">needle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">haystack</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span> <span class="k">if</span> <span class="n">needle</span> <span class="ow">in</span> <span class="n">haystack</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="19">问题19：最后一个字符串长度</h3>
+<p>给定一个仅包含大小写字母和空格&nbsp;' '&nbsp;的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。</p>
+<p>如果不存在最后一个单词，请返回 0&nbsp;。</p>
+<p>说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
+<p>示例:</p>
+<div class="codehilite" id="__code_118"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_118 pre, #__code_118 code"><span class="md-clipboard__message"></span></button><pre id="__code_119"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_119 pre, #__code_119 code"><span class="md-clipboard__message"></span></button><code>输入: "Hello World"
+输出: 5
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>字符串的转列表使用split</li>
+<li>倒数第一个元素用-1</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_120"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_120 pre, #__code_120 code"><span class="md-clipboard__message"></span></button><pre id="__code_121"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_121 pre, #__code_121 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">lengthOfLastWord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">s</span> <span class="k">else</span> <span class="mi">0</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="20">问题20：搜索插入的位置</h3>
+<p>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_122"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_122 pre, #__code_122 code"><span class="md-clipboard__message"></span></button><pre id="__code_123"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_123 pre, #__code_123 code"><span class="md-clipboard__message"></span></button><code>输入: [1,3,5,6], 5
+输出: 2
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_124"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_124 pre, #__code_124 code"><span class="md-clipboard__message"></span></button><pre id="__code_125"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_125 pre, #__code_125 code"><span class="md-clipboard__message"></span></button><code>输入: [1,3,5,6], 2
+输出: 1
+</code></pre></div>
+
+
+<p>示例 3:</p>
+<div class="codehilite" id="__code_126"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_126 pre, #__code_126 code"><span class="md-clipboard__message"></span></button><pre id="__code_127"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_127 pre, #__code_127 code"><span class="md-clipboard__message"></span></button><code>输入: [1,3,5,6], 7
+输出: 4
+</code></pre></div>
+
+
+<p>示例 4:</p>
+<div class="codehilite" id="__code_128"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_128 pre, #__code_128 code"><span class="md-clipboard__message"></span></button><pre id="__code_129"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_129 pre, #__code_129 code"><span class="md-clipboard__message"></span></button><code>输入: [1,3,5,6], 0
+输出: 0
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>append()追加元素，时间复杂度O(1)</li>
+<li>sort()进行排序，这是快排, O(nlogn)</li>
+<li>index()取值，时间复杂度为O(n)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_130"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_130 pre, #__code_130 code"><span class="md-clipboard__message"></span></button><pre id="__code_131"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_131 pre, #__code_131 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">searchInsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="21">问题21：最大子序和</h3>
+<p>给定一个整数数组 nums&nbsp;，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例:</p>
+<div class="codehilite" id="__code_132"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_132 pre, #__code_132 code"><span class="md-clipboard__message"></span></button><pre id="__code_133"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_133 pre, #__code_133 code"><span class="md-clipboard__message"></span></button><code>输入: [-2,1,-3,4,-1,2,1,-5,4]
+输出: 6
+解释:&nbsp;连续子数组&nbsp;[4,-1,2,1] 的和最大，为&nbsp;6。
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔：<ul>
+<li>以前我们已经学习了使用数组存储（二维）的动态规划算法，这次我们的动态规划思想是使用问题的原列表（一维），它将子序和任务转化成最大值的比较任务，即当前值和历史值(包括当前值)的比较。</li>
+<li>因为是<code>连续</code>子数组的比较，因此历史值如果没有当前值大，意味着当前值将成为连续最大子数组的第一个值。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_134"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_134 pre, #__code_134 code"><span class="md-clipboard__message"></span></button><pre id="__code_135"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_135 pre, #__code_135 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maxSubArray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 这是典型的动态规划遍历，比数组遍历+1，即从1开始到len(nums), 因为要进行i-1的索引</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="c1"># 我们开始比较当前值和历史值(包括当前值)的大小，最小的一次历史值，就是前两个元素的相加</span>
+            <span class="c1"># 比较后，胜出者（最大值）占领当前值的位置，准备进行下一次比较</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1"># 最后nums还是剩下两个值，我们从中选择最大的即可</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="22">问题22：二进制求和</h3>
+<p>给你两个二进制字符串，返回它们的和（用二进制表示）。</p>
+<p>输入为 非空 字符串且只包含数字&nbsp;1&nbsp;和&nbsp;0。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_136"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_136 pre, #__code_136 code"><span class="md-clipboard__message"></span></button><pre id="__code_137"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_137 pre, #__code_137 code"><span class="md-clipboard__message"></span></button><code>输入: a = "11", b = "1"
+输出: "100"
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_138"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_138 pre, #__code_138 code"><span class="md-clipboard__message"></span></button><pre id="__code_139"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_139 pre, #__code_139 code"><span class="md-clipboard__message"></span></button><code>输入: a = "1010", b = "1011"
+输出: "10101"
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>二进制向十进制转换使用int(a, 2)</li>
+<li>十进制向二进制转换使用bin(b)[2:]</li>
+<li>[2:]是为了去除0b二进制头，只剩下01组成的二进制数值</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_140"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_140 pre, #__code_140 code"><span class="md-clipboard__message"></span></button><pre id="__code_141"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_141 pre, #__code_141 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">addBinary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bin</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="23">问题23：链表有环</h3>
+<p>给定一个链表，判断链表中是否有环。</p>
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。</p>
+<p>示例 1：</p>
+<div class="codehilite" id="__code_142"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_142 pre, #__code_142 code"><span class="md-clipboard__message"></span></button><pre id="__code_143"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_143 pre, #__code_143 code"><span class="md-clipboard__message"></span></button><code>输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+</code></pre></div>
+
+
+<p><img alt="" src="./index_files/circularlinkedlist.png"></p>
+<p>示例&nbsp;2：</p>
+<div class="codehilite" id="__code_144"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_144 pre, #__code_144 code"><span class="md-clipboard__message"></span></button><pre id="__code_145"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_145 pre, #__code_145 code"><span class="md-clipboard__message"></span></button><code>输入：head = [1,2], pos = 0
+输出：true
+解释：链表中有一个环，其尾部连接到第一个节点。
+</code></pre></div>
+
+
+<p><img alt="" src="./index_files/circularlinkedlist_test2.png"></p>
+<p>示例 3：</p>
+<div class="codehilite" id="__code_146"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_146 pre, #__code_146 code"><span class="md-clipboard__message"></span></button><pre id="__code_147"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_147 pre, #__code_147 code"><span class="md-clipboard__message"></span></button><code>输入：head = [1], pos = -1
+输出：false
+解释：链表中没有环。
+</code></pre></div>
+
+
+<p><img alt="" src="./index_files/circularlinkedlist_test3.png"></p>
+<p>进阶：</p>
+<p>你能用 O(1)（即，常量）内存解决此问题吗？</p>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>为了满足O(1)的空间复杂度，不能使用集合开辟新的空间。</li>
+<li>使用标记递归方法，在所有经过的节点设立标记值，判断链表是否循环递归到该值。</li>
+<li>标记值必须唯一。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_148"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_148 pre, #__code_148 code"><span class="md-clipboard__message"></span></button><pre id="__code_149"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_149 pre, #__code_149 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># class ListNode:</span>
+<span class="c1">#     def __init__(self, x, next=None):</span>
+<span class="c1">#         self.val = x</span>
+<span class="c1">#         self.next = next</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">ListNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+        <span class="c1"># 特殊情况判断</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="c1"># 首先在head处判断标记，值为"0xcafebabe"</span>
+        <span class="k">if</span> <span class="n">head</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="s2">"0xcafebabe"</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="c1"># 在该点处设立标记</span>
+        <span class="n">head</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="s2">"0xcafebabe"</span>
+        <span class="c1"># 使用递归的方式进行循环</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="24">问题24：多数元素</h3>
+<p>给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于&nbsp;⌊ n/2 ⌋&nbsp;的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_150"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_150 pre, #__code_150 code"><span class="md-clipboard__message"></span></button><pre id="__code_151"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_151 pre, #__code_151 code"><span class="md-clipboard__message"></span></button><code>输入: [3,2,3]
+输出: 3
+
+示例&nbsp;2:
+
+```text
+输入: [2,2,1,1,1,2,2]
+输出: 2
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>使用字典进行字符统计。</li>
+<li>再遍历字典进行查找。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_152"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_152 pre, #__code_152 code"><span class="md-clipboard__message"></span></button><pre id="__code_153"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_153 pre, #__code_153 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">majorityElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 创建一个初始字典</span>
+        <span class="n">numDict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># 获得输入列表的长度</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="c1"># 进行列表遍历，进行计数</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="n">numDict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">numDict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="c1"># 最后按照题目要求进行字典查找  </span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">numDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">numDict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">key</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="25">问题25：相同的树</h3>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>示例&nbsp;1:</p>
+<div class="codehilite" id="__code_154"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_154 pre, #__code_154 code"><span class="md-clipboard__message"></span></button><pre id="__code_155"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_155 pre, #__code_155 code"><span class="md-clipboard__message"></span></button><code>输入:       1         1
+          / \       / \
+         2   3     2   3
+
+        [1,2,3],   [1,2,3]
+
+输出: true
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_156"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_156 pre, #__code_156 code"><span class="md-clipboard__message"></span></button><pre id="__code_157"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_157 pre, #__code_157 code"><span class="md-clipboard__message"></span></button><code>输入:      1          1
+          /           \
+         2             2
+
+        [1,2],     [1,null,2]
+
+输出: false
+</code></pre></div>
+
+
+<p>示例&nbsp;3:</p>
+<div class="codehilite" id="__code_158"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_158 pre, #__code_158 code"><span class="md-clipboard__message"></span></button><pre id="__code_159"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_159 pre, #__code_159 code"><span class="md-clipboard__message"></span></button><code>输入:       1         1
+          / \       / \
+         2   1     1   2
+
+        [1,2,1],   [1,1,2]
+
+输出: false
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>递归遍历左右子树进行判断</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_160"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_160 pre, #__code_160 code"><span class="md-clipboard__message"></span></button><pre id="__code_161"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_161 pre, #__code_161 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode:</span>
+<span class="c1">#     def __init__(self, val=0, left=None, right=None):</span>
+<span class="c1">#         self.val = val</span>
+<span class="c1">#         self.left = left</span>
+<span class="c1">#         self.right = right</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isSameTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="c1"># 递归进行前边界条件判断</span>
+        <span class="c1"># 都是空树则相同</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">==</span><span class="bp">None</span> <span class="ow">and</span> <span class="n">q</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="c1"># 有一颗不是空树则不同</span>
+        <span class="k">elif</span> <span class="n">p</span><span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">q</span> <span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="c1"># 树中的值不同也是不同的树</span>
+        <span class="k">elif</span> <span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="o">!=</span> <span class="n">q</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 最后进行递归，要求每个节点的左右子树必须满足边界条件</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isSameTree</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">q</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isSameTree</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">right</span><span class="p">,</span><span class="n">q</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="26">问题26：旋转(平移)数组</h3>
+<p>给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_162"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_162 pre, #__code_162 code"><span class="md-clipboard__message"></span></button><pre id="__code_163"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_163 pre, #__code_163 code"><span class="md-clipboard__message"></span></button><code>输入: [1,2,3,4,5,6,7] 和 k = 3
+输出: [5,6,7,1,2,3,4]
+解释:
+向右旋转 1 步: [7,1,2,3,4,5,6]
+向右旋转 2 步: [6,7,1,2,3,4,5]
+向右旋转 3 步: [5,6,7,1,2,3,4]
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_164"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_164 pre, #__code_164 code"><span class="md-clipboard__message"></span></button><pre id="__code_165"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_165 pre, #__code_165 code"><span class="md-clipboard__message"></span></button><code>输入: [-1,-100,3,99] 和 k = 2
+输出: [3,99,-1,-100]
+解释: 
+向右旋转 1 步: [99,-1,-100,3]
+向右旋转 2 步: [3,99,-1,-100]
+</code></pre></div>
+
+
+<p>说明:</p>
+<p>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
+要求使用空间复杂度为 O(1) 的 原地 算法。</p>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>对列表的旋转（平移）操作使用切片</li>
+<li>nums[:]表示在原数组上修改</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_166"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_166 pre, #__code_166 code"><span class="md-clipboard__message"></span></button><pre id="__code_167"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_167 pre, #__code_167 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># 用切片的方法：k就是将nums的最后k个数放在nums的开始位置即可</span>
+        <span class="n">lenth</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">nums</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">lenth</span><span class="o">-</span><span class="n">k</span><span class="p">:]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[:</span><span class="n">lenth</span><span class="o">-</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">nums</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="27">问题27：打家劫舍</h3>
+<p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p>
+<p>示例 1：</p>
+<div class="codehilite" id="__code_168"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_168 pre, #__code_168 code"><span class="md-clipboard__message"></span></button><pre id="__code_169"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_169 pre, #__code_169 code"><span class="md-clipboard__message"></span></button><code>输入：[1,2,3,1]
+输出：4
+解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
+&nbsp;    偷窃到的最高金额 = 1 + 3 = 4 。
+</code></pre></div>
+
+
+<p>示例 2：</p>
+<div class="codehilite" id="__code_170"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_170 pre, #__code_170 code"><span class="md-clipboard__message"></span></button><pre id="__code_171"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_171 pre, #__code_171 code"><span class="md-clipboard__message"></span></button><code>输入：[2,7,9,3,1]
+输出：12
+解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
+&nbsp;    偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+</code></pre></div>
+
+
+<p>提示：</p>
+<p>0 &lt;= nums.length &lt;= 100
+0 &lt;= nums[i] &lt;= 400</p>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>循环计算间隔最大值：prev, curr = curr, max(curr, prev + i)，返回curr，i是数组中的每个值</li>
+<li>这个间隔可以跨越多个数值</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_172"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_172 pre, #__code_172 code"><span class="md-clipboard__message"></span></button><pre id="__code_173"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_173 pre, #__code_173 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">rob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># prev, curr都是存储数值和的容器</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 每次循环，计算“偷到当前房子为止的最大金额”</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="c1"># 循环计算间隔最大值</span>
+            <span class="n">prev</span><span class="p">,</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+            <span class="c1"># 等效于：</span>
+            <span class="c1"># temp = curr</span>
+            <span class="c1"># curr = max(curr, prev + i)</span>
+            <span class="c1"># prev = temp</span>
+        <span class="k">return</span> <span class="n">curr</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="28">问题28：翻转字符串里的单词</h3>
+<p>给定一个字符串，逐个翻转字符串中的每个单词。</p>
+<p>示例 1：</p>
+<div class="codehilite" id="__code_174"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_174 pre, #__code_174 code"><span class="md-clipboard__message"></span></button><pre id="__code_175"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_175 pre, #__code_175 code"><span class="md-clipboard__message"></span></button><code>输入: "the sky is blue"
+输出:&nbsp;"blue is sky the"
+</code></pre></div>
+
+
+<p>示例 2：</p>
+<div class="codehilite" id="__code_176"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_176 pre, #__code_176 code"><span class="md-clipboard__message"></span></button><pre id="__code_177"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_177 pre, #__code_177 code"><span class="md-clipboard__message"></span></button><code>输入: " &nbsp;hello world! &nbsp;"
+输出:&nbsp;"world! hello"
+解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+</code></pre></div>
+
+
+<p>示例 3：</p>
+<div class="codehilite" id="__code_178"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_178 pre, #__code_178 code"><span class="md-clipboard__message"></span></button><pre id="__code_179"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_179 pre, #__code_179 code"><span class="md-clipboard__message"></span></button><code>输入: "a good &nbsp; example"
+输出:&nbsp;"example good a"
+解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
+</code></pre></div>
+
+
+<p>说明：</p>
+<p>无空格字符构成一个单词。
+输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
+如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</p>
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>s.split(' ')按空格划分</li>
+<li>[i for i in s.split(' ') if i]列表推倒并进行多空格时过滤</li>
+<li>[::-1]列表翻转</li>
+<li>''.join()列表连接成字符串 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_180"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_180 pre, #__code_180 code"><span class="md-clipboard__message"></span></button><pre id="__code_181"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_181 pre, #__code_181 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="29">问题29：二分查找</h3>
+<p>给定一个&nbsp;n&nbsp;个元素有序的（升序）整型数组&nbsp;nums 和一个目标值&nbsp;target &nbsp;，写一个函数搜索&nbsp;nums&nbsp;中的 target，如果目标值存在返回下标，否则返回 -1。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_182"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_182 pre, #__code_182 code"><span class="md-clipboard__message"></span></button><pre id="__code_183"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_183 pre, #__code_183 code"><span class="md-clipboard__message"></span></button><code>输入: nums = [-1,0,3,5,9,12], target = 9
+输出: 4
+解释: 9 出现在 nums 中并且下标为 4
+</code></pre></div>
+
+
+<p>示例&nbsp;2:</p>
+<div class="codehilite" id="__code_184"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_184 pre, #__code_184 code"><span class="md-clipboard__message"></span></button><pre id="__code_185"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_185 pre, #__code_185 code"><span class="md-clipboard__message"></span></button><code>输入: nums = [-1,0,3,5,9,12], target = 2
+输出: -1
+解释: 2 不存在 nums 中因此返回 -1
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>根据上下边界求中值</li>
+<li>使用 mid-1 / mid-1 覆盖上下边界</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_186"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_186 pre, #__code_186 code"><span class="md-clipboard__message"></span></button><pre id="__code_187"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_187 pre, #__code_187 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># 确定查找的上下界</span>
+        <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>  <span class="c1"># 当low == high时还剩下最后一个值需要进行检验</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># +1是因为mid已经验证过不符合条件，新的区间又mid+1开始</span>
+            <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span> <span class="c1"># 这里+1同上面原因相同</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># 执行结束但是没有找到</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="30">问题30：求两个有序数组的最大值</h3>
+<p>给定两个大小为 m 和 n 的正序（从小到大）数组&nbsp;nums1 和&nbsp;nums2。</p>
+<p>请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为&nbsp;O(log(m + n))。</p>
+<p>你可以假设&nbsp;nums1&nbsp;和&nbsp;nums2&nbsp;不会同时为空。</p>
+<p>示例 1:</p>
+<div class="codehilite" id="__code_188"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_188 pre, #__code_188 code"><span class="md-clipboard__message"></span></button><pre id="__code_189"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_189 pre, #__code_189 code"><span class="md-clipboard__message"></span></button><code>nums1 = [1, 3]
+nums2 = [2]
+
+则中位数是 2.0
+</code></pre></div>
+
+
+<p>示例 2:</p>
+<div class="codehilite" id="__code_190"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_190 pre, #__code_190 code"><span class="md-clipboard__message"></span></button><pre id="__code_191"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_191 pre, #__code_191 code"><span class="md-clipboard__message"></span></button><code>nums1 = [1, 2]
+nums2 = [3, 4]
+
+则中位数是 (2 + 3)/2 = 2.5
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>点睛之笔:<ul>
+<li>使用.extend()连接两个数组</li>
+<li>使用.sort()进行排序 </li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_192"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_192 pre, #__code_192 code"><span class="md-clipboard__message"></span></button><pre id="__code_193"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_193 pre, #__code_193 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findMedianSortedArrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">nums2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">nums1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span>
+        <span class="n">nums1</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span>
+        <span class="c1"># 根据长度求中位数</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">nums1</span><span class="p">[</span><span class="n">length</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">length</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums1</span><span class="p">[</span><span class="n">length</span> <span class="o">//</span> <span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div>
+
+
+<hr>
+<h3 id="31">问题31：字符串蕴含</h3>
+<p>给定以下字符串：</p>
+<p>input = "helloword"
+target = "ell"</p>
+<p>如果target在input中，则返回其在input中的首字母下标列表，否则返回空列表。</p>
+<hr>
+<div class="codehilite" id="__code_194"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_194 pre, #__code_194 code"><span class="md-clipboard__message"></span></button><pre id="__code_195"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_195 pre, #__code_195 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="./index2.html" title="ModelArchitectures" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                ModelArchitectures
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

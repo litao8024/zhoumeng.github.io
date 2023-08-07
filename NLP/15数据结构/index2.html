@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8234/2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>ModelArchitectures - Transformer</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="Transformer" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              Transformer
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                ModelArchitectures
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="Transformer" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    Transformer
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="数据结构与算法笔试题" class="md-nav__link">
+      数据结构与算法笔试题
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        ModelArchitectures
+      </label>
+    
+    <a href="" title="ModelArchitectures" class="md-nav__link md-nav__link--active">
+      ModelArchitectures
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文本生成任务" class="md-nav__link">
+    文本生成任务
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="推荐排序模型" class="md-nav__link">
+    推荐排序模型
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="整体优化思路" class="md-nav__link">
+      整体优化思路
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="文本生成任务" class="md-nav__link">
+    文本生成任务
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="推荐排序模型" class="md-nav__link">
+    推荐排序模型
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>ModelArchitectures</h1>
+                
+                <h3 id="_1">文本生成任务</h3>
+<ul>
+<li>典型应用：<ul>
+<li>聊天机器人</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型演化历史：<ul>
+<li>RNN系列（RNN，GRU，LSTM）</li>
+<li>基于RNN的seq2seq + Attention</li>
+<li>基于原生transformers即GPT</li>
+<li>GPT2，CTRL，Transformer-XL，XLNET</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>演化模型特性简介：<ul>
+<li>GPT：</li>
+<li>GPT2：</li>
+<li>CTRL：</li>
+<li>Transformer-XL：</li>
+<li>XLNET：</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>GPT生成优化对比实验：<ul>
+<li>数据有序训练</li>
+<li>使用random categorical生成</li>
+<li>使用label smoothing和teacher forcing</li>
+<li>使用多模态</li>
+<li>使用语法判别器</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>数据有序训练<ul>
+<li>生成模型的微调同样需要避免冷启动，可以使用warm_up_step以及前几个epoch的简单有序数据，否则容易进入鞍点，不收敛。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用random categorical生成<ul>
+<li>生成模型最终需要生成策略，如贪婪，beam search，random c等，实验表明，random c效果最佳。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用label smoothing和teacher forcing<ul>
+<li>对话的回复可能性是比较开放的，因此可以使用标签平滑技术。</li>
+<li>早期的模型预测不稳定，因此容易生成错误的token，导致后续的token也无法正确预测，因此可以在训练阶段加入teacher forcing，即解码阶段使用正确的token logits。这会造成训练和预测的不一致，所以实际上，我们在预测时的解码阶段会引入图谱知识作为早期的下文。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用多模态<ul>
+<li>加入图片特征进行融合一起进行编码。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>使用语法判别器<ul>
+<li>为了保证语法正确，我们加入一个简单的GRU训练的语法判别器来进行输出过滤。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_2">推荐排序模型</h3>
+<ul>
+<li>典型应用：<ul>
+<li>推荐系统排序模块</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型演化历史：<ul>
+<li>LR    </li>
+<li>GBDT + LR</li>
+<li>wide-deep／deepFM</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>wide-deep优化对比实验：<ul>
+<li>从单目标优化到多目标优化</li>
+<li>从属性特征到图特征</li>
+<li>从Adagrad优化器到SWA</li>
+<li>基于keras tuner的贝叶斯超参数调优</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>从单目标优化到多目标优化<ul>
+<li>推荐系统需要融合众多业务指标，如：点击率，互动率，完播率，转化率，使用时长，日留存率，月留存率，DAU等，我们需要做指标分析，来将具体的业务指标与用户行为属性或者当前画像信息相匹配，有些指标具有明显的可计算性，如点击率，本身就是描述用户行为的；但是像使用时长就需要进行进一步的分析，直到推演/实验出它和一些可计算指标（如完播率）成正相关。</li>
+<li>早期的单目标优化（只优化点击率），那我们的样本定义，采集，和特征工程都是相对简单的。随着后期优化目标的增加，为了具有更好的可配置性，我们采用多模型方案，在训练阶段，不同的优化目标，拥有自己的样本定义，采集和特征工程，模型训练流水线。在预测阶段，根据业务对推荐系统的要求，对不同模型预测的得分进行加权，最终通过分值求和的方式计算排名。</li>
+<li>工程实现上，根据目标的样本处理流水线，多模型的多线程优化十分重要。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>从属性特征到图特征<ul>
+<li>我们的双画像体系是基于图数据库存储的，除了用户/item本身的静态标签，挖掘类标签（user兴趣，user消费习惯，item风格）等，所有的交互行为构成图中的边，我们还加入了大量的graph features，对于user，比如以该用户为中心节点，周围三度关系以内的具有某种兴趣的user数量，这种特征能够有效的表示用户的圈子特征，你在什么样的圈子里，你便喜欢什么样的视频。另外一种就是历史视频的点击顺序路径，设最长路径为3度，视频风格标签为10个，路径的可能性就是标签的3度排列数；这种图特征主要捕捉由于观看历史对当前视频的影响。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>从Adagrad优化器到SWA<ul>
+<li>为了达到准实时的训练效果（1000万数据，小时级），对于LR侧，因为优化器使用FTRL，具有梯度截断和L1正则化特性，因此能够很快完成参数更新；而wide侧（3/4层，128 64 16）的参数更新速度是模型训练的瓶颈，主要由于Adagrad优化器的计算复杂度较高（需要利用历史梯度），又因为学习率调整单调递减，很容易无法到达最优，因此这里我们使用新的优化器SWA（随机平均梯度下降），他的计算方式是和SGD一致，不过它的学习率被设定为是一个分段函数，在整个训练阶段的前75%单调递减（相比Adagrad不需要通过计算单调递减，直接设定单调递减），后25%保持恒定，实验表明，在高维稀疏数据下，后期恒定的学习率有助于模型更快的收敛。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>基于keras tuner的贝叶斯超参数调优<ul>
+<li>因为MLP的层数和节点数是重要的超参数，因此使用贝叶斯优化来进行超参数调优。</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index.html" title="数据结构与算法笔试题" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                数据结构与算法笔试题
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index3.html" title="整体优化思路" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                整体优化思路
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

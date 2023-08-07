@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://121.199.45.168:8818/6_1/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8818/6_1/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>6.1 PGN + coverage的优化模型 - 文本摘要项目</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#baseline-2" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="./1_1.html" title="文本摘要项目" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              文本摘要项目
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                6.1 PGN + coverage的优化模型
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 509px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="./1_1.html" title="文本摘要项目" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    文本摘要项目
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      第一章:文本摘要项目简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-1">
+        第一章:文本摘要项目简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_1.html" title="1.1 项目背景介绍" class="md-nav__link">
+      1.1 项目背景介绍
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_2.html" title="1.2 项目中的数据集初探" class="md-nav__link">
+      1.2 项目中的数据集初探
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      第二章:TextRank模型
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-2">
+        第二章:TextRank模型
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-nav__link">
+      2.1 TextRank算法理论基础
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_2.html" title="2.2 TextRank实现baseline-0模型" class="md-nav__link">
+      2.2 TextRank实现baseline-0模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      第三章:seq2seq经典架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-3">
+        第三章:seq2seq经典架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_1.html" title="3.1 seq2seq实现baseline-1模型" class="md-nav__link">
+      3.1 seq2seq实现baseline-1模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_2.html" title="3.2 baseline-1模型的优化" class="md-nav__link">
+      3.2 baseline-1模型的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      第四章:PGN先进架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-4">
+        第四章:PGN先进架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_1.html" title="4.1 PGN架构解析" class="md-nav__link">
+      4.1 PGN架构解析
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_2.html" title="4.2 PGN模型的数据处理" class="md-nav__link">
+      4.2 PGN模型的数据处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_3.html" title="4.3 PGN实现baseline-2模型" class="md-nav__link">
+      4.3 PGN实现baseline-2模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      第五章:生成式模型的评估方法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-5">
+        第五章:生成式模型的评估方法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_1.html" title="5.1 文本摘要评估方法" class="md-nav__link">
+      5.1 文本摘要评估方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_2.html" title="5.2 ROUGE评估算法实现" class="md-nav__link">
+      5.2 ROUGE评估算法实现
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked="">
+    
+    <label class="md-nav__link" for="nav-6">
+      第六章:模型的迭代优化
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: block; overflow: visible;">
+      <label class="md-nav__title" for="nav-6">
+        第六章:模型的迭代优化
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        6.1 PGN + coverage的优化模型
+      </label>
+    
+    <a href="" title="6.1 PGN + coverage的优化模型" class="md-nav__link md-nav__link--active">
+      6.1 PGN + coverage的优化模型
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#baseline-2" title="对baseline-2模型的优化" class="md-nav__link">
+    对baseline-2模型的优化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage" title="增加coverage的原因和数学原理" class="md-nav__link">
+    增加coverage的原因和数学原理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage_1" title="增加coverage的原因" class="md-nav__link">
+    增加coverage的原因
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage_2" title="coverage的数学原理" class="md-nav__link">
+    coverage的数学原理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn-coveragebaseline-3" title="PGN + coverage实现baseline-3模型" class="md-nav__link">
+    PGN + coverage实现baseline-3模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoder" title="第一步: 编码器类Encoder" class="md-nav__link">
+    第一步: 编码器类Encoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention" title="第二步: 注意力层类Attention" class="md-nav__link">
+    第二步: 注意力层类Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" title="第三步: 解码器类Decoder" class="md-nav__link">
+    第三步: 解码器类Decoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reducestate" title="第四步: 降维加和类ReduceState" class="md-nav__link">
+    第四步: 降维加和类ReduceState
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn" title="第五步: 完整的PGN网络类" class="md-nav__link">
+    第五步: 完整的PGN网络类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3" title="baseline-3模型训练与预测" class="md-nav__link">
+    baseline-3模型训练与预测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3_1" title="baseline-3模型训练" class="md-nav__link">
+    baseline-3模型训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3_2" title="baseline-3模型预测" class="md-nav__link">
+    baseline-3模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rougebaseline-3" title="利用ROUGE评估baseline-3模型" class="md-nav__link">
+    利用ROUGE评估baseline-3模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pgnbaseline-3" title="对PGN的baseline-3模型进行评估" class="md-nav__link">
+    对PGN的baseline-3模型进行评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rouge" title="ROUGE评估结果对比" class="md-nav__link">
+    ROUGE评估结果对比
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_2.html" title="6.2 PGN + beam-search的优化模型" class="md-nav__link">
+      6.2 PGN + beam-search的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_3.html" title="6.3 数据增强的优化" class="md-nav__link">
+      6.3 数据增强的优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_4.html" title="6.4 训练策略的优化" class="md-nav__link">
+      6.4 训练策略的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      第七章:模型的部署与总结
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-7">
+        第七章:模型的部署与总结
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_1.html" title="7.1 硬件优化与模型部署" class="md-nav__link">
+      7.1 硬件优化与模型部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_2.html" title="7.2 项目总结" class="md-nav__link">
+      7.2 项目总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 509px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#baseline-2" title="对baseline-2模型的优化" class="md-nav__link">
+    对baseline-2模型的优化
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage" title="增加coverage的原因和数学原理" class="md-nav__link">
+    增加coverage的原因和数学原理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coverage_1" title="增加coverage的原因" class="md-nav__link">
+    增加coverage的原因
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage_2" title="coverage的数学原理" class="md-nav__link">
+    coverage的数学原理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn-coveragebaseline-3" title="PGN + coverage实现baseline-3模型" class="md-nav__link">
+    PGN + coverage实现baseline-3模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encoder" title="第一步: 编码器类Encoder" class="md-nav__link">
+    第一步: 编码器类Encoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention" title="第二步: 注意力层类Attention" class="md-nav__link">
+    第二步: 注意力层类Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decoder" title="第三步: 解码器类Decoder" class="md-nav__link">
+    第三步: 解码器类Decoder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reducestate" title="第四步: 降维加和类ReduceState" class="md-nav__link">
+    第四步: 降维加和类ReduceState
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn" title="第五步: 完整的PGN网络类" class="md-nav__link">
+    第五步: 完整的PGN网络类
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3" title="baseline-3模型训练与预测" class="md-nav__link">
+    baseline-3模型训练与预测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3_1" title="baseline-3模型训练" class="md-nav__link">
+    baseline-3模型训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#baseline-3_2" title="baseline-3模型预测" class="md-nav__link">
+    baseline-3模型预测
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rougebaseline-3" title="利用ROUGE评估baseline-3模型" class="md-nav__link">
+    利用ROUGE评估baseline-3模型
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pgnbaseline-3" title="对PGN的baseline-3模型进行评估" class="md-nav__link">
+    对PGN的baseline-3模型进行评估
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rouge" title="ROUGE评估结果对比" class="md-nav__link">
+    ROUGE评估结果对比
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="小节总结" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>6.1 PGN + coverage的优化模型</h1>
+                
+                <h2 id="baseline-2">对baseline-2模型的优化</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>理解PGN + attention模型的缺陷和增加coverage机制的原因.</li>
+<li>掌握增加coverage机制的代码实现和模型训练.</li>
+</ul>
+<hr>
+<h3 id="coverage">增加coverage的原因和数学原理</h3>
+<h4 id="coverage_1">增加coverage的原因</h4>
+<ul>
+<li>自习观察baseline-2模型的预测结果, 有两点值得注意:<ul>
+<li>1: 相比于baseline-1模型, 摘要生成的效果已经有了很大的提升.</li>
+<li>2: 但是也会出现一些短语的简单无效重复.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>在6.1小节中, 针对于短语的简单无效重复问题, 提出了解决方案: 引入coverage机制.</li>
+</ul>
+<p></p><center><img alt="" src="./index_files/19.png"></center><p></p>
+<hr>
+<blockquote>
+<ul>
+<li>结论: 从原始论文中可以清楚的看到, 引入coverage机制后, 确实可以大大缓解重复问题.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="coverage_2">coverage的数学原理</h4>
+<ul>
+<li>所谓coverage机制, 就是覆盖机制, 模型采用一种方式可以跟踪过去的时间步对哪些单词投放了较多的注意力, 这样在后续时间步的预测时, 我们就更多的去关注累积注意力少的部分, 而不去较多的关注累积注意力多的部分.</li>
+</ul>
+<hr>
+<ul>
+<li>论文中在实现coverage机制时, 采用了如下几步:<ul>
+<li>第一步: 统计注意力分布的累加和.</li>
+<li>第二步: 将coverage张量作为注意力机制的一路输入.</li>
+<li>第三步: 引入覆盖损失.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 统计注意力分布的累加和.<ul>
+<li>定义覆盖向量c_t: 是所有先前解码器时间步的注意力分布的总和.</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="" src="./index_files/10.png"></center><p></p>
+<hr>
+<ul>
+<li>第二步: 将coverage张量作为注意力机制的一路输入.</li>
+</ul>
+<p></p><center><img alt="" src="./index_files/11.png"></center><p></p>
+<hr>
+<ul>
+<li>第三步: 引入覆盖损失.<ul>
+<li>定义覆盖损失covloss: 采用第一步中的累加和, 还有当前时间步的注意力值的较小值.</li>
+<li>作用: 用以惩罚将注意力过多的重复分配到同一位置.</li>
+</ul>
+</li>
+</ul>
+<p></p><center><img alt="" src="./index_files/12.png"></center><p></p>
+<hr>
+<ul>
+<li>综合上面三步, 可以得到引入coverage机制后, 整个模型训练的损失函数为:</li>
+</ul>
+<p></p><center><img alt="" src="./index_files/13.png"></center><p></p>
+<hr>
+<hr>
+<h3 id="pgn-coveragebaseline-3">PGN + coverage实现baseline-3模型</h3>
+<ul>
+<li>PGN + coverage模型的构建也要分别编写几个子层类, 结构和PGN很像, 但需要添加coverage的代码:<ul>
+<li>第一步: 编码器类Encoder.</li>
+<li>第二步: 注意力层类Attention.</li>
+<li>第三步: 解码器类Decoder.</li>
+<li>第四步: 降维加和类ReduceState.</li>
+<li>第五步: 完整的PGN网络类.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>以上五个步骤的全部代码都在model.py中.</p>
+</li>
+<li>
+<p>代码文件路径: /home/ec2-user/text_summary/pgn/src/model.py</p>
+</li>
+</ul>
+<hr>
+<h4 id="encoder">第一步: 编码器类Encoder</h4>
+<ul>
+<li>编码器类Encoder的创建:</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 构建编码器类</span>
+<span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">rnn_drop</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 词嵌入层采用跟随模型一起训练的模式</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        <span class="c1"># 编码器的主体采用单层, 双向LSTM结构</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">rnn_drop</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">embedded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">embedded</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>注意: 此处代码和第四章4.3小节中的Encoder完全一样.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="attention">第二步: 注意力层类Attention</h4>
+<ul>
+<li>注意力层类Attention的创建:</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 构建注意力类</span>
+<span class="k">class</span> <span class="nc">Attention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Attention</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 定义前向传播层, 对应论文中的公式1中的Wh, Ws</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Wh</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">)</span>
+
+
+        <span class="c1"># ---------------------------------------------------------------</span>
+        <span class="c1"># 下面一行代码是baseline-3模型增加coverage机制的新增代码</span>
+        <span class="c1"># 定义全连接层wc, 对应论文中的coverage处理</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="c1"># ---------------------------------------------------------------</span>
+
+
+        <span class="c1"># 定义全连接层, 对应论文中的公式1中最外层的v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c1"># 相比于baseline-2模型, 此处forward函数新增最后一个参数coverage_vector</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">encoder_output</span><span class="p">,</span> <span class="n">x_padding_masks</span><span class="p">,</span> <span class="n">coverage_vector</span><span class="p">):</span>
+        <span class="n">h_dec</span><span class="p">,</span> <span class="n">c_dec</span> <span class="o">=</span> <span class="n">decoder_states</span>
+        <span class="c1"># 将两个张量在最后一个维度拼接, 得到deocder state St: (1, batch_size, 2*hidden_units)</span>
+        <span class="n">s_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">h_dec</span><span class="p">,</span> <span class="n">c_dec</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># 将batch_size置于第一个维度上: (batch_size, 1, 2*hidden_units)</span>
+        <span class="n">s_t</span> <span class="o">=</span> <span class="n">s_t</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 按照hi的维度扩展St的维度: (batch_size, seq_length, 2*hidden_units)</span>
+        <span class="n">s_t</span> <span class="o">=</span> <span class="n">s_t</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">encoder_output</span><span class="p">)</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
+
+         <span class="c1"># 根据论文中的公式1来计算et, 总共有三步</span>
+        <span class="c1"># 第一步: 分别经历各自的全连接层矩阵乘法</span>
+        <span class="c1"># Wh * h_i: (batch_size, seq_length, 2*hidden_units)</span>
+        <span class="n">encoder_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Wh</span><span class="p">(</span><span class="n">encoder_output</span><span class="o">.</span><span class="n">contiguous</span><span class="p">())</span>
+        <span class="c1"># Ws * s_t: (batch_size, seq_length, 2*hidden_units)</span>
+        <span class="n">decoder_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ws</span><span class="p">(</span><span class="n">s_t</span><span class="p">)</span>
+
+        <span class="c1"># 第二步: 两部分执行加和运算</span>
+        <span class="c1"># (batch_size, seq_length, 2*hidden_units)</span>
+        <span class="n">attn_inputs</span> <span class="o">=</span> <span class="n">encoder_features</span> <span class="o">+</span> <span class="n">decoder_features</span>
+
+
+        <span class="c1"># -----------------------------------------------------------------</span>
+        <span class="c1"># 下面新增的3行代码是baseline-3为服务于coverage机制而新增的.</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">coverage</span><span class="p">:</span>
+            <span class="n">coverage_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wc</span><span class="p">(</span><span class="n">coverage_vector</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">attn_inputs</span> <span class="o">=</span> <span class="n">attn_inputs</span> <span class="o">+</span> <span class="n">coverage_features</span>
+        <span class="c1"># -----------------------------------------------------------------</span>
+
+
+
+        <span class="c1"># 第三步: 执行tanh运算和一个全连接层的运算</span>
+        <span class="c1"># (batch_size, seq_length, 1)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">attn_inputs</span><span class="p">))</span>
+
+        <span class="c1"># 得到score后, 执行论文中的公式2</span>
+        <span class="c1"># (batch_size, seq_length)</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># 添加一步执行padding mask的运算, 将编码器端无效的PAD字符全部遮掩掉</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">*</span> <span class="n">x_padding_masks</span>
+
+        <span class="c1"># 最整个注意力层执行一次正则化操作</span>
+        <span class="n">normalization_factor</span> <span class="o">=</span> <span class="n">attention_weights</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">attention_weights</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">/</span> <span class="n">normalization_factor</span>
+
+        <span class="c1"># 执行论文中的公式3,将上一步得到的attention distributon应用在encoder hidden states上,得到context_vector</span>
+        <span class="c1"># (batch_size, 1, 2*hidden_units)</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bmm</span><span class="p">(</span><span class="n">attention_weights</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">encoder_output</span><span class="p">)</span>
+        <span class="c1"># (batch_size, 2*hidden_units)</span>
+        <span class="n">context_vector</span> <span class="o">=</span> <span class="n">context_vector</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># 下面新增的2行代码是baseline-3模型为服务于coverage机制而新增的.</span>
+        <span class="c1"># 按照论文中的公式10更新coverage vector</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">coverage</span><span class="p">:</span>
+            <span class="n">coverage_vector</span> <span class="o">=</span> <span class="n">coverage_vector</span> <span class="o">+</span> <span class="n">attention_weights</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+
+
+        <span class="c1"># 在baseline-2中我们返回2个张量; 在baseline-3中我们新增返回coverage vector张量.</span>
+        <span class="k">return</span> <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span><span class="p">,</span> <span class="n">coverage_vector</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>注意: 此处代码和第四章4.3小节中的Attention不一样, 新增了关于coverage的处理部分. </li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="decoder">第三步: 解码器类Decoder</h4>
+<ul>
+<li>解码器类Decoder的创建:</li>
+</ul>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">enc_hidden_size</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Decoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 解码器端也采用跟随模型一起训练的方式, 得到词嵌入层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_size</span><span class="p">)</span>
+        <span class="c1"># self.DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">=</span> <span class="n">vocab_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+
+        <span class="c1"># 解码器的主体结构采用单向LSTM, 区别于编码器端的双向LSTM</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="c1"># 因为要将decoder hidden state和context vector进行拼接, 因此需要3倍的hidden_size维度设置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">pointer</span><span class="p">:</span>
+            <span class="c1"># 因为要根据论文中的公式8进行运算, 所谓输入维度上匹配的是4 * hidden_size + embed_size</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">w_gen</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">embed_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">context_vector</span><span class="p">):</span>
+        <span class="c1"># 首先计算Decoder的前向传播输出张量</span>
+        <span class="n">decoder_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x_t</span><span class="p">)</span>
+        <span class="n">decoder_output</span><span class="p">,</span> <span class="n">decoder_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span><span class="p">(</span><span class="n">decoder_emb</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">)</span>
+
+        <span class="c1"># 接下来就是论文中的公式4的计算.</span>
+        <span class="c1"># 将context vector和decoder state进行拼接, (batch_size, 3*hidden_units)</span>
+        <span class="n">decoder_output</span> <span class="o">=</span> <span class="n">decoder_output</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="n">concat_vector</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">decoder_output</span><span class="p">,</span> <span class="n">context_vector</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 经历两个全连接层V和V1后,再进行softmax运算, 得到vocabulary distribution</span>
+        <span class="c1"># (batch_size, hidden_units)</span>
+        <span class="n">FF1_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W1</span><span class="p">(</span><span class="n">concat_vector</span><span class="p">)</span>
+        <span class="c1"># (batch_size, vocab_size)</span>
+        <span class="n">FF2_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W2</span><span class="p">(</span><span class="n">FF1_out</span><span class="p">)</span>
+        <span class="c1"># (batch_size, vocab_size)</span>
+        <span class="n">p_vocab</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">FF2_out</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 构造decoder state s_t.</span>
+        <span class="n">h_dec</span><span class="p">,</span> <span class="n">c_dec</span> <span class="o">=</span> <span class="n">decoder_states</span>
+        <span class="c1"># (1, batch_size, 2*hidden_units)</span>
+        <span class="n">s_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">h_dec</span><span class="p">,</span> <span class="n">c_dec</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># p_gen是通过context vector h_t, decoder state s_t, decoder input x_t, 三个部分共同计算出来的.</span>
+        <span class="c1"># 下面的部分是计算论文中的公式8.</span>
+        <span class="n">p_gen</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">pointer</span><span class="p">:</span>
+            <span class="c1"># 这里面采用了直接拼接3部分输入张量, 然后经历一个共同的全连接层w_gen, 和原始论文的计算不同.</span>
+            <span class="c1"># 这也给了大家提示, 可以提高模型的复杂度, 完全模拟原始论文中的3个全连接层来实现代码.</span>
+            <span class="n">x_gen</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">context_vector</span><span class="p">,</span> <span class="n">s_t</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">decoder_emb</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">p_gen</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w_gen</span><span class="p">(</span><span class="n">x_gen</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">p_vocab</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">p_gen</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>注意: 此处代码和第四章4.3小节中的Decoder完全一样.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="reducestate">第四步: 降维加和类ReduceState</h4>
+<ul>
+<li>降维加和类ReduceState的创建:</li>
+</ul>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 构造加和state的类, 方便模型运算</span>
+<span class="k">class</span> <span class="nc">ReduceState</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ReduceState</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+        <span class="n">h</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">hidden</span>
+        <span class="n">h_reduced</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">c_reduced</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">h_reduced</span><span class="p">,</span> <span class="n">c_reduced</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>注意: 此处代码和第四章4.3小节中的ReduceState完全一样.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="pgn">第五步: 完整的PGN网络类</h4>
+<ul>
+<li>PGN类的创建:</li>
+</ul>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入系统工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># 设置项目的root路径, 方便后续相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入若干工具包</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="kn">as</span> <span class="nn">F</span>
+<span class="c1"># 导入项目中的相关代码文件</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">utils.func_utils</span> <span class="kn">import</span> <span class="n">timer</span><span class="p">,</span> <span class="n">replace_oovs</span>
+<span class="kn">from</span> <span class="nn">utils.vocab</span> <span class="kn">import</span> <span class="n">Vocab</span>
+
+
+<span class="c1"># 构建PGN类</span>
+<span class="k">class</span> <span class="nc">PGN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PGN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 初始化字典对象</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">DEVICE</span>
+
+        <span class="c1"># 依次初始化4个类对象</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">Attention</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">config</span><span class="o">.</span><span class="n">embed_size</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reduce_state</span> <span class="o">=</span> <span class="n">ReduceState</span><span class="p">()</span>
+
+    <span class="c1"># 计算最终分布的函数</span>
+    <span class="k">def</span> <span class="nf">get_final_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">p_gen</span><span class="p">,</span> <span class="n">p_vocab</span><span class="p">,</span> <span class="n">attention_weights</span><span class="p">,</span> <span class="n">max_oov</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">pointer</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">p_vocab</span>
+
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># 进行p_gen概率值的裁剪, 具体取值范围可以调参</span>
+        <span class="n">p_gen</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">p_gen</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">)</span>
+        <span class="c1"># 接下来两行代码是论文中公式9的计算.</span>
+        <span class="n">p_vocab_weighted</span> <span class="o">=</span> <span class="n">p_gen</span> <span class="o">*</span> <span class="n">p_vocab</span>
+        <span class="c1"># (batch_size, seq_len)</span>
+        <span class="n">attention_weighted</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_gen</span><span class="p">)</span> <span class="o">*</span> <span class="n">attention_weights</span>
+
+        <span class="c1"># 得到扩展后的单词概率分布(extended-vocab probability distribution)</span>
+        <span class="c1"># extended_size = len(self.v) + max_oovs</span>
+        <span class="n">extension</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_oov</span><span class="p">))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+        <span class="c1"># (batch_size, extended_vocab_size)</span>
+        <span class="n">p_vocab_extended</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">p_vocab_weighted</span><span class="p">,</span> <span class="n">extension</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 根据论文中的公式9, 累加注意力值attention_weighted到对应的单词位置x</span>
+        <span class="n">final_distribution</span> <span class="o">=</span> <span class="n">p_vocab_extended</span><span class="o">.</span><span class="n">scatter_add_</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">attention_weighted</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">final_distribution</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x_len</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">len_oovs</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">num_batches</span><span class="p">,</span> <span class="n">teacher_forcing</span><span class="p">):</span>
+        <span class="n">x_copy</span> <span class="o">=</span> <span class="n">replace_oovs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">x_padding_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="c1"># 第一步: 进行Encoder的编码计算</span>
+        <span class="n">encoder_output</span><span class="p">,</span> <span class="n">encoder_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x_copy</span><span class="p">)</span>
+        <span class="n">decoder_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce_state</span><span class="p">(</span><span class="n">encoder_states</span><span class="p">)</span>
+
+        <span class="c1"># ------------------------------------------------------------------</span>
+        <span class="c1"># 下面新增的一行代码是baseline-3模型处理coverage机制新增的.</span>
+        <span class="c1"># 用全零张量初始化coverage vector.</span>
+        <span class="n">coverage_vector</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+        <span class="c1"># 初始化每一步的损失值</span>
+        <span class="n">step_losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 第二步: 循环解码, 每一个时间步都经历注意力的计算, 解码器层的计算.</span>
+        <span class="c1"># 初始化解码器的输入, 是ground truth中的第一列, 即真实摘要的第一个字符</span>
+        <span class="n">x_t</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># 如果使用Teacher_forcing, 则每一个时间步用真实标签来指导训练</span>
+            <span class="k">if</span> <span class="n">teacher_forcing</span><span class="p">:</span>
+                <span class="n">x_t</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+
+            <span class="n">x_t</span> <span class="o">=</span> <span class="n">replace_oovs</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">y_t</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># ------------------------------------------------------------------------------------</span>
+            <span class="c1"># 通过注意力层计算context vector, 这里新增了coverage_vector张量的处理</span>
+            <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span><span class="p">,</span> <span class="n">coverage_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">decoder_states</span><span class="p">,</span>
+                                                                                <span class="n">encoder_output</span><span class="p">,</span>
+                                                                                <span class="n">x_padding_masks</span><span class="p">,</span>
+                                                                                <span class="n">coverage_vector</span><span class="p">)</span>
+            <span class="c1"># ------------------------------------------------------------------------------------</span>
+
+            <span class="c1"># 通过解码器层计算得到vocab distribution和hidden states</span>
+            <span class="n">p_vocab</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">p_gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">x_t</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">context_vector</span><span class="p">)</span>
+
+            <span class="c1"># 得到最终的概率分布</span>
+            <span class="n">final_dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_final_distribution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p_gen</span><span class="p">,</span><span class="n">p_vocab</span><span class="p">,</span><span class="n">attention_weights</span><span class="p">,</span><span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">len_oovs</span><span class="p">))</span>
+
+            <span class="c1"># 第t个时间步的预测结果, 将作为第t + 1个时间步的输入(如果采用Teacher-forcing则不同).</span>
+            <span class="n">x_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">final_dist</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+            <span class="c1"># 根据模型对target tokens的预测, 来获取到预测的概率</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">pointer</span><span class="p">:</span>
+                <span class="n">y_t</span> <span class="o">=</span> <span class="n">replace_oovs</span><span class="p">(</span><span class="n">y_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">target_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">final_dist</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_t</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">target_probs</span> <span class="o">=</span> <span class="n">target_probs</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># 将解码器端的PAD用padding mask遮掩掉, 防止计算loss时的干扰</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="n">y_t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span>
+            <span class="c1"># 为防止计算log(0)而做的数学上的平滑处理</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">target_probs</span> <span class="o">+</span> <span class="n">config</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+
+
+            <span class="c1"># ------------------------------------------------------------------------</span>
+            <span class="c1"># 下面新增的4行代码是baseline-3模型为服务coverage机制而新增的.</span>
+            <span class="c1"># 新增关于coverage loss的处理逻辑代码.</span>
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">coverage</span><span class="p">:</span>
+                <span class="c1"># 按照论文中的公式12, 计算covloss.</span>
+                <span class="n">ct_min</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">attention_weights</span><span class="p">,</span> <span class="n">coverage_vector</span><span class="p">)</span>
+                <span class="n">cov_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ct_min</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># 按照论文中的公式13, 计算加入coverage机制后整个模型的损失值.</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">config</span><span class="o">.</span><span class="n">LAMBDA</span> <span class="o">*</span> <span class="n">cov_loss</span>
+            <span class="c1"># ------------------------------------------------------------------------</span>
+
+
+            <span class="c1"># 先遮掩, 再添加损失值</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">*</span> <span class="n">mask</span>
+            <span class="n">step_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+        <span class="c1"># 第三步: 计算一个批次样本的损失值, 为反向传播做准备.</span>
+        <span class="n">sample_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">step_losses</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 统计非PAD的字符个数, 作为当前批次序列的有效长度</span>
+        <span class="n">seq_len_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">batch_seq_len</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">seq_len_mask</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 计算批次样本的平均损失值</span>
+        <span class="n">batch_loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample_losses</span> <span class="o">/</span> <span class="n">batch_seq_len</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">batch_loss</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">Vocab</span><span class="p">()</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">PGN</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_12"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code>PGN(
+  (attention): Attention(
+    (Wh): Linear(in_features=1024, out_features=1024, bias=False)
+    (Ws): Linear(in_features=1024, out_features=1024, bias=True)
+    (wc): Linear(in_features=1, out_features=1024, bias=False)
+    (v): Linear(in_features=1024, out_features=1, bias=False)
+  )
+  (encoder): Encoder(
+    (embedding): Embedding(4, 512)
+    (lstm): LSTM(512, 512, batch_first=True, bidirectional=True)
+  )
+  (decoder): Decoder(
+    (embedding): Embedding(4, 512)
+    (lstm): LSTM(512, 512, batch_first=True)
+    (W1): Linear(in_features=1536, out_features=512, bias=True)
+    (W2): Linear(in_features=512, out_features=4, bias=True)
+    (w_gen): Linear(in_features=2560, out_features=1, bias=True)
+  )
+  (reduce_state): ReduceState()
+)
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>PGN + attention + coverage模型结论: 相比于第四章4.3小节的baseline-2模型, 这里面只是在attention模块中新增了一个wc全连接层.</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h3 id="baseline-3">baseline-3模型训练与预测</h3>
+<h4 id="baseline-3_1">baseline-3模型训练</h4>
+<ul>
+<li>首先修改config.py文件, 将coverage=True加入配置文件中.<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/config.py</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_14"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 在config.py文件中修改如下一行配置代码</span>
+<span class="n">coverage</span><span class="o">=</span><span class="bp">True</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_16"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/src/
+
+python train.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>训练时查看GPU情况: nvidia-smi</li>
+</ul>
+<div class="codehilite" id="__code_18"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code>+-----------------------------------------------------------------------------+
+| NVIDIA-SMI 450.51.05    Driver Version: 450.51.05    CUDA Version: 11.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  Tesla T4            On   | 00000000:00:08.0 Off |                    0 |
+| N/A   69C    P0    69W /  70W |  14566MiB / 15109MiB |     99%      Default |
+|                               |                      |                  N/A |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|    0   N/A  N/A     29256      C   python                          14563MiB |
++-----------------------------------------------------------------------------+
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_20"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code>DEVICE:  cuda
+Reading dataset /home/ec2-user/text_summary/pgn/data/train.txt... 70000 pairs.
+Reading dataset /home/ec2-user/text_summary/pgn/data/dev.txt...
+[[0%|          | 0/10 [00:00&lt;?, ?it/s]
+[[0%|          | 0/21 [00:00&lt;?, ?it/s]
+[[0%|          | 0/2188 [00:00&lt;?, ?it/s]
+[[Epoch 0:   0%|          | 0/21 [00:01&lt;?, ?it/s]
+[[Epoch 0:   0%|          | 0/21 [00:01&lt;?, ?it/s, Batch=0, Loss=6.87]
+[[Epoch 0:   5%|▍         | 1/21 [00:01&lt;00:29,  1.47s/it, Batch=0, Loss=6.87]
+[[0%|          | 1/2188 [00:01&lt;53:37,  1.47s/it]
+[[0%|          | 2/2188 [00:03&lt;1:05:02,  1.79s/it]
+[[0%|          | 3/2188 [00:05&lt;1:00:36,  1.66s/it]
+[[0%|          | 4/2188 [00:07&lt;1:00:46,  1.67s/it]
+[[0%|          | 5/2188 [00:07&lt;50:25,  1.39s/it]
+
+......
+......
+......
+
+
+[[99%|█████████▉| 397/402 [03:58&lt;00:02,  1.85it/s]
+[[99%|█████████▉| 398/402 [03:58&lt;00:02,  1.98it/s]
+[[99%|█████████▉| 399/402 [03:59&lt;00:01,  2.22it/s]
+[[100%|█████████▉| 400/402 [03:59&lt;00:00,  2.50it/s]
+[[100%|█████████▉| 401/402 [03:59&lt;00:00,  2.41it/s]
+[[100%|██████████| 402/402 [04:00&lt;00:00,  2.28it/s]
+[[100%|██████████| 402/402 [04:00&lt;00:00,  1.67it/s]
+
+[[0%|          | 0/21 [00:00&lt;?, ?it/s]
+[[0%|          | 0/2188 [00:00&lt;?, ?it/s]
+[[Epoch 1:   0%|          | 0/21 [00:01&lt;?, ?it/s]
+[[Epoch 1:   0%|          | 0/21 [00:01&lt;?, ?it/s, Batch=0, Loss=3.77]
+[[Epoch 1:   5%|▍         | 1/21 [00:01&lt;00:20,  1.02s/it, Batch=0, Loss=3.77]
+[[0%|          | 1/2188 [00:01&lt;37:01,  1.02s/it]
+[[0%|          | 2/2188 [00:02&lt;41:05,  1.13s/it]
+[[0%|          | 3/2188 [00:04&lt;48:23,  1.33s/it]
+[[0%|          | 4/2188 [00:05&lt;47:54,  1.32s/it]
+
+
+......
+......
+......
+
+
+[[99%|█████████▉| 398/402 [04:01&lt;00:02,  1.49it/s]
+[[99%|█████████▉| 399/402 [04:02&lt;00:02,  1.48it/s]
+[[100%|█████████▉| 400/402 [04:02&lt;00:01,  1.61it/s]
+[[100%|█████████▉| 401/402 [04:03&lt;00:00,  1.74it/s]
+[[100%|██████████| 402/402 [04:03&lt;00:00,  1.71it/s]
+[[100%|██████████| 402/402 [04:03&lt;00:00,  1.65it/s]
+
+Epoch 9: 100%|██████████| 10/10 [11:04:48&lt;00:00, 3988.90s/it, Loss=1.95]
+12870 pairs.
+loading data......
+initializing optimizer......
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:4.402697711801616 validation loss:4.268789264693189
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:3.748820104372349 validation loss:4.182700956638772
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:3.3340630204411705 validation loss:4.273871925932851
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.9564538238471343 validation loss:4.434603503094384
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.651415746870163 validation loss:4.654036068797705
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.425050822919204 validation loss:4.86548933579554
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.2524327974650715 validation loss:5.090988543496203
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.1244054655706206 validation loss:5.302600638783393
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:2.0239765569976305 validation loss:5.519360942033986
+model_name = pgn_model, pointer = True, coverage = True, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+teacher_forcing = True
+validating
+training loss:1.9480807396567936 validation loss:5.688335746081908
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看保存的模型: </li>
+</ul>
+<div class="codehilite" id="__code_22"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/saved_model/
+
+ll
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_24"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code>-rw-rw-r-- 1 ec2-user ec2-user   8403804 3月   9 11:03 model_attention.pt
+-rw-rw-r-- 1 ec2-user ec2-user  93584247 3月   9 11:03 model_decoder.pt
+-rw-rw-r-- 1 ec2-user ec2-user  57781249 3月   9 11:03 model_encoder.pt
+-rw-rw-r-- 1 ec2-user ec2-user       751 3月   9 11:03 model_reduce_state.pt
+-rw-rw-r-- 1 ec2-user ec2-user 159765238 3月   9 11:03 pgn_model.pt
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>baseline-3模型训练结论: 虽然整个训练过程用了10个epoch, 每个epoch在GPU上耗时约1个小时, 但是我们最终保存下来的模型是第2个epoch的训练结果. 因为第2个epoch的模型在验证集上损失值最低, 后面进入了过拟合的状态, 因此再后续的模型训练完全可以在config.py文件中设置epoch=3即可.</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h4 id="baseline-3_2">baseline-3模型预测</h4>
+<ul>
+<li>对于baseline-3模型的预测, 需要进行如下两步:<ul>
+<li>第一步: 修改predict.py代码文件.</li>
+<li>第二步: 执行预测程序.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 修改predict.py代码文件.<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/src/predict.py</li>
+</ul>
+</li>
+</ul>
+<hr>
+<div class="codehilite" id="__code_26"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入工具包</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+
+<span class="c1"># 设定项目的root路径, 方便后续相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入项目相关的代码文件</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">src.model</span> <span class="kn">import</span> <span class="n">PGN</span>
+<span class="kn">from</span> <span class="nn">utils.dataset</span> <span class="kn">import</span> <span class="n">PairDataset</span>
+<span class="kn">from</span> <span class="nn">utils.func_utils</span> <span class="kn">import</span> <span class="n">source2ids</span><span class="p">,</span> <span class="n">outputids2words</span><span class="p">,</span> <span class="n">timer</span><span class="p">,</span> <span class="n">add2heap</span><span class="p">,</span> <span class="n">replace_oovs</span>
+
+
+<span class="c1"># 构建预测类Predict</span>
+<span class="k">class</span> <span class="nc">Predict</span><span class="p">():</span>
+    <span class="nd">@timer</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s1">'initalize predicter'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">DEVICE</span>
+
+        <span class="c1"># 调用工具函数PairDataset读取训练集数据并构造PGN数据集</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">PairDataset</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">train_data_path</span><span class="p">,</span>
+                              <span class="n">max_enc_len</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_enc_len</span><span class="p">,</span>
+                              <span class="n">max_dec_len</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_dec_len</span><span class="p">,</span>
+                              <span class="n">truncate_enc</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">truncate_enc</span><span class="p">,</span>
+                              <span class="n">truncate_dec</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">truncate_dec</span><span class="p">)</span>
+
+        <span class="c1"># 基于数据集dataset构建词典</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">embed_file</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">embed_file</span><span class="p">)</span>
+
+        <span class="c1"># 实例化PGN网络类对象</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">PGN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_word</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">stop_word_file</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]))</span>
+
+        <span class="c1"># 加载已经训练好的模型并移动到GPU上.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model_save_path</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+    <span class="c1"># 编写贪心解码策略的函数</span>
+    <span class="k">def</span> <span class="nf">greedy_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">max_sum_len</span><span class="p">,</span> <span class="n">len_oovs</span><span class="p">,</span> <span class="n">x_padding_masks</span><span class="p">):</span>
+        <span class="n">encoder_output</span><span class="p">,</span> <span class="n">encoder_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">replace_oovs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">))</span>
+
+        <span class="c1"># 用encoder的hidden state初始化decoder的hidden state</span>
+        <span class="n">decoder_states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">reduce_state</span><span class="p">(</span><span class="n">encoder_states</span><span class="p">)</span>
+
+        <span class="c1"># 利用SOS作为解码器的初始化输入字符</span>
+        <span class="n">x_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">SOS</span>
+        <span class="n">x_t</span> <span class="o">=</span> <span class="n">x_t</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">SOS</span><span class="p">]</span>
+        <span class="n">coverage_vector</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+        <span class="c1"># 循环解码, 最多解码max_sum_len步</span>
+        <span class="k">while</span> <span class="nb">int</span><span class="p">(</span><span class="n">x_t</span><span class="o">.</span><span class="n">item</span><span class="p">())</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">EOS</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_sum_len</span><span class="p">:</span>
+            <span class="c1"># 解码的每一个时间步, 都要先计算注意力分布, 得到context_vector</span>
+            <span class="n">context_vector</span><span class="p">,</span> <span class="n">attention_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">decoder_states</span><span class="p">,</span>
+                                                                     <span class="n">encoder_output</span><span class="p">,</span>
+                                                                     <span class="n">x_padding_masks</span><span class="p">,</span>
+                                                                     <span class="n">coverage_vector</span><span class="p">)</span>
+
+            <span class="c1"># 基于context_vector, 利用解码器得到单词分布p_vocab和p_gen</span>
+            <span class="n">p_vocab</span><span class="p">,</span> <span class="n">decoder_states</span><span class="p">,</span> <span class="n">p_gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">x_t</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+                                                                <span class="n">decoder_states</span><span class="p">,</span>
+                                                                <span class="n">context_vector</span><span class="p">)</span>
+
+            <span class="c1"># 计算得到最终的全局分布final_dist</span>
+            <span class="n">final_dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_final_distribution</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_gen</span><span class="p">,</span> <span class="n">p_vocab</span><span class="p">,</span>
+                                                           <span class="n">attention_weights</span><span class="p">,</span>
+                                                           <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">len_oovs</span><span class="p">))</span>
+
+            <span class="c1"># 以贪心解码策略预测字符</span>
+            <span class="n">x_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">final_dist</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+            <span class="n">decoder_word_idx</span> <span class="o">=</span> <span class="n">x_t</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="c1"># 将预测的字符添加进结果摘要中</span>
+            <span class="n">summary</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">decoder_word_idx</span><span class="p">)</span>
+            <span class="n">x_t</span> <span class="o">=</span> <span class="n">replace_oovs</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">summary</span>
+
+    <span class="nd">@timer</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s1">'doing prediction'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tokenize</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+        <span class="c1"># 将原始文本映射成数字化张量</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">oov</span> <span class="o">=</span> <span class="n">source2ids</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+        <span class="c1"># 获取OOV的长度和padding mask张量</span>
+        <span class="n">len_oovs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">oov</span><span class="p">)])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+        <span class="n">x_padding_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ne</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">byte</span><span class="p">()</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+
+        <span class="c1"># 利用贪心解码函数得到摘要结果.</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">greedy_search</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                                     <span class="n">max_sum_len</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_dec_steps</span><span class="p">,</span>
+                                     <span class="n">len_oovs</span><span class="o">=</span><span class="n">len_oovs</span><span class="p">,</span>
+                                     <span class="n">x_padding_masks</span><span class="o">=</span><span class="n">x_padding_masks</span><span class="p">)</span>
+
+        <span class="c1"># 将得到的摘要数字化张量转换成自然语言文本</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">outputids2words</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span> <span class="n">oov</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+
+        <span class="c1"># 删除掉特殊字符&lt;SOS&gt;和&lt;EOS&gt;</span>
+        <span class="k">return</span> <span class="n">summary</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'&lt;SOS&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'&lt;EOS&gt;'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>第二步: 调用.</li>
+</ul>
+<div class="codehilite" id="__code_28"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'实例化Predict对象, 构建dataset和vocab......'</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">Predict</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'vocab_size: '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">vocab</span><span class="p">))</span>
+    <span class="c1"># Randomly pick a sample in test set to predict.</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">val_data_path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">test</span><span class="p">:</span>
+        <span class="n">picked</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+        <span class="n">source</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">picked</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'&lt;SEP&gt;'</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s1">'source: '</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'******************************************'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'ref: '</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'******************************************'</span><span class="p">)</span>
+    <span class="n">greedy_prediction</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>  <span class="n">beam_search</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'greedy: '</span><span class="p">,</span> <span class="n">greedy_prediction</span><span class="p">,</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>执行程序:</li>
+</ul>
+<div class="codehilite" id="__code_30"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/src/
+
+python predict.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_32"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code>实例化Predict对象, 构建dataset和vocab......
+Reading dataset /home/ec2-user/text_summary/pgn/data/train.txt... 70000 pairs.
+9.530707359313965 secs used for  initalize predicter
+vocab_size:  20004
+source:  2015 年 途观 旗舰版 ， 现 6 万公里 ， 近期 感觉 发动机 加油 门时 前机 盖内 突突 声音 ， 停车 红灯 时 发动机 声音 特别 大 ， 平均 油耗 以前 2 个油 。 是不是 车出 问题 ？ ， 这种 情况 主要 看 一下 发动机 本身 抖动 没有 ， 抖动 火花塞 点火 不好 导致 
+
+******************************************
+ref:  检查一下 火花塞 才 行 ， 点火 不好 会 
+
+******************************************
+0.013345718383789062 secs used for  doing prediction
+greedy:  检查一下 火花塞
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>baseline-3模型测试结论: 随机抽取一个样本进行测试, 发现baseline-3模型效果已经非常棒了. 既可以表达source document中的核心要点, 又可以去除掉短句重复问题, 而这个正是coverage机制的功劳!!!</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h3 id="rougebaseline-3">利用ROUGE评估baseline-3模型</h3>
+<h4 id="pgnbaseline-3">对PGN的baseline-3模型进行评估</h4>
+<ul>
+<li>为了做模型的对比测试, 我们在测试baseline-2模型同样的测试集数据上, 来测试baseline-3模型的表现.</li>
+</ul>
+<hr>
+<ul>
+<li>ROUGE评估代码文件路径: /home/ec2-user/text_summary/pgn/src/rouge_eval.py</li>
+</ul>
+<div class="codehilite" id="__code_34"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">rouge</span> <span class="kn">import</span> <span class="n">Rouge</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+
+<span class="c1"># 设定项目的root路径, 方便相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入项目的相关代码文件</span>
+<span class="kn">from</span> <span class="nn">src.predict</span> <span class="kn">import</span> <span class="n">Predict</span>
+<span class="kn">from</span> <span class="nn">utils.func_utils</span> <span class="kn">import</span> <span class="n">timer</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+
+
+<span class="c1"># 构建ROUGE评估类</span>
+<span class="k">class</span> <span class="nc">RougeEval</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scores</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rouge</span> <span class="o">=</span> <span class="n">Rouge</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hypos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+
+    <span class="c1"># 预处理评估数据集</span>
+    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'Reading from '</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">test</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+                <span class="n">source</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'&lt;SEP&gt;'</span><span class="p">)</span>
+                <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'。'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">refs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s1">'self.refs[]包含的样本数: '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refs</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Test set contains {len(self.sources)} samples.'</span><span class="p">)</span>
+
+    <span class="c1"># 构建预测集合</span>
+    <span class="nd">@timer</span><span class="p">(</span><span class="s1">'building hypotheses'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">build_hypos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predict</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'Building hypotheses.'</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">'count='</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hypos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">predict</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">get_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hypos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'需要首先构建hypotheses'</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">'Calculating average rouge scores.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rouge</span><span class="o">.</span><span class="n">get_scores</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hypos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">refs</span><span class="p">,</span> <span class="n">avg</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_36"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 真实的测试机是val_data_path: dev.txt</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'实例化Rouge对象......'</span><span class="p">)</span>
+<span class="n">rouge_eval</span> <span class="o">=</span> <span class="n">RougeEval</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">val_data_path</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'实例化Predict对象......'</span><span class="p">)</span>
+<span class="n">predict</span> <span class="o">=</span> <span class="n">Predict</span><span class="p">()</span>
+
+<span class="c1"># 利用模型对article进行预测</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'利用模型对article进行预测, 并通过Rouge对象进行评估......'</span><span class="p">)</span>
+<span class="n">rouge_eval</span><span class="o">.</span><span class="n">build_hypos</span><span class="p">(</span><span class="n">predict</span><span class="p">)</span>
+<span class="c1"># 将预测结果和标签abstract进行ROUGE规则计算</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'开始用Rouge规则进行评估......'</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">rouge_eval</span><span class="o">.</span><span class="n">get_average</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'rouge1: '</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s1">'rouge-1'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'rouge2: '</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s1">'rouge-2'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'rougeL: '</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="s1">'rouge-l'</span><span class="p">])</span>
+
+<span class="c1"># 最后将计算评估结果写入文件中</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'将评估结果写入结果文件中......'</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'../eval_result/rouge_result.txt'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">metric</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>执行:</li>
+</ul>
+<div class="codehilite" id="__code_38"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code><span class="m">1</span>: 关键的第一步是在rouge_eval.py文件中, 设置好RougeEval<span class="o">(</span>config.val_data_path<span class="o">)</span>中待评估的文件配置路径, 
+注意: 在config.py中val_data_path待评估的数据一定要和baseline-2模型的测试数据是同一份数据
+
+<span class="m">2</span>: 关键的第二步是在predict.py文件中, 设置好当前要评估的模型, 使用self.model.load_state_dict<span class="o">(</span>torch.load<span class="o">(</span>config.model_save_path<span class="o">))</span>,
+将config.py中的model_save_path指定成baseline-3模型的存储路径.
+
+<span class="m">3</span>: 执行评估代码即可
+<span class="nb">cd</span> /home/ec2-user/text_summary/pgn/src/
+python rouge_eval.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_40"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code>实例化Rouge对象......
+Reading from  /home/ec2-user/text_summary/pgn/data/dev.txt
+self.refs[]包含的样本数:  3000
+Test set contains 3000 samples.
+实例化Predict对象......
+Reading dataset /home/ec2-user/text_summary/pgn/data/train.txt... 70000 pairs.
+10.267724990844727 secs used for  initalize predicter
+利用模型对article进行预测, 并通过Rouge对象进行评估......
+Building hypotheses.
+0.04752159118652344 secs used for  doing prediction
+0.0552525520324707 secs used for  doing prediction
+0.03582024574279785 secs used for  doing prediction
+0.01597142219543457 secs used for  doing prediction
+0.03732419013977051 secs used for  doing prediction
+0.016273975372314453 secs used for  doing prediction
+0.013509750366210938 secs used for  doing prediction
+0.030243396759033203 secs used for  doing prediction
+0.0444340705871582 secs used for  doing prediction
+0.017905235290527344 secs used for  doing prediction
+0.023414134979248047 secs used for  doing prediction
+0.016438007354736328 secs used for  doing prediction
+0.01435995101928711 secs used for  doing prediction
+0.03378701210021973 secs used for  doing prediction
+0.025617361068725586 secs used for  doing prediction
+0.013029336929321289 secs used for  doing prediction
+0.09791374206542969 secs used for  doing prediction
+0.039574623107910156 secs used for  doing prediction
+
+
+......
+......
+......
+
+
+0.03331756591796875 secs used for  doing prediction
+0.01589798927307129 secs used for  doing prediction
+0.05126142501831055 secs used for  doing prediction
+0.013388395309448242 secs used for  doing prediction
+0.015698671340942383 secs used for  doing prediction
+0.01641082763671875 secs used for  doing prediction
+0.019998550415039062 secs used for  doing prediction
+0.10716414451599121 secs used for  doing prediction
+0.09088850021362305 secs used for  doing prediction
+0.007317543029785156 secs used for  doing prediction
+0.017053604125976562 secs used for  doing prediction
+159.63976788520813 secs used for  building hypotheses
+开始用Rouge规则进行评估......
+Calculating average rouge scores.
+rouge1:  {'f': 0.23891369972642879, 'p': 0.2788479944741074, 'r': 0.3274651102592097}
+rouge2:  {'f': 0.08145260844937684, 'p': 0.09507772545428753, 'r': 0.11403972188579534}
+rougeL:  {'f': 0.28112397619052887, 'p': 0.3551625333014313, 'r': 0.28567520633785176}
+将评估结果写入结果文件中......
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>查看结果文件:</li>
+</ul>
+<div class="codehilite" id="__code_42"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><pre id="__code_43"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_43 pre, #__code_43 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/eval_result/
+
+cat rouge_result.txt
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_44"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_44 pre, #__code_44 code"><span class="md-clipboard__message"></span></button><pre id="__code_45"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_45 pre, #__code_45 code"><span class="md-clipboard__message"></span></button><code>rouge-1
+f: 23.891369972642877
+p: 27.884799447410742
+r: 32.746511025920974
+rouge-2
+f: 8.145260844937683
+p: 9.507772545428752
+r: 11.403972188579534
+rouge-l
+f: 28.112397619052885
+p: 35.51625333014313
+r: 28.567520633785175
+</code></pre></div>
+
+
+<hr>
+<h4 id="rouge">ROUGE评估结果对比</h4>
+<ul>
+<li>将baseline-2模型和baseline-3模型在同样的测试集上的表现展示在一起:</li>
+</ul>
+<div class="codehilite" id="__code_46"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_46 pre, #__code_46 code"><span class="md-clipboard__message"></span></button><pre id="__code_47"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_47 pre, #__code_47 code"><span class="md-clipboard__message"></span></button><code># 左侧展示的是baseline-2模型的表现, 右侧展示的是baseline-3模型的表现
+
+# baseline-2: PGN + attention          # baseline-3: PGN + attention + coverage    
+
+rouge-1                                rouge-1
+f: 22.4840567492723                    f: 23.891369972642877
+p: 22.48892685096682                   p: 27.884799447410742
+r: 36.152107385286506                  r: 32.746511025920974
+rouge-2                                rouge-2
+f: 7.6855293213852995                  f: 8.145260844937683
+p: 7.633592816230374                   p: 9.507772545428752
+r: 12.992180038436171                  r: 11.403972188579534
+rouge-l                                rouge-l
+f: 29.79190839597577                   f: 28.112397619052885
+p: 35.022548049923934                  p: 35.51625333014313
+r: 31.245311823639828                  r: 28.567520633785175
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>ROUGE评估结论: baseline-3模型在ROUGE-N的关键指标上效果更好, 尤其是针对于精确率的提升; 但是baseline-3模型在ROUGE-L的关键指标上都有一些下降, 说明在目前的数据集上, 最长公共子串的表现不理想, 后续需要继续优化改进.</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h3 id="_2">小节总结</h3>
+<ul>
+<li>小节总结: 在6.1小节中, 基于baseline-2模型做出优化, 增加重要的coverage机制. 旨在消除生成序列的重复性问题, 得到良好效果.</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./5_2.html" title="5.2 ROUGE评估算法实现" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                5.2 ROUGE评估算法实现
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./6_2.html" title="6.2 PGN + beam-search的优化模型" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                6.2 PGN + beam-search的优化模型
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2020, AITutorials.CN This website has been reviewed by the review agency. 京ICP备19006137号
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE doctype>
+<!-- saved from url=(0029)http://121.199.45.168:8004/1/ -->
+<html class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" lang="zh" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width,initial-scale=1" name="viewport">
+<meta content="ie=edge" http-equiv="x-ua-compatible">
+<link href="#" rel="canonical">
+<meta content="复制" name="lang:clipboard.copy">
+<meta content="已复制" name="lang:clipboard.copied">
+<meta content="ja" name="lang:search.language">
+<meta content="True" name="lang:search.pipeline.stopwords">
+<meta content="True" name="lang:search.pipeline.trimmer">
+<meta content="没有找到符合条件的结果" name="lang:search.result.none">
+<meta content="找到 1 个符合条件的结果" name="lang:search.result.one">
+<meta content="# 个符合条件的结果" name="lang:search.result.other">
+<meta content="[\uff0c\u3002]+" name="lang:search.tokenizer">
+<link href="./index_files/AI.jpg" rel="shortcut icon">
+<meta content="mkdocs-1.1.2, mkdocs-material-4.4.0" name="generator">
+<title>HMM与CRF - 经典的序列模型</title>
+<link href="./index_files/application.0284f74d.css" rel="stylesheet">
+<script src="./index_files/modernizr.74668098.js"></script>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect">
+<link href="./index_files/css" rel="stylesheet">
+<style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+<link href="./index_files/material-icons.css" rel="stylesheet">
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+<script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+<body dir="ltr">
+<svg class="md-svg">
+<defs>
+</defs>
+</svg>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox">
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox">
+<label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+<a class="md-skip" href="#hmmcrf" tabindex="1">
+        跳转至
+      </a>
+<header class="md-header" data-md-component="header" data-md-state="shadow">
+<nav class="md-header-nav md-grid">
+<div class="md-flex">
+<div class="md-flex__cell md-flex__cell--shrink">
+<a class="md-header-nav__button md-logo" href="#" title="经典的序列模型">
+<img height="24" src="./index_files/AI.jpg" width="24">
+</a>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch">
+<div class="md-flex__ellipsis md-header-nav__title" data-md-component="title" data-md-state="">
+<span class="md-header-nav__topic" style="width: 910px;">
+              经典的序列模型
+            </span>
+<span class="md-header-nav__topic" style="width: 910px;">
+              
+                HMM与CRF
+              
+            </span>
+</div>
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+</div>
+<div class="md-flex__cell md-flex__cell--shrink">
+<div class="md-header-nav__source">
+<a class="md-source" data-md-source="" href="http://www.itcast.cn/" title="前往 Github 仓库" data-md-state="done">
+<div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container">
+<main class="md-main">
+<div class="md-main__inner md-grid" data-md-component="container">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 757px;" data-md-state="">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title md-nav__title--site" for="__drawer">
+<a class="md-nav__button md-logo" href="#" title="经典的序列模型">
+<img height="48" src="./index_files/AI.jpg" width="48">
+</a>
+    经典的序列模型
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-source="" href="http://www.itcast.cn/" title="前往 Github 仓库" data-md-state="done">
+<div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-toggle md-nav__toggle" data-md-toggle="toc" id="__toc" type="checkbox">
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        HMM与CRF
+      </label>
+<a class="md-nav__link md-nav__link--active" href="#" title="HMM与CRF">
+      HMM与CRF
+    </a>
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">目录</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf" title="认识HMM与CRF模型">
+    认识HMM与CRF模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="学习目标">
+    学习目标
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm" title="HMM模型的输入和输出">
+    HMM模型的输入和输出
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm_1" title="HMM模型的作用">
+    HMM模型的作用
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm_2" title="HMM模型使用过程简述">
+    HMM模型使用过程简述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf" title="CRF模型的输入和输出">
+    CRF模型的输入和输出
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf_1" title="CRF模型的作用">
+    CRF模型的作用
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf_2" title="CRF模型使用过程简述">
+    CRF模型使用过程简述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf_1" title="HMM与CRF模型之间差异">
+    HMM与CRF模型之间差异
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf_2" title="HMM和CRF的发展现状">
+    HMM和CRF的发展现状
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="小节总结">
+    小节总结
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 757px;" data-md-state="">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">目录</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf" title="认识HMM与CRF模型" data-md-state="">
+    认识HMM与CRF模型
+  </a>
+<nav class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_1" title="学习目标" data-md-state="">
+    学习目标
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm" title="HMM模型的输入和输出" data-md-state="">
+    HMM模型的输入和输出
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm_1" title="HMM模型的作用" data-md-state="">
+    HMM模型的作用
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmm_2" title="HMM模型使用过程简述" data-md-state="">
+    HMM模型使用过程简述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf" title="CRF模型的输入和输出" data-md-state="">
+    CRF模型的输入和输出
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf_1" title="CRF模型的作用" data-md-state="">
+    CRF模型的作用
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crf_2" title="CRF模型使用过程简述" data-md-state="">
+    CRF模型使用过程简述
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf_1" title="HMM与CRF模型之间差异" data-md-state="">
+    HMM与CRF模型之间差异
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hmmcrf_2" title="HMM和CRF的发展现状" data-md-state="">
+    HMM和CRF的发展现状
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#_2" title="小节总结">
+    小节总结
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<h1>HMM与CRF</h1>
+<h2 id="hmmcrf">认识HMM与CRF模型</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>了解HMM与CRF模型的输入和输出.</li>
+<li>了解HMM与CRF模型的作用.</li>
+<li>了解HMM与CRF模型的使用过程.</li>
+<li>了解HMM与CRF模型之间的差异.</li>
+<li>了解HMM和CRF的发展现状.</li>
+</ul>
+<hr>
+<h3 id="hmm">HMM模型的输入和输出</h3>
+<ul>
+<li>HMM(Hidden Markov Model), 中文称作隐含马尔科夫模型, 因俄国数学家马尔可夫而得名. 它一般以文本序列数据为输入, 以该序列对应的隐含序列为输出.</li>
+</ul>
+<hr>
+<ul>
+<li>什么是隐含序列:<ul>
+<li>序列数据中每个单元包含的隐性信息, 这些隐性信息之间也存在一定关联. </li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>举个栗子:</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>给定一段文本: "人生该如何起头"
+
+我们看到的这句话可以叫做: 观测序列
+
+我们可以将这句话以词为单位进行划分得到:
+
+["人生", "该", "如何", "起头"]
+
+那么每个词对应的词性就是它的隐含序列, 如: 
+
+["n", "r", "r", "v"]
+</code></pre></div>
+<hr>
+<h3 id="hmm_1">HMM模型的作用</h3>
+<ul>
+<li>在NLP领域, HMM用来解决文本序列标注问题. 如分词, 词性标注, 命名实体识别都可以看作是序列标注问题.</li>
+</ul>
+<hr>
+<h3 id="hmm_2">HMM模型使用过程简述</h3>
+<ul>
+<li>首先, HMM模型表示为: lambda = HMM(A, B, pi), 其中A, B, pi都是模型的参数, 分别称作: 转移概率矩阵, 发射概率矩阵和初始概率矩阵.</li>
+<li>接着, 我们开始训练HMM模型, 语料就是事先准备好的一定数量的观测序列及其对应的隐含序列, 通过极大似然估计求得一组参数, 使由观测序列到对应隐含序列的概率最大.</li>
+<li>在训练过程中, 为了简化计算, 马尔可夫提出一种假设: 隐含序列中每个单元的可能性只与上一个单元有关. 这个假设就是著名的隐含假设.</li>
+<li>训练后, 我们就得到了具备预测能力的新模型: lambda = HMM(A, B, pi), 其中的模型参数已经改变. </li>
+<li>之后给定输入序列(x1, x2, ..., xn), 经过模型计算lambda(x1, x2, ..., xn)得到对应隐含序列的条件概率分布.</li>
+<li>最后, 使用维特比算法从隐含序列的条件概率分布中找出概率最大的一条序列路径就是我们需要的隐含序列: (y1, y2, ..., yn). </li>
+</ul>
+<hr>
+<h3 id="crf">CRF模型的输入和输出</h3>
+<ul>
+<li>CRF(Conditional Random Fields), 中文称作条件随机场, 同HMM一样,  它一般也以文本序列数据为输入, 以该序列对应的隐含序列为输出.</li>
+</ul>
+<hr>
+<h3 id="crf_1">CRF模型的作用</h3>
+<ul>
+<li>同HMM一样, 在NLP领域, CRF用来解决文本序列标注问题. 如分词, 词性标注, 命名实体识别.</li>
+</ul>
+<hr>
+<h3 id="crf_2">CRF模型使用过程简述</h3>
+<ul>
+<li>首先, CRF模型表示为: lambda = CRF(w1, w2, ..., wn), 其中w1到wn是模型参数.</li>
+<li>接着, 我们开始训练CRF模型, 语料同样是事先准备好的一定数量的观测序列及其对应的隐含序列.</li>
+<li>与此同时我们还需要做人工特征工程, 然后通过不断训练求得一组参数, 使由观测序列到对应隐含序列的概率最大.</li>
+<li>训练后, 我们就得到了具备预测能力的新模型: lambda = CRF(w1, w2, ..., wn), 其中的模型参数已经改变.</li>
+<li>之后给定输入序列(x1, x2, ..., xn), 经过模型计算lambda(x1, x2, ..., xn)得到对应隐含序列的条件概率分布.</li>
+<li>最后, 还是使用维特比算法从隐含序列的条件概率分布中找出概率最大的一条序列路径就是我们需要的隐含序列: (y1, y2, ..., yn).</li>
+</ul>
+<hr>
+<h3 id="hmmcrf_1">HMM与CRF模型之间差异</h3>
+<ul>
+<li>HMM模型存在隐马假设, 而CRF不存在, 因此HMM的计算速度要比CRF模型快很多, 适用于对预测性能要求较高的场合.</li>
+<li>同样因为隐马假设, 当预测问题中隐含序列单元并不是只与上一个单元有关时, HMM的准确率会大大降低, 而CRF不受这样限制, 准确率明显高于HMM.</li>
+</ul>
+<hr>
+<h3 id="hmmcrf_2">HMM和CRF的发展现状</h3>
+<ul>
+<li>HMM和CRF模型曾在多种序列任务中表现出色, 伴随NLP工程师度过漫长的一段时期.</li>
+<li>但由于近年来深度学习发展迅速, 经典序列模型, 如HMM和CRF, 已经开始慢慢淡出人们的视野. </li>
+<li>因此, 我们这里也是对其做了简洁的总结知识, 让大家对其有一定的基本认识.</li>
+</ul>
+<hr>
+<h3 id="_2">小节总结</h3>
+<ul>
+<li>学习了HMM与CRF模型的输入和输出.</li>
+<li>学习了HMM与CRF模型的作用.</li>
+<li>学习了HMM与CRF模型的使用过程.</li>
+<li>学习了HMM与CRF模型之间的差异.</li>
+<li>学习了HMM和CRF的发展现状.</li>
+</ul>
+<hr>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+ ... <a download="" href="http://121.199.45.168:8004/pdf/document.pdf" title="PDF">download PDF</a></div>
+<div class="md-footer-social">
+<link href="./index_files/font-awesome.css" rel="stylesheet">
+<a class="md-footer-social__link fa fa-linkedin" href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/"></a>
+<a class="md-footer-social__link fa fa-weibo" href="https://weibo.com/u/3469990762?is_all=1"></a>
+<a class="md-footer-social__link fa fa-bitbucket" href="http://bitbucket.org/AITutorials"></a>
+<a class="md-footer-social__link fa fa-gitlab" href="https://github.com/AITutorials/datasets/issues"></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<script src="./index_files/application.245445c6.js"></script>
+<script src="./index_files/lunr.stemmer.support.js"></script>
+<script src="./index_files/tinyseg.js"></script>
+<script src="./index_files/lunr.ja.js"></script>
+<script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+
+</body></html>

@@ -1,0 +1,1795 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>6.3 知识图谱的众包 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6.3 知识图谱的众包
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          6.3 知识图谱的众包
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="6_3.html" class="md-nav__link md-nav__link--active">
+        6.3 知识图谱的众包
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱众包
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱众包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    知识图谱的众包概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    知识型众包的基本概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    众包的问题和方法
+  </a>
+  
+    <nav class="md-nav" aria-label="众包的问题和方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what" class="md-nav__link">
+    What(对什么任务进行众包)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whom" class="md-nav__link">
+    Whom(将任务交给谁完成)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    How(如何完成众包)
+  </a>
+  
+    <nav class="md-nav" aria-label="How(如何完成众包)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    如何设计任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    如何激励工人
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    如何控制质量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    基于众包的知识图谱构建
+  </a>
+  
+    <nav class="md-nav" aria-label="基于众包的知识图谱构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    本体构建阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    知识图谱构建阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    知识图谱精化阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱众包
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱众包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    知识图谱的众包概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    知识型众包的基本概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    众包的问题和方法
+  </a>
+  
+    <nav class="md-nav" aria-label="众包的问题和方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what" class="md-nav__link">
+    What(对什么任务进行众包)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whom" class="md-nav__link">
+    Whom(将任务交给谁完成)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    How(如何完成众包)
+  </a>
+  
+    <nav class="md-nav" aria-label="How(如何完成众包)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    如何设计任务
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    如何激励工人
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    如何控制质量
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    基于众包的知识图谱构建
+  </a>
+  
+    <nav class="md-nav" aria-label="基于众包的知识图谱构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    本体构建阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    知识图谱构建阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    知识图谱精化阶段
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>6.3 知识图谱的众包</h1>
+
+<h2 id="_1">知识图谱众包<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_2">学习目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>了解什么是知识图谱的众包.</li>
+<li>理解知识图谱众包中的问题和方法.</li>
+<li>理解众包的知识图谱构建与优化的方法.</li>
+</ul>
+<hr />
+<h3 id="_3">知识图谱的众包概述<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>目前知识图谱主要是以数据驱动的方法来构建的, 即机器利用自然语言处理等方法自动从大规模文本中抽取知识, 这种方法克服了完全依靠人工专家构建知识库所带来的高昂成本, 使知识图谱的规模呈几何级数增长.</li>
+</ul>
+<hr />
+<ul>
+<li>当前阶段(2023年, 大数据知识工程时代发展10年后), 知识的获取仍然需要人力介入, 主要有三个原因:<ul>
+<li>第一: 人机混合智能仍然是当前人工智能发展的主要形态. 总体来说, 当前人工智能是人机混合智能的初级阶段, 距离机器自主智能阶段仍然相距甚远. 这意味着, 大部分人工智能过程仍然需要来自专家的经验和知识, 大部分机器学习算法仍然显著依赖于人工标注的样本, 智能过程的输出结果还是需要人类的反馈, 机器的价值观与认知框架还需要人类来建立. 人机混合智能既是当前人工智能技术发展的局限所致, 也是人工智能技术发展的可控性要求的结果. 因此, 整个知识图谱的构建过程, 从抽取模型的样本标注, 概念层级体系的设计到知识的验证等环节, 仍然需要人类的积极参与.</li>
+<li>第二: 知识是人类认知世界的结果, 知识的对错其责任主体还是人类自身. 当前通过自动化方法获取知识产生的错误在所难免. 由于人工智能, 模式识别, 自然语言处理等技术的限制, 以及网络文档不规范, 噪声数据多等条件的制约, 知识图谱构建的每一个重要步骤(命名实体识别, 关系抽取, 知识融合)都不可能用自动化的手段完全, 准确的完成, 而在这些中间步骤中产生的误差经过累加会导致知识图谱将错误的知识也吸纳进来. 自动化知识获取所产生的错误必须由人来验证, 因为"知识"本质上是人类对世界的认知结果, "知识"的对错是人类社会的命题, 与机器无关. 因此, 由机器自动抽取的任何知识, 其最终的验证者还是人, 而且只有人才能对知识的对错负责, 没有办法对机器追责.</li>
+<li>第三: 数据只是人类知识的有限载体, 通过数据驱动的自动化获取方法只能获取知识的有限集合, 人类对知识的补充不可或缺. 人类的知识是十分庞大的, 通过口口相传, 通过书籍记载或者数字化记录的知识只是人类知识总体中相当有限的子集. 普通人对世界认知产生的常识, 以及专家的隐性知识都是极难从数据中使用自动化方法获取的, 因此很难被现有的大型知识图谱所覆盖. 因此, 我们仍然需要将来自专家的隐知识, 默知识尽量外显, 把它们显式的表达出来, 连同人类的常识一并由人灌输给机器.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>综上所述, 仅仅依靠基于数据驱动的方法难以使知识图谱达到高准确率和高覆盖度, 而适当的人力介入则可以缓解上述问题. 然而, 高昂的人工成本和知识图谱庞大的规模使得传统的由专家介入知识库构建的方案无法展开. 众包平台(Crowdsourcing Platform)的出现使这种由人力介入参与知识图谱构建的方式成为可能. 由于众包方式利用的是大众的闲暇时间, 其没有传统的公司培训开销和团队维护开销, 也避免了雇佣专家所产生的昂贵费用, 因此可以大幅降低单个任务的人工成本.</li>
+</ul>
+<hr />
+<ul>
+<li>众包可以在以下三个阶段介入知识图谱的构建过程:<ul>
+<li>1: 元知识创建阶段. 这个阶段主要实现元知识(基本的认知框架)的搭建, 原因在于基本的知识体系涉及深层次语义理解, 难以从大数据中自动归纳得到. 另外, 各类知识获取模型所用到的特征和规则也需要由人制定, 因此这部分工作主要由专家完成.</li>
+<li>2: 知识获取阶段. 这个阶段需要利用众包实现数据标注, 再将这些标注数据作为训练数据, 进而构建知识获取模型(命名实体识别, 关系抽取, 知识融合等经典任务, 大部分基于监督学习), 通过这些模型从文本或数据中自动获取知识.</li>
+<li>3: 知识精化阶段. 在完成自动化知识获取后, 需要通过众包手段来验证知识, 纠错补漏.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 众包对于知识图谱的构建十分重要, 人力的参与必不可少. 知识图谱的构建是一项与知识和智慧密切相关的任务, 其众包任务属于知识型众包.</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="_4">知识型众包的基本概念<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>众包(Crowdsourcing)是一种新型的外包模式, 它将一群松散的任务发包方(Requester)和任务完成者(Worker)联系起来, 实现任务发包, 匹配, 完成, 付款等一系列操作.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 在数字化时代到来以前众包就出现了, 只不过当时主要采用"线下"的形式完成众包.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>与传统外包模式不同的是, 众包所联系的群体是一群松散的无组织人群, 而传统承接外包任务的对象是一个相对固定的组织.</li>
+</ul>
+<hr />
+<ul>
+<li>互联网2.0使得人们交互, 支付和组织的便捷性大大提高, 众包因此也得到了推广, 目前已经有不少比较成功的众包平台:<ul>
+<li>滴滴出行</li>
+<li>Uber</li>
+<li>美团外卖</li>
+<li>饿了吗</li>
+<li>达达物流</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>
+<p>注意: 上面的几个成功的众包平台偏向于劳动密集型行业, 如快递, 外卖, 出租车等, 主要是将闲散的劳动力组织起来为大众服务. 近年来, 涌现出一类新型的众包平台-知识型众包平台(Knowledge-Intensive Crowdsourcing). 这类众包平台主要将大众的智慧和时间合理组织, 为广大用户提供智力支持. </p>
+</li>
+<li>
+<p>例如: 当前典型的知识型众包平台有亚马逊的Mechanical Turk, 阿里众包, 猪八戒等. 在其上产生了各种各样的智力型任务需求, 如语料标注, 字幕翻译, Logo设计和问卷调查等.</p>
+</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>相比于劳动密集型众包, 知识型众包有以下特点:<ul>
+<li>任务多样性强</li>
+<li>工人多样性强</li>
+<li>任务质量难以评价</li>
+<li>任务完成质量的影响面大</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>总结: 可以看出劳动密集型众包的核心问题是如何优化任务与工人的匹配, 提升用户体验; 而知识型众包则需要在此基础上进一步考虑一系列技术问题.</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="_5">众包的问题和方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>总体来说, 知识型众包需要面临的问题可以归结为WWH(What, Whom, How):<ul>
+<li>What: 对什么任务进行众包</li>
+<li>Whom: 将任务交给谁完成</li>
+<li>How: 如何完成众包</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="what">What(对什么任务进行众包)<a class="headerlink" href="#what" title="Permanent link">&para;</a></h4>
+<ul>
+<li>首先, 需要精心挑选具有最佳收益的一批问题交予众包平台, 挑选的原则有两条:<ul>
+<li>挑选最重要的任务: 虽然众包单个任务的花费很少, 但知识型任务往往需要将大量的小型任务拼接在一起, 比如, 数据标注通常要达到一定的数量才能获得合适的训练数据集. 知识图谱的融合与清洗也往往面临知识图谱规模超大的问题, 这会造成整体开销十分巨大. 另一方面, 数据源的异构以及样本分布不均衡往往导致知识图谱构建的结果质量不一.</li>
+<li>挑选机器最不擅长而人最擅长的任务: 人机智能是有着显著差异的, 人擅长理解常识而机器不擅长; 人擅长理解似是而非的事实, 机器擅长处理精确的知识; 人擅长理解概念性, 框架性的元知识, 而机器在这一方面的能力仍然十分有限.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>补充: 在任务挑选中, 可以通过"不确定图"(Uncertain Graph)的建模, 将节点之间的关系建模为带有置信度的边, 最后通过边概率的选取来挑选出哪些任务需要被众包.</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="whom">Whom(将任务交给谁完成)<a class="headerlink" href="#whom" title="Permanent link">&para;</a></h4>
+<ul>
+<li>众包任务有两种不同的发包方式:<ul>
+<li>被动众包: 是指发包方将任务挂在众包平台上, 由工人来认领任务并完成, 发包方不对工人做过多选择, 最多设计一套测试题来验证工人的资格.</li>
+<li>主动众包: 是指由发包方通过一系列算法精心挑选工人实现任务的分配.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>当前大规模的众包平台, 如亚马逊的Mechanical Turk, 阿里众包等, 均采用被动众包的方式分配任务. 主要原因是其上的大部分任务的完成门槛较低, 且平台用户数量庞大, 难以有效筛选.</p>
+</li>
+<li>
+<p>反之, 在某些质量攸关且所需工人较少的特殊任务中, 需要采用主动众包的方式, 对工人精挑细选, 如项目评审, 代码众包等. 目前学术界和工业界研究热点主要集中在主动众包上.</p>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>冷启动问题: 与推荐系统一样, 主动众包的一个重要问题是冷启动问题. 可以采用迁移学习的方法将工人在某一领域的经验迁移到数据稀缺的领域, 比如, 对"口红"熟悉的工人也许对"高跟鞋"也熟悉, 因此可以将工人对"口红"相关问题的回答迁移到对"高跟鞋"相关问题的回答中. 这种方法在一定程度上解决了冷启动问题, 可以应用于知识图谱的众包构建.</li>
+</ul>
+</blockquote>
+<hr />
+<h4 id="how">How(如何完成众包)<a class="headerlink" href="#how" title="Permanent link">&para;</a></h4>
+<ul>
+<li>当前工业界经过多年的实践经验, 已经将众包过程进行了高效的调整, 主要包括3个方面:<ul>
+<li>如何设计任务</li>
+<li>如何激励工人</li>
+<li>如何控制质量</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5 id="_6">如何设计任务<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h5>
+<ul>
+<li>从工人的视角来看, 众包任务可以分为显式众包和隐式众包:<ul>
+<li>显式众包: 是指工人在完成众包任务时知晓自己正在完成众包任务.</li>
+<li>隐式众包: 是指工人在不知不觉中完成众包任务.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>目前工业界的众包平台大多数采用显式众包, 工人完成任务的目的也主要是为了获得金钱报酬. 显式众包领域有一些公认的设计原则:<ul>
+<li>偏好更小的任务</li>
+<li>判断题优于选择题</li>
+<li>工人不喜欢有大量交互合作的任务</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h5 id="_7">如何激励工人<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h5>
+<ul>
+<li>目前工业界常用的激励机制有以下四种:<ul>
+<li>名誉度</li>
+<li>快乐感</li>
+<li>金钱激励</li>
+<li>社交影响</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>最重要的金钱激励有三类:<ul>
+<li>静态奖励</li>
+<li>动态奖励</li>
+<li>条件奖励</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>研究较多的社交影响有两类:<ul>
+<li>强连接网络: 微信, Facebook</li>
+<li>弱连接网络: 百度贴吧, 论坛</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>综上所述: 为了更有效的激发工人主观能动性, 可以混合使用上述多种激励机制. 比如, 任务开始阶段, 使用强连接网络和金钱激励吸引大量工人注意到此任务. 后续可以通过留存用户, 采用名誉度, 快乐感等虚拟机制节省开销.</li>
+</ul>
+</blockquote>
+<hr />
+<h5 id="_8">如何控制质量<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h5>
+<ul>
+<li>知识型众包最大的问题之一就是质量控制, 因为发包方也没有任务的标准答案, 只能凭借工人返回的结果推断出真实的答案. 而同时工人的素质和水平又参差不齐, 所以质量控制就成了很难的问题.</li>
+</ul>
+<hr />
+<ul>
+<li>主要分成3阶段来控制:<ul>
+<li>众包前的质量控制: 主要是在任务发包前制定好的任务设计策略和激励分配策略.</li>
+<li>众包过程中的质量控制: 是指在众包过程中通过设计一些精细的过程提升众包任务完成的质量.</li>
+<li>众包后的质量控制: 是指在获取人工返回的答案后综合推断出真实的结果.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<h3 id="_9">基于众包的知识图谱构建<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在构建与精化知识图谱的过程中, 有三个阶段是需要人工介入的:<ul>
+<li>本体构建阶段</li>
+<li>知识图谱构建阶段</li>
+<li>知识图谱精化阶段</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_10">本体构建阶段<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在知识图谱构建之初, 本体设计是不可或缺的环节, 构建好本体后, 再从数据中抽取实例挂接到概念之下. 实例之间还可以继承本体中对应的概念与概念之间的关系.</li>
+</ul>
+<hr />
+<h4 id="_11">知识图谱构建阶段<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>本体设计完成后, 需要用自动化的手段从大规模文本中抽取知识, 人工介入的两个优势任务:<ul>
+<li>三元组抽取</li>
+<li>实体对齐</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>三元组抽取: 目前学术界, 工业界关于三元组抽取任务, 主要有2种方法, 基于规则派的方法和基于机器学习的方法, 但都无法避免错误.</p>
+</li>
+<li>
+<p>众包平台将与真实三元组相关的上下文融入问题中, 并生成选择题的题目, 并给出若干个候选答案. </p>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 之所以采用选择题的方式进行众包, 是为了防止开放性问题造成众包答案五花八门而难以统一!</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>实体对齐: 实体对齐是知识型众包中最常见的任务之一, 是一项典型的人擅长而机器不容易准确完成的任务. 比如, 人可以很容易的把"苹果 iPad 4"和"苹果平板电脑4代"对应起来, 而机器却很难做到.</li>
+</ul>
+<hr />
+<ul>
+<li>实体对齐任务在机器学习中的难点:<ul>
+<li>互联网中新的实体层出不穷, 训练集很难覆盖这些新实体.</li>
+<li>实体的结构复杂, 不规范, 很难用规则模板来适配.</li>
+<li>实体表述一般较短, 需要结合上下文来判断和识别. 人脑由于有更强大的认知能力和更丰富的常识储备, 所以可以非常轻松, 准确的完成实体对齐任务.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_12">知识图谱精化阶段<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在知识图谱精化过程中引入众包, 可以提高基于数据驱动的知识图谱构建过程的准确度和覆盖度. 某些知识图谱中的错误或者缺失, 可以借助用户在应用后的反馈来完成.</li>
+</ul>
+<hr />
+<ul>
+<li>利用众包方式实现知识精化的典型案例:<ul>
+<li>Cyc</li>
+<li>OpenMind</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="6_2.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 6.2 百科图谱的构建" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              6.2 百科图谱的构建
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="7_1.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 7.1 知识图谱建模与存储" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              7.1 知识图谱建模与存储
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

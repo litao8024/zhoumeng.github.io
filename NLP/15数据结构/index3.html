@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8234/7/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>整体优化思路 - Transformer</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="Transformer" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              Transformer
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                整体优化思路
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="Transformer" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    Transformer
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="数据结构与算法笔试题" class="md-nav__link">
+      数据结构与算法笔试题
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="ModelArchitectures" class="md-nav__link">
+      ModelArchitectures
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        整体优化思路
+      </label>
+    
+    <a href="" title="整体优化思路" class="md-nav__link md-nav__link--active">
+      整体优化思路
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="模型优化的三大方向" class="md-nav__link">
+    模型优化的三大方向
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="模型指标优化" class="md-nav__link">
+    模型指标优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="模型训练性能优化" class="md-nav__link">
+    模型训练性能优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="模型预测性能优化" class="md-nav__link">
+    模型预测性能优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="模型优化的三大方向" class="md-nav__link">
+    模型优化的三大方向
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="模型指标优化" class="md-nav__link">
+    模型指标优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="模型训练性能优化" class="md-nav__link">
+    模型训练性能优化
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="模型预测性能优化" class="md-nav__link">
+    模型预测性能优化
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>整体优化思路</h1>
+                
+                <h3 id="_1">学习目标</h3>
+<ul>
+<li>掌握主流的模型优化方法和对应的案例。</li>
+</ul>
+<hr>
+<h3 id="_2">模型优化的三大方向</h3>
+<ul>
+<li>
+<p>模型指标优化</p>
+</li>
+<li>
+<p>模型训练性能优化</p>
+</li>
+<li>
+<p>模型预测性能优化</p>
+</li>
+</ul>
+<hr>
+<h4 id="_3">模型指标优化</h4>
+<ul>
+<li>
+<p>这里的模型指标，是指评定最终模型优劣的指标，如常用的ACC，AUC，F1，precision，recall，mAP等等。</p>
+</li>
+<li>
+<p>为了能够提升这些指标，我们往往从以下几个方面考虑：</p>
+<ul>
+<li>训练数据</li>
+<li>模型结构</li>
+<li>损失函数</li>
+<li>可解释性</li>
+<li>知识融合</li>
+<li>优化器修改（比如SGD--&gt;SWA）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>训练数据：<ul>
+<li>往往清洗或增强训练数据是最直接和有效的指标提升方式，也是工业界最常用的方式。</li>
+<li>对于清洗脏数据，主要的理论依据便是从业务角度出发，对数据的合理性进行业务解析，然后编写相关的代码逻辑，最后进行对比实验。</li>
+<li>对于数据增强则需要考虑的更多一些，需要在验证集上进行badcase分析，不同的badcase代表着模型不同的弱点，然后针对性的增强数据，如何增强呢，EDA（同义词替换）和回译法都是常见的方法。</li>
+<li>对于通过预训练+微调的两阶段模型，对训练数据可以进行领域自适应，即选择收集垂直领域的数据进行无监督的预训练（需要保证相同领域的数据是充分的），最终再进行微调。</li>
+<li>同样对于预训练+微调的两阶段模型，在优化微调网络参数时，需要使用任务自适应的数据进行参数初始化（需要保证类似任务的数据是充分的），最终再进行微调。</li>
+<li>领域自适应和任务自适应可以同时使用，本质上，都是对外部相关数据的信息利用。</li>
+<li>一致性训练：这是将数据增强和无监督训练结合的方法，因为无监督数据增强后的隐含标签是不变的（我们不知道实际的标签），因此在预训练阶段我们可以通过减小无监督数据增强前后KL散度来进行聚类，虽然不知道具体标签是什么，但我们可以融合一些类别归属的信息，之后再通过有监督的微调进行明确的类别划分。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型结构：<ul>
+<li>一般情况下，官方发布的模型都具有成熟的结构，比如：transformer或resnet，不建议直接修改这些模型的网络结构。</li>
+<li>那模型结构如何改变呢，我们可以使用级联（Cascade）的方式，多个标准模型可以分享输入，然后使用损失和作为最终的损失，比如wide-deep；也可以多个标准模型串行，后面的模型基于前面的模型弱点进行强化，比如：先分类，后检测。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>损失函数：<ul>
+<li>其实在Cascade模型结构时，我们就需要用到自定义损失函数，不过，那种自定义比较简单，只是多个已有标准损失的和。</li>
+<li>而去真正进行深度的自定义损失函数需要很多过程，首先需要对优化目标进行业务剖析，从另外一个角度找到其优化的方向，比如，除了希望输出的标签和真实标签越来越接近以外，还希望输出的词向量能够满足语序关系。而这种优化方向还需要你的模型输出和已有数据的配合，比如bert除了能输出标签外，就天然能够输出词向量，而为了满足语序关系可以使用NER的损失函数（前提是你也已经有了NER的标注数据）。</li>
+<li>建议损失函数的修改还是从简单的运算（加减乘除）开始，或者标准损失的累加，因为损失函数之后需要施加优化器，需要考虑可导性。</li>
+<li>标签平滑技术需要使用新的交叉熵损失，因为框架实现的交叉熵一般允许标签非整。</li>
+<li>一般损失函数的修改应该来自明确的论文支持：比如在NER技术中，可以使用可变Dice损失替代真实路径得分和所有可能路径的总得分。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="_4">模型训练性能优化</h4>
+<ul>
+<li>
+<p>一般情况下，训练是离线的，实时性要求不高，因此其优化也不是考核的重点。但假如可以做到准实时训练，对于产品应用来讲，也是非常有益的。</p>
+</li>
+<li>
+<p>模型训练性能优化从以下几个方面考虑：</p>
+<ul>
+<li>硬件加速</li>
+<li>数据分布式</li>
+<li>模型分布式</li>
+<li>混合精度训练    </li>
+<li>迁移学习</li>
+<li>优化器计算简化   </li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="_5">模型预测性能优化</h4>
+<ul>
+<li>
+<p>对于模型预测阶段的性能优化是业界的热点问题，不能满足性能要求的模型几乎不可被使用，比如在移动端使用大型模型。</p>
+</li>
+<li>
+<p>模型预测性能优化从以下几个方面考虑：</p>
+<ul>
+<li>模型压缩</li>
+<li>硬件加速</li>
+<li>并行预测</li>
+<li>模型融合</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index2.html" title="ModelArchitectures" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                ModelArchitectures
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

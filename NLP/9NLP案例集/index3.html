@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8008/3/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, zh">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>莎士比亚风格的文本生成任务 - NLP案例集</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+      <link rel="manifest" href="http://121.199.45.168:8008/manifest.webmanifest">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="NLP案例集" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              NLP案例集
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                莎士比亚风格的文本生成任务
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="NLP案例集" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    NLP案例集
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="图片的描述生成任务" class="md-nav__link">
+      图片的描述生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="IMDB影评的情感分析任务" class="md-nav__link">
+      IMDB影评的情感分析任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        莎士比亚风格的文本生成任务
+      </label>
+    
+    <a href="" title="莎士比亚风格的文本生成任务" class="md-nav__link md-nav__link--active">
+      莎士比亚风格的文本生成任务
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru" title="使用GRU模型实现文本生成任务的步骤" class="md-nav__link">
+    使用GRU模型实现文本生成任务的步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 下载数据集并做文本预处理" class="md-nav__link">
+    第一步: 下载数据集并做文本预处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 构建模型并训练模型" class="md-nav__link">
+    第二步: 构建模型并训练模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 使用模型生成文本内容" class="md-nav__link">
+    第三步: 使用模型生成文本内容
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" title="更高级的方式" class="md-nav__link">
+    更高级的方式
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-nav__link">
+      应用于bert模型的动态量化技术
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-nav__link">
+      基于seq2seq的西班牙语到英语的机器翻译任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-nav__link">
+      ResNet模型在GPU上的并行实践
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru" title="使用GRU模型实现文本生成任务的步骤" class="md-nav__link">
+    使用GRU模型实现文本生成任务的步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 下载数据集并做文本预处理" class="md-nav__link">
+    第一步: 下载数据集并做文本预处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 构建模型并训练模型" class="md-nav__link">
+    第二步: 构建模型并训练模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 使用模型生成文本内容" class="md-nav__link">
+    第三步: 使用模型生成文本内容
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" title="更高级的方式" class="md-nav__link">
+    更高级的方式
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>莎士比亚风格的文本生成任务</h1>
+                
+                <h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>了解文本生成任务和相关数据集.</li>
+<li>掌握使用GRU模型实现文本生成任务的过程.</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/ssb.png"></center><p></p>
+<hr>
+<h3 id="_2">任务说明<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li>这是一项使用GRU模型的文本生成任务，文本生成任务是NLP领域最具有挑战性的任务之一，我们将以一段文本或字符为输入，使用模型预测之后可能出现的文本内容，我们希望这些文本内容符合语法并能保持语义连贯性。但是到目前为止，这是一项艰巨的任务，因此从实用角度出发，更多的尝试在与艺术类文本相关的任务中，如我们的当前案例，就是使用莎士比亚的剧本作为原始数据。</li>
+</ul>
+<hr>
+<h3 id="_3">数据集说明<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>数据集名称: 莎士比亚作品数据集</li>
+<li>数据下载地址: <a href="https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt">https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt</a></li>
+<li>数据集预览:</li>
+</ul>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code>QUEENE:
+I had thought thou hadst a Roman; for the oracle,
+Thus by All bids the man against the word,
+Which are so weak of care, by old care done;
+Your children were in your holy love,
+And the precipitation through the bleeding throne.
+
+BISHOP OF ELY:
+Marry, and will, my lord, to weep in such a one were prettiest;
+Yet now I was adopted heir
+Of the world's lamentable day,
+To watch the next way with his father with his face?
+
+ESCALUS:
+The cause why then we are all resolved more sons.
+
+VOLUMNIA:
+O, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, it is no sin it should be dead,
+And love and pale as any will to that word.
+
+QUEEN ELIZABETH:
+But how long have I heard the soul for this world,
+And show his hands of life be proved to stand.
+
+PETRUCHIO:
+I say he look'd on, if I must be content
+To stay him from the fatal of our country's bliss.
+His lordship pluck'd from this sentence then for prey,
+And then let us twain, being the moon,
+were she such a case as fills m
+</code></pre></div>
+
+<hr>
+<h3 id="gru">使用GRU模型实现文本生成任务的步骤<a class="headerlink" href="#gru" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步: 下载数据集并做文本预处理</li>
+<li>第二步: 构建模型并训练模型</li>
+<li>第三步: 使用模型生成文本内容</li>
+</ul>
+<hr>
+<h4 id="_4">第一步: 下载数据集并做文本预处理<a class="headerlink" href="#_4" title="Permanent link">¶</a></h4>
+<ul>
+<li>下载数据:</li>
+</ul>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1"># 打印tensorflow版本</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Tensorflow Version:"</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 使用tf.keras.utils.get_file方法从指定地址下载数据，得到原始数据本地路径</span>
+<span class="n">path_to_file</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">'shakespeare.txt'</span><span class="p">,</span> <span class="s1">'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt'</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code>Tensorflow Version: 2.1.0-rc2
+Downloading data from https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt
+1122304/1115394 [==============================] - 0s 0us/step
+</code></pre></div>
+
+<ul>
+<li>读取数据:</li>
+</ul>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 打开原始数据文件并读取文本内容</span>
+<span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># 统计字符个数并查看前250个字符</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Length of text: {} characters'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">250</span><span class="p">])</span>
+<span class="c1"># 统计文本中非重复字符数量</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="s1">'{} unique characters'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code>Length of text: 1115394 characters
+
+
+First Citizen:
+Before we proceed any further, hear me speak.
+
+All:
+Speak, speak.
+
+First Citizen:
+You are all resolved rather to die than to famish?
+
+All:
+Resolved. resolved.
+
+First Citizen:
+First, you know Caius Marcius is chief enemy to the people.
+
+
+65 unique characters
+</code></pre></div>
+
+<hr>
+<ul>
+<li>对文本进行数值映射:</li>
+</ul>
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 对字符进行数值映射，将创建两个映射表：字符映射成数字，数字映射成字符</span>
+<span class="n">char2idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">u</span><span class="p">:</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+<span class="n">idx2char</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+<span class="c1"># 使用字符到数字的映射表示所有文本</span>
+<span class="n">text_as_int</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">char2idx</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">])</span>
+
+<span class="c1"># 查看映射表</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'{'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">char</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">char2idx</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'  {:4s}: {:3d},'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">char</span><span class="p">),</span> <span class="n">char2idx</span><span class="p">[</span><span class="n">char</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'  ...</span><span class="se">\n</span><span class="s1">}'</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code><span class="p">{</span>
+  <span class="err">'\n':</span>   <span class="err">0,</span>
+  <span class="err">'</span> <span class="err">'</span> <span class="err">:</span>   <span class="err">1,</span>
+  <span class="err">'!'</span> <span class="err">:</span>   <span class="err">2,</span>
+  <span class="err">'$'</span> <span class="err">:</span>   <span class="err">3,</span>
+  <span class="err">'&amp;'</span> <span class="err">:</span>   <span class="err">4,</span>
+  <span class="nt">"'"</span> <span class="p">:</span>   <span class="mi">5</span><span class="p">,</span>
+  <span class="err">','</span> <span class="err">:</span>   <span class="err">6,</span>
+  <span class="err">'-'</span> <span class="err">:</span>   <span class="err">7,</span>
+  <span class="err">'.'</span> <span class="err">:</span>   <span class="err">8,</span>
+  <span class="err">'3'</span> <span class="err">:</span>   <span class="err">9,</span>
+  <span class="err">':'</span> <span class="err">:</span>  <span class="err">10,</span>
+  <span class="err">';'</span> <span class="err">:</span>  <span class="err">11,</span>
+  <span class="err">'?'</span> <span class="err">:</span>  <span class="err">12,</span>
+  <span class="err">'A'</span> <span class="err">:</span>  <span class="err">13,</span>
+  <span class="err">'B'</span> <span class="err">:</span>  <span class="err">14,</span>
+  <span class="err">'C'</span> <span class="err">:</span>  <span class="err">15,</span>
+  <span class="err">'D'</span> <span class="err">:</span>  <span class="err">16,</span>
+  <span class="err">'E'</span> <span class="err">:</span>  <span class="err">17,</span>
+  <span class="err">'F'</span> <span class="err">:</span>  <span class="err">18,</span>
+  <span class="err">'G'</span> <span class="err">:</span>  <span class="err">19,</span>
+  <span class="err">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code># 查看原始语料前13个字符映射后的结果
+print ('{} ---- characters mapped to int ---- &gt; {}'.format(repr(text[:13]), text_as_int[:13]))
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code>'First Citizen' ---- characters mapped to int ---- &gt; [18 47 56 57 58  1 15 47 58 47 64 43 52]
+</code></pre></div>
+
+<hr>
+<ul>
+<li>生成训练数据</li>
+</ul>
+<blockquote>
+<ul>
+<li>训练数据定义：<ul>
+<li>对于原始文本，人工定义输入序列长度seq_length，每个输入序列与其对应的目标序列等长度，但是向右顺移一个字符。如：设定输入序列长度seq_length为4，针对文本hello来讲，得到的训练数据为：输入序列“hell”，目标序列为“ello”.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 设定输入序列长度</span>
+<span class="n">seq_length</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># 获得样本总数</span>
+<span class="n">examples_per_epoch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">//</span><span class="n">seq_length</span>
+<span class="c1"># 将数值映射后的文本转换成dataset对象方便后续处理</span>
+<span class="n">char_dataset</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="n">text_as_int</span><span class="p">)</span>
+
+<span class="c1"># 通过dataset的take方法以及映射表查看前5个字符</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">char_dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()])</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code>F
+i
+r
+s
+t
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用dataset的batch方法按照字符长度+1划分（要留出一个向后顺移的位置）</span>
+<span class="c1"># drop_remainder=True表示删除掉最后一批可能小于批次数量的数据</span>
+<span class="n">sequences</span> <span class="o">=</span> <span class="n">char_dataset</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">seq_length</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_remainder</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># 查看划分后的5条数据对应的文本内容</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequences</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">numpy</span><span class="p">()])))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code>'First Citizen:\nBefore we proceed any further, hear me speak.\n\nAll:\nSpeak, speak.\n\nFirst Citizen:\nYou '
+'are all resolved rather to die than to famish?\n\nAll:\nResolved. resolved.\n\nFirst Citizen:\nFirst, you k'
+"now Caius Marcius is chief enemy to the people.\n\nAll:\nWe know't, we know't.\n\nFirst Citizen:\nLet us ki"
+"ll him, and we'll have corn at our own price.\nIs't a verdict?\n\nAll:\nNo more talking on't; let it be d"
+'one: away, away!\n\nSecond Citizen:\nOne word, good citizens.\n\nFirst Citizen:\nWe are accounted poor citi'
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">split_input_target</span><span class="p">(</span><span class="n">chunk</span><span class="p">):</span>
+    <span class="sd">"""划分输入序列和目标序列函数"""</span>
+    <span class="c1"># 前100个字符为输入序列，第二个字符开始到最后为目标序列</span>
+    <span class="n">input_text</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">target_text</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">input_text</span><span class="p">,</span> <span class="n">target_text</span>
+
+<span class="c1"># 使用map方法调用该函数对每条序列进行划分</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">sequences</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">split_input_target</span><span class="p">)</span>
+
+<span class="c1"># 查看划分后的第一批次结果</span>
+<span class="k">for</span> <span class="n">input_example</span><span class="p">,</span> <span class="n">target_example</span> <span class="ow">in</span>  <span class="n">dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Input data: '</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">input_example</span><span class="o">.</span><span class="n">numpy</span><span class="p">()])))</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Target data:'</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">target_example</span><span class="o">.</span><span class="n">numpy</span><span class="p">()])))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code>Input data:  'First Citizen:\nBefore we proceed any further, hear me speak.\n\nAll:\nSpeak, speak.\n\nFirst Citizen:\nYou'
+Target data: 'irst Citizen:\nBefore we proceed any further, hear me speak.\n\nAll:\nSpeak, speak.\n\nFirst Citizen:\nYou '
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code># 查看将要输入模型中的每个时间步的输入和输出(以前五步为例)
+#&nbsp;循环每个字符，并打印每个时间步对应的输入和输出
+for i, (input_idx, target_idx) in enumerate(zip(input_example[:5], target_example[:5])):
+    print("Step {:4d}".format(i))
+    print("  input: {} ({:s})".format(input_idx, repr(idx2char[input_idx])))
+    print("  expected output: {} ({:s})".format(target_idx, repr(idx2char[target_idx])))
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code>Step    0
+  input: 18 ('F')
+  expected output: 47 ('i')
+Step    1
+  input: 47 ('i')
+  expected output: 56 ('r')
+Step    2
+  input: 56 ('r')
+  expected output: 57 ('s')
+Step    3
+  input: 57 ('s')
+  expected output: 58 ('t')
+Step    4
+  input: 58 ('t')
+  expected output: 1 (' ')
+</code></pre></div>
+
+<hr>
+<ul>
+<li>创建批次数据:</li>
+</ul>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 定义批次大小为64</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># 设定缓冲区大小，以重新排列数据集</span>
+<span class="c1"># 缓冲区越大数据混乱程度越高，所需内存也越大</span>
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># 打乱数据并分批次</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">drop_remainder</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+<span class="c1"># 打印数据集对象查看数据张量形状</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code>&lt;BatchDataset shapes: ((64, 100), (64, 100)), types: (tf.int64, tf.int64)&gt;
+</code></pre></div>
+
+<hr>
+<h4 id="_5">第二步: 构建模型并训练模型<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 获得词汇集大小</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+
+<span class="c1"># 定义词嵌入维度</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="c1"># 定义GRU的隐层节点数量</span>
+<span class="n">rnn_units</span> <span class="o">=</span> <span class="mi">1024</span>
+
+
+<span class="c1"># 模型包括三个层：输入层即embedding层，中间层即GRU层（详情查看）输出层即全连接层</span>
+<span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="sd">"""模型构建函数"""</span>
+    <span class="c1"># 使用tf.keras.Sequential定义模型</span>
+    <span class="c1"># GRU层的参数return_sequences为True说明返回结果为每个时间步的输出，而不是最后时间步的输出</span>
+    <span class="c1"># stateful参数为True，说明将保留每个batch数据的结果状态作为下一个batch的初始化数据</span>
+    <span class="c1"># recurrent_initializer='glorot_uniform'，说明GRU的循环核采用均匀分布的初始化方法</span>
+    <span class="c1"># 模型最终通过全连接层返回一个所有可能字符的概率分布.</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span>
+                              <span class="n">batch_input_shape</span><span class="o">=</span><span class="p">[</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">None</span><span class="p">]),</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">rnn_units</span><span class="p">,</span>
+                          <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                          <span class="n">stateful</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                          <span class="n">recurrent_initializer</span><span class="o">=</span><span class="s1">'glorot_uniform'</span><span class="p">),</span>
+      <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+    <span class="p">])</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># 传入超参数构建模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),</span>
+    <span class="n">embedding_dim</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span>
+    <span class="n">rnn_units</span><span class="o">=</span><span class="n">rnn_units</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>模型结构图:</li>
+</ul>
+<p></p><center> <img alt="pic" src="./index_files/text_generation_training.png"> </center><p></p>
+<hr>
+<ul>
+<li>训练前试用模型:</li>
+</ul>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用一个批次的数据作为输入</span>
+<span class="c1"># 查看通过模型后的结果形状是否满足预期</span>
+<span class="k">for</span> <span class="n">input_example_batch</span><span class="p">,</span> <span class="n">target_example_batch</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">example_batch_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_example_batch</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">example_batch_predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"# (batch_size, sequence_length, vocab_size)"</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">65</span><span class="p">)</span> <span class="c1"># (batch_size, sequence_length, vocab_size)</span>
+</code></pre></div>
+
+<hr>
+<div class="highlight"><pre id="__code_22"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 查看模型参数情况</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code>Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding (Embedding)        (64, None, 256)           16640     
+_________________________________________________________________
+gru (GRU)                    (64, None, 1024)          3938304   
+_________________________________________________________________
+dense (Dense)                (64, None, 65)            66625     
+=================================================================
+Total params: 4,021,569
+Trainable params: 4,021,569
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div>
+
+<hr>
+<ul>
+<li>
+<p>接下来我们将介绍一种新的技巧，取代之前我们熟悉的使用贪心算法从结果分布中获得最有可能的预测ID.</p>
+</li>
+<li>
+<p>random categorical: </p>
+<ul>
+<li>从理论上来讲，如果模型足够准确，我们只需要从概率分布中选择概率最大的值的索引即可，这就是贪心算法。但在实际中，模型的预测效果很难确定，一直按照最大概率选取很容易陷入重复的循环中，因此会将分布的概率值作为其被选中的概率值，这样每个分布中的值都有可能被选中，tensorflow中使用tf.random.categorical方法来实现.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_24"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用random categorical</span>
+<span class="n">sampled_indices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">categorical</span><span class="p">(</span><span class="n">example_batch_predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># squeeze表示消减一个维度</span>
+<span class="n">sampled_indices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">sampled_indices</span><span class="p">,</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sampled_indices</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code><span class="n">array</span><span class="p">([</span><span class="mi">63</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span>
+       <span class="mi">53</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+       <span class="mi">37</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span>
+       <span class="mi">33</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span>  <span class="mi">3</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span>
+       <span class="mi">61</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span> <span class="mi">54</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="highlight"><pre id="__code_26"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 也将输入映射成文本内容</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Input: </span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">input_example_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]])))</span>
+<span class="k">print</span><span class="p">()</span>
+
+<span class="c1"># 映射这些索引查看对应的文本</span>
+<span class="c1"># 在没有训练之前，生成的文本没有任何规律</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Next Char Predictions: </span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">sampled_indices</span> <span class="p">])))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code>Input: 
+ "ght me craft\nTo counterfeit oppression of such grief\nThat words seem'd buried in my sorrow's grave.\n"
+
+Next Char Predictions: 
+ "yZ- u;MhXhuenIjcaou,yA a$FRKQQZYd:Y-yMYqxp.AMrlzjxVUMjaZ$DMYSG IRF!,\nqrA'yfO?VpRZXLexwKBeGRt,Ir,pj!p"
+</code></pre></div>
+
+<hr>
+<ul>
+<li>添加损失函数<ul>
+<li>此时可以将生成问题看作是标准的分类问题，即给定RNN的状态和该时间步的输入，预测下一个字符的类别（从分布中只选择一个），类别总数即不重复的字符总数，因此这是一个稀疏类别矩阵.</li>
+<li>稀疏类别矩阵: 样本的所属类别总数较多，如几百到几千个类别，且每条样本所属的类别较少，如单标签多分类一条样本只所属一个类别，那么此时形成的类别矩阵即稀疏类别矩阵.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre id="__code_28"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用keras预置的稀疏类别交叉熵损失（当类别矩阵为稀疏类别矩阵时使用该损失）</span>
+<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">logits</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">sparse_categorical_crossentropy</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># 使用损失函数</span>
+<span class="n">example_batch_loss</span>  <span class="o">=</span> <span class="n">loss</span><span class="p">(</span><span class="n">target_example_batch</span><span class="p">,</span> <span class="n">example_batch_predictions</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Prediction shape: "</span><span class="p">,</span> <span class="n">example_batch_predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">" # (batch_size, sequence_length, vocab_size)"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"scalar_loss:      "</span><span class="p">,</span> <span class="n">example_batch_loss</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="n">Prediction</span> <span class="n">shape</span><span class="p">:</span>  <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">65</span><span class="p">)</span>  <span class="c1"># (batch_size, sequence_length, vocab_size)</span>
+<span class="n">scalar_loss</span><span class="p">:</span>       <span class="mf">4.175118</span>
+</code></pre></div>
+
+<ul>
+<li>添加优化器:</li>
+</ul>
+<div class="highlight"><pre id="__code_30"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 配置优化器为'adam'</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">'adam'</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>配置检测点:</li>
+</ul>
+<div class="highlight"><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 检查点保存至的目录</span>
+<span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="s1">'./training_checkpoints'</span>
+
+<span class="c1"># 检查点的文件名</span>
+<span class="n">checkpoint_prefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">,</span> <span class="s2">"ckpt_{epoch}"</span><span class="p">)</span>
+
+<span class="c1"># 创建检测点保存的回调对象</span>
+<span class="n">checkpoint_callback</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ModelCheckpoint</span><span class="p">(</span>
+    <span class="n">filepath</span><span class="o">=</span><span class="n">checkpoint_prefix</span><span class="p">,</span>
+    <span class="n">save_weights_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>模型训练并打印日志:</li>
+</ul>
+<div class="highlight"><pre id="__code_32"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><code><span class="n">EPOCHS</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">EPOCHS</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">checkpoint_callback</span><span class="p">])</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code>Epoch 1/10
+172/172 [==============================] - 8s 49ms/step - loss: 2.6956
+Epoch 2/10
+172/172 [==============================] - 7s 39ms/step - loss: 1.9793
+Epoch 3/10
+172/172 [==============================] - 7s 38ms/step - loss: 1.7066
+Epoch 4/10
+172/172 [==============================] - 6s 37ms/step - loss: 1.5544
+Epoch 5/10
+172/172 [==============================] - 7s 38ms/step - loss: 1.4630
+Epoch 6/10
+172/172 [==============================] - 6s 38ms/step - loss: 1.4019
+Epoch 7/10
+172/172 [==============================] - 6s 37ms/step - loss: 1.3562
+Epoch 8/10
+172/172 [==============================] - 7s 38ms/step - loss: 1.3177
+Epoch 9/10
+172/172 [==============================] - 6s 37ms/step - loss: 1.2836
+Epoch 10/10
+172/172 [==============================] - 6s 37ms/step - loss: 1.2513
+</code></pre></div>
+
+<hr>
+<h4 id="_6">第三步: 使用模型生成文本内容<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
+<ul>
+<li>恢复模型:</li>
+</ul>
+<div class="highlight"><pre id="__code_34"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 恢复模型结构</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 从检测点中获得训练后的模型参数</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">))</span>
+</code></pre></div>
+
+<ul>
+<li>构建生成函数:</li>
+</ul>
+<div class="highlight"><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">generate_text</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">start_string</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    :param model: 训练后的模型</span>
+<span class="sd">    :param start_string: 任意起始字符串</span>
+<span class="sd">    """</span>
+    <span class="c1"># 要生成的字符个数</span>
+    <span class="n">num_generate</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="c1"># 将起始字符串转换为数字（向量化）</span>
+    <span class="n">input_eval</span> <span class="o">=</span> <span class="p">[</span><span class="n">char2idx</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">start_string</span><span class="p">]</span>
+
+    <span class="c1"># 扩展维度满足模型输入要求</span>
+    <span class="n">input_eval</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">input_eval</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 空列表用于存储结果</span>
+    <span class="n">text_generated</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># 设定“温度参数”，根据tf.random_categorical方法特点，</span>
+    <span class="c1"># 温度参数能够调节该方法的输入分布中概率的差距，以便控制随机被选中的概率大小 </span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># 初始化模型参数 </span>
+    <span class="n">model</span><span class="o">.</span><span class="n">reset_states</span><span class="p">()</span>
+
+    <span class="c1"># 开始循环生成</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_generate</span><span class="p">):</span>
+        <span class="c1"># 使用模型获得输出</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_eval</span><span class="p">)</span>
+        <span class="c1"># 删除批次的维度</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># 使用“温度参数”和tf.random.categorical方法生成最终的预测字符索引</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span> <span class="o">/</span> <span class="n">temperature</span>
+        <span class="n">predicted_id</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">categorical</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+        <span class="c1"># 将预测的输出再扩展维度作为下一次的模型输入</span>
+        <span class="n">input_eval</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">([</span><span class="n">predicted_id</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># 将该次输出映射成字符存到列表中</span>
+        <span class="n">text_generated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx2char</span><span class="p">[</span><span class="n">predicted_id</span><span class="p">])</span>
+
+    <span class="c1"># 最后将初始字符串和生成的字符进行连接</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">start_string</span> <span class="o">+</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_generated</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>调用:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_36"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><code><span class="k">print</span><span class="p">(</span><span class="n">generate_text</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">start_string</span><span class="o">=</span><span class="sa">u</span><span class="s2">"ROMEO: "</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code>ROMEO: it may be see, I say.
+Elong where I have sea loved for such heart
+As of all desperate in your colls?
+On how much to purwed esumptrues as we,
+But taker appearing our great Isabel,;
+Of your brother's needs.
+I cannot but one hour, by nimwo and ribs
+After 't? O Pedur, break our manory,
+The shadot bestering eyes write; onfility;
+Indeed I am possips And feated with others and throw it?
+
+CAPULET:
+O, not the ut with mine own sort.
+But, with your souls, sir, well we would he,
+And videwith the sungesoy begins, revell;
+Much it in secart.
+
+PROSPERO:
+Villain, I darry record;
+In sea--lodies, nor that I do I were stir,
+You appointed with that sed their o tailor and hope left fear'd,
+I so; that your looks stand up,
+Comes I truly see this last weok not the
+sul us.
+
+CAMILLO:
+You did and ever sea,
+Into these hours: awake! Ro with mine enemies,
+Were werx'd in everlawacted man been to alter
+As Lewis could smile to his.
+
+Farthus:
+Marry! I'll do lose a man see me
+To no drinking often hat back on an illing mo
+</code></pre></div>
+
+<hr>
+<h3 id="_7">更高级的方式<a class="headerlink" href="#_7" title="Permanent link">¶</a></h3>
+<div class="codehilite" id="__code_38"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code><span class="o">*</span> <span class="err">为了能够获得更多的可控参数，我们将采用</span><span class="n">tf2</span><span class="p">.</span><span class="mi">0</span><span class="err">推荐的训练方式</span><span class="p">.</span>
+</code></pre></div>
+
+
+<ul>
+<li>构建训练模型与函数</li>
+</ul>
+<div class="highlight"><pre id="__code_40"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 构建模型</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span>
+    <span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),</span>
+    <span class="n">embedding_dim</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span>
+    <span class="n">rnn_units</span><span class="o">=</span><span class="n">rnn_units</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+
+<span class="c1"># 选择优化器</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">()</span>
+
+
+<span class="c1"># 编写带有装饰器@tf.function的函数进行训练</span>
+<span class="nd">@tf.function</span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    :param inp: 模型输入</span>
+<span class="sd">    :param tatget: 输入对应的标签</span>
+<span class="sd">    """</span>
+    <span class="c1"># 打开梯度记录管理器</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="c1"># 使用模型进行预测</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+        <span class="c1"># 使用sparse_categorical_crossentropy计算平均损失</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">sparse_categorical_crossentropy</span><span class="p">(</span>
+                <span class="n">target</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+    <span class="c1"># 使用梯度记录管理器求解全部参数的梯度</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="c1"># 使用梯度和优化器更新参数</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+    <span class="c1"># 返回平均损失</span>
+    <span class="k">return</span> <span class="n">loss</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>进行训练:</li>
+</ul>
+<div class="highlight"><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 训练轮数</span>
+<span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1">#进行轮数循环</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">EPOCHS</span><span class="p">):</span>
+    <span class="c1"># 获得开始时间</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 初始化隐层状态</span>
+    <span class="n">hidden</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">reset_states</span><span class="p">()</span>
+    <span class="c1"># 进行批次循环</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">batch_n</span><span class="p">,</span> <span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
+        <span class="c1"># 调用train_step进行训练, 获得批次循环的损失</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="c1"># 每100个批次打印轮数，批次和对应的损失</span>
+        <span class="k">if</span> <span class="n">batch_n</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="s1">'Epoch {} Batch {} Loss {}'</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_n</span><span class="p">,</span> <span class="n">loss</span><span class="p">))</span>
+
+    <span class="c1"># 每5轮保存一次检测点</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">checkpoint_prefix</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">))</span>
+
+    <span class="c1"># 打印轮数，当前损失，和训练耗时</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Epoch {} Loss {:.4f}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">loss</span><span class="p">))</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s1">'Time taken for 1 epoch {} sec</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+
+
+<span class="c1"># 保存最后的检测点</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_weights</span><span class="p">(</span><span class="n">checkpoint_prefix</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_42"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><code>WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.iter
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_1
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.beta_2
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.decay
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer.learning_rate
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-0.embeddings
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-2.kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-2.bias
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-1.cell.kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-1.cell.recurrent_kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'm' for (root).layer_with_weights-1.cell.bias
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-0.embeddings
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-2.kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-2.bias
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-1.cell.kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-1.cell.recurrent_kernel
+WARNING:tensorflow:Unresolved object in checkpoint: (root).optimizer's state 'v' for (root).layer_with_weights-1.cell.bias
+WARNING:tensorflow:A checkpoint was restored (e.g. tf.train.Checkpoint.restore or tf.keras.Model.load_weights) but not all checkpointed values were used. See above for specific issues. Use expect_partial() on the load status object, e.g. tf.train.Checkpoint.restore(...).expect_partial(), to silence these warnings, or use assert_consumed() to make the check explicit. See https://www.tensorflow.org/alpha/guide/checkpoints#loading_mechanics for details.
+Epoch 1 Batch 0 Loss 4.175624370574951
+Epoch 1 Batch 100 Loss 2.3564367294311523
+Epoch 1 Loss 2.1518
+Time taken for 1 epoch 7.982784032821655 sec
+
+Epoch 2 Batch 0 Loss 2.163119316101074
+Epoch 2 Batch 100 Loss 1.9472384452819824
+Epoch 2 Loss 1.8479
+Time taken for 1 epoch 5.905952215194702 sec
+
+Epoch 3 Batch 0 Loss 1.7995233535766602
+Epoch 3 Batch 100 Loss 1.7234388589859009
+Epoch 3 Loss 1.6408
+Time taken for 1 epoch 6.035773515701294 sec
+
+Epoch 4 Batch 0 Loss 1.5643184185028076
+Epoch 4 Batch 100 Loss 1.5031523704528809
+Epoch 4 Loss 1.4930
+Time taken for 1 epoch 5.940794944763184 sec
+
+Epoch 5 Batch 0 Loss 1.460329532623291
+Epoch 5 Batch 100 Loss 1.4455183744430542
+Epoch 5 Loss 1.4024
+Time taken for 1 epoch 5.9728288650512695 sec
+
+Epoch 6 Batch 0 Loss 1.3865368366241455
+Epoch 6 Batch 100 Loss 1.4166384935379028
+Epoch 6 Loss 1.4086
+Time taken for 1 epoch 5.951516151428223 sec
+
+Epoch 7 Batch 0 Loss 1.3148362636566162
+Epoch 7 Batch 100 Loss 1.3581626415252686
+Epoch 7 Loss 1.3357
+Time taken for 1 epoch 5.936840057373047 sec
+
+Epoch 8 Batch 0 Loss 1.2742923498153687
+Epoch 8 Batch 100 Loss 1.2792794704437256
+Epoch 8 Loss 1.3340
+Time taken for 1 epoch 6.054928302764893 sec
+
+Epoch 9 Batch 0 Loss 1.2506366968154907
+Epoch 9 Batch 100 Loss 1.2806147336959839
+Epoch 9 Loss 1.2853
+Time taken for 1 epoch 6.035765886306763 sec
+
+Epoch 10 Batch 0 Loss 1.2073233127593994
+Epoch 10 Batch 100 Loss 1.2544529438018799
+Epoch 10 Loss 1.2721
+Time taken for 1 epoch 6.2950661182403564 sec
+</code></pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index2.html" title="IMDB影评的情感分析任务" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                IMDB影评的情感分析任务
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                应用于bert模型的动态量化技术
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+              
+            
+          
+          
+            <script src="./index_files/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

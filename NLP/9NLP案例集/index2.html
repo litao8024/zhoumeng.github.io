@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8008/2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, zh">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>IMDB影评的情感分析任务 - NLP案例集</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+      <link rel="manifest" href="http://121.199.45.168:8008/manifest.webmanifest">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="NLP案例集" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              NLP案例集
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                IMDB影评的情感分析任务
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="NLP案例集" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    NLP案例集
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="图片的描述生成任务" class="md-nav__link">
+      图片的描述生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        IMDB影评的情感分析任务
+      </label>
+    
+    <a href="" title="IMDB影评的情感分析任务" class="md-nav__link md-nav__link--active">
+      IMDB影评的情感分析任务
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru" title="使用GRU模型实现文本生成任务的步骤" class="md-nav__link">
+    使用GRU模型实现文本生成任务的步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tfdsimdb" title="第一步: 使用TFDS下载IMDB数据集，并划分训练集和测试集" class="md-nav__link">
+    第一步: 使用TFDS下载IMDB数据集，并划分训练集和测试集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batchbilstm" title="第二步：按batch划分数据并训练单层biLSTM模型" class="md-nav__link">
+    第二步：按batch划分数据并训练单层biLSTM模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bi-lstm" title="第三步：训练双层bi-LSTM模型，对比效果" class="md-nav__link">
+    第三步：训练双层bi-LSTM模型，对比效果
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-nav__link">
+      莎士比亚风格的文本生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index4.html" title="应用于bert模型的动态量化技术" class="md-nav__link">
+      应用于bert模型的动态量化技术
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-nav__link">
+      基于seq2seq的西班牙语到英语的机器翻译任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-nav__link">
+      ResNet模型在GPU上的并行实践
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="任务说明" class="md-nav__link">
+    任务说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru" title="使用GRU模型实现文本生成任务的步骤" class="md-nav__link">
+    使用GRU模型实现文本生成任务的步骤
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tfdsimdb" title="第一步: 使用TFDS下载IMDB数据集，并划分训练集和测试集" class="md-nav__link">
+    第一步: 使用TFDS下载IMDB数据集，并划分训练集和测试集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batchbilstm" title="第二步：按batch划分数据并训练单层biLSTM模型" class="md-nav__link">
+    第二步：按batch划分数据并训练单层biLSTM模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bi-lstm" title="第三步：训练双层bi-LSTM模型，对比效果" class="md-nav__link">
+    第三步：训练双层bi-LSTM模型，对比效果
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>IMDB影评的情感分析任务</h1>
+                
+                <h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>了解影评情感分析任务和IMDB数据集。</li>
+<li>掌握使用RNN模型完成IMDB影评情感分析任务的实现流程。</li>
+<li>掌握对比不同隐层的RNN模型对情感分析任务的影响。</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/IMDB.png"></center><p></p>
+<hr>
+<h3 id="_2">任务说明<a class="headerlink" href="http://121.199.45.168:8008/2/#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li>对IMDB影评语料进行情感分析，是NLP中典型的应用案例，它的输入是一段文本，输出该段文本为“积极”或“消极”的态度，这是典型的二分类任务。与此同时，我还将在此任务基础上对所使用的RNN模型进行改进，增加更多的隐层来比较最终的效果！</li>
+</ul>
+<hr>
+<h3 id="_3">数据集说明<a class="headerlink" href="http://121.199.45.168:8008/2/#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>数据集名称: IMDB数据集</li>
+<li>数据集大小: 84M</li>
+<li>数据下载地址: <a href="http://ai.stanford.edu/~amaas/data/sentiment/">http://ai.stanford.edu/~amaas/data/sentiment/</a></li>
+<li>训练样本数: 25000</li>
+<li>验证样本数: 25000</li>
+<li>数据集预览: </li>
+</ul>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code>review  label
+"Once again Mr. Costner has dragged out a movie for far longer than necessary. Aside from the terrific sea rescue sequences, of which there are very few I just did not care about any of the characters"       neg
+"This is an example of why the majority of action films are the same. Generic and boring, there's really nothing worth watching here. A complete waste of the then barely-tapped talents of Ice-T and Ice"      neg
+"Finally, the golf scenes are well photographed. Although the course used in the movie was not the actual site of the historical tournament, the little liberties taken by Disney do not detract from the beauty of the film."      pos
+...
+</code></pre></div>
+
+<ul>
+<li>内容说明:<ul>
+<li>review代表用户影评文本，label代表评论的情感极性，有pos和neg两种，分别代表积极和消极.</li>
+<li>直接下载的数据是经过处理的tfrecord二进制文件(压缩文件)，以上预览是通过还原的文本内容.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="gru">使用GRU模型实现文本生成任务的步骤<a class="headerlink" href="http://121.199.45.168:8008/2/#gru" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步：使用TFDS下载IMDB数据集，并划分训练集和测试集</li>
+<li>第二步：按batch划分数据并训练单层biLSTM模型</li>
+<li>第三步：训练双层bi-LSTM模型，对比效果</li>
+</ul>
+<hr>
+<h4 id="tfdsimdb">第一步: 使用TFDS下载IMDB数据集，并划分训练集和测试集<a class="headerlink" href="http://121.199.45.168:8008/2/#tfdsimdb" title="Permanent link">¶</a></h4>
+<ul>
+<li>下载IMDB数据:</li>
+</ul>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="c1"># TFDS介绍: tensorflow&nbsp;datasets的缩写，由tensorflow官方提供的标准数据集工具，</span>
+<span class="c1"># 截止到2020年2月，共包含可使用的不同数据集数量155个，同时提供在加载过程中，</span>
+<span class="c1"># 对数据集的多种操作，满足后续对dataset的使用.</span>
+<span class="c1"># tfds安装: pip&nbsp;install&nbsp;tensorflow_datasets==2.0.0 </span>
+<span class="kn">import</span> <span class="nn">tensorflow_datasets</span> <span class="kn">as</span> <span class="nn">tfds</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="c1"># 打印tensorflow版本</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">"Tensorflow Version:"</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1">#&nbsp;使用tfds加载数据集，其中参数with_info=True代表返回数据相关信息，包括数据进行数值映射的方式等。</span>
+<span class="c1"># 参数as_supervised=True,&nbsp;代表返回的数据为监督数据即需要将data和对应的label以一个元组的方式(data,&nbsp;label)返回。</span>
+<span class="n">dataset</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">tfds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">'imdb_reviews/subwords8k'</span><span class="p">,</span> <span class="n">with_info</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                          <span class="n">as_supervised</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1">#&nbsp;返回的dataset对象是一个字典形式，直接取train和test作为训练集和验证集</span>
+<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">'train'</span><span class="p">],</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">'test'</span><span class="p">]</span>
+
+<span class="c1">#&nbsp;从dataset的info对象中可以获得子词数值映射器或称为子词数值编码器（encoder）</span>
+<span class="c1"># 关于子词数值映射的概念下方有详细说明</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="o">.</span><span class="n">encoder</span>
+
+<span class="c1"># 从子词数值映射器中取出它映射过的非重复子词数量</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Vocabulary size: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code>Tensorflow Version: 2.1.0-rc2
+Vocabulary size: 8185
+</code></pre></div>
+
+<ul>
+<li>子词数值映射(也称子词编码器):<ul>
+<li>文本的子词数值映射是文本数值映射的拓展，基本的文本数值映射是将每个英文单词映射成一个词汇，如hello映射成数值1，而文本子词映射可能将hello拆分成子词如：hell和o，分别映射成对应的数值34和6，这样相当于将hello映射成34和6。文本子词数值映射在英文文本生成任务中使用频繁，因为子词的多样组合使得模型对不同的文本输入更加友好，不再局限于训练语料大小。在TFDS中，对该文本语料都使用了该技巧。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>用一个样例演示子词数值映射的方式:</li>
+</ul>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 样例字符串hello&nbsp;tensorflow</span>
+<span class="n">sample_string</span> <span class="o">=</span> <span class="s1">'Hello TensorFlow.'</span>
+
+<span class="c1"># 使用encoder进行映射（编码）并查看结果</span>
+<span class="n">encoded_string</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">sample_string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Encoded string is {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">encoded_string</span><span class="p">))</span>
+
+<span class="c1"># 之后使用对应的方法decode进行解码并查看结果</span>
+<span class="n">original_string</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoded_string</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'The original string: "{}"'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">original_string</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code>Encoded string is [4025, 222, 6307, 2327, 4043, 2120, 7975]
+The original string: "Hello TensorFlow."
+</code></pre></div>
+
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 断定解码字符串与原样例字符串相同</span>
+<span class="k">assert</span> <span class="n">original_string</span> <span class="o">==</span> <span class="n">sample_string</span>
+
+<span class="c1"># 为什么原来两个单词会映射成5个数值呢？</span>
+<span class="c1"># 我们将每个数值进行解码查看，发现它们都是原单词的子词（原单词的一部分）</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">encoded_string</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'{} ----&gt; {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decode</span><span class="p">([</span><span class="n">index</span><span class="p">])))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code>4025 ----&gt; Hell
+222 ----&gt; o 
+6307 ----&gt; Ten
+2327 ----&gt; sor
+4043 ----&gt; Fl
+2120 ----&gt; ow
+7975 ----&gt; .
+</code></pre></div>
+
+<hr>
+<h4 id="batchbilstm">第二步：按batch划分数据并训练单层biLSTM模型<a class="headerlink" href="http://121.199.45.168:8008/2/#batchbilstm" title="Permanent link">¶</a></h4>
+<ul>
+<li>批次化数据</li>
+</ul>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 定义shuffle时的缓存大小</span>
+<span class="n">BUFFER_SIZE</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="c1"># 定义训练批次大小</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># 打乱训练数据</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">BUFFER_SIZE</span><span class="p">)</span>
+<span class="c1"># 划分批次，并做批次内最大长度补齐，使每个批次输入都是一个矩阵</span>
+
+<span class="c1"># 训练集划分</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">output_shapes</span><span class="p">)</span>
+
+<span class="c1"># 验证集划分</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="n">test_dataset</span><span class="o">.</span><span class="n">output_shapes</span><span class="p">)</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>构建模型:</li>
+</ul>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 模型结构</span>
+<span class="c1"># 首层为embedding层</span>
+<span class="c1"># 之后双向LSTM层</span>
+<span class="c1"># 全连接层</span>
+<span class="c1"># 输出层(全连接层)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Bidirectional</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">64</span><span class="p">)),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'relu'</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'sigmiod'</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div>
+
+<ul>
+<li>定义损失函数和优化方法</li>
+</ul>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用二分类交叉熵损失，并且from_logits设置为True，即保留y_pred的真实值，不进行强制为0或1</span>
+<span class="c1"># 优化器是Adam</span>
+<span class="c1"># 评估指标为准确率</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">),</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+</code></pre></div>
+
+<ul>
+<li>训练模型并打印日志</li>
+</ul>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 指定训练集和验证集和轮数进行训练</span>
+<span class="c1"># 这里指定验证过程的总步数为30以防止验证时间过久</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span> 
+                    <span class="n">validation_steps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>Train for 391 steps, validate for 30 steps
+Epoch 1/10
+391/391 [==============================] - 48s 123ms/step - loss: 0.6656 - accuracy: 0.5314 - val_loss: 0.5635 - val_accuracy: 0.6922
+Epoch 2/10
+391/391 [==============================] - 44s 112ms/step - loss: 0.3783 - accuracy: 0.8263 - val_loss: 0.3738 - val_accuracy: 0.8510
+Epoch 3/10
+391/391 [==============================] - 44s 111ms/step - loss: 0.2747 - accuracy: 0.8876 - val_loss: 0.3534 - val_accuracy: 0.8448
+Epoch 4/10
+391/391 [==============================] - 44s 113ms/step - loss: 0.2247 - accuracy: 0.9128 - val_loss: 0.3405 - val_accuracy: 0.8656
+Epoch 5/10
+391/391 [==============================] - 43s 111ms/step - loss: 0.1862 - accuracy: 0.9324 - val_loss: 0.3479 - val_accuracy: 0.8542
+Epoch 6/10
+391/391 [==============================] - 44s 113ms/step - loss: 0.1640 - accuracy: 0.9436 - val_loss: 0.3703 - val_accuracy: 0.8625
+Epoch 7/10
+391/391 [==============================] - 44s 113ms/step - loss: 0.1562 - accuracy: 0.9459 - val_loss: 0.4085 - val_accuracy: 0.8651
+Epoch 8/10
+391/391 [==============================] - 44s 113ms/step - loss: 0.1381 - accuracy: 0.9530 - val_loss: 0.4257 - val_accuracy: 0.8656
+Epoch 9/10
+391/391 [==============================] - 44s 112ms/step - loss: 0.1226 - accuracy: 0.9589 - val_loss: 0.4311 - val_accuracy: 0.8646
+Epoch 10/10
+391/391 [==============================] - 44s 113ms/step - loss: 0.1087 - accuracy: 0.9658 - val_loss: 0.4558 - val_accuracy: 0.8599
+</code></pre></div>
+
+<ul>
+<li>绘制损失和准确率对照曲线:</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code>import matplotlib.pyplot as plt
+
+# 根据训练历史日志和对应的评估指标绘制曲线
+def plot_graphs(history, metric):
+    # 绘制训练曲线
+    plt.plot(history.history[metric])
+    # 绘制验证曲线
+    plt.plot(history.history['val_'+metric], '')
+    # 横坐标为epochs
+    plt.xlabel("Epochs")
+    # 纵坐标为对应指标
+    plt.ylabel(metric)
+    # 图中曲线说明框
+    plt.legend([metric, 'val_'+metric])
+    plt.show()
+
+# 进行准确率和损失的绘制
+plot_graphs(history, 'accuracy')
+plot_graphs(history, 'loss')
+</code></pre></div>
+
+<p></p><center> <img alt="pic" src="./index_files/output_ZfIVoxiNmKBF_0.png"> </center>
+<center> <img alt="pic" src="./index_files/output_IUzgkqnhmKD2_0.png"> </center><p></p>
+<hr>
+<ul>
+<li>在验证集上计算评估损失和准确率:</li>
+</ul>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test Loss: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_loss</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test Accuracy: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_acc</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code>391/391 [==============================] - 33s 84ms/step - loss: 0.5256 - accuracy: 0.8432
+Test Loss: 0.5255793487400655
+Test Accuracy: 0.8431599736213684
+</code></pre></div>
+
+<hr>
+<h4 id="bi-lstm">第三步：训练双层bi-LSTM模型，对比效果<a class="headerlink" href="http://121.199.45.168:8008/2/#bi-lstm" title="Permanent link">¶</a></h4>
+<ul>
+<li>构建模型</li>
+</ul>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 结构与上面的模型类似，只不过多加了一层双向LSTM</span>
+<span class="c1"># return_sequences=True表示将返回每一个时间步的综合结果(结果张量进行拼接)。</span>
+<span class="c1"># 为了防止过拟合，还加入了dropout层</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Bidirectional</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span>  <span class="n">return_sequences</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Bidirectional</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">32</span><span class="p">)),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">'relu'</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div>
+
+<ul>
+<li>选择损失函数和优化方法</li>
+</ul>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 与第一个模型相同</span>
+<span class="c1"># 二分类交叉熵损失</span>
+<span class="c1"># Adam优化器</span>
+<span class="c1"># 准确率为评估指标</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">BinaryCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">),</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">'accuracy'</span><span class="p">])</span>
+</code></pre></div>
+
+<ul>
+<li>模型训练并打印日志</li>
+</ul>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 模型训练拟合</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">validation_data</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span>
+                    <span class="n">validation_steps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code>Train for 391 steps, validate for 30 steps
+Epoch 1/10
+391/391 [==============================] - 82s 209ms/step - loss: 0.6905 - accuracy: 0.5090 - val_loss: 0.6268 - val_accuracy: 0.6500
+Epoch 2/10
+391/391 [==============================] - 77s 198ms/step - loss: 0.4483 - accuracy: 0.8062 - val_loss: 0.3569 - val_accuracy: 0.8562
+Epoch 3/10
+391/391 [==============================] - 78s 198ms/step - loss: 0.2891 - accuracy: 0.8906 - val_loss: 0.3535 - val_accuracy: 0.8609
+Epoch 4/10
+391/391 [==============================] - 78s 198ms/step - loss: 0.2364 - accuracy: 0.9166 - val_loss: 0.3601 - val_accuracy: 0.8667
+Epoch 5/10
+391/391 [==============================] - 78s 198ms/step - loss: 0.1974 - accuracy: 0.9359 - val_loss: 0.3640 - val_accuracy: 0.8708
+Epoch 6/10
+391/391 [==============================] - 78s 200ms/step - loss: 0.1629 - accuracy: 0.9502 - val_loss: 0.3921 - val_accuracy: 0.8552
+Epoch 7/10
+391/391 [==============================] - 77s 197ms/step - loss: 0.1454 - accuracy: 0.9580 - val_loss: 0.4394 - val_accuracy: 0.8646
+Epoch 8/10
+391/391 [==============================] - 78s 200ms/step - loss: 0.1244 - accuracy: 0.9656 - val_loss: 0.4521 - val_accuracy: 0.8641
+Epoch 9/10
+391/391 [==============================] - 78s 198ms/step - loss: 0.1108 - accuracy: 0.9721 - val_loss: 0.4762 - val_accuracy: 0.8458
+Epoch 10/10
+391/391 [==============================] - 77s 198ms/step - loss: 0.0906 - accuracy: 0.9791 - val_loss: 0.5085 - val_accuracy: 0.8484
+</code></pre></div>
+
+<ul>
+<li>绘制损失和准确率对照曲线:</li>
+</ul>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 绘制损失和准确率对照曲线</span>
+<span class="n">plot_graphs</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s1">'accuracy'</span><span class="p">)</span>
+<span class="n">plot_graphs</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="s1">'loss'</span><span class="p">)</span>
+</code></pre></div>
+
+<p></p><center> <img alt="" src="./index_files/output__YYub0EDtwCu_0.png"> </center>
+<center> <img alt="" src="./index_files/output_DPV3Nn9xtwFM_0.png"> </center><p></p>
+<hr>
+<ul>
+<li>在验证集上计算评估损失和准确率:</li>
+</ul>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test Loss: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_loss</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">'Test Accuracy: {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_acc</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code><span class="mi">391</span><span class="o">/</span><span class="mi">391</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">33</span><span class="n">s</span> <span class="mi">84</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5256</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.8432</span>
+<span class="n">Test</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5255793487400655</span>
+<span class="n">Test</span> <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.8431599736213684</span>
+</code></pre></div>
+
+<ul>
+<li>对比分析:<ul>
+<li>在IMDB数据集的25000条训练数据下，单层biLSTM的验证准确率为: 0.8578, 双层biLSTM的验证准确率为: 0.8432, 相比之下，模型准确率没有因为层数的增加而提升，反倒略微下降。说明在该大小的文本数据量级上，使用层数更多的LSTM并不能提升模型准确率，模型优化可以从其他超参数或工程技巧入手。</li>
+</ul>
+</li>
+</ul>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index.html" title="图片的描述生成任务" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                图片的描述生成任务
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                莎士比亚风格的文本生成任务
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+              
+            
+          
+          
+            <script src="./index_files/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

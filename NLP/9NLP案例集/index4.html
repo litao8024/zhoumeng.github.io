@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8008/4/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="en, zh">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>应用于bert模型的动态量化技术 - NLP案例集</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+      <link rel="manifest" href="http://121.199.45.168:8008/manifest.webmanifest">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="NLP案例集" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              NLP案例集
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                应用于bert模型的动态量化技术
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="NLP案例集" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    NLP案例集
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github | Give Me A Star
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="图片的描述生成任务" class="md-nav__link">
+      图片的描述生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index2.html" title="IMDB影评的情感分析任务" class="md-nav__link">
+      IMDB影评的情感分析任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-nav__link">
+      莎士比亚风格的文本生成任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        应用于bert模型的动态量化技术
+      </label>
+    
+    <a href="" title="应用于bert模型的动态量化技术" class="md-nav__link md-nav__link--active">
+      应用于bert模型的动态量化技术
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="相关知识" class="md-nav__link">
+    相关知识
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#huggingfacebert" title="使用huggingface中的预训练BERT模型进行微调" class="md-nav__link">
+    使用huggingface中的预训练BERT模型进行微调
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 安装核心的工具包并导入" class="md-nav__link">
+    第一步: 安装核心的工具包并导入
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 下载数据集并使用脚本进行微调" class="md-nav__link">
+    第二步: 下载数据集并使用脚本进行微调
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 设定全局配置并加载微调模型" class="md-nav__link">
+    第三步: 设定全局配置并加载微调模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bert" title="使用动态量化技术对训练后的bert模型进行压缩" class="md-nav__link">
+    使用动态量化技术对训练后的bert模型进行压缩
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第一步: 将模型应用动态量化技术" class="md-nav__link">
+    第一步: 将模型应用动态量化技术
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第二步: 对比压缩后模型的大小" class="md-nav__link">
+    第二步: 对比压缩后模型的大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第三步: 对比压缩后的模型的推理准确性和耗时" class="md-nav__link">
+    第三步: 对比压缩后的模型的推理准确性和耗时
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="第四步: 序列化模型以便之后使用" class="md-nav__link">
+    第四步: 序列化模型以便之后使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" title="附录" class="md-nav__link">
+    附录
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run_gluepy" title="run_glue.py微调脚本代码" class="md-nav__link">
+    run_glue.py微调脚本代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index5.html" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-nav__link">
+      基于seq2seq的西班牙语到英语的机器翻译任务
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index6.html" title="ResNet模型在GPU上的并行实践" class="md-nav__link">
+      ResNet模型在GPU上的并行实践
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="相关知识" class="md-nav__link">
+    相关知识
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="数据集说明" class="md-nav__link">
+    数据集说明
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#huggingfacebert" title="使用huggingface中的预训练BERT模型进行微调" class="md-nav__link">
+    使用huggingface中的预训练BERT模型进行微调
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="第一步: 安装核心的工具包并导入" class="md-nav__link">
+    第一步: 安装核心的工具包并导入
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="第二步: 下载数据集并使用脚本进行微调" class="md-nav__link">
+    第二步: 下载数据集并使用脚本进行微调
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="第三步: 设定全局配置并加载微调模型" class="md-nav__link">
+    第三步: 设定全局配置并加载微调模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bert" title="使用动态量化技术对训练后的bert模型进行压缩" class="md-nav__link">
+    使用动态量化技术对训练后的bert模型进行压缩
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="第一步: 将模型应用动态量化技术" class="md-nav__link">
+    第一步: 将模型应用动态量化技术
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" title="第二步: 对比压缩后模型的大小" class="md-nav__link">
+    第二步: 对比压缩后模型的大小
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" title="第三步: 对比压缩后的模型的推理准确性和耗时" class="md-nav__link">
+    第三步: 对比压缩后的模型的推理准确性和耗时
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" title="第四步: 序列化模型以便之后使用" class="md-nav__link">
+    第四步: 序列化模型以便之后使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" title="附录" class="md-nav__link">
+    附录
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run_gluepy" title="run_glue.py微调脚本代码" class="md-nav__link">
+    run_glue.py微调脚本代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>应用于bert模型的动态量化技术</h1>
+                
+                <h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">¶</a></h3>
+<ul>
+<li>了解模型压缩技术中的动态量化与静态量化的相关知识。</li>
+<li>掌握使用huggingface中的预训练BERT模型进行微调。</li>
+<li>掌握使用动态量化技术对训练后的bert模型进行压缩。</li>
+</ul>
+<hr>
+<p></p><center><img alt="avatar" src="./index_files/bert1.png"></center><p></p>
+<hr>
+<h3 id="_2">相关知识<a class="headerlink" href="#_2" title="Permanent link">¶</a></h3>
+<ul>
+<li>模型压缩:<ul>
+<li>模型压缩是一种针对大型模型(参数量巨大)在使用过程中进行优化的一种常用措施。它往往能够使模型体积缩小，简化计算，增快推断速度，满足模型在特定场合(如: 移动端)的需求。目前，模型压缩可以从多方面考虑，如剪枝方法(简化模型架构)，参数量化方法(简化模型参数)，知识蒸馏等。本案例将着重讲解模型参数量化方法。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型参数量化:<ul>
+<li>在机器学习（深度学习）领域，模型量化一般是指将模型参数由类型FP32转换为INT8/FP16的过程，如果转换为INT8，转换之后的模型大小被压缩为原来的¼，所需内存和带宽减小4倍，同时，计算量减小约为2-4倍。模型又可分为动态量化和静态量化。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型动态量化：<ul>
+<li>操作最简单也是压缩效果最好的量化方式，量化过程发生在模型训练后，针对模型权重采取量化，之后会在模型预测过程中，再决定是否针对激活值采取量化，因此称作动态量化（在预测时可能发生量化）。这是我们本案例将会使用的量化方式。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>模型静态量化：<ul>
+<li>考虑到动态量化这种“一刀切”的量化方式有时会带来模型预测效果的大幅度下降，因此引入静态量化，它同样发生在模型训练后，为了判断哪些权重或激活值应该被量化，哪些应该保留或小幅度量化，在预测过程开始前，在模型中节点插入“观测者”（衡量节点使用情况的一些计算方法），他们将在一些实验数据中评估节点使用情况，来决定是否将其权重或激活值进行量化，因为在预测过程中，这些节点是否被量化已经确定，因此称作静态量化。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>（扩展知识）量化意识训练：<ul>
+<li>这是一种操作相对复杂的模型量化方法，在训练过程中使用它，原理与静态量化类似，都需要像模型中插入“观测者”，同时它还需要插入量化计算操作，使得模型训练过程中除了进行原有的浮点型计算，还要进行量化计算，但模型参数的更新还是使用浮点型，而量化计算的作用就是让模型“意识”到这个过程，通过“观测者”评估每次量化结果与训练过程中参数更新程度，为之后模型如何进行量化还能保证准确率提供衡量指标。（类似于，人在接受训练时，意识到自己接下来可能除了训练内容外，还会接受其他“操作”（量化），因此也会准备一些如果进行量化仍能达成目标的措施）</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>BERT模型:<ul>
+<li>这里使用bert-base-uncased，它的编码器具有12个隐层, 输出768维张量, 12个自注意力头, 共110M参数量, 在小写的英文文本上进行训练而得到。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="_3">数据集说明<a class="headerlink" href="#_3" title="Permanent link">¶</a></h3>
+<ul>
+<li>
+<p>GLUE数据集合的介绍：</p>
+<ul>
+<li>GLUE由纽约大学，华盛顿大学，Google联合推出，涵盖不同的NLP任务类型，持续至2020年1月，其中包括11个子任务数据集，成为NLP研究发展的标准。我们这里使用其实MRPC数据集。</li>
+</ul>
+</li>
+<li>
+<p>数据下载地址: 标准数据集一般使用下载脚本进行下载，会在之后的代码中演示。</p>
+</li>
+<li>
+<p>MRPC数据集的任务类型：</p>
+<ul>
+<li>句子对二分类任务<ul>
+<li>训练集上正样本占68%，负样本占32%</li>
+</ul>
+</li>
+<li>评估指标这里使用：F1</li>
+<li>评估指标计算方式：F1=2∗(precision∗recall)/(precision+recall)</li>
+</ul>
+</li>
+<li>
+<p>数据集预览: </p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>MRPC数据集文件样式：</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_0"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><code>- MRPC/
+        - dev.tsv
+        - test.tsv
+        - train.tsv
+    - dev_ids.tsv
+    - msr_paraphrase_test.txt
+    - msr_paraphrase_train.txt
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>文件样式说明：<ul>
+<li>在使用中常用到的文件是train.tsv，dev.tsv，test.tsv，分别代表训练集，验证集和测试集。其中train.tsv与dev.tsv数据样式相同，都是带有标签的数据，其中test.tsv是不带有标签的数据。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>train.tsv数据样式：</li>
+</ul>
+<div class="highlight"><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code>Quality #1 ID   #2 ID   #1 String   #2 String
+1   702876  702977  Amrozi accused his brother , whom he called " the witness " , of deliberately distorting his evidence . Referring to him as only " the witness " , Amrozi accused his brother of deliberately distorting his evidence .
+0   2108705 2108831 Yucaipa owned Dominick 's before selling the chain to Safeway in 1998 for $ 2.5 billion .   Yucaipa bought Dominick 's in 1995 for $ 693 million and sold it to Safeway for $ 1.8 billion in 1998 .
+1   1330381 1330521 They had published an advertisement on the Internet on June 10 , offering the cargo for sale , he added .   On June 10 , the ship 's owners had published an advertisement on the Internet , offering the explosives for sale .
+0   3344667 3344648 Around 0335 GMT , Tab shares were up 19 cents , or 4.4 % , at A $ 4.56 , having earlier set a record high of A $ 4.57 . Tab shares jumped 20 cents , or 4.6 % , to set a record closing high at A $ 4.57 .
+1   1236820 1236712 The stock rose $ 2.11 , or about 11 percent , to close Friday at $ 21.51 on the New York Stock Exchange .   PG &amp; E Corp. shares jumped $ 1.63 or 8 percent to $ 21.03 on the New York Stock Exchange on Friday .
+1   738533  737951  Revenue in the first quarter of the year dropped 15 percent from the same period a year earlier .   With the scandal hanging over Stewart 's company , revenue the first quarter of the year dropped 15 percent from the same period a year earlier .
+0   264589  264502  The Nasdaq had a weekly gain of 17.27 , or 1.2 percent , closing at 1,520.15 on Friday .    The tech-laced Nasdaq Composite .IXIC rallied 30.46 points , or 2.04 percent , to 1,520.15 .
+1   579975  579810  The DVD-CCA then appealed to the state Supreme Court .  The DVD CCA appealed that decision to the U.S. Supreme Court .
+...
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>train.tsv数据样式说明：<ul>
+<li>train.tsv中的数据内容共分为5列，第一列数据，0或1，代表每对句子是否具有相同的含义，0代表含义不相同，1代表含义相同。第二列和第三列分别代表每对句子的id，第四列和第五列分别具有相同/不同含义的句子对。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>test.tsv数据样式：</li>
+</ul>
+<div class="highlight"><pre id="__code_2"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><code>index   #1 ID   #2 ID   #1 String   #2 String
+0   1089874 1089925 PCCW 's chief operating officer , Mike Butcher , and Alex Arena , the chief financial officer , will report directly to Mr So . Current Chief Operating Officer Mike Butcher and Group Chief Financial Officer Alex Arena will report to So .
+1   3019446 3019327 The world 's two largest automakers said their U.S. sales declined more than predicted last month as a late summer sales frenzy caused more of an industry backlash than expected . Domestic sales at both GM and No. 2 Ford Motor Co. declined more than predicted as a late summer sales frenzy prompted a larger-than-expected industry backlash .
+2   1945605 1945824 According to the federal Centers for Disease Control and Prevention ( news - web sites ) , there were 19 reported cases of measles in the United States in 2002 .   The Centers for Disease Control and Prevention said there were 19 reported cases of measles in the United States in 2002 .
+3   1430402 1430329 A tropical storm rapidly developed in the Gulf of Mexico Sunday and was expected to hit somewhere along the Texas or Louisiana coasts by Monday night . A tropical storm rapidly developed in the Gulf of Mexico on Sunday and could have hurricane-force winds when it hits land somewhere along the Louisiana coast Monday night .
+4   3354381 3354396 The company didn 't detail the costs of the replacement and repairs .   But company officials expect the costs of the replacement work to run into the millions of dollars .
+5   1390995 1391183 The settling companies would also assign their possible claims against the underwriters to the investor plaintiffs , he added . Under the agreement , the settling companies will also assign their potential claims against the underwriters to the investors , he added .
+6   2201401 2201285 Air Commodore Quaife said the Hornets remained on three-minute alert throughout the operation . Air Commodore John Quaife said the security operation was unprecedented .
+7   2453843 2453998 A Washington County man may have the countys first human case of West Nile virus , the health department said Friday .  The countys first and only human case of West Nile this year was confirmed by health officials on Sept . 8 .
+...
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>test.tsv数据样式说明：<ul>
+<li>test.tsv中的数据内容共分为5列，第一列数据代表每条文本数据的索引；其余列的含义与train.tsv中相同。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="huggingfacebert">使用huggingface中的预训练BERT模型进行微调<a class="headerlink" href="#huggingfacebert" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步: 安装必要的工具包并导入</li>
+<li>第二步: 下载数据集并使用脚本进行微调</li>
+<li>第三步: 设定全局配置并加载微调模型</li>
+<li>第四步: 编写用于模型使用的评估函数</li>
+</ul>
+<hr>
+<h4 id="_4">第一步: 安装核心的工具包并导入<a class="headerlink" href="#_4" title="Permanent link">¶</a></h4>
+<ul>
+<li>安装核心工具包:</li>
+</ul>
+<div class="highlight"><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code># 这是由huggingface提供的预训练模型使用工具包
+pip install transformers==2.3.0
+</code></pre></div>
+
+<ul>
+<li>工具包导入</li>
+</ul>
+<div class="highlight"><pre id="__code_4"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># 用于设定全局配置的命名空间</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">Namespace</span>
+
+<span class="c1"># 从torch.utils.data中导入常用的模型处理工具，会在代码使用中进行详细介绍</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="p">(</span><span class="n">DataLoader</span><span class="p">,</span> <span class="n">RandomSampler</span><span class="p">,</span> <span class="n">SequentialSampler</span><span class="p">,</span>
+                              <span class="n">TensorDataset</span><span class="p">)</span>
+
+<span class="c1"># 模型进度可视化工具，在评估过程中，帮助打印进度条</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># 从transformers中导入BERT模型的相关工具</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BertConfig</span><span class="p">,</span> <span class="n">BertForSequenceClassification</span><span class="p">,</span> <span class="n">BertTokenizer</span><span class="p">,)</span>
+
+<span class="c1"># 从transformers中导入GLUE数据集的评估指标计算方法</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">glue_compute_metrics</span> <span class="k">as</span> <span class="n">compute_metrics</span>
+
+<span class="c1"># 从transformers中导入GLUE数据集的输出模式(回归/分类)</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">glue_output_modes</span> <span class="k">as</span> <span class="n">output_modes</span>
+
+<span class="c1"># 从transformers中导入GLUE数据集的预处理器processors</span>
+<span class="c1"># processors是将持久化文件加载到内存的过程，即输入一般为文件路径，输出是训练数据和对应标签的某种数据结构，如列表表示。</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">glue_processors</span> <span class="k">as</span> <span class="n">processors</span>
+
+<span class="c1"># 从transformers中导入GLUE数据集的特征处理器convert_examples_to_features</span>
+<span class="c1"># convert_examples_to_features是将processor的输出处理成模型需要的输入，NLP定中的一般流程为数值映射，指定长度的截断补齐等</span>
+<span class="c1"># 在BERT模型上处理句子对时，还需要在句子前插入[CLS]开始标记，在两个句子中间和第二个句子末端插入[SEP]分割/结束标记</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">glue_convert_examples_to_features</span> <span class="k">as</span> <span class="n">convert_examples_to_features</span>
+
+
+<span class="c1"># 设定与日志打印有关的配置</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span> <span class="o">=</span> <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> -   </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
+                    <span class="n">datefmt</span> <span class="o">=</span> <span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %H:%M:%S'</span><span class="p">,</span>
+                    <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"transformers.modeling_utils"</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span>
+   <span class="n">logging</span><span class="o">.</span><span class="n">WARN</span><span class="p">)</span>  <span class="c1"># Reduce logging</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s2">"torch version:"</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1"># 设置torch允许启动的线程数, 因为之后会对比压缩模型的耗时，因此防止该变量产生影响</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">set_num_threads</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__config__</span><span class="o">.</span><span class="n">parallel_info</span><span class="p">())</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code>torch version: 1.3.1
+
+ATen/Parallel:
+    at::get_num_threads() : 1
+    at::get_num_interop_threads() : 8
+OpenMP 201511 (a.k.a. OpenMP 4.5)
+    omp_get_max_threads() : 1
+Intel(R) Math Kernel Library Version 2019.0.4 Product Build 20190411 for Intel(R) 64 architecture applications
+    mkl_get_max_threads() : 1
+Intel(R) MKL-DNN v0.20.5 (Git Hash 0125f28c61c1f822fd48570b4c1066f96fcb9b2e)
+std::thread::hardware_concurrency() : 16
+Environment variables:
+    OMP_NUM_THREADS : [not set]
+    MKL_NUM_THREADS : [not set]
+ATen parallel backend: OpenMP
+</code></pre></div>
+
+<hr>
+<h4 id="_5">第二步: 下载数据集并使用脚本进行微调<a class="headerlink" href="#_5" title="Permanent link">¶</a></h4>
+<ul>
+<li>下载GLUE中的MRPC数据集:</li>
+</ul>
+<div class="highlight"><pre id="__code_6"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><code>python download_glue_data.py --data_dir<span class="o">=</span><span class="s1">'./glue_data'</span> --tasks<span class="o">=</span><span class="s1">'MRPC'</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>使用<a href="http://47.92.175.143:8008/4/#1">run_glue.py[具体代码内容见附录]</a>进行模型微调:</li>
+</ul>
+<div class="highlight"><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 注意: 这是一段使用shell运行的脚本, 运行过程中需要请求AWS的S3进行预训练模型下载</span>
+
+<span class="c1"># 定义GLUE_DIR: 微调数据所在路径, 这里我们使用glue_data中的数据作为微调数据</span>
+<span class="nb">export</span> <span class="nv">GLUE_DIR</span><span class="o">=</span>./glue_data
+<span class="c1"># 定义OUT_DIR: 模型的保存路径, 我们将模型保存在当前目录的bert_finetuning_test文件中</span>
+<span class="nb">export</span> <span class="nv">OUT_DIR</span><span class="o">=</span>./bert_finetuning_test/
+
+python ./run_glue.py <span class="se">\</span>
+    --model_type bert <span class="se">\</span>
+    --model_name_or_path bert-base-uncased <span class="se">\</span>
+    --task_name MRPC <span class="se">\</span>
+    --do_train <span class="se">\</span>
+    --do_eval <span class="se">\</span>
+    --do_lower_case <span class="se">\</span>
+    --data_dir <span class="nv">$GLUE_DIR</span>/MRPC <span class="se">\</span>
+    --max_seq_length <span class="m">128</span> <span class="se">\</span>
+    --per_gpu_eval_batch_size<span class="o">=</span><span class="m">8</span>   <span class="se">\</span>
+    --per_gpu_train_batch_size<span class="o">=</span><span class="m">8</span>   <span class="se">\</span>
+    --learning_rate 2e-5 <span class="se">\</span>
+    --num_train_epochs <span class="m">1</span>.0 <span class="se">\</span>
+    --output_dir <span class="nv">$OUT_DIR</span>
+
+<span class="c1"># 使用python运行微调脚本</span>
+<span class="c1"># --model_type: 选择需要微调的模型类型, 这里可以选择BERT, XLNET, XLM, roBERTa, distilBERT, ALBERT</span>
+<span class="c1"># --model_name_or_path: 选择具体的模型或者变体, 这里是在英文语料上微调, 因此选择bert-base-uncased</span>
+<span class="c1"># --task_name: 它将代表对应的任务类型, 如MRPC代表句子对二分类任务</span>
+<span class="c1"># --do_train: 使用微调脚本进行训练</span>
+<span class="c1"># --do_eval: 使用微调脚本进行验证</span>
+<span class="c1"># --data_dir: 训练集及其验证集所在路径, 将自动寻找该路径下的train.tsv和dev.tsv作为训练集和验证集</span>
+<span class="c1"># --max_seq_length: 输入句子的最大长度, 超过则截断, 不足则补齐</span>
+<span class="c1"># --learning_rate: 学习率</span>
+<span class="c1"># --num_train_epochs: 训练轮数</span>
+<span class="c1"># --output_dir $OUT_DIR: 训练后的模型保存路径</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_8"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><code>...
+03/18/2020 00:55:17 - INFO - __main__ -   Loading features from cached file ./glue_data/MRPC/cached_train_bert-base-uncased_128_mrpc
+03/18/2020 00:55:17 - INFO - __main__ -   ***** Running training *****
+03/18/2020 00:55:17 - INFO - __main__ -     Num examples = 3668
+03/18/2020 00:55:17 - INFO - __main__ -     Num Epochs = 1
+03/18/2020 00:55:17 - INFO - __main__ -     Instantaneous batch size per GPU = 8
+03/18/2020 00:55:17 - INFO - __main__ -     Total train batch size (w. parallel, distributed &amp; accumulation) = 8
+03/18/2020 00:55:17 - INFO - __main__ -     Gradient Accumulation steps = 1
+03/18/2020 00:55:17 - INFO - __main__ -     Total optimization steps = 459
+Epoch:   0%|                 | 0/1 [00:00&lt;?, ?it/s]
+Iteration:   2%|   | 8/459 [00:13&lt;12:42,  1.69s/it]
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>运行成功后会在当前目录下生成 ./bert_finetuning_test文件夹，内部文件如下:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code>added_tokens.json  checkpoint-200  checkpoint-350  eval_results.txt         tokenizer_config.json
+checkpoint-100     checkpoint-250  checkpoint-50   pytorch_model.bin        training_args.bin
+checkpoint-150     checkpoint-300  config.json     special_tokens_map.json  vocab.txt
+</code></pre></div>
+
+<hr>
+<h4 id="_6">第三步: 设定全局配置并加载微调模型<a class="headerlink" href="#_6" title="Permanent link">¶</a></h4>
+<ul>
+<li>设定全局配置:</li>
+</ul>
+<div class="highlight"><pre id="__code_10"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 这些配置将在调用微调模型时进行使用</span>
+
+<span class="c1"># 实例化一个配置的命名空间</span>
+<span class="n">configs</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">()</span>
+
+<span class="c1"># 模型的输出文件路径</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"./bert_finetuning_test/"</span>
+
+<span class="c1"># 验证数据集所在路径(与训练集相同)</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="s2">"./glue_data/MRPC"</span>
+
+<span class="c1"># 预训练模型的名字</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">model_name_or_path</span> <span class="o">=</span> <span class="s2">"bert-base-uncased"</span>
+
+<span class="c1"># 文本的最大对齐长度</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="c1"># GLUE中的任务名(需要小写)</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">task_name</span> <span class="o">=</span> <span class="s2">"MRPC"</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># 根据任务名从GLUE数据集处理工具包中取出对应的预处理工具</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">processor</span> <span class="o">=</span> <span class="n">processors</span><span class="p">[</span><span class="n">configs</span><span class="o">.</span><span class="n">task_name</span><span class="p">]()</span>
+
+<span class="c1"># 得到对应模型输出模式(MRPC为分类)</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">output_mode</span> <span class="o">=</span> <span class="n">output_modes</span><span class="p">[</span><span class="n">configs</span><span class="o">.</span><span class="n">task_name</span><span class="p">]</span>
+
+<span class="c1"># 得到该任务的对应的标签种类列表</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">label_list</span> <span class="o">=</span> <span class="n">configs</span><span class="o">.</span><span class="n">processor</span><span class="o">.</span><span class="n">get_labels</span><span class="p">()</span>
+
+<span class="c1"># 定义模型类型</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">"bert"</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="c1"># 是否全部使用小写文本</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">do_lower_case</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># 使用的设备</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="s2">"cpu"</span>
+<span class="c1"># 每次验证的批次大小</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">per_eval_batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># gpu的数量</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">n_gpu</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># 是否需要重写数据缓存</span>
+<span class="n">configs</span><span class="o">.</span><span class="n">overwrite_cache</span> <span class="o">=</span> <span class="bp">False</span>
+</code></pre></div>
+
+<hr>
+<ul>
+<li>加载微调模型:</li>
+</ul>
+<div class="highlight"><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code># 因为在模型使用中，会使用一些随机方法，为了使每次运行的结果可以复现
+# 需要设定确定的随机种子，保证每次随机化的数字在范围内浮动
+def set_seed(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+set_seed(42)
+
+
+## 加载微调模型
+
+# 加载BERT预训练模型的数值映射器
+tokenizer = BertTokenizer.from_pretrained(
+    configs.output_dir, do_lower_case=configs.do_lower_case)
+
+# 加载带有文本分类头的BERT模型
+model = BertForSequenceClassification.from_pretrained(configs.output_dir)
+
+# 将模型传到制定设备上
+model.to(configs.device)
+</code></pre></div>
+
+<hr>
+<ul>
+<li>第四步: 编写用于模型使用的评估函数</li>
+</ul>
+<div class="highlight"><pre id="__code_12"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    模型评估函数</span>
+<span class="sd">    :param args: 模型的全局配置对象，里面包含模型的各种配置信息</span>
+<span class="sd">    :param model: 使用的模型</span>
+<span class="sd">    :param tokenizer: 文本数据的数值映射器</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># 因为之后会多次用到任务名和输出路径</span>
+    <span class="c1"># 所以将其从参数中取出</span>
+    <span class="n">eval_task</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">task_name</span>
+    <span class="n">eval_output_dir</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">output_dir</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># 调用load_and_cache_examples加载原始或者已经缓存的数据 </span>
+        <span class="c1"># 得到一个验证数据集的迭代器对象</span>
+        <span class="n">eval_dataset</span> <span class="o">=</span> <span class="n">load_and_cache_examples</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">eval_task</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+
+        <span class="c1"># 判断模型输出路径是否存在</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">eval_output_dir</span><span class="p">):</span>
+            <span class="c1"># 不存在的话，创建该路径</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">eval_output_dir</span><span class="p">)</span>
+
+        <span class="c1"># 使用SequentialSampler封装验证数据集的迭代器对象</span>
+        <span class="c1"># SequentialSampler是采样器对象，一般在Dataloader数据加载器中使用，</span>
+        <span class="c1"># 因为数据加载器是以迭代的方式产生数据，因此每个批次数据可以指定采样规则，</span>
+        <span class="c1"># SequentialSampler是顺序采样器，不改变原有数据集的顺序，依次取出数据。</span>
+        <span class="n">eval_sampler</span> <span class="o">=</span> <span class="n">SequentialSampler</span><span class="p">(</span><span class="n">eval_dataset</span><span class="p">)</span>
+        <span class="c1"># 使用Dataloader数据加载器，参数分别是数据集的迭代器对象，采集器对象，批次大小</span>
+        <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">eval_dataset</span><span class="p">,</span> <span class="n">sampler</span><span class="o">=</span><span class="n">eval_sampler</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">per_eval_batch_size</span><span class="p">)</span>
+
+        <span class="c1"># 开始评估</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"***** Running evaluation *****"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"  Num examples = </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">eval_dataset</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"  Batch size = </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">per_eval_batch_size</span><span class="p">)</span>
+        <span class="c1"># 初始化验证损失</span>
+        <span class="n">eval_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="c1"># 初始化验证步数</span>
+        <span class="n">nb_eval_steps</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 初始化预测的概率分布</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c1"># 初始化输出真实标签值</span>
+        <span class="n">out_label_ids</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># 循环数据批次，使用tqdm封装数据加载器，可以在评估时显示进度条</span>
+        <span class="c1"># desc是进度条前面的描述信息</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">eval_dataloader</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Evaluating"</span><span class="p">):</span>
+            <span class="c1"># 评估过程中模型开启评估模式，不进行反向传播</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+            <span class="c1"># 从batch中取出数据的所有相关信息存于元组中</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">)</span>
+            <span class="c1"># 不进行梯度计算</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="c1"># 将batch携带的数据信息表示称字典形式</span>
+                <span class="c1"># 这些数据信息和load_and_cache_examples函数返回的数据对象中信息相同</span>
+                <span class="c1"># 词汇的映射数值, 词汇的类型数值(0或1, 代表第一句和第二句话)</span>
+                <span class="c1"># 注意力掩码张量，以及对应的标签</span>
+                <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'input_ids'</span><span class="p">:</span>      <span class="n">batch</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                          <span class="s1">'attention_mask'</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                          <span class="s1">'token_type_ids'</span><span class="p">:</span> <span class="n">batch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                          <span class="s1">'labels'</span><span class="p">:</span>         <span class="n">batch</span><span class="p">[</span><span class="mi">3</span><span class="p">]}</span>
+                <span class="c1"># 将该字典作为参数输入到模型中获得输出</span>
+                <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+                <span class="c1"># 获得损失和预测分布</span>
+                <span class="n">tmp_eval_loss</span><span class="p">,</span> <span class="n">logits</span> <span class="o">=</span> <span class="n">outputs</span>
+                <span class="c1"># 将损失累加求均值</span>
+                <span class="n">eval_loss</span> <span class="o">+=</span> <span class="n">tmp_eval_loss</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="c1"># 验证步数累加</span>
+            <span class="n">nb_eval_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># 如果是第一批次的数据</span>
+            <span class="k">if</span> <span class="n">preds</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c1"># 结果分布就是模型的输出分布</span>
+                <span class="n">preds</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                <span class="c1"># 输出真实标签值为输入对应的labels</span>
+                <span class="n">out_label_ids</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s1">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># 结果分布就是每一次模型输出分布组成的数组</span>
+                <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">logits</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="c1"># 输出真实标签值为每一次输入对应的labels组成的数组</span>
+                <span class="n">out_label_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_label_ids</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="s1">'labels'</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># 计算每一轮的平均损失</span>
+        <span class="n">eval_loss</span> <span class="o">=</span> <span class="n">eval_loss</span> <span class="o">/</span> <span class="n">nb_eval_steps</span>
+        <span class="c1"># 取结果分布中最大的值对应的索引</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 使用compute_metrics计算对应的评估指标</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">compute_metrics</span><span class="p">(</span><span class="n">eval_task</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">out_label_ids</span><span class="p">)</span>
+        <span class="c1"># 在日志中打印每一轮的评估结果</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"***** Eval results {} *****"</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+         <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">load_and_cache_examples</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    加载或使用缓存数据</span>
+<span class="sd">    :param args: 全局配置参数</span>
+<span class="sd">    :param task: 任务名</span>
+<span class="sd">    :param tokenizer: 数值映射器</span>
+<span class="sd">    """</span>
+    <span class="c1"># 根据任务名(MRPC)获得对应数据预处理器</span>
+    <span class="n">processor</span> <span class="o">=</span> <span class="n">processors</span><span class="p">[</span><span class="n">task</span><span class="p">]()</span>
+    <span class="c1"># 获得输出模式</span>
+    <span class="n">output_mode</span> <span class="o">=</span> <span class="n">output_modes</span><span class="p">[</span><span class="n">task</span><span class="p">]</span>
+    <span class="c1"># 定义缓存数据文件的名字</span>
+    <span class="n">cached_features_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">'cached_{}_{}_{}_{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="s1">'dev'</span><span class="p">,</span>
+        <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">model_name_or_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)))</span><span class="o">.</span><span class="n">pop</span><span class="p">(),</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">max_seq_length</span><span class="p">),</span>
+        <span class="nb">str</span><span class="p">(</span><span class="n">task</span><span class="p">)))</span>
+    <span class="c1"># 判断缓存文件是否存在，以及全局配置中是否需要重写数据</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cached_features_file</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">overwrite_cache</span><span class="p">:</span>
+        <span class="c1"># 使用torch.load(解序列化，一般用于加载模型，在这里用于加载训练数据)加载缓存文件</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cached_features_file</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 如果没有缓存文件，则需要使用processor从原始数据路径中加载数据</span>
+        <span class="n">examples</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_dev_examples</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">data_dir</span><span class="p">)</span> 
+        <span class="c1"># 获取对应的标签</span>
+        <span class="n">label_list</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_labels</span><span class="p">()</span>
+        <span class="c1"># 再使用convert_examples_to_features生成模型需要的输入形式</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">convert_examples_to_features</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span>
+                                                <span class="n">tokenizer</span><span class="p">,</span>
+                                                <span class="n">label_list</span><span class="o">=</span><span class="n">label_list</span><span class="p">,</span>
+                                                <span class="n">max_length</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">max_seq_length</span><span class="p">,</span>
+                                                <span class="n">output_mode</span><span class="o">=</span><span class="n">output_mode</span><span class="p">,</span>
+                                                <span class="n">pad_token</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">([</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token</span><span class="p">])[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Saving features into cached file </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">cached_features_file</span><span class="p">)</span>
+        <span class="c1"># 将其保存至缓存文件路径中</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">cached_features_file</span><span class="p">)</span>
+
+
+    <span class="c1"># 为了有效利用内存，之后将使用数据加载器，我们需要在这里将张量数据转换成数据迭代器对象TensorDatase</span>
+    <span class="c1"># TensorDataset：用于自定义训练数据结构的迭代封装器，它可以封装任何与训练数据映射值相关的数据</span>
+    <span class="c1">#（如：训练数据对应的标签，训练数据使用的掩码张量，token的类型id等），</span>
+    <span class="c1"># 它们必须能转换成张量，将同训练数据映射值一起在训练过程中迭代使用。</span>
+
+    <span class="c1"># 以下是分别把input_ids，attention_mask，token_type_ids，label封装在TensorDataset之中</span>
+    <span class="n">all_input_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">input_ids</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">all_attention_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">attention_mask</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">all_token_type_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">token_type_ids</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">all_labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">all_input_ids</span><span class="p">,</span> <span class="n">all_attention_mask</span><span class="p">,</span> <span class="n">all_token_type_ids</span><span class="p">,</span> <span class="n">all_labels</span><span class="p">)</span>
+    <span class="c1"># 返回数据迭代器对象</span>
+    <span class="k">return</span> <span class="n">dataset</span>
+</code></pre></div>
+
+<ul>
+<li>我们将在下面的模型量化中调用该评估函数。</li>
+</ul>
+<hr>
+<h3 id="bert">使用动态量化技术对训练后的bert模型进行压缩<a class="headerlink" href="#bert" title="Permanent link">¶</a></h3>
+<ul>
+<li>第一步: 将模型应用动态量化技术</li>
+<li>第二步: 对比压缩后模型的大小</li>
+<li>第三步: 对比压缩后的模型的推理准确性和耗时</li>
+<li>第四步: 序列化模型以便之后使用</li>
+</ul>
+<hr>
+<h4 id="_7">第一步: 将模型应用动态量化技术<a class="headerlink" href="#_7" title="Permanent link">¶</a></h4>
+<ul>
+<li>应用动态量化技术:</li>
+</ul>
+<div class="highlight"><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 使用torch.quantization.quantize_dynamic获得动态量化的模型</span>
+<span class="c1"># 量化的网络层为所有的nn.Linear的权重，使其成为int8</span>
+<span class="n">quantized_model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">quantization</span><span class="o">.</span><span class="n">quantize_dynamic</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="p">{</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">},</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">qint8</span>
+<span class="p">)</span>
+
+<span class="c1"># 打印动态量化后的BERT模型</span>
+<span class="k">print</span><span class="p">(</span><span class="n">quantized_model</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_14"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><code>## 模型中的所有Linear层变成了DynamicQuantizedLinear层
+
+BertForSequenceClassification(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (key): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (value): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): DynamicQuantizedLinear(in_features=768, out_features=3072, scale=1.0, zero_point=0)
+          )
+          (output): BertOutput(
+            (dense): DynamicQuantizedLinear(in_features=3072, out_features=768, scale=1.0, zero_point=0)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (1): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (key): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (value): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): DynamicQuantizedLinear(in_features=768, out_features=3072, scale=1.0, zero_point=0)
+          )
+          (output): BertOutput(
+            (dense): DynamicQuantizedLinear(in_features=3072, out_features=768, scale=1.0, zero_point=0)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+...
+...
+
+        (11): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (key): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (value): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): DynamicQuantizedLinear(in_features=768, out_features=3072, scale=1.0, zero_point=0)
+          )
+          (output): BertOutput(
+            (dense): DynamicQuantizedLinear(in_features=3072, out_features=768, scale=1.0, zero_point=0)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): DynamicQuantizedLinear(in_features=768, out_features=768, scale=1.0, zero_point=0)
+      (activation): Tanh()
+    )
+  )
+  (dropout): Dropout(p=0.1, inplace=False)
+  (classifier): DynamicQuantizedLinear(in_features=768, out_features=2, scale=1.0, zero_point=0)
+)
+</code></pre></div>
+
+<hr>
+<h4 id="_8">第二步: 对比压缩后模型的大小<a class="headerlink" href="#_8" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">print_size_of_model</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="sd">"""打印模型大小"""</span>
+    <span class="c1"># 保存模型中的参数部分到持久化文件</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">"temp.p"</span><span class="p">)</span>
+    <span class="c1"># 打印持久化文件的大小</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'Size (MB):'</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="s2">"temp.p"</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="p">)</span>
+    <span class="c1"># 移除该文件</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'temp.p'</span><span class="p">)</span>
+
+<span class="c1"># 分别打印model和quantized_model</span>
+<span class="n">print_size_of_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">print_size_of_model</span><span class="p">(</span><span class="n">quantized_model</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_16"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><code>## 模型参数文件大小缩减了257MB 
+
+Size (MB): 437.982584
+Size (MB): 181.430351
+</code></pre></div>
+
+<h4 id="_9">第三步: 对比压缩后的模型的推理准确性和耗时<a class="headerlink" href="#_9" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="k">def</span> <span class="nf">time_model_evaluation</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="sd">"""获得模型评估结果和运行时间"""</span>
+    <span class="c1"># 获得评估前时间</span>
+    <span class="n">eval_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 进行模型评估</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+    <span class="c1"># 获得评估后时间</span>
+    <span class="n">eval_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 获得评估耗时</span>
+    <span class="n">eval_duration_time</span> <span class="o">=</span> <span class="n">eval_end_time</span> <span class="o">-</span> <span class="n">eval_start_time</span>
+    <span class="c1"># 打印模型评估结果</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Evaluate result:"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="c1"># 打印耗时</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">"Evaluate total time (seconds): {0:.1f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eval_duration_time</span><span class="p">))</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_18"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><code>Evaluating: 100%|██| 51/51 [01:36&lt;00:00,  1.89s/it]
+Evaluate result: {'acc': 0.8161764705882353, 'f1': 0.8739495798319329, 'acc_and_f1': 0.8450630252100841}
+Evaluate total time (seconds): 96.4
+
+Evaluating: 100%|███████████████████████████████| 51/51 [00:43&lt;00:00,  1.19it/s]
+Evaluate result: {'acc': 0.7965686274509803, 'f1': 0.8663446054750403, 'acc_and_f1': 0.8314566164630104}
+Evaluate total time (seconds): 43.0
+</code></pre></div>
+
+<ul>
+<li>结论:<ul>
+<li>对模型进行动态量化后，参数文件大小明显减少。</li>
+<li>动态量化后的模型在验证集上评估指标几乎不变，但是耗时却只用了原来的一半左右。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="_10">第四步: 序列化模型以便之后使用<a class="headerlink" href="#_10" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 量化模型的保存路径</span>
+<span class="n">quantized_output_dir</span> <span class="o">=</span> <span class="n">configs</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">"quantized/"</span>
+<span class="c1"># 判断是否需要创建该路径</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">quantized_output_dir</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">quantized_output_dir</span><span class="p">)</span>
+    <span class="c1"># 使用save_pretrained保存模型</span>
+    <span class="n">quantized_model</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="n">quantized_output_dir</span><span class="p">)</span>
+</code></pre></div>
+
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre id="__code_20"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><code># 在bert_finetuning_test/目录下
+
+- quantized/
+    - config.json
+    - pytorch_model.bin
+</code></pre></div>
+
+<h3 id="_11">附录<a class="headerlink" href="#_11" title="Permanent link">¶</a></h3>
+<h4 id="run_gluepy">run_glue.py微调脚本代码<a class="headerlink" href="#run_gluepy" title="Permanent link">¶</a></h4>
+<p>请访问: <a href="http://git.itcast.cn/Stephen/AI-key-file/blob/master/run_glue.py">http://git.itcast.cn/Stephen/AI-key-file/blob/master/run_glue.py</a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index3.html" title="莎士比亚风格的文本生成任务" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                莎士比亚风格的文本生成任务
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./index5.html" title="基于seq2seq的西班牙语到英语的机器翻译任务" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                基于seq2seq的西班牙语到英语的机器翻译任务
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+          
+            
+              
+              
+            
+          
+          
+            <script src="./index_files/lunr.multi.js"></script>
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

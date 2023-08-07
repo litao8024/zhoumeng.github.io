@@ -1,0 +1,645 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="img/AI.jpg">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.3">
+    
+    
+      
+        <title>云服务器使用入门 - NLP入门</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.f7f47774.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="NLP入门" class="md-header__button md-logo" aria-label="NLP入门" data-md-component="logo">
+      
+  <img src="img/AI.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NLP入门
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              云服务器使用入门
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="NLP入门" class="md-nav__button md-logo" aria-label="NLP入门" data-md-component="logo">
+      
+  <img src="img/AI.jpg" alt="logo">
+
+    </a>
+    NLP入门
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+<a href="https://github.com/AITutorials/datasets/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        自然语言处理入门
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          云服务器使用入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="1.html" class="md-nav__link md-nav__link--active">
+        云服务器使用入门
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    背景介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本操作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    其他说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    背景介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    基本操作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    其他说明
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/AITutorials/datasets/edit/master/docs/1.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>云服务器使用入门</h1>
+                
+                <h3 id="_1">学习目标</h3>
+<ul>
+<li>掌握云服务器使用的基本方法。</li>
+</ul>
+<hr />
+<p><img alt="" src="img/Centos-logo-light.svg" /></p>
+<hr />
+<h3 id="_2">背景介绍</h3>
+<ul>
+<li>当前市场上对程序员的基本需求之一就是能够使用服务器进行开发。在绝大多数公司中，我们都会使用Centos系统（Linux发行版之一）进行开发，因为它是被验证的最稳定的企业级开发服务器。下面我们将学习一些简单的命令，来开启我们Centos学习之旅。</li>
+</ul>
+<hr />
+<h3 id="_3">基本操作</h3>
+<ul>
+<li>假设你已经通过运维人员开通了服务器，并获得了root用户权限（在公司中，你可能得不到这么高的权限），需要在终端中输入这些命令。</li>
+</ul>
+<hr />
+<ul>
+<li>使用ssh命令登陆服务器：</li>
+</ul>
+<pre><code class="language-shell">ssh root@XX.XX.XXX.XX
+root@XX.XX.XXX.XX's password:
+
+# 登陆后修改密码：
+passwd
+
+更改用户 root 的密码 。
+新的 密码：
+
+# 修改后重新登陆即可
+</code></pre>
+<hr />
+<ul>
+<li>查看我们当前的硬件配置：</li>
+</ul>
+<pre><code class="language-shell"># 查看内存
+free -h
+
+# 查看硬盘
+df -h
+
+# 查看cpu逻辑核
+lscpu
+</code></pre>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<pre><code class="language-text">              total        used        free      shared  buff/cache   available
+Mem:           7.4G        265M        3.5G        580K        3.6G        6.8G
+Swap:            0B          0B          0B
+
+
+文件系统        容量  已用  可用 已用% 挂载点
+devtmpfs        3.7G     0  3.7G    0% /dev
+tmpfs           3.7G     0  3.7G    0% /dev/shm
+tmpfs           3.7G  580K  3.7G    1% /run
+tmpfs           3.7G     0  3.7G    0% /sys/fs/cgroup
+/dev/vda1        99G   29G   66G   31% /
+tmpfs           756M     0  756M    0% /run/user/0
+
+
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                4
+On-line CPU(s) list:   0-3
+Thread(s) per core:    2
+Core(s) per socket:    2
+座：                 1
+NUMA 节点：         1
+厂商 ID：           GenuineIntel
+CPU 系列：          6
+型号：              85
+型号名称：        Intel(R) Xeon(R) Platinum 8269CY CPU @ 2.50GHz
+步进：              7
+CPU MHz：             2500.000
+BogoMIPS：            5000.00
+超管理器厂商：  KVM
+虚拟化类型：     完全
+L1d 缓存：          32K
+L1i 缓存：          32K
+L2 缓存：           1024K
+L3 缓存：           36608K
+NUMA 节点0 CPU：    0-3
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl eagerfpu pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 arat avx512_vnni
+</code></pre>
+<hr />
+<ul>
+<li>查看计算环境：</li>
+</ul>
+<pre><code class="language-shell">cd /home/ec2-user/
+vim README
+</code></pre>
+<ul>
+<li>你将看到所有的虚拟环境(我们必须学会使用虚拟环境，这在协作开发中非常重要)</li>
+</ul>
+<pre><code class="language-text">Please use one of the following commands to start the required environment with the framework of your choice:
+for MXNet(+Keras2) with Python3 (CUDA 10.1 and Intel MKL-DNN) ____________________________________ source activate mxnet_p36
+for MXNet(+Keras2) with Python2 (CUDA 10.1 and Intel MKL-DNN) ____________________________________ source activate mxnet_p27
+for MXNet(+AWS Neuron) with Python3 ___________________________________________________ source activate aws_neuron_mxnet_p36
+for TensorFlow(+Keras2) with Python3 (CUDA 10.0 and Intel MKL-DNN) __________________________ source activate tensorflow_p36
+for TensorFlow(+Keras2) with Python2 (CUDA 10.0 and Intel MKL-DNN) __________________________ source activate tensorflow_p27
+for TensorFlow(+AWS Neuron) with Python3 _________________________________________ source activate aws_neuron_tensorflow_p36
+for TensorFlow 2(+Keras2) with Python3 (CUDA 10.1 and Intel MKL-DNN) _______________________ source activate tensorflow2_p36
+for TensorFlow 2(+Keras2) with Python2 (CUDA 10.1 and Intel MKL-DNN) _______________________ source activate tensorflow2_p27
+for TensorFlow 2.3 with Python3.7 (CUDA 10.2 and Intel MKL-DNN) _____________________ source activate tensorflow2_latest_p37
+for PyTorch 1.4 with Python3 (CUDA 10.1 and Intel MKL) _________________________________________ source activate pytorch_p36
+for PyTorch 1.4 with Python2 (CUDA 10.1 and Intel MKL) _________________________________________ source activate pytorch_p27
+for PyTorch 1.6 with Python3 (CUDA 10.1 and Intel MKL) ________________________________ source activate pytorch_latest_p36
+for PyTorch (+AWS Neuron) with Python3 ______________________________________________ source activate aws_neuron_pytorch_p36
+for Chainer with Python2 (CUDA 10.0 and Intel iDeep) ___________________________________________ source activate chainer_p27
+for Chainer with Python3 (CUDA 10.0 and Intel iDeep) ___________________________________________ source activate chainer_p36
+for base Python2 (CUDA 10.0) _______________________________________________________________________ source activate python2
+for base Python3 (CUDA 10.0) _______________________________________________________________________ source activate python3
+</code></pre>
+<ul>
+<li>如果你需要使用python3 + torch新版:</li>
+</ul>
+<pre><code class="language-shell">source activate pytorch_latest_p36
+</code></pre>
+<hr />
+<ul>
+<li>然后继续可以查看具体的python和pip版本：</li>
+</ul>
+<pre><code class="language-shell">python3 -V
+
+# 查看pip版本
+pip -V
+
+# 查看重点的科学计算包，tensorflow，pytorch等
+pip list
+</code></pre>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<pre><code class="language-text">Python 3.6.10 :: Anaconda, Inc.
+pip 20.0.2 from /home/ec2-user/anaconda3/envs/pytorch_latest_p36/lib/python3.6/site-packages/pip (python 3.6)
+</code></pre>
+<hr />
+<ul>
+<li>查看图数据情况：</li>
+</ul>
+<pre><code class="language-shell"># 开启图数据库，这里后期我们将重点学习的数据库
+neo4j start
+
+# 关闭数据库
+neo4j stop
+</code></pre>
+<hr />
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<pre><code class="language-text">Active database: graph.db
+Directories in use:
+  home:         /var/lib/neo4j
+  config:       /etc/neo4j
+  logs:         /var/log/neo4j
+  plugins:      /var/lib/neo4j/plugins
+  import:       /var/lib/neo4j/import
+  data:         /var/lib/neo4j/data
+  certificates: /var/lib/neo4j/certificates
+  run:          /var/run/neo4j
+Starting Neo4j.
+Started neo4j (pid 17565). It is available at http://0.0.0.0:7474/
+There may be a short delay until the server is ready.
+See /var/log/neo4j/neo4j.log for current status.
+
+Stopping Neo4j.. stopped
+</code></pre>
+<hr />
+<ul>
+<li>运行一个使用Pytorch的程序:</li>
+</ul>
+<pre><code class="language-shell">cd /data
+
+python3 pytorch_demo.py
+</code></pre>
+<blockquote>
+<ul>
+<li>输出效果:</li>
+</ul>
+</blockquote>
+<pre><code class="language-text">Net(
+  (conv1): Conv2d(1, 6, kernel_size=(3, 3), stride=(1, 1))
+  (conv2): Conv2d(6, 16, kernel_size=(3, 3), stride=(1, 1))
+  (fc1): Linear(in_features=576, out_features=120, bias=True)
+  (fc2): Linear(in_features=120, out_features=84, bias=True)
+  (fc3): Linear(in_features=84, out_features=10, bias=True)
+)
+</code></pre>
+<hr />
+<h3 id="_4">总结</h3>
+<ul>
+<li>我们学习了一些简单的查看命令以适应服务器环境。</li>
+<li>当然该镜像服务器上还安装了很多工具，如nginx，redis，supervisor等等，这在我们课程的后期会用到。</li>
+<li>自己购买服务器的小伙伴也不用担心，我们也有对应的安装教程。</li>
+</ul>
+<hr />
+<h3 id="_5">其他说明</h3>
+<ul>
+<li>为了更好的连接海外服务器，大家可以使用<code>finalshell</code>进行登陆。点击进行下载：<ul>
+<li><a href="http://www.hostbuf.com/downloads/finalshell_install.exe">finalshell WINDOWS版本</a></li>
+<li><a href="http://www.hostbuf.com/downloads/finalshell_install.pkg">finalshell macOS版本</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>服务器相关告知:<ul>
+<li>1，服务器订购是学员为了更好的适应企业开发环境，更好的实现AI开发，自主自愿的行为。</li>
+<li>2，教师团队将为其提供指定数量的服务器，<code>配置为4核，8G内存 100G硬盘 ==&gt; 350元/月</code></li>
+<li>3，云服务器由传智专业运维团队维护，在下发给学员前，配置指定的AI镜像环境。</li>
+<li>4，传智AI团队帮助学员解决学员在初期使用过程中遇到的各类软件问题。</li>
+<li>5，传智运维团队帮助学员处理云服务器开发过程中遇到的各类硬件安全和运营商问题。</li>
+<li>6，学员在使用过程中不得使用服务器进行违法开发（搭建违规网站，黑客攻击等），否则后果自负。 </li>
+</ul>
+</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 自然语言处理入门" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              自然语言处理入门
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.29db7785.min.js"></script>
+      
+    
+  </body>
+</html>

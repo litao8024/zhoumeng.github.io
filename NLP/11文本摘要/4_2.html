@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://121.199.45.168:8818/4_2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="http://0.0.0.0:8818/4_2/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>4.2 PGN模型的数据处理 - 文本摘要项目</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"></path></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#pgn" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="./1_1.html" title="文本摘要项目" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 648px;">
+              文本摘要项目
+            </span>
+            <span class="md-header-nav__topic" style="width: 648px;">
+              
+                4.2 PGN模型的数据处理
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 509px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="./1_1.html" title="文本摘要项目" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    文本摘要项目
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/AITutorials/manuals" title="前往 Github 仓库" class="md-source" data-md-source="github" data-md-state="done">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      第一章:文本摘要项目简介
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-1">
+        第一章:文本摘要项目简介
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_1.html" title="1.1 项目背景介绍" class="md-nav__link">
+      1.1 项目背景介绍
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./1_2.html" title="1.2 项目中的数据集初探" class="md-nav__link">
+      1.2 项目中的数据集初探
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      第二章:TextRank模型
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-2">
+        第二章:TextRank模型
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_1.html" title="2.1 TextRank算法理论基础" class="md-nav__link">
+      2.1 TextRank算法理论基础
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./2_2.html" title="2.2 TextRank实现baseline-0模型" class="md-nav__link">
+      2.2 TextRank实现baseline-0模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      第三章:seq2seq经典架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-3">
+        第三章:seq2seq经典架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_1.html" title="3.1 seq2seq实现baseline-1模型" class="md-nav__link">
+      3.1 seq2seq实现baseline-1模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./3_2.html" title="3.2 baseline-1模型的优化" class="md-nav__link">
+      3.2 baseline-1模型的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked="">
+    
+    <label class="md-nav__link" for="nav-4">
+      第四章:PGN先进架构
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: block; overflow: visible;">
+      <label class="md-nav__title" for="nav-4">
+        第四章:PGN先进架构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_1.html" title="4.1 PGN架构解析" class="md-nav__link">
+      4.1 PGN架构解析
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4.2 PGN模型的数据处理
+      </label>
+    
+    <a href="" title="4.2 PGN模型的数据处理" class="md-nav__link md-nav__link--active">
+      4.2 PGN模型的数据处理
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#pgn" title="PGN数据预处理" class="md-nav__link">
+    PGN数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="原始数据预处理" class="md-nav__link">
+    原始数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="第一轮数据处理" class="md-nav__link">
+    第一轮数据处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn_1" title="PGN数据的特殊性分析" class="md-nav__link">
+    PGN数据的特殊性分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="工具函数代码" class="md-nav__link">
+    工具函数代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn_2" title="PGN模型的数据迭代器预备函数和类" class="md-nav__link">
+    PGN模型的数据迭代器预备函数和类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="字典类构建" class="md-nav__link">
+    字典类构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="创建相关类和函数" class="md-nav__link">
+    创建相关类和函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="小节总结:" class="md-nav__link">
+    小节总结:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./4_3.html" title="4.3 PGN实现baseline-2模型" class="md-nav__link">
+      4.3 PGN实现baseline-2模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      第五章:生成式模型的评估方法
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-5">
+        第五章:生成式模型的评估方法
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_1.html" title="5.1 文本摘要评估方法" class="md-nav__link">
+      5.1 文本摘要评估方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./5_2.html" title="5.2 ROUGE评估算法实现" class="md-nav__link">
+      5.2 ROUGE评估算法实现
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      第六章:模型的迭代优化
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-6">
+        第六章:模型的迭代优化
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_1.html" title="6.1 PGN + coverage的优化模型" class="md-nav__link">
+      6.1 PGN + coverage的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_2.html" title="6.2 PGN + beam-search的优化模型" class="md-nav__link">
+      6.2 PGN + beam-search的优化模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_3.html" title="6.3 数据增强的优化" class="md-nav__link">
+      6.3 数据增强的优化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./6_4.html" title="6.4 训练策略的优化" class="md-nav__link">
+      6.4 训练策略的优化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      第七章:模型的部署与总结
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1" style="display: none; overflow: hidden;">
+      <label class="md-nav__title" for="nav-7">
+        第七章:模型的部署与总结
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix="">
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_1.html" title="7.1 硬件优化与模型部署" class="md-nav__link">
+      7.1 硬件优化与模型部署
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="./7_2.html" title="7.2 项目总结" class="md-nav__link">
+      7.2 项目总结
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 509px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#pgn" title="PGN数据预处理" class="md-nav__link">
+    PGN数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="学习目标" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" title="原始数据预处理" class="md-nav__link">
+    原始数据预处理
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" title="第一轮数据处理" class="md-nav__link">
+    第一轮数据处理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn_1" title="PGN数据的特殊性分析" class="md-nav__link">
+    PGN数据的特殊性分析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" title="工具函数代码" class="md-nav__link">
+    工具函数代码
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pgn_2" title="PGN模型的数据迭代器预备函数和类" class="md-nav__link">
+    PGN模型的数据迭代器预备函数和类
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" title="字典类构建" class="md-nav__link">
+    字典类构建
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" title="创建相关类和函数" class="md-nav__link">
+    创建相关类和函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" title="小节总结:" class="md-nav__link">
+    小节总结:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>4.2 PGN模型的数据处理</h1>
+                
+                <h2 id="pgn">PGN数据预处理</h2>
+<hr>
+<h3 id="_1">学习目标</h3>
+<ul>
+<li>理解PGN模型应用在本项目时数据处理的特殊性.</li>
+<li>掌握PGN模型的数据预处理.</li>
+</ul>
+<hr>
+<h3 id="_2">原始数据预处理</h3>
+<h4 id="_3">第一轮数据处理</h4>
+<ul>
+<li>本项目中, 针对于第一轮数据处理, 要达到的目的是以下两点:<ul>
+<li>原始数据挑选.</li>
+<li>原始数据清洗, 过滤, 分词, 合并.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>有了第二章, 第三章的基础铺垫, 在本章中, 重复性的数据预处理函数不做过多的解释, 直接拿来用就好. 主要完成3个代码文件的编写:<ul>
+<li>第1步: 数据预处理配置文件config1.py</li>
+<li>第2步: 多核多进程处理函数文件multi_proc_utils.py</li>
+<li>第3步: 预处理代码文件preprocess.py</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第1步: 数据预处理配置文件config1.py<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/config1.py</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_0"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_0 pre, #__code_0 code"><span class="md-clipboard__message"></span></button><pre id="__code_1"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_1 pre, #__code_1 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># 设置项目的root目录, 方便后续代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+
+<span class="c1"># 原始数据文本存储路径</span>
+<span class="n">train_raw_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'train.csv'</span><span class="p">)</span>
+<span class="n">test_raw_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'test.csv'</span><span class="p">)</span>
+
+<span class="c1"># 停用词表和用户自定义字典的存储路径</span>
+<span class="n">stop_words_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'stopwords.txt'</span><span class="p">)</span>
+<span class="n">user_dict_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'user_dict.txt'</span><span class="p">)</span>
+
+<span class="c1"># 预处理+切分后的训练测试数据路径</span>
+<span class="n">train_seg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'train_seg_data.csv'</span><span class="p">)</span>
+<span class="n">test_seg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'test_seg_data.csv'</span><span class="p">)</span>
+
+<span class="c1"># 经过第一轮处理后的最终训练集数据和测试集数据</span>
+<span class="n">train_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'train.txt'</span><span class="p">)</span>
+<span class="n">test_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'test.txt'</span><span class="p">)</span>
+
+<span class="c1"># 词向量模型路径</span>
+<span class="n">word_vector_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">,</span> <span class="s1">'wv'</span><span class="p">,</span> <span class="s1">'word2vec.model'</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>第2步: 多核多进程处理函数文件multi_proc_utils.py<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/multi_proc_utils.py</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_2"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_2 pre, #__code_2 code"><span class="md-clipboard__message"></span></button><pre id="__code_3"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_3 pre, #__code_3 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span><span class="p">,</span> <span class="n">Pool</span>
+
+<span class="c1"># cpu 数量</span>
+<span class="n">cores</span> <span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
+<span class="c1"># 分块个数</span>
+<span class="n">partitions</span> <span class="o">=</span> <span class="n">cores</span>
+
+
+<span class="k">def</span> <span class="nf">parallelize</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="c1"># 数据切分</span>
+    <span class="n">data_split</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">partitions</span><span class="p">)</span>
+    <span class="c1"># 线程池</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cores</span><span class="p">)</span>
+    <span class="c1"># 数据分发 合并</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">data_split</span><span class="p">))</span>
+    <span class="c1"># 关闭线程池</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># 执行完close后不会有新的进程加入到pool,join函数等待所有子进程结束</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>第3步: 预处理代码文件preprocess.py<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/preprocess.py</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_4"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_4 pre, #__code_4 code"><span class="md-clipboard__message"></span></button><pre id="__code_5"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_5 pre, #__code_5 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入若干工具包</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">jieba</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 设置项目的root目录, 方便后续相关代码包的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入文本预处理的配置信息config1</span>
+<span class="kn">from</span> <span class="nn">utils.config1</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># 导入多核CPU并行处理数据的函数</span>
+<span class="kn">from</span> <span class="nn">utils.multi_proc_utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># jieba载入自定义切词表</span>
+<span class="n">jieba</span><span class="o">.</span><span class="n">load_userdict</span><span class="p">(</span><span class="n">user_dict_path</span><span class="p">)</span>
+
+
+<span class="c1"># 根据max_len和vocab填充&lt;START&gt; &lt;STOP&gt; &lt;PAD&gt; &lt;UNK&gt;</span>
+<span class="k">def</span> <span class="nf">pad_proc</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">max_len</span><span class="p">,</span> <span class="n">word_to_id</span><span class="p">):</span>
+    <span class="c1"># 1: 按空格统计切分出词</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+    <span class="c1"># 2: 截取规定长度的词数</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">words</span><span class="p">[:</span><span class="n">max_len</span><span class="p">]</span>
+    <span class="c1"># 3: 填充&lt;UNK&gt;</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word_to_id</span> <span class="k">else</span> <span class="s1">'&lt;UNK&gt;'</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+    <span class="c1"># 4: 填充&lt;START&gt;, &lt;END&gt;</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'&lt;START&gt;'</span><span class="p">]</span> <span class="o">+</span> <span class="n">sentence</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'&lt;STOP&gt;'</span><span class="p">]</span>
+    <span class="c1"># 5: 判断长度, 填充&lt;PAD&gt;</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'&lt;PAD&gt;'</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+
+<span class="c1"># 加载停用词</span>
+<span class="k">def</span> <span class="nf">load_stop_words</span><span class="p">(</span><span class="n">stop_word_path</span><span class="p">):</span>
+    <span class="c1"># stop_word_path: 停用词路径</span>
+    <span class="c1"># 打开文件</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">stop_word_path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="c1"># 读取所有行</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="c1"># 去除每一个停用词前后的空格, 换行符</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">stop_word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">stop_word</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">stop_words</span>
+
+<span class="c1"># 加载停用词</span>
+<span class="n">stop_words</span> <span class="o">=</span> <span class="n">load_stop_words</span><span class="p">(</span><span class="n">stop_words_path</span><span class="p">)</span>
+
+
+<span class="c1"># 清洗文本, 删除特殊符号(被sentence_proc调用)</span>
+<span class="k">def</span> <span class="nf">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># sentence: 待处理的字符串</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="c1"># 删除1. 2. 3. 这些标题</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"\D(\d\.)\D"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+        <span class="c1"># 删除带括号的 进口 海外</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[(（]进口[)）]|\(海外\)"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+        <span class="c1"># 删除除了汉字数字字母和，！？。.- 以外的字符</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"[^，！？。\.\-</span><span class="se">\u4e00</span><span class="s2">-</span><span class="se">\u9fa5</span><span class="s2">_a-zA-Z0-9]"</span><span class="p">)</span>
+        <span class="c1"># 用中文输入法下的，！？来替换英文输入法下的,!?</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">"，"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"!"</span><span class="p">,</span> <span class="s2">"！"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"?"</span><span class="p">,</span> <span class="s2">"？"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+        <span class="c1"># 删除--- 车主说, 技师说, 语音, 图片, 你好, 您好</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"车主说|技师说|语音|图片|你好|您好"</span><span class="p">)</span>
+        <span class="n">sentence</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">sentence</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sentence</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">''</span>
+
+
+<span class="c1"># 过滤一句切好词的话中的停用词(被sentence_proc调用)</span>
+<span class="k">def</span> <span class="nf">filter_stopwords</span><span class="p">(</span><span class="n">seg_list</span><span class="p">):</span>
+    <span class="c1"># seg_list: 切好词的列表 [word1 ,word2 .......]</span>
+    <span class="c1"># 首先去掉多余空字符</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">seg_list</span> <span class="k">if</span> <span class="n">word</span><span class="p">]</span>
+    <span class="c1"># 去掉停用词</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+
+<span class="c1"># 预处理模块(处理一条句子, 被sentences_proc调用)</span>
+<span class="k">def</span> <span class="nf">sentence_proc</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># sentence:待处理字符串</span>
+    <span class="c1"># 清除无用词</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="n">clean_sentence</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># 切词, 默认精确模式, 全模式cut参数cut_all=True</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="c1"># 过滤停用词</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">filter_stopwords</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    <span class="c1"># 拼接成一个字符串, 按空格分隔</span>
+    <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+
+<span class="c1"># 预处理模块(处理一个句子列表, 对每个句子调用sentence_proc操作)</span>
+<span class="k">def</span> <span class="nf">sentences_proc</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="c1"># df: 数据集</span>
+    <span class="c1"># 批量预处理训练集和测试集</span>
+    <span class="k">for</span> <span class="n">col_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Brand'</span><span class="p">,</span> <span class="s1">'Model'</span><span class="p">,</span> <span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Dialogue'</span><span class="p">]:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">sentence_proc</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">'Report'</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="c1"># 训练集 Report 预处理</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">'Report'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Report'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">sentence_proc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="c1"># 用于数据加载+预处理(只需执行一次)</span>
+<span class="k">def</span> <span class="nf">build_dataset</span><span class="p">(</span><span class="n">train_raw_data_path</span><span class="p">,</span> <span class="n">test_raw_data_path</span><span class="p">):</span>
+    <span class="c1"># 1. 加载原始数据</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'1. 加载原始数据.'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">train_raw_data_path</span><span class="p">)</span>
+    <span class="c1"># 必须指定解码格式为utf-8</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">train_raw_data_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">test_raw_data_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'python'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'原始训练集行数 {}, 测试集行数 {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_df</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="c1"># 2. 空值去除（对于一行数据, 任意列只要有空值就去掉该行）</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'2. 空值去除(对于一行数据, 任意列只要有空值就去掉该行).'</span><span class="p">)</span>
+    <span class="n">train_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Dialogue'</span><span class="p">,</span> <span class="s1">'Report'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'any'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">test_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Dialogue'</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">'any'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'空值去除后训练集行数 {}, 测试集行数 {}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_df</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_df</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="c1"># 3. 多线程, 批量数据预处理(对每个句子执行sentence_proc, 清除无用词, 切词, 过滤停用词, 再用空格拼接为一个&gt;字符串)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'3. 多线程, 批量数据预处理(对每个句子执行sentence_proc, 清除无用词, 切词, 过滤停用词, 再用空格拼接为</span>
+<span class="err">一个字符串</span><span class="p">)</span><span class="o">.</span><span class="s1">')</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">parallelize</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span> <span class="n">sentences_proc</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">parallelize</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span> <span class="n">sentences_proc</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'sentences_proc has done!'</span><span class="p">)</span>
+
+    <span class="c1"># 4. 合并训练测试集，用于训练词向量</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'4. 合并训练测试集, 用于训练词向量.'</span><span class="p">)</span>
+    <span class="c1"># 新建一列，按行堆积</span>
+    <span class="n">train_df</span><span class="p">[</span><span class="s1">'X'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[[</span><span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Dialogue'</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span><span class="p">[</span><span class="s1">'Y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[[</span><span class="s1">'Report'</span><span class="p">]]</span>
+    <span class="c1"># 新建一列，按行堆积</span>
+    <span class="n">test_df</span><span class="p">[</span><span class="s1">'X'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[[</span><span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Dialogue'</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 5. 保存分割处理好的train_seg_data.csv、test_set_data.csv</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'5. 保存处理好的train_seg_data.csv, test_set_data.csv.'</span><span class="p">)</span>
+    <span class="c1"># 把建立的列merged去掉，该列对于神经网络无用，只用于训练词向量</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Question'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Dialogue'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Brand'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Model'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Report'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'QID'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Question'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Dialogue'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Brand'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Model'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">test_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'QID'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># 将处理后的数据存入持久化文件</span>
+    <span class="c1"># train_df.to_csv(train_seg_path, index=None, header=True)</span>
+    <span class="n">test_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">test_seg_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">train_df</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[[</span><span class="s1">'X'</span><span class="p">,</span> <span class="s1">'Y'</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">'&lt;sep&gt;'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'X'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Y'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">train_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">train_seg_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'The csv_file has saved!'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'6. 后续工作是将第5步的结果文件进行适当处理, 并保存为.txt文件.'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'本程序代码所有工作执行完毕!'</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_6"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_6 pre, #__code_6 code"><span class="md-clipboard__message"></span></button><pre id="__code_7"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_7 pre, #__code_7 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">build_dataset</span><span class="p">(</span><span class="n">train_raw_data_path</span><span class="p">,</span> <span class="n">test_raw_data_path</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<div class="codehilite" id="__code_8"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_8 pre, #__code_8 code"><span class="md-clipboard__message"></span></button><pre id="__code_9"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_9 pre, #__code_9 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/utils
+
+python preprocess.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_10"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_10 pre, #__code_10 code"><span class="md-clipboard__message"></span></button><pre id="__code_11"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_11 pre, #__code_11 code"><span class="md-clipboard__message"></span></button><code>Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 0.831 seconds.
+Prefix dict has been built successfully.
+1. 加载原始数据.
+/home/ec2-user/text_summary/pgn/data/train.csv
+原始训练集行数 82943, 测试集行数 20000
+
+
+2. 空值去除(对于一行数据, 任意列只要有空值就去掉该行).
+空值去除后训练集行数 82871, 测试集行数 20000
+
+
+3. 多线程, 批量数据预处理(对每个句子执行sentence_proc, 清除无用词, 切词, 过滤停用词, 再用空格拼接为一个字符串).
+
+
+sentences_proc has done!
+4. 合并训练测试集, 用于训练词向量.
+5. 保存处理好的train_seg_data.csv, test_set_data.csv.
+The csv_file has saved!
+
+
+6. 后续工作是将第5步的结果文件进行适当处理, 并保存为.txt文件.
+本程序代码所有工作执行完毕!
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>结果文件查看:</li>
+</ul>
+<div class="codehilite" id="__code_12"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_12 pre, #__code_12 code"><span class="md-clipboard__message"></span></button><pre id="__code_13"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_13 pre, #__code_13 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/data/
+
+ll
+</code></pre></div>
+
+
+<hr>
+<div class="codehilite" id="__code_14"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_14 pre, #__code_14 code"><span class="md-clipboard__message"></span></button><pre id="__code_15"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_15 pre, #__code_15 code"><span class="md-clipboard__message"></span></button><code># 在当前路径下, 多出了两个数据文件train_seg_data.csv和test_seg_data.csv
+
+-rwxr-xr-x 1 ec2-user ec2-user     5211 2月  19 16:18 stopwords.txt
+-rwxr-xr-x 1 ec2-user ec2-user 17514902 2月  19 16:18 test.csv
+-rw-rw-r-- 1 ec2-user ec2-user 12593705 3月   6 08:34 test_seg_data.csv
+-rwxr-xr-x 1 ec2-user ec2-user 82314291 2月  19 16:18 train.csv
+-rw-rw-r-- 1 ec2-user ec2-user 59993863 3月   6 08:34 train_seg_data.csv
+-rwxr-xr-x 1 ec2-user ec2-user    18103 2月  19 16:18 user_dict.txt
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>接下来要对结果文件做进一步的处理:<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/data/make_data.py</li>
+</ul>
+</li>
+</ul>
+<div class="codehilite" id="__code_16"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_16 pre, #__code_16 code"><span class="md-clipboard__message"></span></button><pre id="__code_17"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_17 pre, #__code_17 code"><span class="md-clipboard__message"></span></button><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 打开最终的结果文件</span>
+<span class="n">train_writer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'train.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="n">test_writer</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># 对训练数据做处理, 将article和abstract中间用'&lt;SEP&gt;'分隔</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'train_seg_data.csv'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f1</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f1</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+        <span class="n">article</span><span class="p">,</span> <span class="n">abstract</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'&lt;sep&gt;'</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">article</span> <span class="o">+</span> <span class="s1">'&lt;SEP&gt;'</span> <span class="o">+</span> <span class="n">abstract</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span>
+        <span class="n">train_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'train n='</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># 对测试数据做处理, 仅将文件存储格式从.csv换成.txt</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'test_seg_data.csv'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f2</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f2</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">line</span> <span class="o">+</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span>
+        <span class="n">test_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">'test n='</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_18"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_18 pre, #__code_18 code"><span class="md-clipboard__message"></span></button><pre id="__code_19"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_19 pre, #__code_19 code"><span class="md-clipboard__message"></span></button><code><span class="nb">cd</span> /home/ec2-user/text_summary/pgn/data/
+
+python make_data.py
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_20"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_20 pre, #__code_20 code"><span class="md-clipboard__message"></span></button><pre id="__code_21"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_21 pre, #__code_21 code"><span class="md-clipboard__message"></span></button><code>train n= 82871
+test n= 20000
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>注意: 我们需要明确一点, 这里面的test.txt中只有article, 没有abstract. 本质上来说不是真实的测试集. 因此我们需要从train.txt中分离出模型所需的训练集和测试集.</li>
+</ul>
+<div class="codehilite" id="__code_22"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_22 pre, #__code_22 code"><span class="md-clipboard__message"></span></button><pre id="__code_23"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_23 pre, #__code_23 code"><span class="md-clipboard__message"></span></button><code>tail -n <span class="m">12871</span> train.txt &gt; dev.txt
+
+head -n <span class="m">70000</span> train.txt &gt; train.txt
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>结果查看:</li>
+</ul>
+<div class="codehilite" id="__code_24"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_24 pre, #__code_24 code"><span class="md-clipboard__message"></span></button><pre id="__code_25"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_25 pre, #__code_25 code"><span class="md-clipboard__message"></span></button><code># train.txt将作为模型真实的训练集, dev.txt将作为模型真实的测试集
+
+-rw-rw-r-- 1 ec2-user ec2-user 50965199 2月  20 12:52 train.txt
+-rw-rw-r-- 1 ec2-user ec2-user  9028642 2月  20 12:53 dev.txt
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h4 id="pgn_1">PGN数据的特殊性分析</h4>
+<ul>
+<li>在分析PGN数据前, 我们来看一下第三章中实现seq2seq架构时的数据迭代器代码:</li>
+</ul>
+<div class="codehilite" id="__code_26"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_26 pre, #__code_26 code"><span class="md-clipboard__message"></span></button><pre id="__code_27"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_27 pre, #__code_27 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 训练批次数据生成器函数</span>
+<span class="k">def</span> <span class="nf">train_batch_generator</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">max_enc_len</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">max_dec_len</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">sample_num</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c1"># batch_size: batch大小</span>
+    <span class="c1"># max_enc_len: 样本最大长度</span>
+    <span class="c1"># max_dec_len: 标签最大长度</span>
+    <span class="c1"># sample_num: 限定样本个数大小</span>
+
+    <span class="c1"># 直接从已经预处理好的数据文件中加载训练集数据</span>
+    <span class="n">train_X</span><span class="p">,</span> <span class="n">train_Y</span> <span class="o">=</span> <span class="n">load_train_dataset</span><span class="p">(</span><span class="n">max_enc_len</span><span class="p">,</span> <span class="n">max_dec_len</span><span class="p">)</span>
+    <span class="c1"># 对数据进行限定长度的切分</span>
+    <span class="k">if</span> <span class="n">sample_num</span><span class="p">:</span>
+        <span class="n">train_X</span> <span class="o">=</span> <span class="n">train_X</span><span class="p">[:</span><span class="n">sample_num</span><span class="p">]</span>
+        <span class="n">train_Y</span> <span class="o">=</span> <span class="n">train_Y</span><span class="p">[:</span><span class="n">sample_num</span><span class="p">]</span>
+
+    <span class="c1"># 将numpy类型的数据转换为Pytorch下的tensor类型, 因为TensorDataset只接收tensor类型数据</span>
+    <span class="n">x_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">train_X</span><span class="p">)</span>
+    <span class="n">y_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">train_Y</span><span class="p">)</span>
+
+    <span class="c1"># 第一步: 先对数据进行封装</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+
+    <span class="c1"># 第二步: 再对dataset进行迭代器的构建</span>
+    <span class="c1"># 如果机器没有GPU, 请采用下面的注释行代码</span>
+    <span class="c1"># dataset = DataLoader(dataset, batch_size=batch_size, shuffle=True, drop_last=True)</span>
+
+    <span class="c1"># 如果机器有GPU, 请采用下面的代码, 可以加速训练流程</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                         <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c1"># 计算每个epoch要循环多少次</span>
+    <span class="n">steps_per_epoch</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_X</span><span class="p">)</span> <span class="o">//</span> <span class="n">batch_size</span>
+
+    <span class="c1"># 将封装好的数据集和次数返回</span>
+    <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">steps_per_epoch</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>结论: 在seq2seq架构中, 我们只需要将处理好的x_data, y_data封装后, 直接传入DataLoader()即完成了数据迭代器的构造.</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>PGN数据的特殊性: 因为存在pointer, 在某些时候模型需要具备从source document中copy原文的能力. 也就是说即使某一个token属于OOV, 不在单词分布中, 模型"也能访问到这个token".<ul>
+<li>第一: 构造数据迭代器的时候, 需要保存那些"属于source document, 但不属于word_to_id"的token.</li>
+<li>第二: 考虑到每一条样本数据都会有"特有的OOV"词表, 这些特殊token的长度也应该被保存下来以供模型使用.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>结论: 因为PGN中存在特殊要存储的数据字段, 就不能使用DataLoader中默认的处理方式, 后续需要对内部函数collate_fn做"个性化"处理.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="_4">工具函数代码</h4>
+<ul>
+<li>在实现PGN模型的数据迭代器之前, 需要若干工具函数, 按照第三章的开发套路, 一般工程上都会专门用一个代码文件存放这些工具函数, 以便未来修改, 添加, 删除, 实现工程代码的解耦.</li>
+</ul>
+<hr>
+<ul>
+<li>本项目中所有相关的工具函数都放在func_utils.py文件中:<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/func_utils.py</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>
+<p>在整个代码文件func_utils.py中, 需要实现若干个函数, 接下来一个个实现:</p>
+</li>
+<li>
+<p>1: 计量函数耗时的函数timer(module)</p>
+</li>
+</ul>
+<div class="codehilite" id="__code_28"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_28 pre, #__code_28 code"><span class="md-clipboard__message"></span></button><pre id="__code_29"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_29 pre, #__code_29 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入系统工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># 设置项目的root路径, 方便后续相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入项目中的工具包</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">heapq</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<span class="c1"># 函数耗时计量函数</span>
+<span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="c1"># func: 一个函数名, 下面的计时函数就是计算这个func函数的耗时.</span>
+        <span class="k">def</span> <span class="nf">cal_time</span><span class="p">(</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">cost_time</span> <span class="o">=</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'{cost_time} secs used for '</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">cal_time</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_30"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_30 pre, #__code_30 code"><span class="md-clipboard__message"></span></button><pre id="__code_31"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_31 pre, #__code_31 code"><span class="md-clipboard__message"></span></button><code><span class="nd">@timer</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="s1">'test a demo program'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000000</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">i</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'s = '</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">test</span><span class="p">()</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_32"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_32 pre, #__code_32 code"><span class="md-clipboard__message"></span></button><pre id="__code_33"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_33 pre, #__code_33 code"><span class="md-clipboard__message"></span></button><code>s =  4999999950000000
+5.171767950057983 secs used for  test a demo program
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>2: 对文本执行按空格切分的函数simple_tokenizer(text)</li>
+</ul>
+<div class="codehilite" id="__code_34"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_34 pre, #__code_34 code"><span class="md-clipboard__message"></span></button><pre id="__code_35"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_35 pre, #__code_35 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将一段文本按空格切分, 返回结果列表</span>
+<span class="k">def</span> <span class="nf">simple_tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_36"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_36 pre, #__code_36 code"><span class="md-clipboard__message"></span></button><pre id="__code_37"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_37 pre, #__code_37 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">sentence</span> <span class="o">=</span> <span class="s1">'技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压 看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈  火花塞 喷油嘴不用干活  直接和二三缸对倒一下  跑一段在测量一下故障码进行排除|车主说：[语音]|&gt;车主&gt;说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴  测一下缸压  都正常则为&gt;发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压  只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我  有什么问题随时询问  一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气'</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">simple_tokenizer</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'res='</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'res length = '</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_38"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_38 pre, #__code_38 code"><span class="md-clipboard__message"></span></button><pre id="__code_39"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_39 pre, #__code_39 code"><span class="md-clipboard__message"></span></button><code>res= ['技师说：你好！以前也出现过该故障吗？|技师说：缸压多少有没有测量一下?|车主说：没有过|车主说：没测缸压|技师说：测量一下缸压', '看一四缸缸压是否偏低|车主说：用电脑测，只是14缸缺火|车主说：[语音]|车主说：[语音]|技师说：点火线圈', '火花塞', '喷油嘴不用干活', '直接和二三缸对倒一下', '跑一段在测量一下故障码进行排除|车主说：[语音]|车主&gt;说：[语音]|车主说：[语音]|车主说：[语音]|车主说：师傅还在吗|技师说：调一下喷油嘴', '测一下缸压', '都正常则为发动机电脑板问题|车主说：[语音]|车主说：[语音]|车主说：[语音]|技师说：这个影响不大的|技师说：缸压八个以上正常|车主说：[语音]|技师说：所以说让你测量缸压', '只要缸压正常则没有问题|车主说：[语音]|车主说：[语音]|技师说：可以点击头像关注我', '有什么问题随时询问', '一定真诚用心为你解决|车主说：师傅，谢谢了|技师说：不用客气']
+res length =  11
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>3: 以字典统计文本中单词的数量函数count_words(counter, text)</li>
+</ul>
+<div class="codehilite" id="__code_40"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_40 pre, #__code_40 code"><span class="md-clipboard__message"></span></button><pre id="__code_41"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_41 pre, #__code_41 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 以字典计数的方式统计一段文本中不同单词的数量</span>
+<span class="k">def</span> <span class="nf">count_words</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
+            <span class="n">counter</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_42"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_42 pre, #__code_42 code"><span class="md-clipboard__message"></span></button><pre id="__code_43"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_43 pre, #__code_43 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'以前也出现过该故障吗？缸压多少有没有测量一下?'</span><span class="p">,</span> <span class="s1">'14缸缺火点火线圈火花塞喷油嘴不用干活直接和二三缸对倒一下跑一段在测量一下故障码'</span><span class="p">]</span>
+    <span class="n">count_words</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s1">': '</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_44"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_44 pre, #__code_44 code"><span class="md-clipboard__message"></span></button><pre id="__code_45"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_45 pre, #__code_45 code"><span class="md-clipboard__message"></span></button><code>一 :  4
+缸 :  3
+下 :  3
+火 :  3
+故 :  2
+障 :  2
+有 :  2
+测 :  2
+量 :  2
+以 :  1
+前 :  1
+也 :  1
+出 :  1
+现 :  1
+过 :  1
+该 :  1
+吗 :  1
+？ :  1
+压 :  1
+多 :  1
+少 :  1
+没 :  1
+? :  1
+1 :  1
+4 :  1
+缺 :  1
+点 :  1
+线 :  1
+圈 :  1
+花 :  1
+塞 :  1
+喷 :  1
+油 :  1
+嘴 :  1
+不 :  1
+用 :  1
+干 :  1
+活 :  1
+直 :  1
+接 :  1
+和 :  1
+二 :  1
+三 :  1
+对 :  1
+倒 :  1
+跑 :  1
+段 :  1
+在 :  1
+码 :  1
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>4: 对一个批次的数据按某一列长度进行排序的函数sort_batch_by_len(data_batch)</li>
+</ul>
+<div class="codehilite" id="__code_46"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_46 pre, #__code_46 code"><span class="md-clipboard__message"></span></button><pre id="__code_47"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_47 pre, #__code_47 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 对一个批次batch_size个样本, 按照x_len字段长短进行排序, 并返回排序后的结果</span>
+<span class="k">def</span> <span class="nf">sort_batch_by_len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">):</span>
+    <span class="c1"># 初始化一个结果字典, 其中包含的6个字段都是未来数据迭代器中的6个字段</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="p">[],</span>
+           <span class="s1">'y'</span><span class="p">:</span> <span class="p">[],</span>
+           <span class="s1">'x_len'</span><span class="p">:</span> <span class="p">[],</span>
+           <span class="s1">'y_len'</span><span class="p">:</span> <span class="p">[],</span>
+           <span class="s1">'OOV'</span><span class="p">:</span> <span class="p">[],</span>
+           <span class="s1">'len_OOV'</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="c1"># 遍历批次数据, 分别将6个字段数据按照字典key值, 添加进各自的列表中</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">)):</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'x'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'x'</span><span class="p">])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'y'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'y'</span><span class="p">])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'x_len'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'x'</span><span class="p">]))</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'y_len'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'y'</span><span class="p">]))</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'OOV'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'OOV'</span><span class="p">])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">'len_OOV'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'len_OOV'</span><span class="p">])</span>
+
+    <span class="c1"># 以x_len字段大小进行排序, 并返回下标结果的列表</span>
+    <span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s1">'x_len'</span><span class="p">])</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="c1"># 返回的data_batch依然保持字典类型</span>
+    <span class="n">data_batch</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">[</span><span class="n">_tensor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_indices</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_tensor</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="k">return</span> <span class="n">data_batch</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>5: 原始文本映射成ids张量的函数source2ids(source_words, vocab)</li>
+</ul>
+<div class="codehilite" id="__code_48"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_48 pre, #__code_48 code"><span class="md-clipboard__message"></span></button><pre id="__code_49"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_49 pre, #__code_49 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 原始文本映射成ids张量</span>
+<span class="k">def</span> <span class="nf">source2ids</span><span class="p">(</span><span class="n">source_words</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">oovs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">unk_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">UNK</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">source_words</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">unk_id</span><span class="p">:</span>  <span class="c1"># 如果w是OOV单词</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">oovs</span><span class="p">:</span>  <span class="c1"># 将w添加进OOV列表中</span>
+                <span class="n">oovs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="c1"># 索引0对应第一个source document OOV, 索引1对应第二个source document OOV, 以此类推......</span>
+            <span class="n">oov_num</span> <span class="o">=</span> <span class="n">oovs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="c1"># 在本项目中索引vocab_size对应第一个source document OOV, vocab_size+1对应第二个source document OOV</span>
+            <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">oov_num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ids</span><span class="p">,</span> <span class="n">oovs</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>6: 摘要文本映射成数字化ids函数abstract2ids(abstract_words, vocab, source_oovs)</li>
+</ul>
+<div class="codehilite" id="__code_50"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_50 pre, #__code_50 code"><span class="md-clipboard__message"></span></button><pre id="__code_51"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_51 pre, #__code_51 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 摘要文本映射成数字化ids张量</span>
+<span class="k">def</span> <span class="nf">abstract2ids</span><span class="p">(</span><span class="n">abstract_words</span><span class="p">,</span> <span class="n">vocab</span><span class="p">,</span> <span class="n">source_oovs</span><span class="p">):</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">unk_id</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">UNK</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">abstract_words</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">w</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">unk_id</span><span class="p">:</span>  <span class="c1"># 如果w是OOV单词</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">source_oovs</span><span class="p">:</span>  <span class="c1"># 如果w是source document OOV</span>
+                <span class="c1"># 对这样的w计算出一个新的映射id值</span>
+                <span class="n">vocab_idx</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">source_oovs</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vocab_idx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># 如果w不是一个source document OOV</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unk_id</span><span class="p">)</span>  <span class="c1"># 对这样的w只能用UNK的id值来代替</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="c1"># 如果w是词表中的单词, 直接取id值映射</span>
+    <span class="k">return</span> <span class="n">ids</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>7: 将输出张量ids结果映射成文本函数outputids2words(id_list, source_oovs, vocab)</li>
+</ul>
+<div class="codehilite" id="__code_52"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_52 pre, #__code_52 code"><span class="md-clipboard__message"></span></button><pre id="__code_53"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_53 pre, #__code_53 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将输出张量ids结果映射成自然语言文本</span>
+<span class="k">def</span> <span class="nf">outputids2words</span><span class="p">(</span><span class="n">id_list</span><span class="p">,</span> <span class="n">source_oovs</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">id_list</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># w可能是&lt;UNK&gt;</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">index2word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># w是OOV单词</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="n">assert_msg</span> <span class="o">=</span> <span class="s2">"Error: 无法在词典中找到该ID值."</span>
+            <span class="k">assert</span> <span class="n">source_oovs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">,</span> <span class="n">assert_msg</span>
+            <span class="c1"># 寄希望索引i是一个source document OOV单词</span>
+            <span class="n">source_oov_idx</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># 如果成功取到, 则w是source document OOV单词</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="n">source_oovs</span><span class="p">[</span><span class="n">source_oov_idx</span><span class="p">]</span>
+            <span class="c1"># i不仅是OOV单词, 也不对应source document中的原文单词</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'Error: 模型生成的ID: </span><span class="si">%i</span><span class="s1">, 原始文本中的OOV ID: </span><span class="si">%i</span><span class="s1"> </span><span class="se">\</span>
+<span class="s1">                                  但是当前样本中只有</span><span class="si">%i</span><span class="s1">个OOVs'</span>
+                                  <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">source_oov_idx</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">source_oovs</span><span class="p">)))</span>
+        <span class="c1"># 向结果列表中添加原始字符</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="c1"># 空格连接成字符串返回</span>
+    <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>8: 向小顶堆数据结构添加元素的函数add2heap(heap, item, k)</li>
+</ul>
+<div class="codehilite" id="__code_54"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_54 pre, #__code_54 code"><span class="md-clipboard__message"></span></button><pre id="__code_55"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_55 pre, #__code_55 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建小顶堆, 包含k个点的特殊二叉树, 始终保持二叉树中最小的值在root根节点</span>
+<span class="k">def</span> <span class="nf">add2heap</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heappushpop</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>9: 将文本中OOV单词替换成<unk>的函数replace_oovs(in_tensor, vocab)</unk></li>
+</ul>
+<div class="codehilite" id="__code_56"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_56 pre, #__code_56 code"><span class="md-clipboard__message"></span></button><pre id="__code_57"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_57 pre, #__code_57 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 将文本张量中所有OOV单词的id, 全部替换成&lt;UNK&gt;对应的id</span>
+<span class="k">def</span> <span class="nf">replace_oovs</span><span class="p">(</span><span class="n">in_tensor</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="c1"># oov_token = torch.full(in_tensor.shape, vocab.UNK).long().to(config.DEVICE)</span>
+    <span class="c1"># 在Pytorch1.5.0以及更早的版本中, torch.full()默认返回float类型</span>
+    <span class="c1"># 在Pytorch1.7.0最新版本中, torch.full()会将bool返回成torch.bool, 会将integer返回成torch.long.</span>
+    <span class="c1"># 上面一行代码在Pytorch1.6.0版本中会报错, 因为必须指定成long类型, 如下面代码所示</span>
+    <span class="n">oov_token</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">in_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">vocab</span><span class="o">.</span><span class="n">UNK</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">DEVICE</span><span class="p">)</span>
+
+    <span class="n">out_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">in_tensor</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">oov_token</span><span class="p">,</span> <span class="n">in_tensor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out_tensor</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>10: 获取模型中超参数信息的函数config_info(config)</li>
+</ul>
+<div class="codehilite" id="__code_58"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_58 pre, #__code_58 code"><span class="md-clipboard__message"></span></button><pre id="__code_59"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_59 pre, #__code_59 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 获取模型训练中若干超参数信息</span>
+<span class="k">def</span> <span class="nf">config_info</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="s1">'model_name = {}, pointer = {}, coverage = {}, fine_tune = {}, scheduled_sampling = {}, weight_tying = {},'</span> <span class="o">+</span> <span class="s1">'source = {}  '</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">pointer</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">coverage</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">scheduled_sampling</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">weight_tying</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">source</span><span class="p">))</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_60"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_60 pre, #__code_60 code"><span class="md-clipboard__message"></span></button><pre id="__code_61"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_61 pre, #__code_61 code"><span class="md-clipboard__message"></span></button><code><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">config_info</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_62"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_62 pre, #__code_62 code"><span class="md-clipboard__message"></span></button><pre id="__code_63"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_63 pre, #__code_63 code"><span class="md-clipboard__message"></span></button><code>model_name = pgn_model, pointer = True, coverage = False, fine_tune = False, scheduled_sampling = False, weight_tying = False,source = train
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h3 id="pgn_2">PGN模型的数据迭代器预备函数和类</h3>
+<h4 id="_5">字典类构建</h4>
+<ul>
+<li>在数据准备阶段, 有一个重要的类, 就是数据字典vocab(起到的作用就是word_to_id):</li>
+</ul>
+<hr>
+<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/vocab.py</li>
+</ul>
+<div class="codehilite" id="__code_64"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_64 pre, #__code_64 code"><span class="md-clipboard__message"></span></button><pre id="__code_65"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_65 pre, #__code_65 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="c1"># 设置项目的root路径, 方便后续相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入相关工具包</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+
+<span class="c1"># 如果采用预训练词向量的策略, 则导入相关配置和工具包</span>
+<span class="kn">from</span> <span class="nn">utils.config</span> <span class="kn">import</span> <span class="n">word_vector_model_path</span>
+<span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">word2vec</span>
+
+
+<span class="c1"># 词典类的创建</span>
+<span class="k">class</span> <span class="nc">Vocab</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">PAD</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">SOS</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">EOS</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">UNK</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word2index</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word2count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reserved</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'&lt;PAD&gt;'</span><span class="p">,</span> <span class="s1">'&lt;SOS&gt;'</span><span class="p">,</span> <span class="s1">'&lt;EOS&gt;'</span><span class="p">,</span> <span class="s1">'&lt;UNK&gt;'</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index2word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reserved</span><span class="p">[:]</span>
+        <span class="c1"># 如果预训练词向量, 则后续直接载入; 否则置为None即可</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_matrix</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="c1"># 向类词典中增加单词</span>
+    <span class="k">def</span> <span class="nf">add_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2index</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">word2index</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index2word</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">index2word</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+        <span class="c1"># 因为引入Counter()工具包, 直接执行update()更新即可.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word2count</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+    <span class="c1"># 如果已经提前预训练的词向量, 则执行类内函数对embedding_matrix赋值</span>
+    <span class="k">def</span> <span class="nf">load_embeddings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word_vector_model_path</span><span class="p">):</span>
+        <span class="c1"># 直接下载预训练词向量模型</span>
+        <span class="n">wv_model</span> <span class="o">=</span> <span class="n">word2vec</span><span class="o">.</span><span class="n">Word2Vec</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">word_vector_model_path</span><span class="p">)</span>
+        <span class="c1"># 从模型中直接提取词嵌入矩阵</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_matrix</span> <span class="o">=</span> <span class="n">wv_model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">vectors</span>
+
+    <span class="c1"># 根据id值item读取字典中的单词</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index2word</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">UNK</span><span class="p">)</span>
+
+    <span class="c1"># 获取字典的当前长度(等效于单词总数)</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index2word</span><span class="p">)</span>
+
+    <span class="c1"># 获取字典的当前单词总数</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index2word</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>调用:</li>
+</ul>
+<div class="codehilite" id="__code_66"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_66 pre, #__code_66 code"><span class="md-clipboard__message"></span></button><pre id="__code_67"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_67 pre, #__code_67 code"><span class="md-clipboard__message"></span></button><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="n">Vocab</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'***'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'***'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="n">embedding_matrix</span><span class="p">)</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="codehilite" id="__code_68"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_68 pre, #__code_68 code"><span class="md-clipboard__message"></span></button><pre id="__code_69"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_69 pre, #__code_69 code"><span class="md-clipboard__message"></span></button><code>&lt;__main__.Vocab object at 0x7f65b8dd3b70&gt;
+***
+4
+***
+None
+</code></pre></div>
+
+
+<hr>
+<hr>
+<h4 id="_6">创建相关类和函数</h4>
+<ul>
+<li>对于PGN的数据处理来说, 整个4.2小节最后的一个步骤就是构建数据迭代器的相关类和函数的创建.</li>
+</ul>
+<hr>
+<ul>
+<li>代码文件路径: /home/ec2-user/text_summary/pgn/utils/dataset.py<ul>
+<li>第一步: 创建(编码器, 解码器)数据对的类PairDataset()</li>
+<li>第二步: 创建生成迭代器数据的类SampleDataset()</li>
+<li>第三步: 创建"个性化"处理函数collate_fn()</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第一步: 创建(编码器, 解码器)数据对的类PairDataset()</li>
+</ul>
+<div class="codehilite" id="__code_70"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_70 pre, #__code_70 code"><span class="md-clipboard__message"></span></button><pre id="__code_71"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_71 pre, #__code_71 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 导入相关工具包</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="c1"># 设置项目的root路径, 方便后续相关代码文件的导入</span>
+<span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
+
+<span class="c1"># 导入项目中的自定义代码文件</span>
+<span class="kn">from</span> <span class="nn">utils.func_utils</span> <span class="kn">import</span> <span class="n">simple_tokenizer</span><span class="p">,</span> <span class="n">count_words</span><span class="p">,</span> <span class="n">sort_batch_by_len</span><span class="p">,</span> <span class="n">source2ids</span><span class="p">,</span> <span class="n">abstract2ids</span>
+<span class="kn">from</span> <span class="nn">utils.vocab</span> <span class="kn">import</span> <span class="n">Vocab</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">config</span>
+
+
+<span class="c1"># 创建数据对的类</span>
+<span class="k">class</span> <span class="nc">PairDataset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">tokenize</span><span class="o">=</span><span class="n">simple_tokenizer</span><span class="p">,</span> <span class="n">max_enc_len</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_dec_len</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">truncate_enc</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">truncate_dec</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"Reading dataset </span><span class="si">%s</span><span class="s2">..."</span> <span class="o">%</span> <span class="n">filename</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 直接读取训练集数据文件, 切分成编码器数据, 解码器数据, 并做长度的统一</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+                <span class="c1"># 在数据预处理阶段已经约定好了x, y之间以&lt;SEP&gt;分隔</span>
+                <span class="n">pair</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'&lt;SEP&gt;'</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">"Line </span><span class="si">%d</span><span class="s2"> of </span><span class="si">%s</span><span class="s2"> is error formed."</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="c1"># 前半部分是编码器数据, 即article原始文本.</span>
+                <span class="n">enc</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">max_enc_len</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">enc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_enc_len</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">truncate_enc</span><span class="p">:</span>
+                        <span class="n">enc</span> <span class="o">=</span> <span class="n">enc</span><span class="p">[:</span><span class="n">max_enc_len</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="c1"># 后半部分是解码器数据, 即abstract摘要文本</span>
+                <span class="n">dec</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">max_dec_len</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_dec_len</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">truncate_dec</span><span class="p">:</span>
+                        <span class="n">dec</span> <span class="o">=</span> <span class="n">dec</span><span class="p">[:</span><span class="n">max_dec_len</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="c1"># 以元组数据对的格式存储进结果列表中</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">enc</span><span class="p">,</span> <span class="n">dec</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">"</span><span class="si">%d</span><span class="s2"> pairs."</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pairs</span><span class="p">))</span>
+
+    <span class="c1"># 构建模型所需的字典</span>
+    <span class="k">def</span> <span class="nf">build_vocab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embed_file</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="c1"># 对读取的文件进行单词计数统计</span>
+        <span class="n">word_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+        <span class="n">count_words</span><span class="p">(</span><span class="n">word_counts</span><span class="p">,</span> <span class="p">[</span><span class="n">enc</span> <span class="o">+</span> <span class="n">dec</span> <span class="k">for</span> <span class="n">enc</span><span class="p">,</span> <span class="n">dec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pairs</span><span class="p">])</span>
+        <span class="c1"># 初始化字典类</span>
+        <span class="n">vocab</span> <span class="o">=</span> <span class="n">Vocab</span><span class="p">()</span>
+        <span class="c1"># 如果有预训练词向量就直接加载, 如果没有则随着模型一起训练获取</span>
+        <span class="n">vocab</span><span class="o">.</span><span class="n">load_embeddings</span><span class="p">(</span><span class="n">embed_file</span><span class="p">)</span>
+
+        <span class="c1"># 将计数得到的结果写入字典类中</span>
+        <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">word_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">max_vocab_size</span><span class="p">):</span>
+            <span class="n">vocab</span><span class="o">.</span><span class="n">add_words</span><span class="p">([</span><span class="n">word</span><span class="p">])</span>
+
+        <span class="c1"># 返回在vocab.py代码文件中定义的字典类结果</span>
+        <span class="k">return</span> <span class="n">vocab</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>第二步: 创建生成迭代器数据的类SampleDataset()</li>
+</ul>
+<div class="codehilite" id="__code_72"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_72 pre, #__code_72 code"><span class="md-clipboard__message"></span></button><pre id="__code_73"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_73 pre, #__code_73 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 直接为后续创建DataLoader提供服务的数据集预处理类</span>
+<span class="k">class</span> <span class="nc">SampleDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_pair</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">src_sents</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_pair</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trg_sents</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_pair</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span> <span class="o">=</span> <span class="n">vocab</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_pair</span><span class="p">)</span>
+
+    <span class="c1"># 需要自定义__getitem__()取元素的函数</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># 调用工具函数获取输入x和oov</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">oov</span> <span class="o">=</span> <span class="n">source2ids</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_sents</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">)</span>
+        <span class="c1"># 完全按照模型需求, 自定义返回格式, 共有6个字段, 每个字段"个性化定制"即可</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">'x'</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">SOS</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">EOS</span><span class="p">],</span>
+                <span class="s1">'OOV'</span><span class="p">:</span> <span class="n">oov</span><span class="p">,</span>
+                <span class="s1">'len_OOV'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">oov</span><span class="p">),</span>
+                <span class="s1">'y'</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">SOS</span><span class="p">]</span> <span class="o">+</span> <span class="n">abstract2ids</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trg_sents</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="p">,</span> <span class="n">oov</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">EOS</span><span class="p">],</span>
+                <span class="s1">'x_len'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">src_sents</span><span class="p">[</span><span class="n">index</span><span class="p">]),</span>
+                <span class="s1">'y_len'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trg_sents</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_len</span>
+</code></pre></div>
+
+
+<hr>
+<ul>
+<li>第三步: 创建"个性化"处理函数collate_fn()</li>
+</ul>
+<div class="codehilite" id="__code_74"><button class="md-clipboard" title="复制" data-clipboard-target="#__code_74 pre, #__code_74 code"><span class="md-clipboard__message"></span></button><pre id="__code_75"><span></span><button class="md-clipboard" title="复制" data-clipboard-target="#__code_75 pre, #__code_75 code"><span class="md-clipboard__message"></span></button><code><span class="c1"># 创建DataLoader时自定义的数据处理函数</span>
+<span class="k">def</span> <span class="nf">collate_fn</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="c1"># 按照最大长度的限制, 对张量进行填充0</span>
+    <span class="k">def</span> <span class="nf">padding</span><span class="p">(</span><span class="n">indice</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span> <span class="n">pad_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">pad_indice</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="o">+</span> <span class="p">[</span><span class="n">pad_idx</span><span class="p">]</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">))</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">indice</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">pad_indice</span><span class="p">)</span>
+
+    <span class="c1"># 对一个批次中的数据, 按照x_len字段进行排序</span>
+    <span class="n">data_batch</span> <span class="o">=</span> <span class="n">sort_batch_by_len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+    <span class="c1"># 依次取得所需的字段, 作为构建DataLoader的返回数据, 本模型需要6个字段</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">data_batch</span><span class="p">[</span><span class="s1">'x'</span><span class="p">]</span>
+    <span class="n">x_max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data_batch</span><span class="p">[</span><span class="s1">'y'</span><span class="p">]</span>
+    <span class="n">y_max_length</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">y</span><span class="p">])</span>
+
+    <span class="n">OOV</span> <span class="o">=</span> <span class="n">data_batch</span><span class="p">[</span><span class="s1">'OOV'</span><span class="p">]</span>
+    <span class="n">len_OOV</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="s1">'len_OOV'</span><span class="p">])</span>
+
+    <span class="n">x_padded</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_max_length</span><span class="p">)</span>
+    <span class="n">y_padded</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_max_length</span><span class="p">)</span>
+
+    <span class="n">x_len</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="s1">'x_len'</span><span class="p">])</span>
+    <span class="n">y_len</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data_batch</span><span class="p">[</span><span class="s1">'y_len'</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">x_padded</span><span class="p">,</span> <span class="n">y_padded</span><span class="p">,</span> <span class="n">x_len</span><span class="p">,</span> <span class="n">y_len</span><span class="p">,</span> <span class="n">OOV</span><span class="p">,</span> <span class="n">len_OOV</span>
+</code></pre></div>
+
+
+<hr>
+<blockquote>
+<ul>
+<li>结论: 编写完上面的2个类 + 1个函数, 就可以针对PGN的模型特点来定制化提供特殊的数据格式, 未来就可以直接构建定制化的DataLoader了.</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="_7">小节总结:</h3>
+<ul>
+<li>
+<p>原始数据处理:</p>
+<ul>
+<li>PGN数据的特殊性: 因为存在OOV的存储, 所以不能放弃source document.</li>
+<li>增加了若干新的工具函数, 扩充知识库武器.</li>
+</ul>
+</li>
+<li>
+<p>数据迭代器的预备函数和类:</p>
+<ul>
+<li>字典类Vocab的创建.</li>
+<li>为了给PGN模型提供特殊的数据格式, 重写SampleDataset类.</li>
+<li>自定义特殊的collate_fn()函数, 为自定的DataLoader提供个性化服务.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<hr>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./4_1.html" title="4.1 PGN架构解析" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                4.1 PGN架构解析
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="./4_3.html" title="4.3 PGN实现baseline-2模型" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                4.3 PGN实现baseline-2模型
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2020, AITutorials.CN This website has been reviewed by the review agency. 京ICP备19006137号
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>

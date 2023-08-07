@@ -1,0 +1,1864 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>2.2 知识图谱的数值表示 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.2 知识图谱的数值表示
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.2 知识图谱的数值表示
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="2_2.html" class="md-nav__link md-nav__link--active">
+        2.2 知识图谱的数值表示
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱的数值表示
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的数值表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    数值表示概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    基于距离的模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    基于翻译的模型
+  </a>
+  
+    <nav class="md-nav" aria-label="基于翻译的模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transe" class="md-nav__link">
+    TransE模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transh" class="md-nav__link">
+    TransH模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transr" class="md-nav__link">
+    TransR模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transd" class="md-nav__link">
+    TransD模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    其他知识表示方式
+  </a>
+  
+    <nav class="md-nav" aria-label="其他知识表示方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    谓词逻辑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    产生式规则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    框架表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    树形知识表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    概率图模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    马尔可夫链
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    知识图谱的数值表示
+  </a>
+  
+    <nav class="md-nav" aria-label="知识图谱的数值表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    数值表示概述
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    基于距离的模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    基于翻译的模型
+  </a>
+  
+    <nav class="md-nav" aria-label="基于翻译的模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transe" class="md-nav__link">
+    TransE模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transh" class="md-nav__link">
+    TransH模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transr" class="md-nav__link">
+    TransR模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transd" class="md-nav__link">
+    TransD模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    其他知识表示方式
+  </a>
+  
+    <nav class="md-nav" aria-label="其他知识表示方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    谓词逻辑
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    产生式规则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    框架表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    树形知识表示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    概率图模型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    马尔可夫链
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>2.2 知识图谱的数值表示</h1>
+
+<h2 id="_1">知识图谱的数值表示<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_2">学习目标<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>了解知识图谱有哪些重要的数值表示方法.</li>
+<li>理解知识图谱相关数值表示的方法.</li>
+</ul>
+<hr />
+<h3 id="_3">数值表示概述<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>随着深度学习模型的应用日益广泛, 如何将知识图谱作为背景知识融合进深度学习模型成为一个关键技术问题. 基本的思路是将知识图谱中的点与边表示成数值化的向量. 不同的向量表示在实际应用中有着不同的效果, 如何将知识图谱中的实体和关系求得最优的向量化表示, 是当前知识图谱表示学习所关注的核心问题. 知识图谱的表示学习旨在将知识图谱中的元素(包括实体, 属性, 概念等)表示为低维稠密实数向量. 知识图谱的向量化表示是面向机器处理的, 而符号化表示是面向人的理解的. 相对于向量化表示, 符号化表示易于理解, 可以实现符号推理. 两种表示各有其适用的场景. </li>
+</ul>
+<p><center><img alt="" src="img/2_3_1.png" /></center></p>
+<hr />
+<hr />
+<h3 id="_4">基于距离的模型<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>基于距离的模型中, 最具代表性的是SE模型, 基本思想: 当两个实体属于同一个三元组时, 它们的向量表示在投影后的空间中也应该彼此靠近. 因此损失函数被定义为向量投影后的距离.</li>
+</ul>
+<p><center><img alt="" src="img/2_3_0.png" /></center></p>
+<hr />
+<blockquote>
+<ul>
+<li>注意: SE模型采用形式较为简单的L1范数, 两个矩阵W(r,1)和W(r,2)用于三元组中头实体向量h和尾实体向量t的投影操作. 但由于SE模型引入了两个不同的投影矩阵, 导致很难捕获实体和关系之间的语义相关性!</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="_5">基于翻译的模型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h4 id="transe">TransE模型<a class="headerlink" href="#transe" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TransE模型: 是基于翻译思想的模型. TransE认为在知识库中, 三元组&lt; h, r, t &gt;可以看成头实体h到尾实体t利用关系r所进行的翻译.</li>
+</ul>
+<p><center><img alt="" src="img/2_3_2.png" /></center></p>
+<hr />
+<ul>
+<li>例如: 对于三元组&lt;柏拉图, 老师, 苏格拉底&gt;, 头实体"柏拉图"的向量加上关系"老师"的向量, 应该尽可能和尾实体"苏格拉底"的向量接近. 损失函数即可得到:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_3.png" /></center></p>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 实际应用中, 为了增加区分度, TransE模型使用了Hinge Loss目标函数, 通过引入Max Margin机制使得正负例尽可能分开.</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h4 id="transh">TransH模型<a class="headerlink" href="#transh" title="Permanent link">&para;</a></h4>
+<ul>
+<li>考虑到TransE模型中的h + r ~ t假设太强, 导致在自反, 一对多, 多对一关系下实体向量学习的错误. 比如, 对于自反关系r, &lt; h, r, t &gt; 和 &lt; t, r, h &gt;同时成立, 导致h = t. 对于多对一关系, 比如&lt;柏拉图, 性别, 男&gt;, &lt;特朗普, 性别, 男&gt;这两个三元组有着相同的关系和尾实体, 从而导致柏拉图和特朗普向量非常接近(一对多的关系类似). 但是柏拉图与特朗普除了在性别上相同, 其他方面显然完全不同. </li>
+</ul>
+<hr />
+<ul>
+<li>TransH模型: 为了解决上述问题, TransH模型放宽了h + r ~ t这一严格假设, 只要求头尾实体在关系r相对应的超平面上的投影彼此接近即可:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_4.png" /></center></p>
+<hr />
+<ul>
+<li>头实体向量h和尾实体向量t在超平面上利用法向量Wr映射为两个新的向量:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_5.png" /></center></p>
+<hr />
+<ul>
+<li>关系r在超平面上的向量表示为dr, 因此TransH的目标函数为:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_6.png" /></center></p>
+<hr />
+<hr />
+<h4 id="transr">TransR模型<a class="headerlink" href="#transr" title="Permanent link">&para;</a></h4>
+<ul>
+<li>在TransE和TransH模型中, 实体和关系都在相同的空间中进行表示. 这种做法无法区分两个语义相近的实体在某些特定方面(关系)上的不同. 比如"马克思"和"恩格斯"可以认为是两个相似的实体, 但是&lt;马克思, 民族, 犹太族&gt;和&lt;恩格斯, 民族, 德意志族&gt;不同.</li>
+</ul>
+<hr />
+<ul>
+<li>TransR模型: 考虑到上述问题, TrasnR模型提出为每个关系构造相应的向量空间, 将实体与关系在不同的向量空间中分开表示.</li>
+</ul>
+<p><center><img alt="" src="img/2_3_7.png" /></center></p>
+<hr />
+<blockquote>
+<ul>
+<li>TransR基本思想: 与TransH的基本思想很相似, 要求头尾实体在关系r相对应的向量空间中的投影彼此接近即可.(在TransH中是超平面)</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>TransR模型将头实体向量h和尾实体向量t映射为两个新向量:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_8.png" /></center></p>
+<hr />
+<ul>
+<li>TransR模型的损失函数为:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_9.png" /></center></p>
+<hr />
+<hr />
+<h4 id="transd">TransD模型<a class="headerlink" href="#transd" title="Permanent link">&para;</a></h4>
+<ul>
+<li>TransR模型将实体和关系在不同的向量空间中表示, 这也带来了一些新问题:<ul>
+<li>第一: TransR模型利用复杂的矩阵计算将头尾实体映射到关系向量空间中, 增加了计算复杂度.</li>
+<li>第二: 对于一个三元组来说, 头实体和尾实体很可能不是一类实体, 比如&lt;柏拉图, 出生地, 希腊&gt;, 那么"柏拉图"和"希腊"是两类不同的实体, 使用相同的映射矩阵Mr很明显不合理.</li>
+<li>第三: TransR模型中实体的映射关系仅有关系决定, 但显然实体本身对映射也有影响.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>TransD模型: 考虑到上述问题, TransD模型认为映射函数应该与实体, 关系同时相关!</li>
+</ul>
+<p><center><img alt="" src="img/2_3_10.png" /></center></p>
+<hr />
+<ul>
+<li>TransD模型修改了映射函数: I(m*n)是单位矩阵, 头实体和尾实体分别用两个不同的映射矩阵M(rh)和M(rt)进行投影.</li>
+</ul>
+<p><center><img alt="" src="img/2_3_11.png" /></center></p>
+<hr />
+<ul>
+<li>头实体的映射矩阵由关系向量rp与头实体映射向量hp共同决定; 尾实体的映射矩阵由关系向量rp与尾实体映射向量tp共同决定:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_12.png" /></center></p>
+<hr />
+<ul>
+<li>最终, TransD模型的损失函数为:</li>
+</ul>
+<p><center><img alt="" src="img/2_3_13.png" /></center></p>
+<hr />
+<hr />
+<h3 id="_6">其他知识表示方式<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h4 id="_7">谓词逻辑<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Predicate Logic: 命题是一个非真即假的陈述. 比如, "亚里士多德出生于波伊提乌"就是一个命题. 命题可以通过谓词&gt;来表达, 谓词的一般形式是P(x1, x2, ..., xn). 其中, P是谓词的名称, xi是谓词的项. xi既可以是一个常量(亚里士多德), 也可以是一个变量. 在某个特定领域, 谓词P可以表达领域对象之间的关系, 也可以表达函数. 比如, BirthPlace(亚里士多德, 波伊提乌)表达了"亚里士多德出生于波伊提乌", 实质上表达了亚里士多德和波伊提乌之间的关系. Philosopher(亚里士多德)表示亚里士多德是一个哲学家这一事实, Philosopher(x)是一个函数.</li>
+</ul>
+<hr />
+<ul>
+<li>在谓词上可以施加不同的操作:<ul>
+<li>否定(Negative)</li>
+<li>析取(Disjunction)</li>
+<li>合取(Conjunction)</li>
+<li>蕴含(Implication)</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>为了进一步刻画谓词和个体之间的关系, 在谓词逻辑中引入两个量词:<ul>
+<li>全称量词 (Universal Quantifier)</li>
+<li>存在量词 (Existential Quantifier)</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<h4 id="_8">产生式规则<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Production Rule: 产生式规则常用于表示事实与规则, 以及相应的不确定性度量. 产生式规则广泛应用于形式语言语法描述, 自动规划, 专家系统, 动作选择等. 产生式规则是一种形如"条件-动作"的规则, 基本形式如下:<ul>
+<li>IF &lt; condition &gt; THEN &lt; conclusion &gt;</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 上述公式中, condition被称为前件, 表示前提条件, 各个条件可以利用合取, 析取等逻辑连接词进行不同的组合; conclusion被称为后件, 表示当前条件为真时, 应采取的动作!</li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<ul>
+<li>R1: IF 病人发烧 AND 咳嗽 THEN 病人得了病毒性感冒</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>很多产生式规则具有不确定性. 比如, R2表达了一个具有长期吸烟史的病人罹患肺部疾病的概率高达0.9:</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>R2: IF 病人具有长期吸烟史 THEN 该病人罹患肺部疾病(0.9)</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>产生式规则与逻辑蕴含有着相同的基本形式, 但是在语义上, 逻辑蕴含P=&gt;Q只能表达如果命题P为真, 则Q一定为真. 产生式规则的后件部分不仅可以是命题, 还可以是动作. 比如, R3的后件就是一个动作而非命题.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>R3: IF 病人得了病毒性感冒 THEN 给予抗病毒治疗</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>基于给定的一组基本事实和一组产生式规则(通常又被称为规则库), 我们就可以进行推理以求解问题. 这就是产生式系统的基本思想. 比如, 可以定义一套动物识别的规则, 从某个动物的基本特征描述出发, 选择匹配规则(与前件部分的匹配)进行推理, 将这样的过程持续下去直至满足推理的终止条件.</li>
+</ul>
+<hr />
+<ul>
+<li>产生式规则是一种自然的, 清晰的, 可扩展的知识表示. 擅长表达具有因果关系的过程性知识, 在医疗诊断, 故障诊断等应用中常能取得一定的效果, 但是在实际应用中会碰到规则冲突, 规则失配等难题. 总体而言, 产生式规则有其使用场景, 但不足以表达现实世界的复杂语义, 还需要同很多其他知识表示协同运用才能较好的落地.</li>
+</ul>
+<hr />
+<hr />
+<h4 id="_9">框架表示<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Frame: 框架表示是以框架理论为基础发展起来的一种结构化的知识表示. 框架理论认为, 人类对现实世界中各类事物的认知都是以框架的结构存储在记忆中的. 当人面临新的情境时, 会从记忆中找出一个合适的框架, 并根据实际情况对这一框架的细节进行加工, 修改, 补充, 形成对新情景的认识并存入人脑中.</li>
+</ul>
+<hr />
+<ul>
+<li>框架是一种描述所论对象(事物, 时间, 概念)属性的数据结构. 框架通常由描述事物的各个方面的槽(Slot)组成. 槽用于描述所论对象某一方面的属性. 每一个槽可以拥有多个侧面(Facet). 每个侧面可以描述相应属性的一个方面, 而且每个侧面可以拥有多个值. 槽和侧面所具有的属性值分别被称为槽值和侧面值. 除了槽, 侧面及其值之外, 在框架中还可以定义约束, 用于约束槽和侧面的合理取值:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>&lt; 框架名 &gt;
+&lt; 槽名1 &gt; : &lt; 侧面11 &gt; : &lt; 值111, 值112, ... , 值11k1 &gt;
+            ......
+            &lt; 侧面1m &gt; : &lt; 值1m1, 值1m2, ... , 值1mkm &gt;
+
+&lt; 槽名2 &gt; : &lt; 侧面21 &gt; : &lt; 值211, 值212, ... , 值21k1 &gt;
+            ......
+            &lt; 侧面2m &gt; : &lt; 值2m1, 值2m2, ... , 值2mkm &gt;
+
+&lt; 约束 &gt; :  &lt; 约束1 &gt;
+            ......
+            &lt; 约束m &gt;
+</code></pre></div>
+<hr />
+<ul>
+<li>下图展示了一个"哲学家"的框架示例:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>框架名: &lt; 哲学家 &gt;
+类属:   &lt; 人物 &gt;
+工作:  范围:  (教学, 研究)
+       默认值: 研究
+性别: (男, 女)
+类型: (&lt; 唯物主义哲学家 &gt;, &lt; 唯心主义哲学家 &gt;)
+</code></pre></div>
+<hr />
+<blockquote>
+<ul>
+<li>注意: 槽或者侧面的取值可以是另一个框架. 框架之间的相互引用可以实现框架表示的复用.</li>
+</ul>
+</blockquote>
+<hr />
+<blockquote>
+<ul>
+<li>框架之间可以定义isA关系, 比如&lt; 哲学家 &gt;框架是&lt; 职业 &gt;的子框架.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>框架在当前的大数据知识图谱工程背景下对于理解文本描述的事件数据极为重要. 互联网媒体的新闻数据, 金融的公告数据都是在表达事件, 而事件的语义可以很自然地表达为框架. 事件框架赋予机器认知事件数据的基本框架, 是这类数据结构化处理的必经路径.</li>
+</ul>
+<hr />
+<hr />
+<h4 id="_10">树形知识表示<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<ul>
+<li>树形结构的知识表示, 可以用于表达复杂条件组合下的决策和动作. 决策树就是最经典的树形知识表示.</li>
+</ul>
+<hr />
+<ul>
+<li>决策树: 决策树是一种用于分类的树形结构, 一棵决策树由根节点, 若干中间节点和若干叶子节点组成. 根节点和中间节点对应一个属性, 相应属性分类的样本集合将被划入对应的子节点. 叶子节点表示最终的分类结果. 从根节点到叶子节点的每一条路径, 就代表了一种分类方案.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: 借贷决策树表达了根据收入水平, 信用卡张数, 是否有房, 以及年龄, 学历来判断是否同意给一个用户借贷的决策逻辑. 比如一个人的收入属于中等水平, 拥有的信用卡数大于或等于5张, 并且年龄小于或等于30岁, 则同意给他借贷. 反之如果一个人的收入水平较低, 而且没有房, 则不同意给他借贷.</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>故障树: 另一类常见的树形知识表示是故障树, 故障树是一种树形的逻辑因果关系图. 在故障树中, 父节点是产生故障的结果, 也称输出事件; 子节点是产生故障的原因, 也称为输入事件. 为了能够表达因果逻辑关系, 故障树利用逻辑符号连接子节点和父节点. 其中, "或"符号表示"发生任何一个输入事件, 输出时间都会发生"; "与"符号表示"只有所有输入事件发生, 输出事件才会发生".</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>例如: 电子文档丢失的原因可能是人工误操作, 也可能是非人工故障. 如果原因是非人工故障, 则可能是因为电脑断电且文档未保存.</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h4 id="_11">概率图模型<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Probalistic Graphical Model: 贝叶斯网络, 也被称为信念网络或有向无环图模型, 是一种概率图模型, 也是不确定知识表示的典型方法. 一个贝叶斯网络就是一个有向无环图, 其中节点是一组随机变量X={X1, X2, X3, ... , Xn}, 节点之间的有向边(由父节点指向子节点)代表随机变量之间的影响. Xi -&gt; Xj之间的有向边表示Xj的分布取决于Xi的取值. 通常, 我们又把Xi称作因(Cause), Xj称作Xi的果(Effect). 因此, 贝叶斯网络常被用于表达因果关系.</li>
+</ul>
+<hr />
+<ul>
+<li>作为一种面向不确定性的知识表示, 贝叶斯网络可以视作基于随机变量之间的条件独立性(conditional independence)对X的联合分布的一种精简表示. 每个贝叶斯网络本质上表达了X的某个联合概率分布P上的若干条件独立性假设.</li>
+</ul>
+<hr />
+<ul>
+<li>令G = (I, E)代表一个贝叶斯网络, 其中I表示图中节点的集合, E表示有向边的集合, X = {Xi}表示有向无环图中的某一个节点i所代表的随机变量. 贝叶斯网络G = (I, E)所表达的基本语义是: 对于每个随机变量Xi, 给定Xi在G中的父节点集合Parent(Xi), 则Xi与所有Xi的非后代节点变量条件独立.</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 上述基本语义的内涵就是, 每个随机变量Xi仅直接依赖于其父节点集合Parent(Xi).</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>贝叶斯网络的两个基本问题:<ul>
+<li>学习</li>
+<li>推理</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<h4 id="_12">马尔可夫链<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Markov Chain (MC): 马尔可夫链是一种满足马尔可夫性的离散随机变量集合. 所谓的马尔可夫性, 是指某个随机变量序列的下一个状态仅仅与当前的状态有关, 而与之前的状态没有关系.</li>
+</ul>
+<hr />
+<hr />
+<h3 id="_13">小节总结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本小节学习了知识图谱的数值表示概念, 和人工智能时代基于深度学习的模型同出一脉.</li>
+</ul>
+<hr />
+<ul>
+<li>基于距离的模型: 代表性的SE模型, 基本思想是当两个实体属于同一个三元组时, 它们的向量表示在投影后的空间中也应该彼此靠近. 但由于SE模型引入了两个不同的投影矩阵, 导致很难捕获实体和关系之间的语义相关性.</li>
+</ul>
+<hr />
+<ul>
+<li>基于翻译的模型:<ul>
+<li>TransE模型: TransE认为在知识库中, 三元组&lt; h, r, t &gt;可以看成头实体h到尾实体t利用关系r所进行的翻译.</li>
+<li>TransH模型: TransH模型放宽了h + r ~ t这一严格假设, 只要求头尾实体在关系r相对应的超平面上的投影彼此接近即可.</li>
+<li>TransR模型: TrasnR模型提出为每个关系构造相应的向量空间, 将实体与关系在不同的向量空间中分开表示.</li>
+<li>TransD模型: TransD模型认为映射函数应该与实体, 关系同时相关.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>其他知识表示方式:<ul>
+<li>谓词逻辑</li>
+<li>产生式规则</li>
+<li>框架表示</li>
+<li>树形知识表示</li>
+<li>概率图模型</li>
+<li>马尔可夫链</li>
+</ul>
+</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="2_1.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 2.1 知识查询方法介绍" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              2.1 知识查询方法介绍
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="3_1.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.1 快速部署的IDCNN模型" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              3.1 快速部署的IDCNN模型
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

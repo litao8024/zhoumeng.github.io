@@ -1,0 +1,2553 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>3.1 快速部署的IDCNN模型 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#idcnn" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.1 快速部署的IDCNN模型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3.1 快速部署的IDCNN模型
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="3_1.html" class="md-nav__link md-nav__link--active">
+        3.1 快速部署的IDCNN模型
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#idcnn" class="md-nav__link">
+    IDCNN模型
+  </a>
+  
+    <nav class="md-nav" aria-label="IDCNN模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idcnn_1" class="md-nav__link">
+    IDCNN模型的结构和原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idcnn_2" class="md-nav__link">
+    IDCNN模型的实现
+  </a>
+  
+    <nav class="md-nav" aria-label="IDCNN模型的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一步: 配置函数的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二步: 工具类函数的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三步: 模型核心类的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四步: 训练代码的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五步: 评估代码的实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_1.html" class="md-nav__link">
+        4.1 multi-head-selection模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#idcnn" class="md-nav__link">
+    IDCNN模型
+  </a>
+  
+    <nav class="md-nav" aria-label="IDCNN模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idcnn_1" class="md-nav__link">
+    IDCNN模型的结构和原理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#idcnn_2" class="md-nav__link">
+    IDCNN模型的实现
+  </a>
+  
+    <nav class="md-nav" aria-label="IDCNN模型的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一步: 配置函数的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二步: 工具类函数的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三步: 模型核心类的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四步: 训练代码的实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五步: 评估代码的实现
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    小节总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>3.1 快速部署的IDCNN模型</h1>
+
+<h2 id="idcnn">IDCNN模型<a class="headerlink" href="#idcnn" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>掌握IDCNN模型的结构和原理.</li>
+<li>掌握IDCNN模型的实现.</li>
+</ul>
+<hr />
+<h3 id="idcnn_1">IDCNN模型的结构和原理<a class="headerlink" href="#idcnn_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>IDCNN模型源于论文&lt;&lt; Fast and Accurate Entity Recognition with Iterated Dilated Convolutions &gt;&gt;, 核心操作是膨胀卷积.</p>
+</li>
+<li>
+<p>膨胀卷积可以跳过一部分神经元, 同时扩大感受野的范围:</p>
+</li>
+</ul>
+<p><center><img alt="" src="img/3_2_1.png" /></center></p>
+<hr />
+<ul>
+<li>下图左侧展示膨胀率等于1的标准卷积操作, 也是经典CNN的实现方式; 下图右侧展示膨胀率等于2的膨胀卷积, 也是论文中要采用的方式:</li>
+</ul>
+<p><center><img alt="" src="img/3_2_2.png" /></center></p>
+<hr />
+<ul>
+<li>当我们采用传统卷积操作, 神经网络的更高层可以如下图所示的获取一定范围内的文本语义信息:</li>
+</ul>
+<p><center><img alt="" src="img/3_2_3.png" /></center></p>
+<hr />
+<ul>
+<li>当我们采用膨胀卷积操作, 神经网络的更高层可以如下图所示的获取更大范围内的文本语义信息:</li>
+</ul>
+<p><center><img alt="" src="img/3_2_4.png" /></center></p>
+<hr />
+<ul>
+<li>论文中对几个经典NER模型做了对比测试, 显示IDCNN模型的效果可以媲美BiLSTM + CRF, 并显著的超越BiLSTM模型本身:</li>
+</ul>
+<p><center><img alt="" src="img/3_2_5.png" /></center></p>
+<hr />
+<ul>
+<li>IDCNN在工业界最大的亮点在于处理速度上, 论文中也进行了对比测试, 相比于效果相同的BiLSTM + CRF, 可以达到8倍的推理加速:</li>
+</ul>
+<p><center><img alt="" src="img/3_2_6.png" /></center></p>
+<hr />
+<hr />
+<h3 id="idcnn_2">IDCNN模型的实现<a class="headerlink" href="#idcnn_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>IDCNN模型的实现步骤如下:<ul>
+<li>第一步: 配置函数的实现</li>
+<li>第二步: 工具类函数的实现</li>
+<li>第三步: 模型核心类的实现</li>
+<li>第四步: 训练代码的实现</li>
+<li>第五步: 预测代码的实现</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_2">第一步: 配置函数的实现<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/ner/idcnn/config.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 设定label_to_id的映射字典, 采用BIEO标注模式, 外加3个特殊字符&lt;pad&gt;, &lt;start&gt;, &lt;eos&gt;</span>
+<span class="n">l2i_dic</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;B-sym&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;B-dis&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;I-sym&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;I-dis&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;E-sym&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;E-dis&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;&lt;pad&gt;&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;&lt;start&gt;&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;&lt;eos&gt;&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
+
+<span class="c1"># 上面的逆向字典, id_to_label</span>
+<span class="n">i2l_dic</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;B-sym&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;B-dis&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;I-sym&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;I-dis&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;E-sym&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;E-dis&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;&lt;pad&gt;&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;&lt;start&gt;&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;&lt;eos&gt;&#39;</span><span class="p">}</span>
+
+
+<span class="c1"># 训练集, 测试集, 词表</span>
+<span class="n">train_file</span> <span class="o">=</span> <span class="s1">&#39;./data/train.txt&#39;</span>
+<span class="n">dev_file</span> <span class="o">=</span> <span class="s1">&#39;./data/test.txt&#39;</span>
+<span class="n">vocab_file</span> <span class="o">=</span> <span class="s1">&#39;./data/vocab.txt&#39;</span>
+
+<span class="n">save_model_path</span> <span class="o">=</span>  <span class="s1">&#39;./saved_model/idcnn_crf.pt&#39;</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;./saved_model/idcnn_crf_1.pt&#39;</span>
+
+<span class="c1"># 设置关键的超参数</span>
+<span class="n">max_length</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">tagset_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">l2i_dic</span><span class="p">)</span>
+<span class="n">dropout</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<hr />
+<h4 id="_3">第二步: 工具类函数的实现<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/ner/idcnn/utils.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">InputFeatures</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">input_id</span><span class="p">,</span> <span class="n">label_id</span><span class="p">,</span> <span class="n">input_mask</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_id</span> <span class="o">=</span> <span class="n">input_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_id</span> <span class="o">=</span> <span class="n">label_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_mask</span> <span class="o">=</span> <span class="n">input_mask</span>
+
+
+<span class="c1"># 读取字典文件, 并构造字典</span>
+<span class="k">def</span> <span class="nf">load_vocab</span><span class="p">(</span><span class="n">vocab_file</span><span class="p">):</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vocab_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">vocab</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">vocab</span>
+
+
+<span class="c1"># 加载训练集, 测试集的原始数据</span>
+<span class="k">def</span> <span class="nf">load_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">text</span> <span class="o">=</span><span class="p">[]</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">texts</span><span class="p">,</span> <span class="n">labels</span>
+
+<span class="c1"># 加载数据</span>
+<span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span> <span class="n">label_dic</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="n">texts</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">load_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># 数据裁剪</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_length</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="n">max_length</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)]</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="n">max_length</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)]</span>
+
+        <span class="c1"># 数据加工</span>
+        <span class="n">tokens_f</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">token</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">]</span>
+        <span class="n">label_f</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;start&gt;&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;&lt;eos&gt;&#39;</span><span class="p">]</span>
+
+        <span class="c1"># 数字化张量映射</span>
+        <span class="n">input_ids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vocab</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">vocab</span><span class="p">[</span><span class="s1">&#39;[UNK]&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens_f</span><span class="p">]</span>
+        <span class="n">label_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">label_f</span><span class="p">]</span>
+
+        <span class="c1"># 构造输入数据和掩码</span>
+        <span class="n">input_mask</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_length</span><span class="p">:</span>
+            <span class="n">input_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">input_mask</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">label_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_dic</span><span class="p">[</span><span class="s1">&#39;&lt;pad&gt;&#39;</span><span class="p">])</span>
+
+        <span class="c1"># 确认数据长度</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span> <span class="o">==</span> <span class="n">max_length</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_mask</span><span class="p">)</span> <span class="o">==</span> <span class="n">max_length</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_ids</span><span class="p">)</span> <span class="o">==</span> <span class="n">max_length</span>
+
+        <span class="c1"># 实例化特征对象</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="n">InputFeatures</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">tokens_f</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label_f</span><span class="p">,</span> <span class="n">input_id</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+                                <span class="n">input_mask</span><span class="o">=</span><span class="n">input_mask</span><span class="p">,</span> <span class="n">label_id</span><span class="o">=</span><span class="n">label_ids</span><span class="p">)</span>
+
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="c1"># 利用标签字典恢复真实的预测标签</span>
+<span class="k">def</span> <span class="nf">recover_label</span><span class="p">(</span><span class="n">pred_var</span><span class="p">,</span> <span class="n">gold_var</span><span class="p">,</span> <span class="n">l2i_dic</span><span class="p">,</span> <span class="n">i2l_dic</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred_var</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">gold_var</span><span class="p">)</span>
+    <span class="n">pred_variable</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gold_variable</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># 进行数据截取</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gold_var</span><span class="p">)):</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">gold_var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">l2i_dic</span><span class="p">[</span><span class="s1">&#39;&lt;start&gt;&#39;</span><span class="p">])</span>
+        <span class="n">end_index</span> <span class="o">=</span> <span class="n">gold_var</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">l2i_dic</span><span class="p">[</span><span class="s1">&#39;&lt;eos&gt;&#39;</span><span class="p">])</span>
+        <span class="n">pred_variable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred_var</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">])</span>
+        <span class="n">gold_variable</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gold_var</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">])</span>
+
+    <span class="n">pred_label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gold_label</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># 标签反向映射</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gold_variable</span><span class="p">)):</span>
+        <span class="n">pred_label</span><span class="o">.</span><span class="n">append</span><span class="p">([</span> <span class="n">i2l_dic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">pred_variable</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">])</span>
+        <span class="n">gold_label</span><span class="o">.</span><span class="n">append</span><span class="p">([</span> <span class="n">i2l_dic</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">gold_variable</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">pred_label</span><span class="p">,</span> <span class="n">gold_label</span>
+
+
+<span class="c1"># 计算NER的关键指标</span>
+<span class="k">def</span> <span class="nf">get_ner_fmeasure</span><span class="p">(</span><span class="n">golden_lists</span><span class="p">,</span> <span class="n">predict_lists</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;BMES&#39;</span><span class="p">):</span>
+    <span class="n">sent_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">golden_lists</span><span class="p">)</span>
+    <span class="n">golden_full</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">predict_full</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">right_full</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">right_tag</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">all_tag</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sent_num</span><span class="p">):</span>
+        <span class="n">golden_list</span> <span class="o">=</span> <span class="n">golden_lists</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">predict_list</span> <span class="o">=</span> <span class="n">predict_lists</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">idy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">golden_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">golden_list</span><span class="p">[</span><span class="n">idy</span><span class="p">]</span> <span class="o">==</span> <span class="n">predict_list</span><span class="p">[</span><span class="n">idy</span><span class="p">]:</span>
+                <span class="n">right_tag</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">all_tag</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">golden_list</span><span class="p">)</span>
+
+        <span class="c1"># 不同的标注体系调用不同的处理函数</span>
+        <span class="k">if</span> <span class="n">label_type</span> <span class="o">==</span> <span class="s1">&#39;BMES&#39;</span><span class="p">:</span>
+            <span class="n">gold_matrix</span> <span class="o">=</span> <span class="n">get_ner_BMES</span><span class="p">(</span><span class="n">golden_list</span><span class="p">)</span>
+            <span class="n">pred_matrix</span> <span class="o">=</span> <span class="n">get_ner_BMES</span><span class="p">(</span><span class="n">predict_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gold_matrix</span> <span class="o">=</span> <span class="n">get_ner_BIO</span><span class="p">(</span><span class="n">golden_list</span><span class="p">)</span>
+            <span class="n">pred_matrix</span> <span class="o">=</span> <span class="n">get_ner_BIO</span><span class="p">(</span><span class="n">predict_list</span><span class="p">)</span>
+
+        <span class="n">right_ner</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">gold_matrix</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pred_matrix</span><span class="p">)))</span>
+        <span class="n">golden_full</span> <span class="o">+=</span> <span class="n">gold_matrix</span>
+        <span class="n">predict_full</span> <span class="o">+=</span> <span class="n">pred_matrix</span>
+        <span class="n">right_full</span> <span class="o">+=</span> <span class="n">right_ner</span>
+
+    <span class="n">right_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">right_full</span><span class="p">)</span>
+    <span class="n">golden_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">golden_full</span><span class="p">)</span>
+    <span class="n">predict_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predict_full</span><span class="p">)</span>
+
+    <span class="c1"># 鲁棒性处理</span>
+    <span class="k">if</span> <span class="n">predict_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">precision</span> <span class="o">=</span>  <span class="p">(</span><span class="n">right_num</span> <span class="o">+</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">predict_num</span>
+
+    <span class="k">if</span> <span class="n">golden_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">recall</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">recall</span> <span class="o">=</span> <span class="p">(</span><span class="n">right_num</span> <span class="o">+</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">golden_num</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">precision</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">recall</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.</span><span class="p">:</span>
+        <span class="n">f_measure</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f_measure</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">right_tag</span> <span class="o">+</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">all_tag</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;gold_num = &#39;</span><span class="p">,</span> <span class="n">golden_num</span><span class="p">,</span> <span class="s1">&#39; pred_num = &#39;</span><span class="p">,</span> <span class="n">predict_num</span><span class="p">,</span> <span class="s1">&#39; right_num = &#39;</span><span class="p">,</span> <span class="n">right_num</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f_measure</span>
+
+<span class="c1"># 反向映射的提取函数</span>
+<span class="k">def</span> <span class="nf">reverse_style</span><span class="p">(</span><span class="n">input_string</span><span class="p">):</span>
+    <span class="n">target_position</span> <span class="o">=</span> <span class="n">input_string</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">)</span>
+    <span class="n">input_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_string</span><span class="p">)</span>
+    <span class="n">output_string</span> <span class="o">=</span> <span class="n">input_string</span><span class="p">[</span><span class="n">target_position</span><span class="p">:</span> <span class="n">input_len</span><span class="p">]</span> <span class="o">+</span> <span class="n">input_string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">target_position</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">output_string</span>
+
+<span class="c1"># 按照BMES标注模式, 进行实体提取的函数</span>
+<span class="k">def</span> <span class="nf">get_ner_BMES</span><span class="p">(</span><span class="n">label_list</span><span class="p">):</span>
+    <span class="n">list_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_list</span><span class="p">)</span>
+    <span class="n">begin_label</span> <span class="o">=</span> <span class="s1">&#39;B-&#39;</span>
+    <span class="n">end_label</span> <span class="o">=</span> <span class="s1">&#39;E-&#39;</span>
+    <span class="n">single_label</span> <span class="o">=</span> <span class="s1">&#39;S-&#39;</span>
+    <span class="n">whole_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">index_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">tag_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stand_matrix</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">list_len</span><span class="p">):</span>
+        <span class="n">current_label</span> <span class="o">=</span> <span class="n">label_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">begin_label</span> <span class="ow">in</span> <span class="n">current_label</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">tag_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whole_tag</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">whole_tag</span> <span class="o">=</span> <span class="n">current_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">begin_label</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">index_tag</span> <span class="o">=</span> <span class="n">current_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">begin_label</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">single_label</span> <span class="ow">in</span> <span class="n">current_label</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">tag_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whole_tag</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">whole_tag</span> <span class="o">=</span> <span class="n">current_label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">single_label</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;[&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">tag_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whole_tag</span><span class="p">)</span>
+            <span class="n">whole_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">index_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">elif</span> <span class="n">end_label</span> <span class="ow">in</span> <span class="n">current_label</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">tag_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whole_tag</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">whole_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">index_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">whole_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">index_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">tag_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whole_tag</span><span class="p">)</span>
+    <span class="n">tag_list_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag_list</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tag_list_len</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tag_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tag_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+            <span class="n">insert_list</span> <span class="o">=</span> <span class="n">reverse_style</span><span class="p">(</span><span class="n">tag_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">stand_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">insert_list</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">stand_matrix</span>
+</code></pre></div>
+<hr />
+<h4 id="_4">第三步: 模型核心类的实现<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>模型类包含3部分, 需要分别实现:<ul>
+<li>1: CRF类</li>
+<li>2: IDCNN类</li>
+<li>3: IDCNN-CRF类</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>CRF类采用经典实现即可, 包括未来在搭建自己的模型时, 可以直接"套用轮子", 而不是自己去"造轮子".</p>
+</li>
+<li>
+<p>代码路径: /home/ec2-user/information_extraction/ner/idcnn/model/crf.py</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>IDCNN类的实现</p>
+</li>
+<li>
+<p>代码路径: /home/ec2-user/information_extraction/ner/idcnn/model/cnn.py</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="c1"># 构建IDCNN核心类的代码</span>
+<span class="k">class</span> <span class="nc">IDCNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_block</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IDCNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;dilation&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;dilation&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;dilation&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}]</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+        <span class="n">norms_1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">LayerNorm</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">))])</span>
+        <span class="n">norms_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">LayerNorm</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_block</span><span class="p">)])</span>
+
+        <span class="c1"># 依次构建每一层网络</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">)):</span>
+            <span class="n">dilation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;dilation&#39;</span><span class="p">]</span>
+            <span class="c1"># 网络中的第一层结构是nn.Conv1d</span>
+            <span class="n">single_block</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span>
+                                     <span class="n">out_channels</span><span class="o">=</span><span class="n">filters</span><span class="p">,</span>
+                                     <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+                                     <span class="n">dilation</span><span class="o">=</span><span class="n">dilation</span><span class="p">,</span>
+                                     <span class="n">padding</span><span class="o">=</span><span class="n">kernel_size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dilation</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># 每一层网络都包含卷积层, 激活层, 正则化层, 依次添加进net中</span>
+            <span class="n">net</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;layer</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">i</span><span class="p">,</span> <span class="n">single_block</span><span class="p">)</span>
+            <span class="n">net</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
+            <span class="n">net</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;layernorm&#39;</span><span class="p">,</span> <span class="n">norms_1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="c1"># 最后定义一个全连接层</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">filters</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+        <span class="c1"># 依次构建4个Block</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_block</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;block</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span><span class="o">.</span><span class="n">add_module</span><span class="p">(</span><span class="s1">&#39;layernorm&#39;</span><span class="p">,</span> <span class="n">norms_2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># 前向传播函数</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="c1"># 1: 首先对词嵌入张量进行全连接映射的转换</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+        <span class="c1"># 2: 调整第1, 2维度</span>
+        <span class="n">embeddings</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># 3: 最后进行IDCNN的特征提取并将第2步的维度调整回原状</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="c1"># 采用经典transformer的LayerNorm实现策略</span>
+<span class="k">class</span> <span class="nc">LayerNorm</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LayerNorm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 初始化一个全1的张量, 初始化一个全0的张量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">features</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">features</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># 计算得到均值和方差, 注意是在当前样本的横向维度, 以区别于BatchNorm</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># 按照公式计算, 并返回结果</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">std</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_2</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>
+<p>IDCNN-CRF类</p>
+</li>
+<li>
+<p>代码路径: /home/ec2-user/information_extraction/ner/idcnn/model/idcnn_crf.py</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">CRF</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">model.cnn</span> <span class="kn">import</span> <span class="n">IDCNN</span> 
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<span class="c1"># 构建IDCNN_CRF模型核心类, 内部把IDCNN和CRF两个基础类进行了融合</span>
+<span class="k">class</span> <span class="nc">IDCNN_CRF</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">tagset_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">num_filters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">use_cuda</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">IDCNN_CRF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># 重要参数初始化</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tagset_size</span> <span class="o">=</span> <span class="n">tagset_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_dim</span> <span class="o">=</span> <span class="n">embedding_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_filters</span> <span class="o">=</span> <span class="n">num_filters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_cuda</span> <span class="o">=</span> <span class="n">use_cuda</span>
+
+        <span class="c1"># 1: 设置词嵌入层, 这是所有NLP模型必备的第一步</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+
+        <span class="c1"># 2: 实例化IDCNN类, 输入维度是嵌入层的输出维度</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span> <span class="o">=</span> <span class="n">IDCNN</span><span class="p">(</span><span class="n">input_size</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="n">num_filters</span><span class="p">)</span>
+
+        <span class="c1"># 3: 对于CNN为基础的网络, dropout是标准配置</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">dropout</span><span class="p">)</span>
+
+        <span class="c1"># 4: 实例化CRF层, 本质上是一个参数方阵, 对应转移矩阵</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crf</span> <span class="o">=</span> <span class="n">CRF</span><span class="p">(</span><span class="n">target_size</span><span class="o">=</span><span class="n">tagset_size</span><span class="p">,</span> <span class="n">average_batch</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_cuda</span><span class="o">=</span><span class="n">use_cuda</span><span class="p">)</span>
+
+        <span class="c1"># 5: 最后定义全连接映射层, 将卷积的输出维度映射到CRF层的输入维度上</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">num_filters</span><span class="p">,</span> <span class="n">tagset_size</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># 获取网络的输出特征张量</span>
+    <span class="k">def</span> <span class="nf">get_output_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">seq_length</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 1: 执行初始化函数的第1层</span>
+        <span class="n">embeds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+        <span class="c1"># 2: 执行初始化函数的第2层</span>
+        <span class="n">idcnn_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idcnn</span><span class="p">(</span><span class="n">embeds</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">)</span>
+
+        <span class="c1"># 3: 执行初始化函数的第3层</span>
+        <span class="n">idcnn_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">idcnn_out</span><span class="p">)</span>
+
+        <span class="c1"># 4: 执行初始化函数的第5层</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">idcnn_out</span><span class="p">)</span>
+
+        <span class="c1"># 5: 进行张量shape的转变, 保持经典的(batch_size, seq_length, X)模式</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">feats</span>
+
+    <span class="c1"># 当模型处于inference阶段时, 默认执行的前向计算函数</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">):</span>
+        <span class="c1"># 首先获取发射矩阵的输出张量</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_score</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="c1"># 利用发射矩阵的输出张量, 直接进行维特比解码, 得到预测序列</span>
+        <span class="n">scores</span><span class="p">,</span> <span class="n">tag_seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">_viterbi_decode</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">masks</span><span class="o">.</span><span class="n">bool</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">tag_seq</span>
+
+    <span class="c1"># 当模型处于训练阶段时, 真正执行的前向计算函数, 为了得到最大似然损失值</span>
+    <span class="k">def</span> <span class="nf">neg_log_likelihood_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">tags</span><span class="p">):</span>
+        <span class="c1"># 首先获取发射矩阵的输出张量</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_score</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+        <span class="c1"># 利用CRF层的最大似然损失函数计算当前损失值</span>
+        <span class="n">loss_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crf</span><span class="o">.</span><span class="n">neg_log_likelihood_loss</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="c1"># 计算当前batch的平均损失值</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">feats</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">loss_value</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loss_value</span>
+</code></pre></div>
+<hr />
+<h4 id="_5">第四步: 训练代码的实现<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/ner/idcnn/train.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">TensorDataset</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">load_vocab</span><span class="p">,</span> <span class="n">load_data</span><span class="p">,</span> <span class="n">recover_label</span><span class="p">,</span> <span class="n">get_ner_fmeasure</span><span class="p">,</span> <span class="n">save_model</span><span class="p">,</span> <span class="n">load_model</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">model</span> <span class="kn">import</span> <span class="n">IDCNN_CRF</span>
+
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span>
+
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">load_vocab</span><span class="p">(</span><span class="n">vocab_file</span><span class="p">)</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+
+<span class="c1"># 读取训练集</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span> <span class="n">max_length</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">train_file</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span> <span class="n">label_dic</span><span class="o">=</span><span class="n">l2i_dic</span><span class="p">,</span> <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+
+<span class="c1"># 提取训练数据中的3个重要字段, 并封装成LongTensor类型</span>
+<span class="n">train_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">input_id</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">])</span>
+<span class="n">train_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">input_mask</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">])</span>
+<span class="n">train_tags</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">label_id</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">])</span>
+
+<span class="c1"># 标准&quot;两步走&quot;, 封装数据集 + 封装迭代器</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">train_ids</span><span class="p">,</span> <span class="n">train_masks</span><span class="p">,</span> <span class="n">train_tags</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+<span class="c1"># 读取测试集</span>
+<span class="n">dev_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">dev_file</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span> <span class="n">label_dic</span><span class="o">=</span><span class="n">l2i_dic</span><span class="p">,</span> <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+
+<span class="n">dev_ids</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">input_id</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">dev_data</span><span class="p">])</span>
+<span class="n">dev_masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">input_mask</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">dev_data</span><span class="p">])</span>
+<span class="n">dev_tags</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">temp</span><span class="o">.</span><span class="n">label_id</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">dev_data</span><span class="p">])</span>
+
+<span class="n">dev_dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">dev_ids</span><span class="p">,</span> <span class="n">dev_masks</span><span class="p">,</span> <span class="n">dev_tags</span><span class="p">)</span>
+<span class="n">dev_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dev_dataset</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+
+<span class="c1"># 实例化模型对象model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">IDCNN_CRF</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">tagset_size</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">use_cuda</span><span class="o">=</span><span class="n">use_cuda</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">use_cuda</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.00001</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.00005</span><span class="p">)</span>
+
+<span class="n">best_f</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
+<span class="c1"># 双重for循环训练模型</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;epoch: </span><span class="si">{}</span><span class="s1">，train&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">train_batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)):</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">train_batch</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">sentence</span><span class="p">),</span> <span class="n">Variable</span><span class="p">(</span><span class="n">masks</span><span class="p">),</span> <span class="n">Variable</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">use_cuda</span><span class="p">:</span>
+            <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+            <span class="n">masks</span> <span class="o">=</span> <span class="n">masks</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="c1"># 训练时的损失值, 需要通过调用最大似然损失计算的函数, 而不是默认的forward函数</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">neg_log_likelihood_loss</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">tags</span><span class="p">)</span>
+        <span class="c1"># &quot;老三样&quot;</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;epoch: </span><span class="si">{}</span><span class="s1">，loss: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+
+    <span class="c1"># 每训练完一个epoch, 对测试集进行一次评估</span>
+    <span class="n">acc</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dev_loader</span><span class="p">)</span>
+    <span class="c1"># 每当有更优的F1值时, 更新最优F1, 并保存模型状态字典</span>
+    <span class="k">if</span> <span class="n">f</span> <span class="o">&gt;</span> <span class="n">best_f</span><span class="p">:</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">save_model_path</span><span class="p">)</span>
+        <span class="n">best_f</span> <span class="o">=</span> <span class="n">f</span>
+</code></pre></div>
+<hr />
+<h4 id="_6">第五步: 评估代码的实现<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/ner/idcnn/train.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 评估函数</span>
+<span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dev_loader</span><span class="p">):</span>
+    <span class="c1"># 将模型设置为评估模式</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+    <span class="c1"># 初始化预测列表, 标签列表</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gold</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">)</span>
+    <span class="c1"># 循环遍历测试集, 并评估关键指标</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dev_batch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dev_loader</span><span class="p">):</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">dev_batch</span>
+        <span class="c1"># 对数据进行Variable封装</span>
+        <span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">sentence</span><span class="p">),</span> <span class="n">Variable</span><span class="p">(</span><span class="n">masks</span><span class="p">),</span> <span class="n">Variable</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+        <span class="c1"># 是否使用GPU进行加速推理</span>
+        <span class="k">if</span> <span class="n">use_cuda</span><span class="p">:</span>
+            <span class="n">sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+            <span class="n">masks</span> <span class="o">=</span> <span class="n">masks</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+
+        <span class="c1"># 利用模型进行推理</span>
+        <span class="n">predict_tags</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+        <span class="c1"># 将预测值和真实标签添加进结果列表中</span>
+        <span class="n">pred</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">predict_tags</span><span class="o">.</span><span class="n">tolist</span><span class="p">()])</span>
+        <span class="n">gold</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tags</span><span class="o">.</span><span class="n">tolist</span><span class="p">()])</span>
+
+    <span class="c1"># 将数字化标签映射回真实标签</span>
+    <span class="n">pred_label</span><span class="p">,</span> <span class="n">gold_label</span> <span class="o">=</span> <span class="n">recover_label</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">gold</span><span class="p">,</span> <span class="n">l2i_dic</span><span class="p">,</span> <span class="n">i2l_dic</span><span class="p">)</span>
+    <span class="c1"># 计算关键指标</span>
+    <span class="n">acc</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">get_ner_fmeasure</span><span class="p">(</span><span class="n">gold_label</span><span class="p">,</span> <span class="n">pred_label</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p: </span><span class="si">{}</span><span class="s1">，r: </span><span class="si">{}</span><span class="s1">, f: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="c1"># 评估结束后, 将模型设置为训练模式</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">acc</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python train.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>max_length:  256
+vocab_size:  21128
+/home/ec2-user/.local/lib/python3.6/site-packages/torch/nn/modules/rnn.py:60: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.4 and num_layers=1
+  &quot;num_layers={}&quot;.format(dropout, num_layers))
+epoch: 0，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:00&lt;00:00,  1.04it/s]
+epoch: 0，loss: 2.960085868835449, best_f1: -100
+evaluate
+gold_num =  1042  pred_num =  369  right_num =  0
+p: 0.0，r: 0.0, f: -1
+epoch: 1，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 1，loss: 1.3307428359985352, best_f1: -1
+evaluate
+gold_num =  1042  pred_num =  96  right_num =  0
+p: 0.0，r: 0.0, f: -1
+epoch: 2，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:08&lt;00:00,  1.03s/it]
+epoch: 2，loss: 1.3992414474487305, best_f1: -1
+evaluate
+gold_num =  1042  pred_num =  77  right_num =  3
+p: 0.03896103896103896，r: 0.0028790786948176585, f: 0.005361930294906167
+epoch: 3，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:08&lt;00:00,  1.03s/it]
+epoch: 3，loss: 0.9490184783935547, best_f1: 0.005361930294906167
+evaluate
+gold_num =  1042  pred_num =  209  right_num =  2
+p: 0.009569377990430622，r: 0.0019193857965451055, f: 0.0031974420463629096
+epoch: 4，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:08&lt;00:00,  1.03s/it]
+epoch: 4，loss: 0.7577829360961914, best_f1: 0.005361930294906167
+evaluate
+gold_num =  1042  pred_num =  390  right_num =  129
+p: 0.33076923076923076，r: 0.1238003838771593, f: 0.18016759776536315
+epoch: 5，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:07&lt;00:00,  1.02s/it]
+epoch: 5，loss: 0.6704387664794922, best_f1: 0.18016759776536315
+evaluate
+gold_num =  1042  pred_num =  540  right_num =  260
+p: 0.48148148148148145，r: 0.2495201535508637, f: 0.3286978508217446
+epoch: 6，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:07&lt;00:00,  1.02s/it]
+epoch: 6，loss: 0.3735923767089844, best_f1: 0.3286978508217446
+evaluate
+gold_num =  1042  pred_num =  857  right_num =  638
+p: 0.7444574095682613，r: 0.6122840690978887, f: 0.6719325961032122
+epoch: 7，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 7，loss: 0.23816967010498047, best_f1: 0.6719325961032122
+evaluate
+gold_num =  1042  pred_num =  1010  right_num =  733
+p: 0.7257425742574257，r: 0.7034548944337812, f: 0.7144249512670564
+epoch: 8，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 8，loss: 0.20075607299804688, best_f1: 0.7144249512670564
+evaluate
+gold_num =  1042  pred_num =  1023  right_num =  725
+p: 0.7086999022482894，r: 0.6957773512476008, f: 0.7021791767554479
+epoch: 9，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 9，loss: 0.3249549865722656, best_f1: 0.7144249512670564
+evaluate
+gold_num =  1042  pred_num =  1035  right_num =  751
+p: 0.7256038647342995，r: 0.7207293666026872, f: 0.7231584015406838
+epoch: 10，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 10，loss: 0.38639259338378906, best_f1: 0.7231584015406838
+evaluate
+gold_num =  1042  pred_num =  1008  right_num =  777
+p: 0.7708333333333334，r: 0.7456813819577736, f: 0.758048780487805
+epoch: 11，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 11，loss: 0.09833717346191406, best_f1: 0.758048780487805
+evaluate
+gold_num =  1042  pred_num =  950  right_num =  817
+p: 0.86，r: 0.7840690978886756, f: 0.820281124497992
+epoch: 12，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 12，loss: 0.067718505859375, best_f1: 0.820281124497992
+evaluate
+gold_num =  1042  pred_num =  966  right_num =  813
+p: 0.8416149068322981，r: 0.7802303262955854, f: 0.8097609561752989
+epoch: 13，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 13，loss: 0.10879707336425781, best_f1: 0.820281124497992
+evaluate
+gold_num =  1042  pred_num =  957  right_num =  827
+p: 0.864158829676071，r: 0.7936660268714012, f: 0.8274137068534267
+epoch: 14，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 14，loss: 0.09510421752929688, best_f1: 0.8274137068534267
+evaluate
+gold_num =  1042  pred_num =  970  right_num =  854
+p: 0.8804123711340206，r: 0.8195777351247601, f: 0.848906560636183
+epoch: 15，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.02s/it]
+epoch: 15，loss: 0.1023712158203125, best_f1: 0.848906560636183
+evaluate
+gold_num =  1042  pred_num =  997  right_num =  868
+p: 0.8706118355065195，r: 0.8330134357005758, f: 0.851397743992153
+epoch: 16，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:07&lt;00:00,  1.02s/it]
+epoch: 16，loss: 0.07217025756835938, best_f1: 0.851397743992153
+evaluate
+gold_num =  1042  pred_num =  966  right_num =  893
+p: 0.9244306418219461，r: 0.8570057581573897, f: 0.8894422310756972
+epoch: 17，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 17，loss: 0.05801582336425781, best_f1: 0.8894422310756972
+evaluate
+gold_num =  1042  pred_num =  980  right_num =  928
+p: 0.9469387755102041，r: 0.8905950095969289, f: 0.9179030662710188
+epoch: 18，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:07&lt;00:00,  1.02s/it]
+epoch: 18，loss: 0.08353233337402344, best_f1: 0.9179030662710188
+evaluate
+gold_num =  1042  pred_num =  1003  right_num =  956
+p: 0.9531405782652044，r: 0.9174664107485605, f: 0.9349633251833741
+epoch: 19，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 19，loss: 0.04948616027832031, best_f1: 0.9349633251833741
+evaluate
+gold_num =  1042  pred_num =  1018  right_num =  953
+p: 0.9361493123772102，r: 0.9145873320537428, f: 0.9252427184466019
+epoch: 20，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 20，loss: 0.0920867919921875, best_f1: 0.9349633251833741
+evaluate
+gold_num =  1042  pred_num =  1019  right_num =  963
+p: 0.9450441609421001，r: 0.9241842610364683, f: 0.9344978165938864
+epoch: 21，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 21，loss: 0.08744049072265625, best_f1: 0.9349633251833741
+evaluate
+gold_num =  1042  pred_num =  1026  right_num =  951
+p: 0.9269005847953217，r: 0.9126679462571977, f: 0.9197292069632496
+epoch: 22，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 22，loss: 0.18969345092773438, best_f1: 0.9349633251833741
+evaluate
+gold_num =  1042  pred_num =  1047  right_num =  991
+p: 0.9465138490926457，r: 0.9510556621880998, f: 0.9487793202489229
+epoch: 23，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 23，loss: 0.0296478271484375, best_f1: 0.9487793202489229
+evaluate
+gold_num =  1042  pred_num =  1019  right_num =  995
+p: 0.9764474975466143，r: 0.95489443378119, f: 0.9655507035419698
+epoch: 24，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 24，loss: 0.03677558898925781, best_f1: 0.9655507035419698
+evaluate
+gold_num =  1042  pred_num =  1030  right_num =  1012
+p: 0.9825242718446602，r: 0.9712092130518234, f: 0.9768339768339768
+epoch: 25，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 25，loss: 0.02207183837890625, best_f1: 0.9768339768339768
+evaluate
+gold_num =  1042  pred_num =  1032  right_num =  1016
+p: 0.9844961240310077，r: 0.9750479846449136, f: 0.9797492767598842
+epoch: 26，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 26，loss: 0.01473236083984375, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1031  right_num =  1014
+p: 0.9835111542192047，r: 0.9731285988483686, f: 0.9782923299565847
+epoch: 27，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 27，loss: 0.04078865051269531, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1028  right_num =  1014
+p: 0.9863813229571985，r: 0.9731285988483686, f: 0.9797101449275363
+epoch: 28，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 28，loss: 0.0731048583984375, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1134  right_num =  967
+p: 0.8527336860670194，r: 0.9280230326295585, f: 0.8887867647058822
+epoch: 29，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 29，loss: 0.03252983093261719, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1015  right_num =  955
+p: 0.9408866995073891，r: 0.9165067178502879, f: 0.9285367039377735
+epoch: 30，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 30，loss: 0.09288597106933594, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1023  right_num =  990
+p: 0.967741935483871，r: 0.9500959692898272, f: 0.9588377723970944
+epoch: 31，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 31，loss: 0.011251449584960938, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1025  right_num =  998
+p: 0.9736585365853658，r: 0.9577735124760077, f: 0.9656507014997581
+epoch: 32，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 32，loss: 0.151336669921875, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1041  right_num =  1017
+p: 0.9769452449567724，r: 0.9760076775431862, f: 0.9764762361977918
+epoch: 33，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 33，loss: 0.008983612060546875, best_f1: 0.9797492767598842
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1020
+p: 0.9807692307692307，r: 0.9788867562380038, f: 0.9798270893371758
+epoch: 34，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 34，loss: 0.010942459106445312, best_f1: 0.9798270893371758
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1023
+p: 0.9817658349328215，r: 0.9817658349328215, f: 0.9817658349328215
+epoch: 35，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 35，loss: 0.0137786865234375, best_f1: 0.9817658349328215
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1025
+p: 0.9855769230769231，r: 0.9836852207293666, f: 0.9846301633045149
+epoch: 36，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 36，loss: 0.010051727294921875, best_f1: 0.9846301633045149
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1030
+p: 0.9903846153846154，r: 0.9884836852207294, f: 0.989433237271854
+epoch: 37，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 37，loss: 0.01131439208984375, best_f1: 0.989433237271854
+evaluate
+gold_num =  1042  pred_num =  1036  right_num =  1030
+p: 0.9942084942084942，r: 0.9884836852207294, f: 0.9913378248315688
+epoch: 38，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 38，loss: 0.008291244506835938, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1038  right_num =  1029
+p: 0.9913294797687862，r: 0.9875239923224568, f: 0.989423076923077
+epoch: 39，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 39，loss: 0.010332107543945312, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1028
+p: 0.9884615384615385，r: 0.9865642994241842, f: 0.9875120076849184
+epoch: 40，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 40，loss: 0.017686843872070312, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1030
+p: 0.9903846153846154，r: 0.9884836852207294, f: 0.989433237271854
+epoch: 41，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 41，loss: 0.009771347045898438, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1043  right_num =  1013
+p: 0.9712368168744008，r: 0.972168905950096, f: 0.9717026378896882
+epoch: 42，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 42，loss: 0.20522689819335938, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1023  right_num =  886
+p: 0.8660801564027371，r: 0.8502879078694817, f: 0.8581113801452784
+epoch: 43，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 43，loss: 0.0157928466796875, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1039  right_num =  991
+p: 0.9538017324350336，r: 0.9510556621880998, f: 0.9524267179240749
+epoch: 44，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 44，loss: 0.00662994384765625, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1024  right_num =  996
+p: 0.97265625，r: 0.9558541266794626, f: 0.9641819941916748
+epoch: 45，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 45，loss: 0.009222030639648438, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1046  right_num =  1028
+p: 0.982791586998088，r: 0.9865642994241842, f: 0.9846743295019157
+epoch: 46，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 46，loss: 0.012540817260742188, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1044  right_num =  1020
+p: 0.9770114942528736，r: 0.9788867562380038, f: 0.977948226270374
+epoch: 47，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 47，loss: 0.0095062255859375, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1038  right_num =  1018
+p: 0.9807321772639692，r: 0.9769673704414588, f: 0.9788461538461538
+epoch: 48，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.00s/it]
+epoch: 48，loss: 0.010555267333984375, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1036  right_num =  1026
+p: 0.9903474903474904，r: 0.9846449136276392, f: 0.9874879692011549
+epoch: 49，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 49，loss: 0.030834197998046875, best_f1: 0.9913378248315688
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1034
+p: 0.9942307692307693，r: 0.9923224568138196, f: 0.9932756964457252
+epoch: 50，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 50，loss: 0.0063266754150390625, best_f1: 0.9932756964457252
+evaluate
+gold_num =  1042  pred_num =  1038  right_num =  1036
+p: 0.9980732177263969，r: 0.9942418426103646, f: 0.9961538461538462
+epoch: 51，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 51，loss: 0.0021381378173828125, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1030
+p: 0.9903846153846154，r: 0.9884836852207294, f: 0.989433237271854
+epoch: 52，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 52，loss: 0.12633514404296875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1153  right_num =  1006
+p: 0.8725065047701648，r: 0.9654510556621881, f: 0.9166287015945331
+epoch: 53，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 53，loss: 0.006160736083984375, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1071  right_num =  878
+p: 0.8197945845004668，r: 0.8426103646833013, f: 0.8310459062943681
+epoch: 54，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 54，loss: 0.004974365234375, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1025  right_num =  994
+p: 0.9697560975609756，r: 0.9539347408829175, f: 0.9617803580067731
+epoch: 55，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 55，loss: 0.00543212890625, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1038  right_num =  1022
+p: 0.9845857418111753，r: 0.980806142034549, f: 0.9826923076923078
+epoch: 56，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 56，loss: 0.007305145263671875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1036  right_num =  1026
+p: 0.9903474903474904，r: 0.9846449136276392, f: 0.9874879692011549
+epoch: 57，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 57，loss: 0.010717391967773438, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1027
+p: 0.9875，r: 0.9856046065259118, f: 0.9865513928914506
+epoch: 58，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 58，loss: 0.0052585601806640625, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1028
+p: 0.9865642994241842，r: 0.9865642994241842, f: 0.9865642994241842
+epoch: 59，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 59，loss: 0.0044727325439453125, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1032
+p: 0.9904030710172744，r: 0.9904030710172744, f: 0.9904030710172744
+epoch: 60，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 60，loss: 0.0077114105224609375, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1029
+p: 0.989423076923077，r: 0.9875239923224568, f: 0.9884726224783862
+epoch: 61，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 61，loss: 0.009601593017578125, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1034
+p: 0.9923224568138196，r: 0.9923224568138196, f: 0.9923224568138196
+epoch: 62，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 62，loss: 0.018930435180664062, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1046  right_num =  1032
+p: 0.9866156787762906，r: 0.9904030710172744, f: 0.9885057471264367
+epoch: 63，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 63，loss: 0.0053234100341796875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1048  right_num =  1035
+p: 0.9875954198473282，r: 0.9932821497120922, f: 0.9904306220095693
+epoch: 64，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 64，loss: 0.003246307373046875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1029
+p: 0.9875239923224568，r: 0.9875239923224568, f: 0.9875239923224568
+epoch: 65，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 65，loss: 0.004497528076171875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1046  right_num =  1032
+p: 0.9866156787762906，r: 0.9904030710172744, f: 0.9885057471264367
+epoch: 66，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 66，loss: 0.007976531982421875, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1033  right_num =  1010
+p: 0.9777347531461762，r: 0.9692898272552783, f: 0.9734939759036145
+epoch: 67，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 67，loss: 0.0014057159423828125, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1034  right_num =  1032
+p: 0.9980657640232108，r: 0.9904030710172744, f: 0.9942196531791907
+epoch: 68，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 68，loss: 0.03486824035644531, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1034
+p: 0.9923224568138196，r: 0.9923224568138196, f: 0.9923224568138196
+epoch: 69，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:05&lt;00:00,  1.01s/it]
+epoch: 69，loss: 0.00244140625, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1038
+p: 0.9961612284069098，r: 0.9961612284069098, f: 0.9961612284069098
+epoch: 70，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 70，loss: 0.0067806243896484375, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1046  right_num =  1036
+p: 0.9904397705544933，r: 0.9942418426103646, f: 0.9923371647509578
+epoch: 71，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 71，loss: 0.0281219482421875, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1038
+p: 0.9961612284069098，r: 0.9961612284069098, f: 0.9961612284069098
+epoch: 72，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 72，loss: 0.046474456787109375, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1044  right_num =  1030
+p: 0.9865900383141762，r: 0.9884836852207294, f: 0.987535953978907
+epoch: 73，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 73，loss: 0.010404586791992188, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1053  right_num =  1026
+p: 0.9743589743589743，r: 0.9846449136276392, f: 0.9794749403341289
+epoch: 74，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 74，loss: 0.00775146484375, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1040  right_num =  1023
+p: 0.9836538461538461，r: 0.9817658349328215, f: 0.9827089337175792
+epoch: 75，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 75，loss: 0.00206756591796875, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1035  right_num =  1027
+p: 0.9922705314009662，r: 0.9856046065259118, f: 0.9889263360616274
+epoch: 76，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 76，loss: 0.0015316009521484375, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1051  right_num =  1042
+p: 0.9914367269267365，r: 1.0, f: 0.9956999522216914
+epoch: 77，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 77，loss: 0.0028858184814453125, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1038
+p: 0.9961612284069098，r: 0.9961612284069098, f: 0.9961612284069098
+epoch: 78，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 78，loss: 0.02457427978515625, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1038  right_num =  1022
+p: 0.9845857418111753，r: 0.980806142034549, f: 0.9826923076923078
+epoch: 79，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 79，loss: 0.018167495727539062, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1049  right_num =  1035
+p: 0.9866539561487131，r: 0.9932821497120922, f: 0.9899569583931133
+epoch: 80，train
+100%|████████████████████████████████████████████████████████████████████| 125/125 [02:06&lt;00:00,  1.01s/it]
+epoch: 80，loss: 0.007198333740234375, best_f1: 0.9961612284069098
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1034
+p: 0.9923224568138196，r: 0.9923224568138196, f: 0.9923224568138196
+
+Done!!!
+best_f = 0.9961612284069098
+</code></pre></div>
+<hr />
+<blockquote>
+<ul>
+<li>追溯日志可以发现最优的模型是在epoch = 69, 也就是真实训练的第70轮次后产生的!!!</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code>epoch: 69，loss: 0.00244140625, best_f1: 0.9961538461538462
+evaluate
+gold_num =  1042  pred_num =  1042  right_num =  1038
+p: 0.9961612284069098，r: 0.9961612284069098, f: 0.9961612284069098
+</code></pre></div>
+<hr />
+<hr />
+<h3 id="_7">小节总结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本小节掌握了IDCNN模型的架构和原理, 并掌握了全部的代码实现.</li>
+</ul>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="2_2.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 2.2 知识图谱的数值表示" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              2.2 知识图谱的数值表示
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="3_2.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.2 FLAT模型" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              3.2 FLAT模型
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

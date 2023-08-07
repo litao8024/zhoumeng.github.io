@@ -1,0 +1,2238 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="img/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+    
+    
+      
+        <title>4.1 multi-head-selection模型 - 红蜘蛛知识图谱项目 V3.0</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.50e68009.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multi-head-selection" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-header__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            红蜘蛛知识图谱项目 V3.0
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4.1 multi-head-selection模型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <img src="assets/images/logo.svg" height="45px" alt="logo">
+
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="红蜘蛛知识图谱项目 V3.0" class="md-nav__button md-logo" aria-label="红蜘蛛知识图谱项目 V3.0" data-md-component="logo">
+      
+  <img src="img/logo.png" alt="logo">
+
+    </a>
+    红蜘蛛知识图谱项目 V3.0
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          第一章:项目背景
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第一章:项目背景" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          第一章:项目背景
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_1.html" class="md-nav__link">
+        1.1 红蜘蛛项目背景
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1_2.html" class="md-nav__link">
+        1.2 知识图谱概述
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          第二章:知识查询
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第二章:知识查询" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          第二章:知识查询
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_1.html" class="md-nav__link">
+        2.1 知识查询方法介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2_2.html" class="md-nav__link">
+        2.2 知识图谱的数值表示
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          第三章:实体抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第三章:实体抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          第三章:实体抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_1.html" class="md-nav__link">
+        3.1 快速部署的IDCNN模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_2.html" class="md-nav__link">
+        3.2 FLAT模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_3.html" class="md-nav__link">
+        3.3 实体消歧与实体对齐
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="3_4.html" class="md-nav__link">
+        3.4 基于规则派的NER
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          第四章:关系抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第四章:关系抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          第四章:关系抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          4.1 multi-head-selection模型
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="4_1.html" class="md-nav__link md-nav__link--active">
+        4.1 multi-head-selection模型
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multi-head-selection" class="md-nav__link">
+    multi-head-selection模型
+  </a>
+  
+    <nav class="md-nav" aria-label="multi-head-selection模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-selection_1" class="md-nav__link">
+    multi-head-selection模型架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-selection_2" class="md-nav__link">
+    multi-head-selection模型实现
+  </a>
+  
+    <nav class="md-nav" aria-label="multi-head-selection模型实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一步: 查看数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二步: 构建数据迭代器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三步: 构建模型类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四步: 编写评估指标函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五步: 编写运行主函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_2.html" class="md-nav__link">
+        4.2 Casrel模型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4_3.html" class="md-nav__link">
+        4.3 基于规则派的RE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          第五章:事件抽取
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第五章:事件抽取" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          第五章:事件抽取
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="5_1.html" class="md-nav__link">
+        5.1 中文场景下的事件抽取
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          第六章:知识构建
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第六章:知识构建" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          第六章:知识构建
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_1.html" class="md-nav__link">
+        6.1 概念图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_2.html" class="md-nav__link">
+        6.2 百科图谱的构建
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="6_3.html" class="md-nav__link">
+        6.3 知识图谱的众包
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          第七章:知识存储
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第七章:知识存储" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          第七章:知识存储
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_1.html" class="md-nav__link">
+        7.1 知识图谱建模与存储
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="7_2.html" class="md-nav__link">
+        7.2 neo4j技术解析
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          第八章:知识补全
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第八章:知识补全" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          第八章:知识补全
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_1.html" class="md-nav__link">
+        8.1 经典知识补全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="8_2.html" class="md-nav__link">
+        8.2 知识图谱质量控制
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          第九章:知识推理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第九章:知识推理" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          第九章:知识推理
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_1.html" class="md-nav__link">
+        9.1 常用推理方法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_2.html" class="md-nav__link">
+        9.2 常用推理引擎
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="9_3.html" class="md-nav__link">
+        9.3 知识推理展望
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          第十章:红蜘蛛上线
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十章:红蜘蛛上线" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          第十章:红蜘蛛上线
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_1.html" class="md-nav__link">
+        10.1 总体设计方案
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_2.html" class="md-nav__link">
+        10.2 搭建红蜘蛛机器人
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10_3.html" class="md-nav__link">
+        10.3 上线部署与联调测试
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11">
+          第十一章:扩展章节之一
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十一章:扩展章节之一" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          第十一章:扩展章节之一
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11_1.html" class="md-nav__link">
+        11.1 TENER模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_12">
+          第十二章:扩展章节之二
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十二章:扩展章节之二" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          第十二章:扩展章节之二
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12_1.html" class="md-nav__link">
+        12.1 Soft-lexicon模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_13">
+          第十三章:扩展章节之三
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十三章:扩展章节之三" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          第十三章:扩展章节之三
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13_1.html" class="md-nav__link">
+        13.1 基于CNN的关系抽取模型
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_14" type="checkbox" id="__nav_14" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_14">
+          第十四章:扩展章节之四
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十四章:扩展章节之四" data-md-level="1">
+        <label class="md-nav__title" for="__nav_14">
+          <span class="md-nav__icon md-icon"></span>
+          第十四章:扩展章节之四
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14_1.html" class="md-nav__link">
+        14.1 CR-CNN关系抽取模型详解
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_15" type="checkbox" id="__nav_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_15">
+          第十五章:扩展章节之五
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="第十五章:扩展章节之五" data-md-level="1">
+        <label class="md-nav__title" for="__nav_15">
+          <span class="md-nav__icon md-icon"></span>
+          第十五章:扩展章节之五
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15_1.html" class="md-nav__link">
+        15.1 中文NER的SOTA
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#multi-head-selection" class="md-nav__link">
+    multi-head-selection模型
+  </a>
+  
+    <nav class="md-nav" aria-label="multi-head-selection模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    学习目标
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-selection_1" class="md-nav__link">
+    multi-head-selection模型架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-head-selection_2" class="md-nav__link">
+    multi-head-selection模型实现
+  </a>
+  
+    <nav class="md-nav" aria-label="multi-head-selection模型实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一步: 查看数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二步: 构建数据迭代器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三步: 构建模型类
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四步: 编写评估指标函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五步: 编写运行主函数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>4.1 multi-head-selection模型</h1>
+
+<h2 id="multi-head-selection">multi-head-selection模型<a class="headerlink" href="#multi-head-selection" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="_1">学习目标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>理解multi-head-selection模型的架构.</li>
+<li>掌握multi-head-selection模型的实现.</li>
+</ul>
+<hr />
+<h3 id="multi-head-selection_1">multi-head-selection模型架构<a class="headerlink" href="#multi-head-selection_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>多头选择模型原始论文&lt;&lt; Joint entity recognition and relation extraction as a multi-head selection problem &gt;&gt;.</p>
+</li>
+<li>
+<p>multi-head-selection模型可以将NER任务和RE任务合二为一, 作为一个整体来看待, 这也是多头的意义所在, 模型总体架构图如下:</p>
+</li>
+</ul>
+<p><center><img alt="" src="img/4_1_1.png" /></center></p>
+<hr />
+<blockquote>
+<ul>
+<li>核心: 模型首先使用BiLSTM+CRF结构识别头实体, 然后再多类别分类的基础上, 一次性进行尾实体提取和关系抽取!!!</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>实体-关系抽取任务旨在识别句子中的实体跨度, 并检测两个实体之间的关系. 一般来说, 它可以形成一个三元组(e1, r, e2), 表示头实体e1, 尾实体e2之间存在关系r.</li>
+</ul>
+<hr />
+<ul>
+<li>传统的pipeline方法一般将任务分为两个阶段:<ul>
+<li>第一阶段: 命名实体识别(NER)</li>
+<li>第二阶段: 关系抽取(RE)</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>思考: 传统pipeline方法是否足够完美? 有什么缺陷?</li>
+</ul>
+</blockquote>
+<hr />
+<ul>
+<li>联合模型的两种范式:<ul>
+<li>范式一: (e1, e2) -&gt; r , 首先识别句子中的所有实体, 然后根据每个实体对进行关系分类.</li>
+<li>范式二: e1 -&gt; (r, e2) , 首先检测头实体, 然后预测对应的关系和尾实体.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<blockquote>
+<ul>
+<li>思考: 范式一和范式二是否足够完美? 有什么缺陷? 哪个更好?</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<h3 id="multi-head-selection_2">multi-head-selection模型实现<a class="headerlink" href="#multi-head-selection_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>本项目中用于医疗场景下的数据放在3.2和3.3节中应用, 本节为了同时兼顾NER和RE任务, 采用了更大众化的非垂直领域数据, 以有利于同学们的学习理解.</li>
+</ul>
+<hr />
+<ul>
+<li>本项目的多头选择模型在实现上分如下几个步骤:<ul>
+<li>第一步: 查看数据集</li>
+<li>第二步: 构建数据迭代器</li>
+<li>第三步: 构建模型类</li>
+<li>第四步: 编写评估指标函数</li>
+<li>第五步: 编写运行主函数</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="_2">第一步: 查看数据集<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>数据集总共有5个文件:<ul>
+<li>训练集数据train_data.json</li>
+<li>验证集数据dev_data.json</li>
+<li>词典数据word_vocab.json</li>
+<li>关系词典数据relation_vocab.json</li>
+<li>标注字典数据bio_vocab.json</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>训练集数据路径: <ul>
+<li>/home/ec2-user/information_extraction/relation/multi_head_selection/data/train_data.json</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;text&quot;: &quot;如何演好自己的角色，请读《演员自我修养》《喜剧之王》周星驰崛起于穷困潦倒之中的独门秘笈&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;主演&quot;, &quot;object&quot;: &quot;周星驰&quot;, &quot;subject&quot;: &quot;喜剧之王&quot;}], &quot;bio&quot;: [&quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 24, &quot;predicate&quot;: 46, &quot;object&quot;: 28}]}
+{&quot;text&quot;: &quot;茶树茶网蝽，Stephanitis chinensis Drake，属半翅目网蝽科冠网椿属的一种昆虫&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;目&quot;, &quot;object&quot;: &quot;半翅目&quot;, &quot;subject&quot;: &quot;茶树茶网蝽&quot;}], &quot;bio&quot;: [&quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 4, &quot;predicate&quot;: 4, &quot;object&quot;: 37}]}
+{&quot;text&quot;: &quot;爱德华·尼科·埃尔南迪斯（1986-），是一位身高只有70公分哥伦比亚男子，体重10公斤，只比随身行李高一些，2010年获吉尼斯世界纪录正式认证，成为全球当今最矮的成年男人&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;身高&quot;, &quot;object&quot;: &quot;70公分&quot;, &quot;subject&quot;: &quot;爱德华·尼科·埃尔南迪斯&quot;}, {&quot;predicate&quot;: &quot;出生日期&quot;, &quot;object&quot;: &quot;1986&quot;, &quot;subject&quot;: &quot;爱德华·尼科·埃尔南迪斯&quot;}, {&quot;predicate&quot;: &quot;国籍&quot;, &quot;object&quot;: &quot;哥伦比亚&quot;, &quot;subject&quot;: &quot;爱德华·尼科·埃尔南迪斯&quot;}], &quot;bio&quot;: [&quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 11, &quot;predicate&quot;: 14, &quot;object&quot;: 30}, {&quot;subject&quot;: 11, &quot;predicate&quot;: 17, &quot;object&quot;: 16}, {&quot;subject&quot;: 11, &quot;predicate&quot;: 21, &quot;object&quot;: 34}]}
+{&quot;text&quot;: &quot;《逐风行》是百度文学旗下纵横中文网签约作家清水秋风创作的一部东方玄幻小说，小说已于2014-04-28正式发布&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;连载网站&quot;, &quot;object&quot;: &quot;纵横中文网&quot;, &quot;subject&quot;: &quot;逐风行&quot;}, {&quot;predicate&quot;: &quot;作者&quot;, &quot;object&quot;: &quot;清水秋风&quot;, &quot;subject&quot;: &quot;逐风行&quot;}], &quot;bio&quot;: [&quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 3, &quot;predicate&quot;: 23, &quot;object&quot;: 16}, {&quot;subject&quot;: 3, &quot;predicate&quot;: 42, &quot;object&quot;: 24}]}
+{&quot;text&quot;: &quot;”（图）张学良、赵一荻双栖&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;妻子&quot;, &quot;object&quot;: &quot;赵一荻&quot;, &quot;subject&quot;: &quot;张学良&quot;}, {&quot;predicate&quot;: &quot;丈夫&quot;, &quot;object&quot;: &quot;张学良&quot;, &quot;subject&quot;: &quot;赵一荻&quot;}], &quot;bio&quot;: [&quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 6, &quot;predicate&quot;: 8, &quot;object&quot;: 10}, {&quot;subject&quot;: 10, &quot;predicate&quot;: 24, &quot;object&quot;: 6}]}
+</code></pre></div>
+<hr />
+<ul>
+<li>验证集数据路径:<ul>
+<li>/home/ec2-user/information_extraction/relation/multi_head_selection/data/dev_data.json</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;text&quot;: &quot;查尔斯·阿兰基斯（Charles Aránguiz），1989年4月17日出生于智利圣地亚哥，智利职业足球运动员，司职中场，效力于德国足球甲级联赛勒沃库森足球俱乐部&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;出生地&quot;, &quot;object&quot;: &quot;圣地亚哥&quot;, &quot;subject&quot;: &quot;查尔斯·阿兰基斯&quot;}, {&quot;predicate&quot;: &quot;出生日期&quot;, &quot;object&quot;: &quot;1989年4月17日&quot;, &quot;subject&quot;: &quot;查尔斯·阿兰基斯&quot;}], &quot;bio&quot;: [&quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 7, &quot;predicate&quot;: 3, &quot;object&quot;: 45}, {&quot;subject&quot;: 7, &quot;predicate&quot;: 17, &quot;object&quot;: 36}]}
+{&quot;text&quot;: &quot;《离开》是由张宇谱曲，演唱&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;歌手&quot;, &quot;object&quot;: &quot;张宇&quot;, &quot;subject&quot;: &quot;离开&quot;}, {&quot;predicate&quot;: &quot;作曲&quot;, &quot;object&quot;: &quot;张宇&quot;, &quot;subject&quot;: &quot;离开&quot;}], &quot;bio&quot;: [&quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 2, &quot;predicate&quot;: 31, &quot;object&quot;: 7}, {&quot;subject&quot;: 2, &quot;predicate&quot;: 43, &quot;object&quot;: 7}]}
+{&quot;text&quot;: &quot;《愤怒的唐僧》由北京吴意波影视文化工作室与优酷电视剧频道联合制作，故事以喜剧元素为主，讲述唐僧与佛祖打牌，得罪了佛祖，被踢下人间再渡九九八十一难的故事&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;出品公司&quot;, &quot;object&quot;: &quot;北京吴意波影视文化工作室&quot;, &quot;subject&quot;: &quot;愤怒的唐僧&quot;}, {&quot;predicate&quot;: &quot;导演&quot;, &quot;object&quot;: &quot;吴意波&quot;, &quot;subject&quot;: &quot;愤怒的唐僧&quot;}], &quot;bio&quot;: [&quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 5, &quot;predicate&quot;: 15, &quot;object&quot;: 19}, {&quot;subject&quot;: 5, &quot;predicate&quot;: 12, &quot;object&quot;: 12}]}
+{&quot;text&quot;: &quot;李治即位后，萧淑妃受宠，王皇后为了排挤萧淑妃，答应李治让身在感业寺的武则天续起头发，重新纳入后宫&quot;, &quot;spo_list&quot;: [{&quot;predicate&quot;: &quot;妻子&quot;, &quot;object&quot;: &quot;萧淑妃&quot;, &quot;subject&quot;: &quot;李治&quot;}, {&quot;predicate&quot;: &quot;丈夫&quot;, &quot;object&quot;: &quot;李治&quot;, &quot;subject&quot;: &quot;萧淑妃&quot;}], &quot;bio&quot;: [&quot;B&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;B&quot;, &quot;I&quot;, &quot;I&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;, &quot;O&quot;], &quot;selection&quot;: [{&quot;subject&quot;: 1, &quot;predicate&quot;: 8, &quot;object&quot;: 8}, {&quot;subject&quot;: 8, &quot;predicate&quot;: 24, &quot;object&quot;: 1}]}
+</code></pre></div>
+<hr />
+<ul>
+<li>词典数据路径:<ul>
+<li>/home/ec2-user/information_extraction/relation/multi_head_selection/data/word_vocab.json</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;&lt;pad&gt;&quot;: 0, &quot;如&quot;: 1, &quot;何&quot;: 2, &quot;演&quot;: 3, &quot;好&quot;: 4, &quot;自&quot;: 5, &quot;己&quot;: 6, &quot;的&quot;: 7, &quot;角&quot;: 8, &quot;色&quot;: 9, &quot;，&quot;: 10, &quot;请&quot;: 11, &quot;读&quot;: 12, &quot;《&quot;: 13, &quot;员&quot;: 14, &quot;我&quot;: 15, &quot;修&quot;: 16, &quot;养&quot;: 17, &quot;》&quot;: 18, &quot;喜&quot;: 19, &quot;剧&quot;: 20, &quot;之&quot;: 21, &quot;王&quot;: 22, &quot;周&quot;: 23, &quot;星&quot;: 24, &quot;驰&quot;: 25, &quot;崛&quot;: 26, &quot;起&quot;: 27, &quot;于&quot;: 28, &quot;穷&quot;: 29, &quot;困&quot;: 30, &quot;潦&quot;: 31, &quot;倒&quot;: 32, &quot;中&quot;: 33, &quot;独&quot;: 34, &quot;门&quot;: 35, &quot;秘&quot;: 36, &quot;笈&quot;: 37, &quot;茶&quot;: 38, &quot;树&quot;: 39, &quot;网&quot;: 40, &quot;蝽&quot;: 41, &quot;S&quot;: 42, &quot;t&quot;: 43, &quot;e&quot;: 44, &quot;p&quot;: 45, &quot;h&quot;: 46, &quot;a&quot;: 47, &quot;n&quot;: 48, &quot;i&quot;: 49, &quot;s&quot;: 50, &quot; &quot;: 51, &quot;c&quot;: 52, &quot;D&quot;: 53, &quot;r&quot;: 54, &quot;k&quot;: 55, &quot;属&quot;: 56, &quot;半&quot;: 57, &quot;翅&quot;: 58, &quot;目&quot;: 59, &quot;科&quot;: 60, &quot;冠&quot;: 61, &quot;椿&quot;: 62, &quot;一&quot;: 63, &quot;种&quot;: 64, &quot;昆&quot;: 65, &quot;虫&quot;: 66, &quot;丝&quot;: 67, &quot;蝗&quot;: 68, &quot;O&quot;: 69, &quot;d&quot;: 70, &quot;o&quot;: 71, &quot;纲&quot;: 72, &quot;直&quot;: 73, &quot;总&quot;: 74, &quot;个&quot;: 75, &quot;爱&quot;: 76, &quot;德&quot;: 77, &quot;华&quot;: 78, &quot;·&quot;: 79, &quot;尼&quot;: 80, &quot;埃&quot;: 81, &quot;尔&quot;: 82, &quot;南&quot;: 83, &quot;迪&quot;: 84, &quot;斯&quot;: 85, &quot;（&quot;: 86, &quot;1&quot;: 87, &quot;9&quot;: 88, &quot;8&quot;: 89, &quot;6&quot;: 90, &quot;-&quot;: 91, &quot;）&quot;: 92, &quot;是&quot;: 93, &quot;位&quot;: 94, &quot;身&quot;: 95, &quot;高&quot;: 96, &quot;只&quot;: 97, &quot;有&quot;: 98, &quot;7&quot;: 99, &quot;0&quot;: 100, &quot;公&quot;: 101, &quot;分&quot;: 102, &quot;哥&quot;: 103, &quot;伦&quot;: 104, &quot;比&quot;: 105, &quot;亚&quot;: 106, &quot;男&quot;: 107, &quot;子&quot;: 108, &quot;体&quot;: 109, &quot;重&quot;: 110, &quot;斤&quot;: 111, &quot;随&quot;: 112, &quot;行&quot;: 113, &quot;李&quot;: 114, &quot;些&quot;: 115, &quot;2&quot;: 116, &quot;年&quot;: 117, &quot;获&quot;: 118, &quot;吉&quot;: 119, &quot;世&quot;: 120, &quot;界&quot;: 121, &quot;纪&quot;: 122, &quot;录&quot;: 123, &quot;正&quot;: 124, &quot;式&quot;: 125, &quot;认&quot;: 126, &quot;证&quot;: 127, &quot;成&quot;: 128, &quot;为&quot;: 129, &quot;全&quot;: 130, &quot;球&quot;: 131, &quot;当&quot;: 132, &quot;今&quot;: 133, &quot;最&quot;: 134, &quot;矮&quot;: 135, &quot;人&quot;: 136, &quot;逐&quot;: 137, &quot;风&quot;: 138, &quot;百&quot;: 139, &quot;度&quot;: 140, &quot;文&quot;: 141, &quot;学&quot;: 142, &quot;旗&quot;: 143, &quot;下&quot;: 144, &quot;纵&quot;: 145, &quot;横&quot;: 146, &quot;签&quot;: 147, &quot;约&quot;: 148, &quot;作&quot;: 149, &quot;家&quot;: 150, &quot;清&quot;: 151, &quot;水&quot;: 152, &quot;秋&quot;: 153, &quot;创&quot;: 154, &quot;部&quot;: 155, &quot;东&quot;: 156, &quot;方&quot;: 157, &quot;玄&quot;: 158, &quot;幻&quot;: 159, &quot;小&quot;: 160, &quot;说&quot;: 161, &quot;已&quot;: 162, &quot;4&quot;: 163, &quot;发&quot;: 164, &quot;布&quot;: 165, &quot;禅&quot;: 166, &quot;意&quot;: 167, &quot;歌&quot;: 168, &quot;者&quot;: 169, &quot;刘&quot;: 170, &quot;珂&quot;: 171, &quot;矣&quot;: 172, &quot;袖&quot;: 173, &quot;云&quot;: 174, &quot;诉&quot;: 175, &quot;知&quot;: 176, &quot;…&quot;: 177, &quot;绵&quot;: 178, &quot;柔&quot;: 179, &quot;纯&quot;: 180, &quot;净&quot;: 181, &quot;女&quot;: 182, &quot;声&quot;: 183, &quot;将&quot;: 184, &quot;心&quot;: 185, &quot;万&quot;: 186, &quot;千&quot;: 187, &quot;山&quot;: 188, &quot;尽&quot;: 189, &quot;勾&quot;: 190, &quot;勒&quot;: 191, &quot;这&quot;: 192, &quot;素&quot;: 193, &quot;画&quot;: 194, &quot;音&quot;: 195, &quot;迦&quot;: 196, &quot;帕&quot;: 197, &quot;巴&quot;: 198, &quot;特&quot;: 199, &quot;峰&quot;: 200, ......}
+</code></pre></div>
+<hr />
+<ul>
+<li>关系词典数据路径:<ul>
+<li>/home/ec2-user/information_extraction/relation/multi_head_selection/data/relation_vocab.json</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;祖籍&quot;: 0, &quot;父亲&quot;: 1, &quot;总部地点&quot;: 2, &quot;出生地&quot;: 3, &quot;目&quot;: 4, &quot;面积&quot;: 5, &quot;简称&quot;: 6, &quot;上映时间&quot;: 7, &quot;妻子&quot;: 8, &quot;所属专辑&quot;: 9, &quot;注册资本&quot;: 10, &quot;首都&quot;: 11, &quot;导演&quot;: 12, &quot;字&quot;: 13, &quot;身高&quot;: 14, &quot;出品公司&quot;: 15, &quot;修业年限&quot;: 16, &quot;出生日期&quot;: 17, &quot;制片人&quot;: 18, &quot;母亲&quot;: 19, &quot;编剧&quot;: 20, &quot;国籍&quot;: 21, &quot;海拔&quot;: 22, &quot;连载网站&quot;: 23, &quot;丈夫&quot;: 24, &quot;朝代&quot;: 25, &quot;民族&quot;: 26, &quot;号&quot;: 27, &quot;出版社&quot;: 28, &quot;主持人&quot;: 29, &quot;专业代码&quot;: 30, &quot;歌手&quot;: 31, &quot;作词&quot;: 32, &quot;主角&quot;: 33, &quot;董事长&quot;: 34, &quot;成立日期&quot;: 35, &quot;毕业院校&quot;: 36, &quot;占地面积&quot;: 37, &quot;官方语言&quot;: 38, &quot;邮政编码&quot;: 39, &quot;人口数量&quot;: 40, &quot;所在城市&quot;: 41, &quot;作者&quot;: 42, &quot;作曲&quot;: 43, &quot;气候&quot;: 44, &quot;嘉宾&quot;: 45, &quot;主演&quot;: 46, &quot;改编自&quot;: 47, &quot;创始人&quot;: 48, &quot;N&quot;: 49}
+</code></pre></div>
+<hr />
+<ul>
+<li>标注字典数据路径:<ul>
+<li>/home/ec2-user/information_extraction/relation/multi_head_selection/data/bio_vocab.json</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>{&quot;B&quot;: 0, &quot;I&quot;: 1, &quot;O&quot;: 2}
+</code></pre></div>
+<hr />
+<h4 id="_3">第二步: 构建数据迭代器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/relation/multi_head_selection/dataloaders/selection_loader.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data.dataloader</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">torch.nn.utils.rnn</span> <span class="kn">import</span> <span class="n">pad_sequence</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span>
+
+<span class="c1"># Dataset是一个抽象类, 自定义的Dataset需要继承它并且实现两个成员方法:</span>
+<span class="c1"># __getitem__() 第一个最为重要, 即每次怎么读数据</span>
+<span class="c1"># __len__() 返回整个数据集的长度</span>
+
+<span class="n">PAD</span><span class="p">,</span> <span class="n">CLS</span><span class="p">,</span> <span class="n">SEP</span><span class="o">=</span> <span class="s1">&#39;[PAD]&#39;</span><span class="p">,</span> <span class="s1">&#39;[CLS]&#39;</span><span class="p">,</span> <span class="s1">&#39;[SEP]&#39;</span>
+
+<span class="c1"># 编写数据集的类</span>
+<span class="k">class</span> <span class="nc">Selection_Dataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span> <span class="o">=</span> <span class="n">hyper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_root</span> <span class="o">=</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;data_root&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bert_model</span> <span class="o">=</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;bert_model&#39;</span><span class="p">]</span>
+
+        <span class="c1"># 加载词典, 关系, 标注的数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;word_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;relation_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;bio_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spo_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># bert分词器</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bert_tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bert_model</span><span class="p">)</span>
+
+        <span class="c1"># 读取数据集, 并将不同的字段分别进行加载存储</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="n">dataset</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">):</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">selection_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="s1">&#39;selection&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bio_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="s1">&#39;bio&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spo_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="s1">&#39;spo_list&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">bio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">spo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spo_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bert&#39;</span><span class="p">:</span>
+            <span class="c1"># 1.数据载入部分</span>
+            <span class="c1"># 初始化bert分词器, 对输入句子预处理, 加上特殊标记符[cls],[pad],[seq], 分词</span>
+            <span class="n">text</span><span class="p">,</span> <span class="n">bio</span><span class="p">,</span> <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pad_bert</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">bio</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
+            <span class="n">tokens_id</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bert_tokenizer</span><span class="o">.</span><span class="n">convert_tokens_to_ids</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokens_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text2id</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="n">bio_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio2id</span><span class="p">(</span><span class="n">bio</span><span class="p">)</span>
+
+        <span class="c1"># self.relation_vocab 作为返回，以便后面批处理的时候将selection变成table</span>
+        <span class="k">return</span> <span class="n">tokens_id</span><span class="p">,</span> <span class="n">bio_id</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">spo</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">bio</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text_list</span><span class="p">)</span>
+
+    <span class="c1"># 对文本进行PAD补齐的函数</span>
+    <span class="k">def</span> <span class="nf">pad_bert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">bio</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
+        <span class="c1"># for [CLS] and [SEP]</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;[CLS]&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[SEP]&#39;</span><span class="p">]</span>
+        <span class="n">bio</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">bio</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span> <span class="o">+</span>
+                      <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;predicate&#39;</span><span class="p">:</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">triplet</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">]</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;max_text_len&#39;</span><span class="p">]</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;[PAD]&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;max_text_len&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="n">bio</span> <span class="o">=</span> <span class="n">bio</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;max_text_len&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">bio</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">text</span><span class="p">,</span> <span class="n">bio</span><span class="p">,</span> <span class="n">selection</span>
+
+    <span class="c1"># 将词转换为id表示</span>
+    <span class="k">def</span> <span class="nf">text2id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="n">oov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span><span class="p">[</span><span class="s1">&#39;oov&#39;</span><span class="p">]</span>
+        <span class="n">text_id_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">oov</span><span class="p">),</span> <span class="n">text</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">text_id_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bio2id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bio</span><span class="p">):</span>
+        <span class="n">bio_id_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">bio</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">bio_id_list</span><span class="p">)</span>
+
+
+<span class="c1"># 批次数据读取器, 本质上是服务区collate_fn()个性化数据迭代器的函数</span>
+<span class="k">class</span> <span class="nc">Batch_reader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">transposed_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span> <span class="o">*</span><span class="n">data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="c1"># tokens_id, bio_id, selection_id, spo, text, bio</span>
+
+        <span class="c1"># word字典中pad的id是0，pad_sequence默认padding_value是0，这里可以不指定了</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokens_id</span> <span class="o">=</span> <span class="n">pad_sequence</span><span class="p">(</span><span class="n">transposed_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_id</span> <span class="o">=</span> <span class="n">pad_sequence</span><span class="p">(</span><span class="n">transposed_data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">batch_max_text_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens_id</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection2table</span><span class="p">(</span><span class="n">batch_max_text_len</span><span class="p">,</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">relation_vocab</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">spo_gold</span> <span class="o">=</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio</span> <span class="o">=</span> <span class="n">transposed_data</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+
+    <span class="c1"># GPU加速功能模块</span>
+    <span class="k">def</span> <span class="nf">pin_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokens_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens_id</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_id</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_id</span><span class="o">.</span><span class="n">pin_memory</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="c1"># 将selection数据模块进行矩阵映射</span>
+    <span class="k">def</span> <span class="nf">selection2table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_max_text_len</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">relation_vocab</span><span class="p">):</span>
+        <span class="c1"># s p o</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+        <span class="c1"># 初始化4维矩阵, 后续的关系抽取都采用4维矩阵</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">batch_max_text_len</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">relation_vocab</span><span class="p">),</span> <span class="n">batch_max_text_len</span><span class="p">)</span>
+
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">relation_vocab</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span>
+        <span class="c1"># 外层for循环遍历批次</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+            <span class="c1"># 默认NA关系等于1</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="p">:,</span> <span class="n">NA</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="c1"># 内层for循环遍历三元组</span>
+            <span class="k">for</span> <span class="n">triplet</span> <span class="ow">in</span> <span class="n">selection</span><span class="p">[</span><span class="n">b</span><span class="p">]:</span>
+                <span class="nb">object</span> <span class="o">=</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span>
+                <span class="n">subject</span> <span class="o">=</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span>
+                <span class="n">predicate</span> <span class="o">=</span> <span class="n">triplet</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">]</span>
+
+                <span class="c1"># 有效关系设置为1, NA关系设置为0</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">predicate</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">NA</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="c1"># 定义个性化读取函数</span>
+<span class="k">def</span> <span class="nf">collate_fn</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Batch_reader</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+
+
+<span class="n">Selection_loader</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">DataLoader</span><span class="p">,</span> <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_fn</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h4 id="_4">第三步: 构建模型类<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/relation/multi_head_selection/models/selection.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">torchcrf</span> <span class="kn">import</span> <span class="n">CRF</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertModel</span><span class="p">,</span> <span class="n">BertTokenizer</span>
+<span class="kn">from</span> <span class="nn">torch.nn.utils.rnn</span> <span class="kn">import</span> <span class="n">pack_padded_sequence</span><span class="p">,</span> <span class="n">pad_packed_sequence</span>
+
+
+<span class="c1"># 多头选择的核心类代码</span>
+<span class="k">class</span> <span class="nc">MultiHeadSelection</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MultiHeadSelection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span> <span class="o">=</span> <span class="n">hyper</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_root</span> <span class="o">=</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;data_root&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gpu</span> <span class="o">=</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;gpu&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bert_model</span> <span class="o">=</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;bert_model&#39;</span><span class="p">]</span>
+
+        <span class="c1"># 读取原始文件数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;word_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;relation_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span> <span class="s1">&#39;bio_vocab.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id2bio</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="c1"># Word, 词汇嵌入张量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_embeddings</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_embeddings</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span><span class="p">),</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;emb_size&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Relation, 关系嵌入张量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation_emb</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_embeddings</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span><span class="p">),</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;rel_emb_size&#39;</span><span class="p">])</span>
+        <span class="c1"># NER, 命名实体嵌入张量</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bio_emb</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">num_embeddings</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="p">),</span> <span class="n">embedding_dim</span><span class="o">=</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;bio_emb_size&#39;</span><span class="p">])</span>
+
+        <span class="c1"># 编码器Encoder的不同定义, 可以采用GRU, LSTM, BERT</span>
+        <span class="k">if</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;gru&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;emb_size&#39;</span><span class="p">],</span>
+                                  <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">],</span>
+                                  <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;lstm&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;emb_size&#39;</span><span class="p">],</span>
+                                   <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">],</span>
+                                   <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bert&#39;</span><span class="p">:</span>
+            <span class="c1"># 当采用BERT作为编码器时, 直接引入预训练模型即可</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bert_model</span><span class="p">)</span>
+            <span class="c1"># 此处即使不执行for循环, 默认的所有encoder参数都参与反向传播和参数更新</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+                <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;cell name should be gru/lstm/bert!&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;relu&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tanh&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;unexpected activation!&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span> <span class="o">=</span> <span class="n">CRF</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="p">),</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_u</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;bio_emb_size&#39;</span><span class="p">],</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;rel_emb_size&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_v</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;bio_emb_size&#39;</span><span class="p">],</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;rel_emb_size&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection_uv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;rel_emb_size&#39;</span><span class="p">],</span> <span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;rel_emb_size&#39;</span><span class="p">])</span>
+        <span class="c1"># 定义NER任务的发射矩阵</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emission</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="p">))</span>
+
+    <span class="c1"># 推理阶段的函数, 用于获取多头提取出来的三元组</span>
+    <span class="k">def</span> <span class="nf">inference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">text_list</span><span class="p">,</span> <span class="n">decoded_tag</span><span class="p">,</span> <span class="n">selection_logits</span><span class="p">):</span>
+        <span class="c1"># 初始化MASK矩阵</span>
+        <span class="n">selection_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">selection_mask</span> <span class="o">=</span> <span class="n">selection_mask</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># selection_mask.shape: torch.Size([4, 200, 50, 200])</span>
+
+        <span class="c1"># 对多头模型的输出做过滤</span>
+        <span class="n">selection_tags</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">selection_logits</span><span class="p">)</span> <span class="o">*</span> <span class="n">selection_mask</span><span class="o">.</span><span class="n">float</span><span class="p">())</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;threshold&#39;</span><span class="p">]</span>
+
+        <span class="c1"># 获取多头模型的结果三元组</span>
+        <span class="n">selection_triplets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_decode</span><span class="p">(</span><span class="n">text_list</span><span class="p">,</span> <span class="n">decoded_tag</span><span class="p">,</span> <span class="n">selection_tags</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">selection_triplets</span>
+
+    <span class="c1"># 计算BCELoss值</span>
+    <span class="k">def</span> <span class="nf">masked_BCEloss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">selection_logits</span><span class="p">,</span> <span class="n">selection_gold</span><span class="p">):</span>
+        <span class="c1"># 将Mask矩阵设置为[batch_size, seq_len, relation_size, seq_len]的形状</span>
+        <span class="n">selection_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">selection_mask</span> <span class="o">=</span> <span class="n">selection_mask</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># 计算得出损失值</span>
+        <span class="n">selection_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span><span class="n">selection_logits</span><span class="p">,</span> <span class="n">selection_gold</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 进行掩码张量的计算</span>
+        <span class="n">selection_loss</span> <span class="o">=</span> <span class="n">selection_loss</span><span class="o">.</span><span class="n">masked_select</span><span class="p">(</span><span class="n">selection_mask</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">selection_loss</span> <span class="o">/=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">selection_loss</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">epoch_num</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;L: </span><span class="si">{:.2f}</span><span class="s1">, L_crf: </span><span class="si">{:.2f}</span><span class="s1">, L_selection: </span><span class="si">{:.2f}</span><span class="s1">, epoch: </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">output</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;crf_loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">output</span><span class="p">[</span><span class="s1">&#39;selection_loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">epoch_num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">is_train</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+
+        <span class="c1"># 对应于文本sentence ids</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">tokens_id</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># 对应于关系三元组的ground truth</span>
+        <span class="n">selection_gold</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">selection_id</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># 对应于NER的ground truth</span>
+        <span class="n">bio_gold</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">bio_id</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># 原始数据中的text, spo_list, bio_list</span>
+        <span class="n">text_list</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">spo_gold</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">spo_gold</span>
+        <span class="n">bio_text</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">bio</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;gru&#39;</span><span class="p">,</span> <span class="s1">&#39;lstm&#39;</span><span class="p">):</span>
+            <span class="c1"># mask: [batch_size, seq_len]</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">tokens</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_vocab</span><span class="p">[</span><span class="s1">&#39;&lt;pad&gt;&#39;</span><span class="p">]</span>
+            <span class="n">bio_mask</span> <span class="o">=</span> <span class="n">mask</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;bert&#39;</span><span class="p">):</span>
+            <span class="n">notpad</span> <span class="o">=</span> <span class="n">tokens</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="n">notcls</span> <span class="o">=</span> <span class="n">tokens</span> <span class="o">!=</span> <span class="mi">101</span>
+            <span class="n">notsep</span> <span class="o">=</span> <span class="n">tokens</span> <span class="o">!=</span> <span class="mi">102</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">notpad</span> <span class="o">&amp;</span> <span class="n">notcls</span> <span class="o">&amp;</span> <span class="n">notsep</span>
+            <span class="n">bio_mask</span> <span class="o">=</span> <span class="n">notpad</span> <span class="o">&amp;</span> <span class="n">notsep</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;unexpected encoder name!&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;lstm&#39;</span><span class="p">,</span> <span class="s1">&#39;gru&#39;</span><span class="p">):</span>
+            <span class="c1"># 首先进行词嵌入的操作</span>
+            <span class="n">embedded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_embeddings</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+            <span class="c1"># 将同一个batch中不同长度的语句进行pack_padded操作, 提升Pytorch的运算效率</span>
+            <span class="n">pack_padded_embedded</span> <span class="o">=</span> <span class="n">pack_padded_sequence</span><span class="p">(</span><span class="n">embedded</span><span class="p">,</span> <span class="n">sample</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># 送入编码器, 得到输出张量和隐藏层张量</span>
+            <span class="n">o</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">pack_padded_embedded</span><span class="p">)</span>
+            <span class="c1"># 再对张量结果进行pad_packed还原操作</span>
+            <span class="n">o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">pad_packed_sequence</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># 相当于双向LSTM的两个张量, 取平均值的结果作为最后的o张量</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)(</span><span class="n">torch</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;hidden_size&#39;</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;cell_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bert&#39;</span><span class="p">:</span>
+            <span class="c1"># 2.模型部分</span>
+            <span class="c1"># 编码器部分改为bert, mask的处理, last hidden of BERT</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;unexpected encoder name!&#39;</span><span class="p">)</span>
+
+        <span class="n">emi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">emission</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">crf_loss</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">is_train</span><span class="p">:</span>
+            <span class="c1"># 训练阶段, 直接将发射张良emi送入CRF中, 和NER任务的标签计算损失</span>
+            <span class="n">crf_loss</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="p">(</span><span class="n">emi</span><span class="p">,</span> <span class="n">bio_gold</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">bio_mask</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># 预测阶段, 直接将发射张量emi送入CRF中, 进行decode解码</span>
+            <span class="n">decoded_tag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">emissions</span><span class="o">=</span><span class="n">emi</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">bio_mask</span><span class="p">)</span>
+
+            <span class="c1"># 将数字化解码结果, 转换成真实BIO标签</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;decoded_tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id2bio</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">tags</span><span class="p">))</span> <span class="k">for</span> <span class="n">tags</span> <span class="ow">in</span> <span class="n">decoded_tag</span><span class="p">]</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;gold_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bio_text</span>
+
+            <span class="n">temp_tag</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">decoded_tag</span><span class="p">)</span>
+            <span class="n">cur_len</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">temp_tag</span><span class="p">:</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]]</span> <span class="o">*</span> <span class="p">(</span><span class="n">cur_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)))</span>
+            <span class="n">bio_gold</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">temp_tag</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># 按照原始论文进行依次计算</span>
+        <span class="n">tag_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_emb</span><span class="p">(</span><span class="n">bio_gold</span><span class="p">)</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">o</span><span class="p">,</span> <span class="n">tag_emb</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># multi-head-selection的核心代码段</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="c1"># 下面三行代码依次得到原始公式中U, W, V的结果张量</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection_u</span><span class="p">(</span><span class="n">o</span><span class="p">))</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection_v</span><span class="p">(</span><span class="n">o</span><span class="p">))</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">uv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selection_uv</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)))</span>
+
+        <span class="c1"># 公式中的V, 和关系嵌入张量, 执行爱因斯坦求和</span>
+        <span class="n">selection_logits</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;bijh,rh-&gt;birj&#39;</span><span class="p">,</span> <span class="n">uv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation_emb</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+
+        <span class="c1"># 推理阶段, 得到预测的三元组结果</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_train</span><span class="p">:</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;selection_triplets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">text_list</span><span class="p">,</span> <span class="n">decoded_tag</span><span class="p">,</span> <span class="n">selection_logits</span><span class="p">)</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">&#39;spo_gold&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spo_gold</span>
+
+        <span class="n">selection_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># 训练阶段, 直接计算带mask效果的BCELoss, 这个loss针对于三元组抽取任务</span>
+        <span class="k">if</span> <span class="n">is_train</span><span class="p">:</span>
+            <span class="n">selection_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">masked_BCEloss</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">selection_logits</span><span class="p">,</span> <span class="n">selection_gold</span><span class="p">)</span>
+
+        <span class="c1"># 模型训练的总损失 = NER任务的损失(crf_loss) + 三元组抽取任务的损失(selection_loss)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">crf_loss</span> <span class="o">+</span> <span class="n">selection_loss</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;crf_loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">crf_loss</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;selection_loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">selection_loss</span>
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loss</span>
+
+        <span class="n">output</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+
+    <span class="c1"># 三元组抽取任务的解码函数</span>
+    <span class="k">def</span> <span class="nf">selection_decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_list</span><span class="p">,</span> <span class="n">sequence_tags</span><span class="p">,</span> <span class="n">selection_tags</span><span class="p">):</span>
+        <span class="n">reversed_relation_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation_vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">reversed_bio_vocab</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bio_vocab</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">text_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">text_list</span><span class="p">))</span>
+        <span class="c1"># len(text_list): 4</span>
+
+        <span class="c1"># 从文本中提取实体的函数</span>
+        <span class="k">def</span> <span class="nf">find_entity</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">sequence_tags</span><span class="p">):</span>
+            <span class="n">entity</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># print(&#39;pos:&#39;, pos)</span>
+            <span class="c1"># pos: 46 - o</span>
+            <span class="c1"># pos: 8  - s</span>
+
+            <span class="c1"># 如果是B, O直接添加, 如果是I, 则循环添加</span>
+            <span class="k">if</span> <span class="n">sequence_tags</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">):</span>
+                <span class="n">entity</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">temp_entity</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">while</span> <span class="n">sequence_tags</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">:</span>
+                    <span class="n">temp_entity</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+                    <span class="n">pos</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="k">if</span> <span class="n">sequence_tags</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+                        <span class="n">temp_entity</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">pos</span><span class="p">])</span>
+                        <span class="k">break</span>
+                <span class="n">entity</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">temp_entity</span><span class="p">))</span>
+            <span class="c1"># print(&#39;entity:&#39;, entity)</span>
+            <span class="c1"># entity: [&#39;智&#39;, &#39;利&#39;, &#39;圣&#39;, &#39;地&#39;, &#39;亚&#39;, &#39;哥&#39;]</span>
+            <span class="c1"># entity: [&#39;查&#39;, &#39;尔&#39;, &#39;斯&#39;, &#39;·&#39;, &#39;阿&#39;, &#39;兰&#39;, &#39;基&#39;, &#39;斯&#39;]</span>
+
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entity</span><span class="p">)</span>
+
+        <span class="n">batch_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence_tags</span><span class="p">)</span>
+        <span class="c1"># batch_num: 4</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_num</span><span class="p">)]</span>
+
+        <span class="c1"># selection_tags.shape: torch.Size([4, 200, 50, 200])</span>
+
+        <span class="c1"># 在4维张量中提取有效样本预测值idx</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">selection_tags</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">as_tuple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idx</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)):</span>
+            <span class="n">b</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="c1"># print(&#39;idx[i]:&#39;, idx[i].tolist())</span>
+
+            <span class="n">predicate</span> <span class="o">=</span> <span class="n">reversed_relation_vocab</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">predicate</span> <span class="o">==</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># idx[i]: [0, 8, 3, 46]</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">reversed_bio_vocab</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">sequence_tags</span><span class="p">[</span><span class="n">b</span><span class="p">]))</span>
+
+            <span class="c1"># print(&#39;text_list[b]:&#39;, text_list[b])</span>
+
+            <span class="nb">object</span> <span class="o">=</span> <span class="n">find_entity</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">text_list</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">tags</span><span class="p">)</span>
+            <span class="c1"># print(&#39;object:&#39;, object)</span>
+            <span class="c1"># object: 智利圣地亚哥</span>
+
+            <span class="n">subject</span> <span class="o">=</span> <span class="n">find_entity</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">text_list</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">tags</span><span class="p">)</span>
+            <span class="c1"># print(&#39;subject:&#39;, subject)</span>
+            <span class="c1"># subject: 查尔斯·阿兰基斯</span>
+
+            <span class="k">assert</span> <span class="nb">object</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">subject</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="c1"># 组装三元组结果</span>
+            <span class="n">triplet</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;object&#39;</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="s1">&#39;predicate&#39;</span><span class="p">:</span> <span class="n">predicate</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">subject</span><span class="p">}</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">triplet</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<hr />
+<h4 id="_5">第四步: 编写评估指标函数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/relation/multi_head_selection/metrics/F1_score.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">overrides</span> <span class="kn">import</span> <span class="n">overrides</span>
+
+
+<span class="k">class</span> <span class="nc">F1_abc</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="mf">1e-10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="mf">1e-10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="mf">1e-10</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="mf">1e-10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="mf">1e-10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="mf">1e-10</span>
+
+    <span class="k">def</span> <span class="nf">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="n">f1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;precision&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;recall&quot;</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">&quot;fscore&quot;</span><span class="p">:</span> <span class="n">f1</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">gold_labels</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+<span class="c1"># 计算三元组的关键指标函数</span>
+<span class="k">class</span> <span class="nc">F1_triplet</span><span class="p">(</span><span class="n">F1_abc</span><span class="p">):</span>
+    <span class="nd">@overrides</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">gold_labels</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gold_labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+            <span class="c1"># 依次遍历组装真实三元组和预测三元组, 以&#39;_&#39;为分隔符</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">g_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">gg</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">],</span> <span class="n">gg</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">],</span> <span class="n">gg</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]))</span> <span class="k">for</span> <span class="n">gg</span> <span class="ow">in</span> <span class="n">g</span><span class="p">)</span>
+                <span class="n">p_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">pp</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]))</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">g_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gg</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]),</span> <span class="n">gg</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gg</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">])))</span> <span class="k">for</span> <span class="n">gg</span> <span class="ow">in</span> <span class="n">g</span><span class="p">)</span>
+                <span class="n">p_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]),</span> <span class="n">pp</span><span class="p">[</span><span class="s1">&#39;predicate&#39;</span><span class="p">],</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">])))</span> <span class="k">for</span> <span class="n">pp</span> <span class="ow">in</span> <span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_set</span> <span class="o">&amp;</span> <span class="n">p_set</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_set</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_set</span><span class="p">)</span>
+
+
+<span class="c1"># 计算NER的关键指标函数</span>
+<span class="k">class</span> <span class="nc">F1_ner</span><span class="p">(</span><span class="n">F1_abc</span><span class="p">):</span>
+    <span class="nd">@overrides</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">gold_labels</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gold_labels</span><span class="p">,</span> <span class="n">predictions</span><span class="p">):</span>
+            <span class="c1"># NER任务采用严格对应的计算方式</span>
+            <span class="n">inter</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tok_g</span> <span class="o">==</span> <span class="n">tok_p</span> <span class="ow">and</span> <span class="n">tok_g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">tok_g</span><span class="p">,</span> <span class="n">tok_p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+            <span class="n">bi_g</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tok_g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">tok_g</span> <span class="ow">in</span> <span class="n">g</span><span class="p">)</span>
+            <span class="n">bi_p</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tok_p</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">tok_p</span> <span class="ow">in</span> <span class="n">p</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">+=</span> <span class="n">inter</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">+=</span> <span class="n">bi_g</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">+=</span> <span class="n">bi_p</span>
+</code></pre></div>
+<hr />
+<h4 id="_6">第五步: 编写运行主函数<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<ul>
+<li>代码路径: /home/ec2-user/information_extraction/relation/multi_head_selection/main.py</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 导入工具包</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">read_config</span>
+<span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">Adam</span><span class="p">,</span> <span class="n">SGD</span>
+<span class="kn">from</span> <span class="nn">preprocessings</span> <span class="kn">import</span> <span class="n">DuIE_selection_preprocessing</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">MultiHeadSelection</span>
+<span class="kn">from</span> <span class="nn">dataloaders</span> <span class="kn">import</span> <span class="n">Selection_Dataset</span><span class="p">,</span> <span class="n">Selection_loader</span>
+<span class="kn">from</span> <span class="nn">prefetch_generator</span> <span class="kn">import</span> <span class="n">BackgroundGenerator</span>
+<span class="kn">from</span> <span class="nn">metrics</span> <span class="kn">import</span> <span class="n">F1_triplet</span><span class="p">,</span> <span class="n">F1_ner</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AdamW</span><span class="p">,</span> <span class="n">get_linear_schedule_with_warmup</span>
+
+<span class="c1"># 添加命令行参数</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--exp_name&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;duie_selection_re&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;experiments/duie_selection_re.json&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--mode&#39;</span><span class="p">,</span> <span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;preprocessing|train|evaluation&#39;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+
+<span class="c1"># 构建运行主函数的类</span>
+<span class="k">class</span> <span class="nc">Runner</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_name</span> <span class="o">=</span> <span class="n">exp_name</span>
+        <span class="c1"># 模型存放的路径</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="s1">&#39;./saved_model&#39;</span>
+        <span class="c1"># 配置文件的作用</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span> <span class="o">=</span> <span class="n">read_config</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;experiments&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_name</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gpu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;gpu&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triplet_metrics</span> <span class="o">=</span> <span class="n">F1_triplet</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ner_metrics</span> <span class="o">=</span> <span class="n">F1_ner</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># 优化器的设置函数</span>
+    <span class="k">def</span> <span class="nf">_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="n">no_decay</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bias&#39;</span><span class="p">,</span> <span class="s1">&#39;LayerNorm.weight&#39;</span><span class="p">]</span>
+        <span class="n">optimizer_grouped_parameters</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">nd</span> <span class="ow">in</span> <span class="n">n</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">no_decay</span><span class="p">)],</span>
+                <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">nd</span> <span class="ow">in</span> <span class="n">n</span> <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="n">no_decay</span><span class="p">)],</span> 
+                <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">0.0</span>
+            <span class="p">}]</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="c1"># BERT中的优化器AdamW(AdamWeightDecayOptimizer), 微调BERT时可以加速收敛</span>
+                <span class="s1">&#39;adam&#39;</span><span class="p">:</span> <span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()),</span>
+                <span class="s1">&#39;sgd&#39;</span><span class="p">:</span> <span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+                <span class="s1">&#39;adamw&#39;</span><span class="p">:</span><span class="n">AdamW</span><span class="p">(</span><span class="n">optimizer_grouped_parameters</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">m</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+    <span class="c1"># 初始化模型并放置于GPU之上</span>
+    <span class="k">def</span> <span class="nf">_init_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MultiHeadSelection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="c1"># 预处理函数, 下发给同学们的数据集是已经预处理好的</span>
+    <span class="k">def</span> <span class="nf">preprocessing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_name</span> <span class="o">==</span> <span class="s1">&#39;duie_selection_re&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">DuIE_selection_preprocessing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">gen_relation_vocab</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">gen_all_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">gen_vocab</span><span class="p">(</span><span class="n">min_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># for ner only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="o">.</span><span class="n">gen_bio_vocab</span><span class="p">()</span>
+
+    <span class="c1"># 按照不同的模式, 运行主入口函数</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;preprocessing&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessing</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_model</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;optimizer&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_init_model</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;evaluation_epoch&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid mode&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 加载已经训练好的模型</span>
+    <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch</span><span class="p">))))</span>
+
+    <span class="c1"># 保存模型</span>
+    <span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_name</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">epoch</span><span class="p">)))</span>
+
+    <span class="c1"># 在验证集上评估模型的关键指标</span>
+    <span class="k">def</span> <span class="nf">evaluation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dev_set</span> <span class="o">=</span> <span class="n">Selection_Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;dev&#39;</span><span class="p">])</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">Selection_loader</span><span class="p">(</span><span class="n">dev_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;eval_batch&#39;</span><span class="p">],</span> <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triplet_metrics</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+        <span class="c1"># 将模型设置为评估模式</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">batch_ndx</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">BackgroundGenerator</span><span class="p">(</span><span class="n">loader</span><span class="p">)):</span>
+                <span class="c1"># 数据送入模型, 得到输出</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">is_train</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+                <span class="c1"># 分别进行三元组的数据存储, 和NER数据的存储</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">triplet_metrics</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;selection_triplets&#39;</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;spo_gold&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ner_metrics</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;gold_tags&#39;</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;decoded_tag&#39;</span><span class="p">])</span>
+
+            <span class="c1"># 分别进行三元组抽取的任务评估, 和NER的任务评估</span>
+            <span class="n">triplet_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">triplet_metrics</span><span class="o">.</span><span class="n">get_metric</span><span class="p">()</span>
+            <span class="n">ner_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ner_metrics</span><span class="o">.</span><span class="n">get_metric</span><span class="p">()</span>
+
+            <span class="c1"># 打印验证集的评估结果</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Triplets-&gt; &#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">triplet_result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+                <span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; ||&#39;</span> <span class="o">+</span> <span class="s1">&#39;NER-&gt;&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ner_result</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]))</span>
+
+    <span class="c1"># 训练函数的代码</span>
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 数据集构建和迭代器的创建</span>
+        <span class="n">train_set</span> <span class="o">=</span> <span class="n">Selection_Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">])</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">Selection_loader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;train_batch&#39;</span><span class="p">],</span> <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># 经典双重for循环的训练模式开启</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hyper</span><span class="p">[</span><span class="s1">&#39;epoch_num&#39;</span><span class="p">]):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+            <span class="c1"># for batch_idx, sample in tqdm(enumerate(loader), total=len(loader)):</span>
+            <span class="k">for</span> <span class="n">batch_idx</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">loader</span><span class="p">):</span>    
+                <span class="c1"># &quot;老三样&quot;和模型的损失值计算</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">is_train</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="c1"># 每一轮epoch后进行一次模型的保存</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+
+            <span class="c1"># 每一轮epoch后进行一次验证集数据的评估</span>
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">()</span>
+
+
+<span class="c1"># 主函数入口</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">Runner</span><span class="p">(</span><span class="n">exp_name</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">exp_name</span><span class="p">)</span>
+    <span class="n">runner</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<ul>
+<li>调用:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>python main.py
+</code></pre></div>
+<hr />
+<ul>
+<li>输出结果:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>Triplets-&gt; p: 0.7824, r: 0.5375, f: 0.6372 ||NER-&gt;p: 0.8912, r: 0.9404, f: 0.9151
+Triplets-&gt; p: 0.7593, r: 0.6875, f: 0.7216 ||NER-&gt;p: 0.8948, r: 0.9413, f: 0.9175
+Triplets-&gt; p: 0.7445, r: 0.7399, f: 0.7422 ||NER-&gt;p: 0.8935, r: 0.9449, f: 0.9185
+Triplets-&gt; p: 0.7514, r: 0.7592, f: 0.7553 ||NER-&gt;p: 0.8932, r: 0.9467, f: 0.9192
+Triplets-&gt; p: 0.7325, r: 0.7870, f: 0.7587 ||NER-&gt;p: 0.8922, r: 0.9483, f: 0.9194
+Triplets-&gt; p: 0.7511, r: 0.7938, f: 0.7719 ||NER-&gt;p: 0.8916, r: 0.9494, f: 0.9196
+Triplets-&gt; p: 0.7618, r: 0.7950, f: 0.7780 ||NER-&gt;p: 0.8922, r: 0.9491, f: 0.9198
+Triplets-&gt; p: 0.7422, r: 0.8149, f: 0.7768 ||NER-&gt;p: 0.8920, r: 0.9494, f: 0.9198
+Triplets-&gt; p: 0.7658, r: 0.8037, f: 0.7843 ||NER-&gt;p: 0.8923, r: 0.9491, f: 0.9198
+Triplets-&gt; p: 0.7553, r: 0.8103, f: 0.7818 ||NER-&gt;p: 0.8921, r: 0.9490, f: 0.9197
+</code></pre></div>
+<hr />
+<blockquote>
+<ul>
+<li>思考: 为什么NER任务比RE任务效果更好? 对于项目中的数据集来说, 这个结果算好的吗?</li>
+</ul>
+</blockquote>
+<hr />
+<hr />
+<hr />
+<hr />
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="3_4.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 3.4 基于规则派的NER" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              3.4 基于规则派的NER
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="4_2.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 4.2 Casrel模型" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              4.2 Casrel模型
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="assets/javascripts/bundle.5a9542cf.min.js"></script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

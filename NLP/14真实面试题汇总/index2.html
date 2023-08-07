@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://121.199.45.168:8567/2/ -->
+<html lang="zh" class="js json svg checked target dataset details fetch supports csstransforms3d no-ios" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+      
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="./index_files/AI.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>学生真实面试问题 - Transformer</title>
+      
+    
+    
+      <link rel="stylesheet" href="./index_files/application.0284f74d.css">
+      
+      
+    
+    
+      <script src="./index_files/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="">
+        <link rel="stylesheet" href="./index_files/css">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="./index_files/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-36723568-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async="" src="./index_files/analytics.js"></script>
+      
+    
+    
+  <script type="text/javascript">(function(){var s=document.createElement("script");var port=window.location.port;s.src="//"+window.location.hostname+":"+port+ "/livereload.js?port=" + port;document.head.appendChild(s);})();</script><script src="./index_files/livereload.js"></script></head>
+  
+    <body dir="ltr" data-md-state="">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#1bert" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header" data-md-state="shadow">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="" title="Transformer" class="md-header-nav__button md-logo">
+          
+            <img src="./index_files/AI.jpg" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic" style="width: 717px;">
+              Transformer
+            </span>
+            <span class="md-header-nav__topic" style="width: 717px;">
+              
+                学生真实面试问题
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="" title="Transformer" class="md-nav__button md-logo">
+      
+        <img src="./index_files/AI.jpg" width="48" height="48">
+      
+    </a>
+    Transformer
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="http://www.itcast.cn/" title="前往 Github 仓库" class="md-source" data-md-source="" data-md-state="done">
+  
+  <div class="md-source__repository">
+    「传智播客: 用爱成就每一位学生」
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="./index.html" title="学生常见项目问题" class="md-nav__link">
+      学生常见项目问题
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        学生真实面试问题
+      </label>
+    
+    <a href="" title="学生真实面试问题" class="md-nav__link md-nav__link--active">
+      学生真实面试问题
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1bert" title="1.现在对针对bert的改进有哪些?" class="md-nav__link">
+    1.现在对针对bert的改进有哪些?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2fasttextword2vec" title="2.fasttext和word2vec的区别？" class="md-nav__link">
+    2.fasttext和word2vec的区别？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3.分词方法有哪些？ 不用工具， 答不上来？" class="md-nav__link">
+    3.分词方法有哪些？ 不用工具， 答不上来？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4bertgptelmo" title="4.bert相对其他模型的优缺点？gpt，elmo。" class="md-nav__link">
+    4.bert相对其他模型的优缺点？gpt，elmo。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" title="5.关于数据结构与算法？" class="md-nav__link">
+    5.关于数据结构与算法？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" title="6.关于机器学习的问题？" class="md-nav__link">
+    6.关于机器学习的问题？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" title="7. 为什么有时候会梯度不下降？都有什么情况可以导致这种情况？" class="md-nav__link">
+    7. 为什么有时候会梯度不下降？都有什么情况可以导致这种情况？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" title="8. 智能标签分类系统分类结果出现多个类别时，在推荐系统中如何进行推荐？" class="md-nav__link">
+    8. 智能标签分类系统分类结果出现多个类别时，在推荐系统中如何进行推荐？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ai" title="9. ai医生，用户输入的可能与你们存+储存在数据库中的命名实体不匹配（其实是一个意思），比如肺部感染用户输入肺感染，你们怎么处理？" class="md-nav__link">
+    9. ai医生，用户输入的可能与你们存+储存在数据库中的命名实体不匹配（其实是一个意思），比如肺部感染用户输入肺感染，你们怎么处理？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" title="10. 一句话里面的关键字有错误的，怎么提取出来关键字，简单的复杂的层面都可以说说" class="md-nav__link">
+    10. 一句话里面的关键字有错误的，怎么提取出来关键字，简单的复杂的层面都可以说说
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" style="height: 810px;">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#1bert" title="1.现在对针对bert的改进有哪些?" class="md-nav__link">
+    1.现在对针对bert的改进有哪些?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2fasttextword2vec" title="2.fasttext和word2vec的区别？" class="md-nav__link">
+    2.fasttext和word2vec的区别？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" title="3.分词方法有哪些？ 不用工具， 答不上来？" class="md-nav__link">
+    3.分词方法有哪些？ 不用工具， 答不上来？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4bertgptelmo" title="4.bert相对其他模型的优缺点？gpt，elmo。" class="md-nav__link">
+    4.bert相对其他模型的优缺点？gpt，elmo。
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" title="5.关于数据结构与算法？" class="md-nav__link">
+    5.关于数据结构与算法？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" title="6.关于机器学习的问题？" class="md-nav__link">
+    6.关于机器学习的问题？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" title="7. 为什么有时候会梯度不下降？都有什么情况可以导致这种情况？" class="md-nav__link">
+    7. 为什么有时候会梯度不下降？都有什么情况可以导致这种情况？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" title="8. 智能标签分类系统分类结果出现多个类别时，在推荐系统中如何进行推荐？" class="md-nav__link">
+    8. 智能标签分类系统分类结果出现多个类别时，在推荐系统中如何进行推荐？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ai" title="9. ai医生，用户输入的可能与你们存+储存在数据库中的命名实体不匹配（其实是一个意思），比如肺部感染用户输入肺感染，你们怎么处理？" class="md-nav__link">
+    9. ai医生，用户输入的可能与你们存+储存在数据库中的命名实体不匹配（其实是一个意思），比如肺部感染用户输入肺感染，你们怎么处理？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" title="10. 一句话里面的关键字有错误的，怎么提取出来关键字，简单的复杂的层面都可以说说" class="md-nav__link">
+    10. 一句话里面的关键字有错误的，怎么提取出来关键字，简单的复杂的层面都可以说说
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>学生真实面试问题</h1>
+                
+                <hr>
+<p></p><center><img alt="avatar" src="./index_files/xueyuan.png"></center><p></p>
+<hr>
+<h4 id="1bert">1.现在对针对bert的改进有哪些?</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>一方面，针对我们自己进行训练的模型，模型改进更多出现在微调网络的选择上。对于BERT的效果提升更多依赖于对数据的调整。另一方面，从整个NLP发展的角度，新型模型如ALBERT，XLNET都对BERT做了一系列的改进，如：为了降低参数量，对Embedding矩阵进行因式分解，不同的encoder层进行参数共享；预训练数据去除主题影响，句子对使用相同主题来源，最后发现模型在100w步后仍然没有过拟合，移除dropout层。</p>
+</div>
+<hr>
+<h4 id="2fasttextword2vec">2.fasttext和word2vec的区别？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>首先，要明确它在说的fasttext是什么？我们学的fasttext工具有两个作用，也就是两个主要接口，文本分类和训练词向量，而我们学习的word2vec是什么，是如何进行词向量训练的理论。但大家要知道，word2vec是有这个工具的，同样实现word2vec还有gensim这样的工具包。所以更进一步，问的是原生的word2vec和fasttext在实现时的差异，到底加了哪些工程技巧呢？为了避免出现OoV（out of vocab）现象，设计了允许加入子词（subword）特征，同时对subword可以进行n-gram，以拓展词表。当然，我们知道，word2vec提供两种模式训练cbow和skipgram，他们的结构都是输出层，隐层和输出层，这些都属于全连接层，输出层就是全连接层+softmax，全连接层+softmax如果计算非常大，那可以怎么办呢？就是允许使用层次softmax。</p>
+</div>
+<hr>
+<h4 id="3">3.分词方法有哪些？ 不用工具， 答不上来？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>正向最大匹配，逆向最大匹配，双向最大匹配。</p>
+</div>
+<hr>
+<h4 id="4bertgptelmo">4.bert相对其他模型的优缺点？gpt，elmo。</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>具体可以参考：http://52.83.69.131:8022/2/    </p>
+</div>
+<hr>
+<h4 id="5">5.关于数据结构与算法？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>我们会陆续的出一些经典的算法和数据结构讲解的讲义。会有很多基础算法的场景化解析，但是快排必须记住。</p>
+</div>
+<hr>
+<h4 id="6">6.关于机器学习的问题？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>我发现大多数问大家的机器学习的问题都是gbdt有关的，这些问题可以问机器学习老师。</p>
+</div>
+<hr>
+<h4 id="7">7. 为什么有时候会梯度不下降？都有什么情况可以导致这种情况？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>首先应该想到，梯度消失；其次就是“鞍点”问题；模型工具构建的bug。</p>
+</div>
+<hr>
+<h4 id="8">8. 智能标签分类系统分类结果出现多个类别时，在推荐系统中如何进行推荐？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>识别出来的标签会做为推荐系统排序模型的特征，无论识别出几个，都是使用multihot进行编码；假如标签总数是100个，那就是100维的向量，每一维代表一个标签，标签出现该位置就是1，否则是0.</p>
+</div>
+<hr>
+<h4 id="9-ai">9. ai医生，用户输入的可能与你们存+储存在数据库中的命名实体不匹配（其实是一个意思），比如肺部感染用户输入肺感染，你们怎么处理？</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>最简单直接的方法就是使用规则。首先对数据库本身实体别名的扩充。把纠错任务变成数据库匹配任务。</p>
+</div>
+<hr>
+<h4 id="10">10. 一句话里面的关键字有错误的，怎么提取出来关键字，简单的复杂的层面都可以说说</h4>
+<div class="admonition tip">
+<p class="admonition-title">参考答案</p>
+<p>query纠错即文本纠错是一项常见的NLP任务，一般可以分为两个步骤，错词定位和错词替换；基于规则的方法是比较常用的，我们需要统计该领域出现错别的基本情况，然后制定一些对应的规则词库，通过词库进行匹配。复杂一点的方法就是建模，错别字建模类似于NER，只不过标注一般是一个比较困难的阶段。</p>
+</div>
+<hr>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="./index.html" title="学生常见项目问题" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                学生常见项目问题
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            ©Copyright 2019, itcast.cn.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org/">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="./index_files/font-awesome.css">
+    
+      <a href="https://www.linkedin.com/in/%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-%E5%8C%97%E4%BA%AC%E6%A9%98%E6%98%9F-6bb7081a1/" class="md-footer-social__link fa fa-linkedin"></a>
+    
+      <a href="https://weibo.com/u/3469990762?is_all=1" class="md-footer-social__link fa fa-weibo"></a>
+    
+      <a href="http://bitbucket.org/AITutorials" class="md-footer-social__link fa fa-bitbucket"></a>
+    
+      <a href="https://github.com/AITutorials/datasets/issues" class="md-footer-social__link fa fa-gitlab"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./index_files/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="./index_files/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="./index_files/tinyseg.js"></script>
+              
+              
+                <script src="./index_files/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1.2",url:{base:".."}})</script>
+      
+    
+  
+</body></html>
